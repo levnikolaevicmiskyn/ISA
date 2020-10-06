@@ -1,12 +1,12 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-#define N 2 /// order of the filter 
+#define N 1 /// order of the filter
 #define NB 8  /// number of bits
 
-const int b0 = 8; /// coefficient b0
-const int b[N]={17, 8}; /// b array
-const int a[N]={-147, 52}; /// a array
+const int b0 = 53; /// coefficient b0
+const int b[N]={53}; /// b array
+const int a[N]={-21}; /// a array
 
 /// Perform fixed point filtering assuming direct form II
 ///\param x is the new input sample
@@ -46,7 +46,7 @@ int myfilter(int x)
   for (i=N-1; i>0; i--)
     sw[i] = sw[i-1];
   sw[0] = w;
- 
+
   return y;
 }
 
@@ -69,7 +69,7 @@ int main (int argc, char **argv)
   fp_in = fopen(argv[1], "r");
   if (fp_in == NULL)
   {
-    printf("Error: cannot open %s\n");
+    printf("Error: cannot open %s\n", argv[1]);
     exit(2);
   }
   fp_out = fopen(argv[2], "w");
