@@ -2,84 +2,84 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 entity controlUnit is
-	port(clk, rst_n, VIN: IN STD_LOGIC;
-		VOUT: OUT STD_LOGIC;
-		clr_delay_regs, en_latch: OUT STD_LOGIC;
-		)
+	port(clk, rst_n, VIN: in std_logic;
+		VOUT: out std_logic;
+		clr_delay_regs, en_latch: out std_logic
+		);
 end entity controlUnit;
 
 architecture behavior of controlUnit is
 type state_type is (RESET_ST, IDLE, LATCH_EN_1, LATCH_EN_OUT_VAL, OUT_VAL);
-SIGNAL present_state, next_state: state_type;
+signal present_state, next_state: state_type;
 
-BEGIN
+begin
 
-output_proc: PROCESS(present_state)
-BEGIN
+output_proc: process(present_state)
+begin
 	-- Default signal assignments: all signals are driven with a logic zero
 	-- in the default condition.
 	VOUT <= '0';
 	en_latch <= '0';
 	clr_delay_regs <= '0';
 	
-	CASE present_state IS
-		WHEN RESET_ST =>
+	case present_state is
+		when RESET_ST =>
 			clr_delay_regs <= '1';
-		WHEN IDLE => 
+		when IDLE => 
 			-- Wait for a new sample
-		WHEN LATCH_EN_1 =>
+		when LATCH_EN_1 =>
 			en_latch <= '1';
-		WHEN LATCH_EN_OUT_VAL =>
+		when LATCH_EN_OUT_VAL =>
 			en_latch <= '1';
 			VOUT <= '1';
-		WHEN OUT_VAL =>
+		when OUT_VAL =>
 			VOUT <= '1';
-		WHEN OTHERS =>
+		when others =>
 			-- Default signal assignments
-	END CASE;
-END PROCESS;
+	end case;
+end process;
 
-next_state_proc: PROCESS(present_state, VIN)
-BEGIN
-	CASE present_state IS
-		WHEN RESET_ST => 
+next_state_proc: process(present_state, VIN)
+begin
+	case present_state is
+		when RESET_ST => 
 			if VIN = '1' then
 				next_state <= LATCH_EN_1;
 			else
 				next_state <= IDLE;
 			end if;
-		WHEN IDLE =>
+		when IDLE =>
 			if VIN = '1' then
 				next_state <= LATCH_EN_1;
 			else
 				next_state <= IDLE;
 			end if;
-		WHEN LATCH_EN_1 =>
+		when LATCH_EN_1 =>
 			if VIN = '1' then
 				next_state <= LATCH_EN_OUT_VAL;
 			else
 				next_state <= OUT_VAL;
 			end if;
-		WHEN LATCH_EN_OUT_VAL =>
+		when LATCH_EN_OUT_VAL =>
 			if VIN = '1' then
 				next_state <= LATCH_EN_OUT_VAL;
 			else
 				next_state <= OUT_VAL;
 			end if;
-		WHEN OUT_VAL =>
+		when OUT_VAL =>
 			if VIN = '1' then
 				next_state <= LATCH_EN_1;
 			else
 				next_state <= IDLE;
 			end if;
-		WHEN OTHERS =>
+		when others =>
 			next_state <= RESET_ST;
-		END CASE;
+		end case;
 			
-END PROCESS;
+end process;
 
-state_assignment_proc: PROCESS(clk)
-BEGIN
+state_assignment_proc: process(clk)
+begin
 	if rising_edge(clk) then
 		if rst_n = '1' then
 			present_state <= next_state;
@@ -87,6 +87,5 @@ BEGIN
 			present_state <= RESET_ST;
 		end if;
 	end if;
-	
-END PROCESS;
+end process;
 end architecture behavior;
