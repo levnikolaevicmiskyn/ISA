@@ -1,3 +1,5 @@
 # Ignore executables
 *.out
 *.exe
+# Ignore VHDL backup files
+*.bak
