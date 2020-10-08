@@ -10,22 +10,22 @@ entity Datapath is
         DIN:    in  signed(7 downto 0);     -- Input sample
         -- Control Unit signals
         clr_w_reg: in std_logic;            -- Clear delay register
-        en_latch: in std_logic;             -- Enable latch
+        en_latch:  in std_logic;            -- Enable latch
         -- Output
-        DOUT:   out signed(7 downto 0)     -- Output sample
+        DOUT:   out signed(7 downto 0)      -- Output sample
     );
 end entity;
 
 
 architecture RTL of Datapath is
     component adder is
-        generic	(N_BIT 	: positive);
+        generic	(N_BIT: positive);
         port (
-            a			: in signed(N_BIT-1 downto 0);
-            b			: in signed(N_BIT-1 downto 0);
-            carry_in	: in std_logic;
-            sum			: out signed(N_BIT-1 downto 0);
-            carry_out	: out std_logic
+            a:         in  signed(N_BIT-1 downto 0);
+            b:         in  signed(N_BIT-1 downto 0);
+            carry_in:  in  std_logic;
+            sum:       out signed(N_BIT-1 downto 0);
+            carry_out: out std_logic
         );
     end component;
 
@@ -47,7 +47,7 @@ begin
     begin
         if rising_edge(clk) then
             -- Extend input sign in assignment
-            sync_DIN <= (7 downto 0 => DIN, others => DIN(7));
+            sync_DIN <= resize(DIN, N);
         end if;
     end process proc_input_sample;
     -- Latch input to prevent power consuming operations when input data is not
@@ -80,7 +80,7 @@ begin
     begin
         if rising_edge(clk) then
             if clr_w_reg = '1' then
-                w1 <= (others => 0);
+                w1 <= (others => '0');
             else
                 w1 <= w0;
             end if;
@@ -90,7 +90,8 @@ begin
     proc_out_reg: process(clk)
     begin
         if rising_edge(clk) then
-            DOUT <= y(N_BIT-1 downto N_BIT-8);
+            -- Pick the 8 most significant bits
+            DOUT <= y(N-1 downto N-8);
         end if;
     end process proc_out_reg;
 end architecture RTL;
