@@ -52,9 +52,11 @@ begin
     end process proc_input_sample;
     -- Latch input to prevent power consuming operations when input data is not
     -- valid
-    proc_input_latch: process(en_latch)
+    proc_input_latch: process(en_latch, clr_w_reg, sync_DIN)
     begin
-        if en_latch = '1' then
+		if clr_w_reg = '1' then
+			x <= (others => '0');
+        elsif en_latch = '1' then
             x <= sync_DIN;
         end if;
     end process proc_input_latch;

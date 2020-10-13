@@ -17,6 +17,6 @@ architecture behavioral of multiplier is
 begin
 
 	temp_y <= a*b;
-	y <= temp_y(2*N_BIT-1 downto N_BIT);
+	y <= temp_y(2*N_BIT-2 downto N_BIT-1);
 
 end architecture behavioral;
