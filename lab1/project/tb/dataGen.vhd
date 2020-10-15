@@ -20,7 +20,7 @@ architecture behavior of dataGen is
 constant tco : time := 1 ns; -- Clock to output delay
 signal end_sim_s : std_logic;
 signal end_sim_v : std_logic_vector(10 downto 0);
-signal hangon : std_logic := '1'; -- This flag is true right after asynchronous reset, causes a delay of one clock cycle to for the DUT to reset synchronously.
+signal hangon : std_logic := '1'; -- This flag is true right after asynchronous reset, it causes a delay of one clock cycle for the DUT to reset synchronously.
 
 begin
 fetch_proc: process (clk, rst_n)
