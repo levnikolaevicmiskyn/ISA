@@ -15,7 +15,26 @@ Given the basic structure, it is necessary to determine the values of the $a$ an
 
 
 As defined in the project specifications, the filter is going to be implemented in hardware and will use an 8 bit \textbf{fixed point} representation: this simplifies the structure of the filter, but limits its precision.\\
-To properly verify the functionality of the filter, it is necessary to have a reference model that also works with 8 bit fixed point numbers. In addition, this allows for an insightful comparison of the filter's behavior when it is working in floating point (in Matlab) versus fixed point, which is going to be implemented in C.
+To properly verify the functionality of the filter, it is necessary to have a reference model that also works with 8 bit fixed point numbers. In addition, this allows for an insightful comparison of the filter's behavior when it is working in floating point (in Matlab) versus fixed point.
+%, which is going to be implemented in C. (detto subito dopo)
+Truly fixed point operation is modeled in a C program where coefficients and data are stored using the standard \texttt{int} data type. A scale factor equal to $2^{n_b-1}$ is implied and input values to this program are rescaled within the same Matlab script where they are generated in order to match the full scale range of an $n_b$-bits two's complement representation.  The loss in precision arising from truncating the $n_b-1$ least significant bits at the output of every hardware multiplier is simulated in C using the right-shift operator \texttt{>>}.
 
-Truly fixed point operation is modeled in a C program where coefficients and data are stored using the standard \texttt{int} data type. A scale factor equal to $2^{n_b-1}$ is implied and input values to this program are rescaled within the same Matlab script where they are generated in order to match the full scale range of an $n_b$-bits two's complement representation.  Sums and multiplications are 
+Rounding the input samples to the closest representable value according to the adopted bitwidth is a nonlinear operation that introduces distortion in the signal, producing spurious harmonics on top of the pure sinusoidal wave expected at the output of a linear filter. The relevant parameter to characterize this effect is the \textit{total harmonic distortion} (THD). The dependence of the THD on the internal bitwidth has been calculated from simulations, with the results reported in figure \ref{fig:thdplot}. 
+
+If the internal representation is the same as the one prescribed for the interface ($n_b=8$), then the output spectrum is as shown in figure \ref{fig:thd8bit}.
+% TODO: correggere questa immagine
+\begin{figure}
+	\includegraphics[width=\textwidth]{./chapter1/images/thd_with_8b.eps}
+	\caption{Spectrum and total harmonic distortion ($n_b=8$)}
+	\label{fig:thd8bit}
+\end{figure} 
+
+The smallest implementation in terms of area occupied by arithmetic operators requires $n_b=6$ in order to keep the total distortion below $-30\,\textrm{dBc}$, as requested .
+
+\begin{figure}
+	\makebox[\textwidth][c]{
+	\includegraphics[width=1.2\textwidth]{./chapter1/images/thdplot.eps}}
+	\caption{THD as a function of $n_b$}
+	\label{fig:thdplot}
+\end{figure}
 
