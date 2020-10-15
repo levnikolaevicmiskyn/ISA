@@ -3,6 +3,15 @@ work/
 transcript
 vsim.wlf
 
+# Simulation files
+samples.txt
+results-VHDL.txt
+results-C.txt
+
 # C files
 *.o
 *.out
+
+# Python files
+.idea/
+__pycache__/
