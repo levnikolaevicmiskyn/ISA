@@ -5,7 +5,7 @@ module testbench();
 	
 	localparam [N-1:0] b1 = 53;
 	localparam [N-1:0] b0 = 53;
-	localparam [N-1:0] a1 = -21;
+	localparam [N-1:0] a1 = 21;
 	
  	wire clk;
 	wire rst_n;
