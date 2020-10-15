@@ -20,6 +20,8 @@ architecture behavior of dataGen is
 constant tco : time := 1 ns; -- Clock to output delay
 signal end_sim_s : std_logic;
 signal end_sim_v : std_logic_vector(10 downto 0);
+signal hangon : std_logic := '1'; -- This flag is true right after asynchronous reset, causes a delay of one clock cycle to for the DUT to reset synchronously.
+
 begin
 fetch_proc: process (clk, rst_n)
 	file samplefile : text open READ_MODE is "samples.txt";
@@ -30,8 +32,11 @@ begin
 		data_out <= (others => '0') after tco;
 		vout <= '0' after tco;
 		end_sim_s <= '0' after tco;
+		hangon <= '1';
 	elsif rising_edge(clk) then
-		if not endfile(samplefile) then
+		if hangon = '1' then
+			hangon <= '0';
+		elsif not endfile(samplefile) then
 			readline(samplefile, linein); -- Read a new line from the input file
 			read(linein, x); -- Interpret the text line as an integer and store it in xn
 			data_out <= to_signed(x, data_out'LENGTH) after tco;
