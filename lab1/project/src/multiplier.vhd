@@ -3,10 +3,10 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
 entity multiplier is
-    generic (N_BIT_I: natural, N_BIT_F: natural);
+    generic (N_BIT_I: natural; N_BIT_F: natural);
     port (
         a, b:   in  signed((N_BIT_I+N_BIT_F)-1 downto 0);
-        y:      out signed((N_BIT_I+B_BIT_F)-1 downto 0)  	
+        y:      out signed((N_BIT_I+N_BIT_F)-1 downto 0)  	
     );
 end entity multiplier;
 
@@ -17,6 +17,6 @@ architecture behavioral of multiplier is
 begin
 
 	temp_y <= a*b;
-	y <= temp_y(2*N_BIT_F + N_I - 1 downto N_BIT_F);
+	y <= temp_y(2*N_BIT_F + N_BIT_I - 1 downto N_BIT_F);
 
 end architecture behavioral;

@@ -1,13 +1,14 @@
 library ieee;
 use ieee.numeric_std.all;
+use ieee.std_logic_1164.all;
 
 package fpconv is
-  function fpresize(X: SIGNED, NIx: INTEGER, NFx: INTEGER, NIy: INTEGER, NFy: INTEGER) return SIGNED;
+  function fpresize(X: SIGNED; NIx: INTEGER; NFx: INTEGER; NIy: INTEGER; NFy: INTEGER) return SIGNED;
 end fpconv;
 
 package body fpconv is
-  function fpresize(X: SIGNED, NIx: INTEGER, NFx:INTEGER, NIy: INTEGER, NFy: INTEGER) return SIGNED is
-    variable y: SIGNED(NIx+NFx-1 downto 0);
+  function fpresize(X: SIGNED; NIx: INTEGER; NFx:INTEGER; NIy: INTEGER; NFy: INTEGER) return SIGNED is
+    variable y: SIGNED(NIy+NFy-1 downto 0);
     begin
       if NFx >= NFy then
         y(NFy-1 downto 0) := X(NFx-1 downto NFx-NFy);
@@ -25,3 +26,4 @@ package body fpconv is
 
       return y;
     end function fpresize;
+end fpconv;

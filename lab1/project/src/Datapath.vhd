@@ -1,6 +1,7 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
+use work.fpconv.all;
 
 entity Datapath is
     port (
@@ -30,7 +31,7 @@ architecture RTL of Datapath is
     end component;
 
     component multiplier is
-        generic (N_BIT_I: natural, N_BIT_F: natural);
+        generic (N_BIT_I: natural; N_BIT_F: natural);
         port (
             a, b:   in  signed((N_BIT_I+N_BIT_F)-1 downto 0);
             y:      out signed((N_BIT_I+N_BIT_F)-1 downto 0)
@@ -38,16 +39,24 @@ architecture RTL of Datapath is
     end component;
 
     constant NIa: natural := 2;
-	  constant NF: natural := 6;   -- Internal data parallelism
+	  constant NF: natural := 7;   -- Internal data parallelism
     constant NIb: natural := 1;
 	  constant NA : natural := NIa + NF;
     constant NB: natural := NIb + NF;
     signal sync_DIN, sync_DOUT: signed(7 downto 0);
-    signal x, y: signed(NA-1 downto 0);
+    signal x: signed(NA-1 downto 0);
+    signal y: signed(NB-1 downto 0);
     signal w0, w1, fb: signed(NA-1 downto 0);
     signal t_tmp, ff_tmp: signed(NA-1 downto 0); -- Feedforward multiplier output
     signal t, ff: signed(NB-1 downto 0);
+    signal a1_int, b0_int, b1_int: signed(NA-1 downto 0);
 begin
+    -- Resize coefficients to match the internal representation: the least significant bit dropped and 
+    -- sign is extendend to avoid overflow.
+    a1_int <= fpresize(a1, 1, 7, NIa, NF);
+    b0_int <= fpresize(b0, 1, 7, NIa, NF);
+    b1_int <= fpresize(b1, 1, 7, NIa, NF);
+    
     -- Sample input data on every clock rising edge
     proc_input_sample: process(clk)
     begin
@@ -75,18 +84,18 @@ begin
         generic map(NB)
         port map(t, ff, '0', y);
     comp_mul_a1: multiplier
-        generic map(NA)
-        port map(w1, a1, fb);
+        generic map(NIa, NF)
+        port map(w1, a1_int, fb);
     comp_mul_b0: multiplier
-        generic map(NA)
-        port map(w0, b0, t_temp);
+        generic map(NIa, NF)
+        port map(w0, b0_int, t_tmp);
     comp_mul_b1: multiplier
-        generic map(NA)
-        port map(w1, b1, ff_temp);
+        generic map(NIa, NF)
+        port map(w1, b1_int, ff_tmp);
     -- Discard the most significant bit from the multiplier output because
     -- the result surely fits into a smaller representation (NB bits).
-    t <= fpresize(t_temp, NIa, NF, NIb, NF);
-    ff <= fpresize(ff_temp, NIa, NF, NIb, NF);
+    t <= fpresize(t_tmp, NIa, NF, NIb, NF);
+    ff <= fpresize(ff_tmp, NIa, NF, NIb, NF);
 
     -- Internal register
     proc_w_reg: process(clk)
