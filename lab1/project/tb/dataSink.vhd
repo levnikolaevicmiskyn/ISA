@@ -18,7 +18,7 @@ architecture behavior of dataSink is
 
 begin
 	process(clk, rst_n)
-		file results_file : text open WRITE_MODE is "results.txt";
+		file results_file : text open WRITE_MODE is "results-VHDL.txt";
 		variable outline : line;
 	begin
 		if rst_n = '0' then
