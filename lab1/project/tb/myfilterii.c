@@ -6,7 +6,7 @@
 
 const int b0 = 53; /// coefficient b0
 const int b[N]={53}; /// b array
-const int a[N]={-21}; /// a array
+const int a[N]={21}; /// a array
 
 /// Perform fixed point filtering assuming direct form II
 ///\param x is the new input sample
@@ -33,7 +33,7 @@ int myfilter(int x)
   ff = 0;
   for (i=0; i<N; i++)
   {
-    fb -= (sw[i]*a[i]) >> (NB-1);
+    fb += (sw[i]*a[i]) >> (NB-1);
     ff += (sw[i]*b[i]) >> (NB-1);
   }
 
@@ -46,6 +46,8 @@ int myfilter(int x)
   for (i=N-1; i>0; i--)
     sw[i] = sw[i-1];
   sw[0] = w;
+  
+  //printf("w=%d\tfb=%d\tff=%d\n", w, fb, ff);
 
   return y;
 }
