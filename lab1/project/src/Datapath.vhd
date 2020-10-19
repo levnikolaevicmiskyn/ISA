@@ -39,7 +39,7 @@ architecture RTL of Datapath is
     end component;
 
     constant NIa: natural := 2;
-	  constant NF: natural := 7;   -- Internal data parallelism
+	  constant NF: natural := 6;   -- Internal data parallelism
     constant NIb: natural := 1;
 	  constant NA : natural := NIa + NF;
     constant NB: natural := NIb + NF;

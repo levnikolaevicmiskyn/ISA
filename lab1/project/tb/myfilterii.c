@@ -2,11 +2,11 @@
 #include<stdlib.h>
 
 #define N 1 /// order of the filter
-#define NB 8  /// number of bits
-
-const int b0 = 53; /// coefficient b0
-const int b[N]={53}; /// b array
-const int a[N]={21}; /// a array
+#define NB 7  /// number of bits (internal representation)
+#define NBINT 8 /// number of bits (interface)
+const int b0 = (53 >>(NBINT-NB)); /// coefficient b0
+const int b[N]={(53>>(NBINT-NB))}; /// b array
+const int a[N]={(21>>(NBINT-NB))}; /// a array
 
 /// Perform fixed point filtering assuming direct form II
 ///\param x is the new input sample
@@ -27,6 +27,7 @@ int myfilter(int x)
     for (i=0; i<N; i++)
       sw[i] = 0;
   }
+  x = x >> (NBINT-NB);
 
   /// compute feed-back and feed-forward
   fb = 0;
@@ -49,7 +50,7 @@ int myfilter(int x)
   
   //printf("w=%d\tfb=%d\tff=%d\n", w, fb, ff);
 
-  return y;
+  return (y << (NBINT-NB));
 }
 
 int main (int argc, char **argv)

@@ -26,7 +26,7 @@ signal counter: integer := 0;
 
 begin
 fetch_proc: process (clk, rst_n)
-	file samplefile : text open READ_MODE is "samples.txt";
+	file samplefile : text open READ_MODE is "samples-VHDL.txt";
 	file timingfile : text open READ_MODE is "in_timing.txt";
 	variable linein : line;
 	variable x: integer;
