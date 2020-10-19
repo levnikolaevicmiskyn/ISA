@@ -27,8 +27,9 @@ signal counter: integer := 0;
 begin
 fetch_proc: process (clk, rst_n)
 	file samplefile : text open READ_MODE is "samples.txt";
-	file timingfile : text open READ_MODE is "in_timing.txt"
+	file timingfile : text open READ_MODE is "in_timing.txt";
 	variable linein : line;
+	variable x: integer;
 	variable factor : integer;
 	variable timing_linein : line; 
 begin
@@ -63,10 +64,11 @@ begin
 				end if;
 			else
 				-- Get here if the end of file the samples file has not been reached
-				-- and no new sample is given as input in the current clock cycle.
+				-- and no new sample must be given as input in the current clock cycle.
 				vout <= '0';
 			end if;
 		end if;
+	end if;
 end process;
 
 process(clk, rst_n)
