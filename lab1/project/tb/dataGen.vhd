@@ -43,7 +43,7 @@ begin
 		counter <= 0;
 	elsif rising_edge(clk) then
 		if hangon = '1' then
-			-- Get here in the first clock cycles after the asynchronous reset has been deasserted, during the reset cycle of 
+			-- Get here in the first clock cycle after the asynchronous reset has been deasserted, during the reset cycle of 
 			-- the DUT. Set the hang on flag to 0 and fetch the time instant when the first sample is to be issued 
 			hangon <= '0';
 			
