@@ -1,0 +1,9 @@
+# Log files
+command.log
+filenames.log
+
+# Synopsys files
+default.svf
+
+# Work directory
+work/
