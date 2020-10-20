@@ -21,5 +21,5 @@ begin
 
 	-- Overflow check: issue a warning during simulation.
 	-- The following statement is ignored by logic synthesis tools
-	assert (temp_y >= 2**(N_BIT_I+N_BIT_F-1)-1 or temp_y <= -2**(N_BIT_I+N_BIT_F-1)) report "Overflow occurred at time " & time'image(now) severity warning;
+	assert (temp_y <= 2**(N_BIT_I+N_BIT_F-1)-1 and temp_y > -2**(N_BIT_I+N_BIT_F-1)) report "Overflow occurred at time " & time'image(now) severity warning;
 end architecture behavioral;

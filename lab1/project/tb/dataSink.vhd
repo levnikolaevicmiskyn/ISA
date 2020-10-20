@@ -15,7 +15,7 @@ end dataSink;
 
 
 architecture behavior of dataSink is
-signal vin_dline: STD_LOGIC(1 downto 0);
+signal vin_dline: STD_LOGIC_VECTOR(1 downto 0);
 begin
 	process(clk, rst_n)
 		file results_file : text open WRITE_MODE is "results-VHDL.txt";
@@ -31,7 +31,7 @@ begin
 			
 			-- Issue a warning when VOUT goes high unexpectedly. This is detected by XORing the VOUT bit with its expected value at the end
 			-- of the delay line vin_dline(0)
-			assert not(vout xor vin_dline(0)) report "VOUT has been asserted unexpectedly at time " & time'image(now) severity warning;
+			assert (vout xor vin_dline(0)) = '0' report "VOUT has been asserted unexpectedly at time " & time'image(now) severity warning;
 		end if;
 	end process;
 	
