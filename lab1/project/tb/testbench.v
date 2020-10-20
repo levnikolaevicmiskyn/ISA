@@ -1,4 +1,4 @@
-//`timescale 1ns
+`timescale 1ns/1ps
 
 module testbench();
 	localparam N = 8;
