@@ -3,6 +3,8 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 use work.fpconv.all;
 
+library work;
+use work.constants;
 entity Datapath is
     port (
         CLK:    in  std_logic;              -- Clock signal
@@ -38,10 +40,10 @@ architecture RTL of Datapath is
         );
     end component;
 
-    constant NIa: natural := 2;
-	  constant NF: natural := 5;   -- Internal data parallelism
-    constant NIb: natural := 1;
-	  constant NA : natural := NIa + NF;
+    constant NIa: natural := constants.NIa;
+	constant NF: natural := constants.NF;   -- Internal data parallelism
+    constant NIb: natural := constants.NIb; -- This must be the same as the interface, adopted by the last two adders
+	constant NA : natural := NIa + NF;
     constant NB: natural := NIb + NF;
     signal sync_DIN, sync_DOUT: signed(7 downto 0);
     signal x: signed(NA-1 downto 0);
