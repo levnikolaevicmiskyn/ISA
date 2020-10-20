@@ -6,6 +6,9 @@ use ieee.std_logic_textio.all;
 library std;
 use std.textio.all;
 
+library work;
+use std.simconsts;
+
 entity dataSink is
 	generic(NB : integer := 8);
 	port (clk, rst_n: in std_logic;
@@ -15,7 +18,7 @@ end dataSink;
 
 
 architecture behavior of dataSink is
-signal vin_dline: STD_LOGIC_VECTOR(1 downto 0);
+signal vin_dline: STD_LOGIC_VECTOR(simconsts.LATENCY downto 0);
 begin
 	process(clk, rst_n)
 		file results_file : text open WRITE_MODE is "results-VHDL.txt";
