@@ -52,7 +52,7 @@ def run_bash(command, **kwargs):
 
 
 def run_simulation(duration, simulation_script):
-    duration = f"{duration} ns"
+    duration = f"{int(duration/1e-9)} ns"
     # Delete work folder
     delete_folder = "rm -rf ./work/"
     run_bash(delete_folder)
@@ -140,20 +140,20 @@ def status_update(status, error=''):
 def main():
     """Main function"""
     time = None
-    input_duration = 1e-3
+    input_duration = 500e-3
     input_delta = 1 / 10e3
     input_nsamples = input_duration / input_delta
 
-    simulation_delta = 1e-9
-    simulation_duration = (30 + input_nsamples) * simulation_delta
+    clock_period = 10e-9
+    simulation_duration = (30 + input_nsamples) * clock_period
 
     # Clean simulation related files
     @status_update("Cleaning files...")
     def _clean_files():
         try:
             os.remove("./samples.txt")
-            os.remove("./results_C.txt")
-            os.remove("./results_VHDL.txt")
+            os.remove("./results-C.txt")
+            os.remove("./results-VHDL.txt")
         except OSError:
             pass
         return 0
@@ -164,8 +164,8 @@ def main():
     @status_update("Generating inputs...")
     def _generate_inputs():
         nonlocal time
-        time = np.crange(0.0, input_duration, input_delta)
-        inputs = generate_inputs(time, 128)
+        time = np.arange(0.0, input_duration + input_delta, input_delta)
+        inputs = generate_inputs(time, 127)
         # Store samples in a file
         np.savetxt('samples.txt', inputs, fmt='%d')
         return 0

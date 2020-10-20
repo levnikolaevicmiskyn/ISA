@@ -1,4 +1,4 @@
-//`timescale 1ns
+`timescale 1ns/1ps
 
 module testbench();
 	localparam N = 8;
@@ -34,7 +34,8 @@ module testbench();
 		comp_dataSink(
 			.clk(clk),
 			.rst_n(rst_n),
-			.vin(vout),
+			.vout(vout),
+			.vin(vin),
 			.din(output_data)
 		);
 		
