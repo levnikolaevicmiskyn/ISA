@@ -1,8 +1,12 @@
+source /software/scripts/init_synopsys_64.18
+dc_shell-xg-t
+
 # Clear design
-remove_design -design
+remove_design -designs
 
 # Analyze components
 analyze -f vhdl -lib WORK ../src/fpconv.vhd
+analyze -f vhdl -lib WORK ../src/constants.vhd
 analyze -f vhdl -lib WORK ../src/multiplier.vhd
 analyze -f vhdl -lib WORK ../src/adder.vhd
 analyze -f vhdl -lib WORK ../src/controlUnit.vhd
@@ -14,7 +18,7 @@ set power_preserve_rtl_hier_names true
 elaborate IIRFilter -arch RTL -lib WORK
 
 # Setup clock
-create_clock -name CLK -period 10 {CLK}
+create_clock -name CLK -period 2.35 {CLK}
 set_dont_touch_network CLK
 
 # Set uncertainties and synthesis variables
@@ -25,4 +29,15 @@ set OLOAD [load_of NangateOpenCellLibrary/BUF_X4/A]
 set_load $OLOAD [all_outputs]
 
 # Compile
-compile
+compile -gate_clock
+
+# Save reports
+report_timing > timing_max_frequency.txt
+report_area > area_max_frequency.txt
+
+# Netlist and constraint file export
+ungroup -all -flatten
+change_names -hierarchy -rules verilog
+write_sdf ../netlist/IIRFilter.sdf
+write -f verilog -hierarchy -output ../netlist/IIRFilter.v
+write_sdc ../netlist/IIRFilter.sdc

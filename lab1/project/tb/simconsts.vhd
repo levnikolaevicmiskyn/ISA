@@ -4,10 +4,10 @@
 -- 					once every SAMPLING_FACTOR clock cycles. If this is set to 1, VIN is always '1'
 
 package simconsts is
-	constant LATENCY, SAMPLING_FACTOR;
+	constant LATENCY			: positive := 1;
+	constant SAMPLING_FACTOR	: positive := 1;
 end simconsts;
 
 package body simconsts is 
-	constant LATENCY := 1;
-	constant SAMPLING_FACTOR := 1;
+	
 end simconsts;

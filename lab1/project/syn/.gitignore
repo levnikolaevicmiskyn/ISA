@@ -7,3 +7,6 @@ default.svf
 
 # Work directory
 work/
+
+# Report File
+*.txt

@@ -7,7 +7,7 @@ library std;
 use std.textio.all;
 
 library work;
-use std.simconsts;
+use work.simconsts;
 
 entity dataSink is
 	generic(NB : integer := 8);
