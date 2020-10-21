@@ -42,7 +42,7 @@ module testbench();
 	// IIR filter
 	IIRFilter comp_IIRFilter(
 		.CLK(clk),
-		.RST_N(rst_n),
+		.RST_n(rst_n),
 		.b1(b1),
 		.b0(b0),
 		.a1(a1),

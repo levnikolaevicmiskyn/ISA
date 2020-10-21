@@ -144,7 +144,7 @@ def main():
     input_delta = 1 / 10e3
     input_nsamples = input_duration / input_delta
 
-    clock_period = 10e-9
+    clock_period = 9.4e-9
     simulation_duration = (30 + input_nsamples) * clock_period
 
     # Clean simulation related files
