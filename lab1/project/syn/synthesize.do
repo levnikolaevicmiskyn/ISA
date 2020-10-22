@@ -18,7 +18,7 @@ set power_preserve_rtl_hier_names true
 elaborate IIRFilter -arch RTL -lib WORK
 
 # Setup clock
-create_clock -name CLK -period 2.35 {CLK}
+create_clock -name CLK -period 2.75 {CLK}
 set_dont_touch_network CLK
 
 # Set uncertainties and synthesis variables
@@ -46,7 +46,7 @@ set power_preserve_rtl_hier_names true
 elaborate IIRFilter -arch RTL -lib WORK
 
 # Setup clock
-create_clock -name CLK -period 9.4 {CLK}
+create_clock -name CLK -period 11 {CLK}
 set_dont_touch_network CLK
 
 # Set uncertainties and synthesis variables
