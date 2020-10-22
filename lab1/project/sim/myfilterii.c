@@ -2,7 +2,7 @@
 #include<stdlib.h>
 
 #define N 1 /// order of the filter
-#define NB 6  /// number of bits (internal representation)
+#define NB 7  /// number of bits (internal representation)
 #define NBINT 8 /// number of bits (interface)
 const int b0 = (53 >>(NBINT-NB)); /// coefficient b0
 const int b[N]={(53>>(NBINT-NB))}; /// b array
