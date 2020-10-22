@@ -21,16 +21,39 @@ Truly fixed point operation is modeled in a C program where coefficients and dat
 
 Rounding the input samples to the closest representable value according to the adopted bitwidth is a nonlinear operation that introduces distortion in the signal, producing spurious harmonics on top of the pure sinusoidal wave expected at the output of a linear filter. The relevant parameter to characterize this effect is the \textit{total harmonic distortion} (THD). The dependence of the THD on the internal bitwidth has been calculated from simulations, with the results reported in figure \ref{fig:thdplot}. 
 
-If the internal representation is the same as the one prescribed for the interface ($n_b=8$), then the output spectrum is as shown in figure \ref{fig:thd8bit}.
+%If the internal representation is the same as the one prescribed for the interface ($n_b=8$), then the THD output spectrum is as shown in figure \ref{fig:thd8bit}.
 % TODO: correggere questa immagine
+%\be<gin{figure}
+%	\includegraphics[width=\textwidth]{./chapter1/images/thd_with_8b.eps}
+%	\caption{Spectrum and total harmonic distortion ($n_b=8$)}
+%	\label{fig:thd8bit}
+%\end{figure} 
+
+From these results we conclude that the smallest implementation in terms of area occupied by arithmetic operators requires $n_b=7$ in order to keep the total distortion below $-30\,\textrm{dBc}$, as requested by the specifications.
+
+\section{Hardware design}
+The computational structure adopted for this project is the direct form II, whose DFG is in figure \ref{fig:arch_schematic}. This graph is the mapping of the following discrete-time equations:
+\begin{align}\label{eqn:iir2}
+&w(n) = x(n) - a_1w(n-1)\\
+&y(n) = b_0v(n) + b_1v(n-1)
+\end{align} 
+\subsection{Internal parallelism}
+From a preliminary investigation regarding the dependence of THD on the representation accuracy, which is linked to $n_b$, it has been found that $n_b=7$ is enough to meet the requirements. This means that dropping the least significant bit from the input samples (represented on 8 bits) can simplify internal computations with an acceptable degradation in performances. The previous analysis has been carried out using a model where numbers include $n_b-1$ fractional bits (the binary digits with weights $2^{-1}$, $2^{-2}$, ..., $2^{n_b-2}$). The C reference model is accurate in predicting the error introduced by truncation, which affects the output of every multiplier block, but it neglects the inability to represent a number larger than 1 with the only integer bit available in the standard fixed-point format. An overflow condition may occur in intermediate steps of the computation where the result would require more than one integer bit. In order to determine the right sizing that guarantees the absence of overflow, the maximum value of the intermediate variable $w(n)$ must be determined. Using eq. \ref{eqn:iir2},
+\begin{equation*}
+w(n) = \sum_{i=0}^{n} (-a_1)^i x(n-i)
+\end{equation*}
+Hence, assuming $|x(n)|\leq 1$,
+\begin{equation*}
+|w(n)|\leq \sum_{i=0}^{n} |(-a_1)^i x(n-i)| \leq \sum_{i=0}^{n} |a_1|^i \leq \frac{1}{1-|a_1|} \approx 1.2 
+\end{equation*}
+According to this computation, two integer bits are enough to avoid overflow at the nodes where $w(n)$ is processed within the DFG. 
+
 \begin{figure}
-	\includegraphics[width=\textwidth]{./chapter1/images/thd_with_8b.eps}
-	\caption{Spectrum and total harmonic distortion ($n_b=8$)}
-	\label{fig:thd8bit}
-\end{figure} 
-
-The smallest implementation in terms of area occupied by arithmetic operators requires $n_b=6$ in order to keep the total distortion below $-30\,\textrm{dBc}$, as requested .
-
+	\makebox[\textwidth][c]{
+	\includegraphics[width=1.5\textwidth]{./chapter1/images/tf_comparison.eps}}
+	\caption{Transfer function for a few values of $n_b$}
+	\label{fig:tfcomparison}
+\end{figure}
 \begin{figure}
 	\makebox[\textwidth][c]{
 	\includegraphics[width=1.2\textwidth]{./chapter1/images/thdplot.eps}}
