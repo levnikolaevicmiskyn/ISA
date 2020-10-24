@@ -7,6 +7,10 @@ Synthesis:
 - once synopsys is opened type "source synthesize.do"
 - once finished type "exit"
 
+2020/10/24: Changes in synthesize.do: 
+-removed unnecessary flag -gate_clock
+-Organized reports in dedicated folders
+
 
 Verification and Power back-annotation (Synthesis is mandatory first)
 
@@ -18,4 +22,6 @@ Verification and Power back-annotation (Synthesis is mandatory first)
 - type "dc_shell-xg-t"
 - once synopsys is opened type "pwr_back_ann.do"
 - once finished type "exit"
+
+
 

@@ -40,5 +40,7 @@ begin
 	-- In order to check this, the temporary result is compared with the representation range corresponding
 	-- to N_BIT_I integer bits and 2*N_BIT_F fractional bits. Satistying this constraint means that the rightmost integer bits can be safely removed,
 	-- as done above.
+	--pragma synthesis_off
 	assert (temp_y <= 2**(N_BIT_I+2*N_BIT_F-1)-1 and temp_y > -2**(N_BIT_I+2*N_BIT_F-1)) report "Overflow occurred at time " & time'image(now) severity warning;
+	--pragma synthesis_on
 end architecture behavioral;

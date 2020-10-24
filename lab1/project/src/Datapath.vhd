@@ -53,7 +53,7 @@ architecture RTL of Datapath is
     signal t, ff: signed(NB-1 downto 0);
     signal a1_int, b0_int, b1_int: signed(NA-1 downto 0);
 begin
-    -- Resize coefficients to match the internal representation: the least significant bit dropped and 
+    -- Resize coefficients to match the internal representation: the least significant bit is dropped and 
     -- sign is extendend to avoid overflow.
     a1_int <= fpresize(a1, 1, 7, NIa, NF);
     b0_int <= fpresize(b0, 1, 7, NIa, NF);
