@@ -1,0 +1,32 @@
+ 
+****************************************
+check_design summary:
+Version:     O-2018.06-SP4
+Date:        Sat Oct 24 14:53:20 2020
+****************************************
+
+                   Name                                            Total
+--------------------------------------------------------------------------------
+Inputs/Outputs                                                      4
+    Unconnected ports (LINT-28)                                     4
+
+Cells                                                               5
+    Connected to power or ground (LINT-32)                          2
+    Nets connected to multiple pins on same cell (LINT-33)          3
+--------------------------------------------------------------------------------
+
+Warning: In design 'Datapath', port 'b1[0]' is not connected to any nets. (LINT-28)
+Warning: In design 'Datapath', port 'b0[0]' is not connected to any nets. (LINT-28)
+Warning: In design 'Datapath', port 'a1[0]' is not connected to any nets. (LINT-28)
+Warning: In design 'Datapath', port 'DIN[0]' is not connected to any nets. (LINT-28)
+Warning: In design 'Datapath', a pin on submodule 'comp_sum1' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'carry_in' is connected to logic 0. 
+Warning: In design 'Datapath', a pin on submodule 'comp_sum2' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'carry_in' is connected to logic 0. 
+Warning: In design 'Datapath', the same net is connected to more than one pin on submodule 'comp_mul_a1'. (LINT-33)
+   Net 'a1[7]' is connected to pins 'b[7]', 'b[6]''.
+Warning: In design 'Datapath', the same net is connected to more than one pin on submodule 'comp_mul_b0'. (LINT-33)
+   Net 'b0[7]' is connected to pins 'b[7]', 'b[6]''.
+Warning: In design 'Datapath', the same net is connected to more than one pin on submodule 'comp_mul_b1'. (LINT-33)
+   Net 'b1[7]' is connected to pins 'b[7]', 'b[6]''.
+1
