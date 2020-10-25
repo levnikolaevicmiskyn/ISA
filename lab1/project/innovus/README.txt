@@ -16,3 +16,13 @@ Place & Route:
 - type "innovus -nowin"
 - once innovus is opened (can require a very long time) type "source place_and_route.do"
 - once finished type "exit"
+
+Verification and Power back-annotation (Place and Route is mandatory first)
+
+- open a shell
+- go in folder sim and run simulate.py with post_place_route_simulate.do as .do file
+- go back in this folder
+- type "source /software/scripts/init_innovus17.11"
+- type "innovus -nowin"
+- once innovus is opened (can require a very long time) type "source pwr_back_ann.do"
+- once finished type "exit"
