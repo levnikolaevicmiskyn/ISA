@@ -64,3 +64,19 @@ As for the operators in the feedforward part (on the right side of the DFG), mul
 	\label{fig:thdplot}
 \end{figure}
 
+\section{Verification}
+\subsection{Methodology}
+The task of verifying a design using a logical simulator such as ModelSim can be broken down into three distinct phases: first of all the generation of suitable input vectors, then a number of logical simulator runs where the device-under-test is operated within a testbench environment that drives its inputs while monitoring its outputs, and finally the analysis of output data both in terms of agreement with a reference behavioral implementation and performance as measured according to the FOMs that are relevant to the specific application.
+
+\paragraph{Targets} In order to plan the verification flow, all aspects of the design that need to be tested must be identified. In the case of a data processing unit like the one we are considering, the correctness of the \textbf{output data} stream must be checked along with the \textbf{timing} of every control and status signal.
+
+\paragraph{VHDL testbench structure} The testbench is made up of the following non-synthesizable components:
+\begin{itemize}
+	\item Clock generator (\texttt{clkGen.vhd}): it generates a clock signal whose period is parametrized by a constant written externally in a dedicated package (\texttt{work.simconsts}).
+	\item Data generator (\texttt{dataGen.vhd}): it fetches the input samples from a text file to feed the DUT at regular intervals, with a frequency submultiple of $f_{clk}$.
+	\item Monitor (\texttt{dataSink.vhd}): it collects output samples in a text file for further analysis and verifies that the status signal \texttt{VOUT} is asserted with the right timing. This is done by probing the control signal \texttt{VIN} and ensuring that \texttt{VOUT} is issued after a latency period (in clock cycles) given as a constant and dependent on the internal architecture. If any unexpecyed behavior is detected, a warning message appears on the output log.
+\end{itemize}
+
+\paragraph{Data generation and analysis} For the creation of the input samples file we resorted to an automated script that provides several options to generate waveforms such as the impulse, the unit step, a sinewave or a chirp signal whose parameters (frequency and amplitude) are given as arguments. Once the input data is stored in a text file, suitable commands are issued to run a simulation in ModelSim. Finally, the output of the monitor component is checked against the stream produced by the reference C model. 
+
+\subsection{Results}
