@@ -2,14 +2,14 @@
 *	Innovus 17.11-s080_1 (64bit) 08/04/2017 11:13 (Linux 2.6.18-194.el5)
 *	
 *
-* 	Date & Time:	2020-Oct-25 11:05:32 (2020-Oct-25 10:05:32 GMT)
+* 	Date & Time:	2020-Oct-25 20:33:56 (2020-Oct-25 19:33:56 GMT)
 *
 *----------------------------------------------------------------------------------------
 *
 *	Design: IIRFilter
 *
 *	Liberty Libraries used: 
-*	        MyAnView: /home/isa12/Desktop/ISA/lab1/project/innovus/IIRFilter_design.enc.dat/libs/mmmc/NangateOpenCellLibrary_typical_ecsm_nowlm.lib
+*	        MyAnView: /home/isa12/Desktop/ISA/lab1/project/innovus/IIRFilter.enc.dat/libs/mmmc/NangateOpenCellLibrary_typical_ecsm_nowlm.lib
 *
 *	Power Domain used: 
 *		Rail:        VDD 	Voltage:        1.1 
@@ -20,7 +20,7 @@
 *
 *	Switching Activity File used: 
 *	        ../vcd/design.vcd
-*			Vcd Window used(Start Time, Stop Time):(3.1361e+26, 3.1361e+26) 
+*			Vcd Window used(Start Time, Stop Time):(0.22826, 0.22826) 
 *                     Vcd Scale Factor: 1 
 **                    Design annotation coverage: 0/582 = 0% 
 *
@@ -40,7 +40,7 @@
 *
 *	Time Units = 1e-09 secs 
 *
-*       report_power -outfile power_report_final.txt -sort total -hierarchy all -instances  /testbench/comp_IIRFilter  -cell_type all -pg_net all -clock_network all -power_domain all -net
+*       report_power -outfile IIRFilter.power.rpt -sort total -hierarchy all -instances  /testbench/comp_IIRFilter  -cell_type all -pg_net all -clock_network  CLK  -power_domain all -count_seq_elements_in_clock_network -net
 *
 -----------------------------------------------------------------------------------------
 
@@ -64,6 +64,69 @@ Rail                  Voltage   Internal   Switching     Leakage       Total  Pe
                                 Power      Power         Power         Power  (%)        
 -----------------------------------------------------------------------------------------
 VDD                       1.1     0.2409      0.2128     0.01855      0.4722         100 
+
+
+Clock                           Internal   Switching     Leakage       Total  Percentage 
+                                Power      Power         Power         Power  (%)        
+-----------------------------------------------------------------------------------------
+CLK                              0.02489    0.008316    0.001971     0.03517       7.448 
+-----------------------------------------------------------------------------------------
+Total (excluding duplicates)     0.02489    0.008316    0.001971     0.03517       7.448 
+-----------------------------------------------------------------------------------------
+Clock: CLK
+Clock Period: 0.010000 usec 
+Clock Toggle Rate:   181.8182 Mhz 
+Clock Static Probability:  0.5000
+
+
+ 
+ 
+Instance Power Report for CLK clock network
+
+Instance                      Max Toggles   Total Toggles   Internal   Switching     Leakage       Total  Percentage    Cell
+                              Input Pins    Output Pins     Power      Power         Power         Power  (%)           Name
+----------------------------------------------------------------------------------------------------------------------------
+comp_dp_w1_reg_3_               1.818e+08       9.091e+07   0.001325    0.002061   7.866e-05    0.003464      0.7336    DFF_X1
+comp_dp_w1_reg_5_               1.818e+08       9.091e+07   0.001324    0.001178   7.866e-05     0.00258      0.5464    DFF_X1
+comp_dp_w1_reg_7_               1.818e+08       9.091e+07   0.001323    0.001141   7.867e-05    0.002542      0.5383    DFF_X1
+comp_dp_w1_reg_2_               1.818e+08       9.091e+07   0.001323    0.000581   7.864e-05    0.001983      0.4199    DFF_X1
+comp_dp_w1_reg_6_               1.818e+08       9.091e+07   0.001319   0.0004336   7.866e-05    0.001831      0.3878    DFF_X1
+comp_dp_w1_reg_4_               1.818e+08       9.091e+07   0.001319   0.0004214   7.866e-05    0.001819      0.3853    DFF_X1
+comp_dp_DOUT_reg_3_                 2e+08       9.091e+07   0.001281   0.0003088   7.911e-05    0.001669      0.3534    DFF_X1
+comp_dp_DOUT_reg_1_                 2e+08       9.091e+07   0.001281    0.000302   7.911e-05    0.001662      0.3519    DFF_X1
+comp_dp_DOUT_reg_4_                 2e+08       9.091e+07    0.00128   0.0002854   7.911e-05    0.001644      0.3482    DFF_X1
+comp_dp_DOUT_reg_2_                 2e+08       9.091e+07    0.00128   0.0002792   7.911e-05    0.001638      0.3469    DFF_X1
+comp_dp_DOUT_reg_5_                 2e+08       9.091e+07   0.001279   0.0002703   7.911e-05    0.001629      0.3449    DFF_X1
+comp_dp_DOUT_reg_6_                 2e+08       9.091e+07   0.001279    0.000255   7.911e-05    0.001613      0.3415    DFF_X1
+comp_dp_DOUT_reg_7_                 2e+08       9.091e+07   0.001279   0.0002518   7.911e-05     0.00161      0.3408    DFF_X1
+comp_dp_w1_reg_0_               1.818e+08       9.091e+07   0.001318   0.0001149   7.859e-05    0.001512      0.3201    DFF_X1
+comp_dp_w1_reg_1_               1.818e+08       9.091e+07   0.001312   7.814e-05   7.862e-05    0.001469      0.3111    DFF_X1
+comp_cu_present_state_reg_0_
+                                1.818e+08       4.372e+07  0.0006304   0.0001266   7.871e-05   0.0008357       0.177    DFF_X1
+comp_cu_present_state_reg_1_
+                                1.818e+08       3.734e+07   0.000589   0.0001038    7.88e-05   0.0007716      0.1634    DFF_X1
+comp_cu_present_state_reg_2_
+                                1.818e+08       1.282e+07  0.0006552   3.672e-05   7.669e-05   0.0007686      0.1628    DFF_X1
+comp_dp_sync_DIN_reg_6_         1.818e+08       1.818e+07  0.0004985   1.331e-05   7.911e-05   0.0005909      0.1251    DFF_X1
+comp_dp_sync_DIN_reg_5_         1.818e+08       1.818e+07  0.0004985   1.293e-05   7.911e-05   0.0005905       0.125    DFF_X1
+comp_dp_sync_DIN_reg_7_         1.818e+08       1.818e+07  0.0004985   1.275e-05   7.911e-05   0.0005903       0.125    DFF_X1
+comp_dp_sync_DIN_reg_4_         1.818e+08       1.818e+07  0.0004985   1.274e-05   7.911e-05   0.0005903       0.125    DFF_X1
+comp_dp_sync_DIN_reg_2_         1.818e+08       1.818e+07  0.0004985    1.23e-05   7.911e-05   0.0005899      0.1249    DFF_X1
+comp_dp_sync_DIN_reg_1_         1.818e+08       1.818e+07  0.0004984   1.214e-05   7.911e-05   0.0005897      0.1249    DFF_X1
+comp_dp_sync_DIN_reg_3_         1.818e+08       1.818e+07  0.0004984   1.167e-05   7.911e-05   0.0005892      0.1248    DFF_X1
+----------------------------------------------------------------------------------------------------------------------------
+Total                                                        0.02489    0.008316    0.001971     0.03517       7.448    
+
+ 
+ 
+Master Clock Power including generated clocks
+--------------------------------------------------------------------------------
+CLK has total 25 instances
+generated clocks: 
+                        0.02489    0.008316    0.001971    0.03517      7.448%
+--------------------------------------------------------------------------------
+Clock network has total 25 instances
+                        0.02489    0.008316    0.001971    0.03517      7.448%
 
 
 Total Power 

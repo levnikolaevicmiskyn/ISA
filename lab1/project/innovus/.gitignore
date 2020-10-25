@@ -11,5 +11,6 @@ IIRFilter_design.enc.dat/
 
 IIRFilter.*
 !IIRFilter.gateCount
-!IIRFilter.rpt
+!IIRFilter.power.rail.rpt
+!IIRFilter.power.rpt
 
