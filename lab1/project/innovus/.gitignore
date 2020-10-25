@@ -7,7 +7,7 @@
 .top.db
 power.db*
 
-IIRFilter_design.end.dat/
+IIRFilter_design.enc.dat/
 
 IIRFilter.*
 !IIRFilter.gateCount

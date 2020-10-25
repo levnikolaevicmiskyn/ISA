@@ -1,0 +1,684 @@
+*----------------------------------------------------------------------------------------
+*	Innovus 17.11-s080_1 (64bit) 08/04/2017 11:13 (Linux 2.6.18-194.el5)
+*	
+*
+* 	Date & Time:	2020-Oct-25 11:05:32 (2020-Oct-25 10:05:32 GMT)
+*
+*----------------------------------------------------------------------------------------
+*
+*	Design: IIRFilter
+*
+*	Liberty Libraries used: 
+*	        MyAnView: /home/isa12/Desktop/ISA/lab1/project/innovus/IIRFilter_design.enc.dat/libs/mmmc/NangateOpenCellLibrary_typical_ecsm_nowlm.lib
+*
+*	Power Domain used: 
+*		Rail:        VDD 	Voltage:        1.1 
+*
+*       Power View : MyAnView
+*
+*       User-Defined Activity : N.A.
+*
+*	Switching Activity File used: 
+*	        ../vcd/design.vcd
+*			Vcd Window used(Start Time, Stop Time):(3.1361e+26, 3.1361e+26) 
+*                     Vcd Scale Factor: 1 
+**                    Design annotation coverage: 0/582 = 0% 
+*
+*       Hierarchical Global Activity: N.A.
+*
+*       Global Activity: N.A.
+*
+*       Sequential Element Activity: N.A.
+*
+*       Primary Input Activity: 0.200000
+*
+*       Default icg ratio: N.A.
+*
+*       Global Comb ClockGate Ratio: N.A.
+*
+*	Power Units = 1mW
+*
+*	Time Units = 1e-09 secs 
+*
+*       report_power -outfile power_report_final.txt -sort total -hierarchy all -instances  /testbench/comp_IIRFilter  -cell_type all -pg_net all -clock_network all -power_domain all -net
+*
+-----------------------------------------------------------------------------------------
+
+Group Power For Rail : VDD
+
+Group                           Internal   Switching     Leakage       Total  Percentage 
+                                Power      Power         Power         Power  (%)        
+-----------------------------------------------------------------------------------------
+Sequential                       0.02608    0.008746     0.00229     0.03712        7.86 
+Macro                                  0           0           0           0           0 
+IO                                     0           0           0           0           0 
+Combinational                     0.2148      0.2041     0.01626      0.4351       92.14 
+Clock (Combinational)                  0           0           0           0           0 
+Clock (Sequential)                     0           0           0           0           0 
+-----------------------------------------------------------------------------------------
+Total                             0.2409      0.2128     0.01855      0.4722         100 
+-----------------------------------------------------------------------------------------
+
+
+Rail                  Voltage   Internal   Switching     Leakage       Total  Percentage 
+                                Power      Power         Power         Power  (%)        
+-----------------------------------------------------------------------------------------
+VDD                       1.1     0.2409      0.2128     0.01855      0.4722         100 
+
+
+Total Power 
+-----------------------------------------------------------------------------------------
+Total Internal Power:        0.24089013 	   51.0099%
+Total Switching Power:       0.21280517 	   45.0628%
+Total Leakage Power:         0.01854629 	    3.9273%
+Total Power:                 0.47224158 
+-----------------------------------------------------------------------------------------
+
+
+Hierarchy                       Internal   Switching     Leakage       Total  Percentage 
+                                Power      Power         Power         Power  (%)        
+-----------------------------------------------------------------------------------------
+
+
+Net                               Toggle Capacitance     Voltage       Power  Percentage 
+-----------------------------------------------------------------------------------------
+comp_dp_w0[1]                      2e+08   2.249e-14         1.1    0.002721      0.5763 
+FE_OFN2_comp_dp_w1_1           9.091e+07   4.829e-14         1.1    0.002656      0.5624 
+comp_dp_comp_mul_b0_mult_31_n242      2e+08   2.037e-14         1.1    0.002465      0.5219 
+comp_dp_w0[3]                      2e+08   1.906e-14         1.1    0.002306      0.4883 
+comp_dp_comp_mul_b0_mult_31_n214      2e+08     1.9e-14         1.1    0.002299      0.4869 
+FE_DBTN2_comp_dp_w1_5          9.091e+07   3.869e-14         1.1    0.002128      0.4507 
+comp_dp_w1[3]                  9.091e+07   3.747e-14         1.1    0.002061      0.4363 
+comp_dp_comp_mul_b0_mult_31_n244      2e+08   1.673e-14         1.1    0.002024      0.4286 
+comp_dp_comp_mul_b0_mult_31_n199      2e+08   1.604e-14         1.1    0.001941       0.411 
+comp_dp_comp_mul_b0_mult_31_n195      2e+08   1.596e-14         1.1    0.001931       0.409 
+comp_dp_comp_mul_b0_mult_31_n227      2e+08   1.524e-14         1.1    0.001844      0.3905 
+comp_dp_comp_mul_b0_mult_31_n215      2e+08   1.507e-14         1.1    0.001824      0.3862 
+comp_dp_comp_mul_b0_mult_31_n208      2e+08   1.497e-14         1.1    0.001811      0.3835 
+FE_DBTN3_comp_dp_w1_7          9.091e+07   3.233e-14         1.1    0.001778      0.3765 
+comp_dp_w0[7]                      2e+08    1.45e-14         1.1    0.001755      0.3716 
+FE_DBTN0_comp_dp_w1_0          9.091e+07   3.094e-14         1.1    0.001702      0.3604 
+comp_dp_w0[5]                      2e+08   1.388e-14         1.1    0.001679      0.3556 
+comp_dp_comp_mul_b0_mult_31_n218      2e+08   1.291e-14         1.1    0.001562      0.3307 
+comp_dp_comp_mul_b0_mult_31_n203      2e+08   1.226e-14         1.1    0.001484      0.3142 
+FE_OFN1_comp_dp_comp_mul_b1_mult_31_n242  1.136e+08   2.119e-14         1.1    0.001457      0.3085 
+FE_OFN0_comp_dp_comp_mul_a1_mult_31_n242  1.136e+08   2.051e-14         1.1     0.00141      0.2986 
+FE_DBTN1_comp_dp_w1_3          9.091e+07   2.527e-14         1.1     0.00139      0.2944 
+comp_dp_comp_mul_b0_mult_31_n226      2e+08   1.101e-14         1.1    0.001332       0.282 
+comp_dp_comp_mul_b1_mult_31_n214  1.136e+08   1.858e-14         1.1    0.001277      0.2705 
+comp_dp_comp_mul_a1_mult_31_n214  1.136e+08   1.782e-14         1.1    0.001225      0.2594 
+comp_dp_w1[5]                  9.091e+07   2.141e-14         1.1    0.001178      0.2494 
+comp_dp_comp_mul_b1_mult_31_n244  1.137e+08   1.695e-14         1.1    0.001166      0.2468 
+comp_dp_comp_mul_a1_mult_31_n244  1.137e+08   1.664e-14         1.1    0.001144      0.2423 
+comp_dp_w1[7]                  9.091e+07   2.074e-14         1.1    0.001141      0.2416 
+comp_dp_comp_mul_b0_mult_31_n223      2e+08   8.793e-15         1.1    0.001064      0.2253 
+comp_dp_comp_mul_a1_mult_31_n227  1.136e+08   1.524e-14         1.1    0.001048      0.2219 
+comp_dp_comp_mul_b1_mult_31_n227  1.136e+08     1.5e-14         1.1    0.001031      0.2184 
+comp_dp_comp_mul_b1_mult_31_n215    1.1e+08    1.45e-14         1.1   0.0009647      0.2043 
+comp_dp_comp_mul_b0_mult_31_n205      2e+08   7.471e-15         1.1    0.000904      0.1914 
+comp_dp_comp_mul_b0_mult_31_n206      2e+08   7.394e-15         1.1   0.0008947      0.1895 
+comp_dp_comp_mul_a1_mult_31_n215  1.015e+08   1.451e-14         1.1   0.0008909      0.1887 
+comp_dp_comp_mul_b0_mult_31_n250      2e+08   7.112e-15         1.1   0.0008605      0.1822 
+comp_dp_comp_mul_b0_mult_31_n263      2e+08   6.992e-15         1.1   0.0008461      0.1792 
+comp_dp_w0[6]                      2e+08     6.8e-15         1.1   0.0008228      0.1742 
+comp_dp_w0[4]                      2e+08   6.712e-15         1.1   0.0008121       0.172 
+comp_dp_w0[2]                      2e+08   6.589e-15         1.1   0.0007972      0.1688 
+comp_dp_comp_mul_a1_mult_31_n226  1.139e+08   1.106e-14         1.1   0.0007625      0.1615 
+comp_dp_comp_mul_b1_mult_31_n226  1.139e+08   1.075e-14         1.1   0.0007413       0.157 
+comp_dp_comp_mul_b0_mult_31_n19      2e+08   5.957e-15         1.1   0.0007208      0.1526 
+comp_dp_comp_mul_a1_mult_31_n218  9.141e+07   1.283e-14         1.1   0.0007093      0.1502 
+comp_dp_comp_mul_b1_mult_31_n218  9.141e+07    1.26e-14         1.1    0.000697      0.1476 
+comp_dp_comp_mul_b0_mult_31_n262      2e+08   5.738e-15         1.1   0.0006943       0.147 
+comp_dp_comp_mul_b0_mult_31_n30      2e+08   5.686e-15         1.1   0.0006881      0.1457 
+comp_dp_ff_tmp[0]                  2e+08   5.042e-15         1.1   0.0006101      0.1292 
+comp_dp_comp_mul_b0_mult_31_n39      2e+08   4.895e-15         1.1   0.0005923      0.1254 
+comp_dp_w1[2]                  9.091e+07   1.056e-14         1.1    0.000581       0.123 
+comp_dp_comp_mul_b0_mult_31_n95      2e+08    4.66e-15         1.1   0.0005639      0.1194 
+comp_dp_t_tmp[0]                   2e+08   4.645e-15         1.1   0.0005621       0.119 
+comp_dp_ff_tmp[1]                  2e+08    4.64e-15         1.1   0.0005615      0.1189 
+comp_dp_fb[2]                      2e+08   4.561e-15         1.1   0.0005519      0.1169 
+comp_dp_t_tmp[1]                   2e+08   4.542e-15         1.1   0.0005496      0.1164 
+comp_dp_ff_tmp[6]                  2e+08   4.522e-15         1.1   0.0005472      0.1159 
+comp_dp_comp_mul_b0_mult_31_n9      2e+08   4.518e-15         1.1   0.0005467      0.1158 
+comp_dp_comp_mul_b0_mult_31_n78      2e+08   4.434e-15         1.1   0.0005365      0.1136 
+comp_dp_fb[3]                      2e+08   4.429e-15         1.1   0.0005359      0.1135 
+comp_dp_comp_mul_b0_mult_31_n47      2e+08   4.404e-15         1.1   0.0005328      0.1128 
+comp_dp_ff_tmp[2]                  2e+08   4.386e-15         1.1   0.0005307      0.1124 
+comp_dp_comp_mul_b1_mult_31_n200  1.139e+08    7.67e-15         1.1   0.0005287       0.112 
+comp_dp_fb[1]                      2e+08   4.368e-15         1.1   0.0005286      0.1119 
+comp_dp_fb[0]                      2e+08   4.357e-15         1.1   0.0005272      0.1116 
+comp_dp_comp_mul_b0_mult_31_n17      2e+08   4.348e-15         1.1   0.0005261      0.1114 
+comp_dp_comp_mul_a1_mult_31_n200  1.139e+08   7.627e-15         1.1   0.0005258      0.1113 
+comp_dp_comp_mul_b1_mult_31_n201  1.136e+08   7.604e-15         1.1   0.0005228      0.1107 
+comp_dp_comp_mul_b0_mult_31_n45      2e+08    4.27e-15         1.1   0.0005167      0.1094 
+comp_dp_comp_mul_a1_mult_31_n201  1.136e+08   7.485e-15         1.1   0.0005146       0.109 
+comp_dp_comp_mul_b0_mult_31_n89      2e+08   4.252e-15         1.1   0.0005145       0.109 
+comp_dp_comp_mul_b0_mult_31_n261      2e+08   4.251e-15         1.1   0.0005143      0.1089 
+comp_dp_comp_mul_b0_mult_31_n79      2e+08   4.232e-15         1.1   0.0005121      0.1084 
+comp_dp_ff_tmp[5]                  2e+08   4.199e-15         1.1   0.0005081      0.1076 
+comp_dp_comp_mul_b1_mult_31_n18      2e+08   4.172e-15         1.1   0.0005048      0.1069 
+comp_dp_comp_mul_b0_mult_31_n96      2e+08    4.17e-15         1.1   0.0005046      0.1069 
+comp_dp_comp_mul_b0_mult_31_n33      2e+08   4.167e-15         1.1   0.0005042      0.1068 
+comp_dp_comp_mul_b0_mult_31_n27      2e+08   4.164e-15         1.1   0.0005038      0.1067 
+comp_dp_comp_mul_b0_mult_31_n73      2e+08   4.152e-15         1.1   0.0005024      0.1064 
+comp_dp_comp_mul_a1_mult_31_n30  1.424e+08   5.811e-15         1.1   0.0005007       0.106 
+comp_dp_t_tmp[4]                   2e+08   4.137e-15         1.1   0.0005006       0.106 
+comp_dp_comp_mul_b1_mult_31_n44      2e+08   4.134e-15         1.1   0.0005002      0.1059 
+comp_dp_comp_mul_a1_mult_31_n17      2e+08   4.122e-15         1.1   0.0004987      0.1056 
+comp_dp_ff_tmp[3]                  2e+08   4.121e-15         1.1   0.0004986      0.1056 
+comp_dp_comp_mul_b1_mult_31_n22      2e+08   4.116e-15         1.1    0.000498      0.1055 
+comp_dp_comp_mul_b1_mult_31_n38      2e+08   4.101e-15         1.1   0.0004962      0.1051 
+comp_dp_comp_mul_b1_mult_31_n17      2e+08   4.094e-15         1.1   0.0004954      0.1049 
+comp_dp_comp_mul_a1_mult_31_n38      2e+08    4.09e-15         1.1   0.0004949      0.1048 
+comp_dp_comp_mul_b1_mult_31_n26      2e+08   4.081e-15         1.1   0.0004938      0.1046 
+comp_dp_ff_tmp[4]                  2e+08   4.067e-15         1.1   0.0004921      0.1042 
+comp_dp_comp_mul_b1_mult_31_n32      2e+08   4.063e-15         1.1   0.0004916      0.1041 
+comp_dp_comp_mul_a1_mult_31_n19  1.421e+08   5.713e-15         1.1   0.0004911       0.104 
+comp_dp_comp_mul_b0_mult_31_n197      2e+08    4.05e-15         1.1     0.00049      0.1038 
+comp_dp_comp_mul_b0_mult_31_n70      2e+08   4.037e-15         1.1   0.0004885      0.1034 
+comp_dp_comp_mul_b0_mult_31_n97      2e+08   4.036e-15         1.1   0.0004883      0.1034 
+comp_dp_comp_mul_b0_mult_31_n18      2e+08   4.029e-15         1.1   0.0004875      0.1032 
+comp_dp_comp_mul_b0_mult_31_n44      2e+08   4.027e-15         1.1   0.0004872      0.1032 
+comp_dp_comp_mul_b0_mult_31_n81      2e+08   4.013e-15         1.1   0.0004856      0.1028 
+comp_dp_comp_mul_b0_mult_31_n37      2e+08    4.01e-15         1.1   0.0004852      0.1028 
+comp_dp_comp_mul_b0_mult_31_n71      2e+08   4.009e-15         1.1   0.0004851      0.1027 
+comp_dp_comp_mul_b0_mult_31_n22      2e+08   4.001e-15         1.1   0.0004842      0.1025 
+comp_dp_comp_mul_b0_mult_31_n207      2e+08   3.983e-15         1.1   0.0004819       0.102 
+comp_dp_comp_mul_a1_mult_31_n18      2e+08    3.98e-15         1.1   0.0004815       0.102 
+comp_dp_comp_mul_b0_mult_31_n21      2e+08   3.979e-15         1.1   0.0004814      0.1019 
+comp_dp_comp_mul_b0_mult_31_n43      2e+08   3.975e-15         1.1    0.000481      0.1018 
+comp_dp_comp_mul_b0_mult_31_n38      2e+08   3.957e-15         1.1   0.0004787      0.1014 
+comp_dp_t_tmp[5]                   2e+08   3.956e-15         1.1   0.0004786      0.1014 
+comp_dp_comp_mul_b0_mult_31_n220      2e+08   3.939e-15         1.1   0.0004766      0.1009 
+comp_dp_comp_mul_b0_mult_31_n26      2e+08   3.938e-15         1.1   0.0004765      0.1009 
+comp_dp_comp_mul_b0_mult_31_n80      2e+08   3.937e-15         1.1   0.0004764      0.1009 
+comp_dp_comp_mul_b0_mult_31_n16      2e+08   3.932e-15         1.1   0.0004758      0.1007 
+comp_dp_comp_mul_b0_mult_31_n82      2e+08   3.914e-15         1.1   0.0004736      0.1003 
+comp_dp_t_tmp[6]                   2e+08   3.911e-15         1.1   0.0004733      0.1002 
+comp_dp_comp_mul_a1_mult_31_n26      2e+08   3.907e-15         1.1   0.0004728      0.1001 
+comp_dp_comp_mul_a1_mult_31_n22      2e+08   3.897e-15         1.1   0.0004715     0.09985 
+comp_dp_comp_mul_b0_mult_31_n72      2e+08   3.895e-15         1.1   0.0004713     0.09981 
+comp_dp_comp_mul_b0_mult_31_n258      2e+08   3.886e-15         1.1   0.0004702     0.09957 
+comp_dp_comp_mul_b1_mult_31_n19  1.421e+08   5.468e-15         1.1   0.0004701     0.09955 
+comp_dp_fb[5]                      2e+08   3.878e-15         1.1   0.0004693     0.09937 
+comp_dp_fb[6]                      2e+08   3.877e-15         1.1   0.0004691     0.09933 
+comp_dp_comp_mul_b0_mult_31_n247      2e+08   3.875e-15         1.1   0.0004689      0.0993 
+comp_dp_t_tmp[3]                   2e+08   3.868e-15         1.1    0.000468      0.0991 
+comp_dp_t_tmp[2]                   2e+08   3.868e-15         1.1    0.000468      0.0991 
+comp_dp_comp_mul_b0_mult_31_n32      2e+08   3.859e-15         1.1    0.000467     0.09888 
+comp_dp_comp_mul_b0_mult_31_n94      2e+08   3.857e-15         1.1   0.0004668     0.09884 
+comp_dp_comp_mul_a1_mult_31_n27   1.78e+08   4.332e-15         1.1   0.0004667     0.09882 
+comp_dp_comp_mul_b1_mult_31_n21      2e+08   3.852e-15         1.1   0.0004661      0.0987 
+comp_dp_comp_mul_a1_mult_31_n21      2e+08   3.845e-15         1.1   0.0004652     0.09852 
+comp_dp_comp_mul_a1_mult_31_n32  1.844e+08    4.17e-15         1.1   0.0004652     0.09852 
+comp_dp_comp_mul_b0_mult_31_n31      2e+08   3.844e-15         1.1   0.0004652      0.0985 
+comp_dp_comp_mul_b0_mult_31_n35      2e+08   3.843e-15         1.1    0.000465     0.09847 
+comp_dp_comp_mul_b0_mult_31_n217      2e+08   3.841e-15         1.1   0.0004648     0.09842 
+comp_dp_comp_mul_b0_mult_31_n231      2e+08   3.836e-15         1.1   0.0004642     0.09829 
+comp_dp_w0[0]                      2e+08    3.82e-15         1.1   0.0004623     0.09789 
+comp_dp_comp_mul_b0_mult_31_n254      2e+08   3.819e-15         1.1   0.0004621     0.09786 
+comp_dp_comp_mul_a1_mult_31_n25      2e+08   3.818e-15         1.1    0.000462     0.09784 
+comp_dp_comp_mul_b0_mult_31_n230      2e+08   3.809e-15         1.1   0.0004609      0.0976 
+comp_dp_comp_mul_b1_mult_31_n25      2e+08   3.806e-15         1.1   0.0004605     0.09752 
+comp_dp_comp_mul_b0_mult_31_n36      2e+08   3.799e-15         1.1   0.0004597     0.09735 
+comp_dp_comp_mul_b1_mult_31_n30  1.424e+08   5.333e-15         1.1   0.0004596     0.09731 
+comp_dp_comp_mul_b1_mult_31_n37   1.89e+08   4.017e-15         1.1   0.0004593     0.09726 
+comp_dp_fb[4]                      2e+08    3.78e-15         1.1   0.0004574     0.09685 
+comp_dp_comp_mul_a1_mult_31_n262  1.424e+08   5.306e-15         1.1   0.0004572     0.09682 
+comp_dp_comp_mul_b0_mult_31_n42      2e+08   3.778e-15         1.1   0.0004571     0.09679 
+comp_dp_comp_mul_b0_mult_31_n240      2e+08   3.774e-15         1.1   0.0004567     0.09671 
+comp_dp_comp_mul_b0_mult_31_n91      2e+08   3.767e-15         1.1   0.0004558     0.09652 
+comp_dp_comp_mul_b0_mult_31_n238      2e+08   3.741e-15         1.1   0.0004527     0.09587 
+comp_dp_comp_mul_b0_mult_31_n246      2e+08   3.734e-15         1.1   0.0004519     0.09569 
+comp_dp_comp_mul_b0_mult_31_n256      2e+08   3.726e-15         1.1   0.0004508     0.09547 
+comp_dp_comp_mul_b0_mult_31_n233      2e+08   3.721e-15         1.1   0.0004502     0.09534 
+comp_dp_comp_mul_b0_mult_31_n204      2e+08   3.707e-15         1.1   0.0004486     0.09499 
+comp_dp_comp_mul_b0_mult_31_n221      2e+08   3.707e-15         1.1   0.0004485     0.09497 
+comp_dp_comp_mul_a1_mult_31_n42  1.776e+08   4.173e-15         1.1   0.0004483     0.09492 
+comp_dp_comp_mul_b0_mult_31_n25      2e+08   3.691e-15         1.1   0.0004466     0.09456 
+comp_dp_comp_mul_b1_mult_31_n31      2e+08    3.69e-15         1.1   0.0004465     0.09455 
+comp_dp_comp_mul_b1_mult_31_n27   1.78e+08   4.126e-15         1.1   0.0004444     0.09411 
+comp_dp_comp_mul_b0_mult_31_n98      2e+08   3.668e-15         1.1   0.0004439     0.09399 
+comp_dp_comp_mul_b0_mult_31_n228      2e+08   3.664e-15         1.1   0.0004433     0.09388 
+comp_dp_fb[7]                      2e+08   3.654e-15         1.1   0.0004422     0.09363 
+comp_dp_comp_mul_b0_mult_31_n83      2e+08   3.647e-15         1.1   0.0004413     0.09344 
+comp_dp_comp_mul_b0_mult_31_n75      2e+08   3.639e-15         1.1   0.0004403     0.09323 
+comp_dp_comp_mul_b0_mult_31_n239      2e+08   3.628e-15         1.1    0.000439     0.09297 
+comp_dp_comp_mul_b0_mult_31_n229      2e+08   3.626e-15         1.1   0.0004388     0.09291 
+comp_dp_comp_mul_b0_mult_31_n248      2e+08   3.625e-15         1.1   0.0004387     0.09289 
+comp_dp_comp_mul_b0_mult_31_n237      2e+08   3.625e-15         1.1   0.0004386     0.09288 
+comp_dp_comp_mul_b0_mult_31_n245      2e+08   3.623e-15         1.1   0.0004384     0.09283 
+comp_dp_comp_mul_b1_mult_31_n262  1.424e+08   5.062e-15         1.1   0.0004362     0.09236 
+comp_dp_comp_mul_b0_mult_31_n219      2e+08   3.602e-15         1.1   0.0004359      0.0923 
+comp_dp_w1[6]                  9.091e+07   7.884e-15         1.1   0.0004336     0.09182 
+comp_dp_comp_mul_b1_mult_31_n195      2e+08   3.579e-15         1.1   0.0004331     0.09171 
+comp_dp_comp_mul_b1_mult_31_n42  1.776e+08   4.016e-15         1.1   0.0004314     0.09135 
+comp_dp_comp_mul_b0_mult_31_n255      2e+08   3.565e-15         1.1   0.0004313     0.09133 
+comp_dp_comp_mul_a1_mult_31_n44  1.776e+08   4.004e-15         1.1   0.0004302     0.09111 
+comp_dp_comp_mul_b0_mult_31_n52      2e+08   3.554e-15         1.1     0.00043     0.09106 
+comp_dp_comp_mul_a1_mult_31_n31  1.844e+08   3.827e-15         1.1    0.000427     0.09042 
+comp_dp_comp_mul_b0_mult_31_n85      2e+08   3.518e-15         1.1   0.0004256     0.09013 
+comp_dp_comp_mul_b0_mult_31_n40      2e+08   3.516e-15         1.1   0.0004254     0.09009 
+comp_dp_comp_mul_b1_mult_31_n33  1.667e+08   4.207e-15         1.1   0.0004244     0.08986 
+comp_dp_comp_mul_b0_mult_31_n257      2e+08   3.496e-15         1.1   0.0004231     0.08959 
+comp_dp_comp_mul_b0_mult_31_n88      2e+08   3.491e-15         1.1   0.0004224     0.08946 
+comp_dp_comp_mul_b0_mult_31_n65      2e+08   3.484e-15         1.1   0.0004216     0.08928 
+comp_dp_w1[4]                  9.091e+07   7.663e-15         1.1   0.0004214     0.08924 
+comp_dp_comp_mul_b0_mult_31_n200      2e+08   3.483e-15         1.1   0.0004214     0.08923 
+comp_dp_comp_mul_b0_mult_31_n216      2e+08   3.471e-15         1.1     0.00042     0.08894 
+comp_dp_comp_mul_b0_mult_31_n249      2e+08   3.469e-15         1.1   0.0004197     0.08887 
+comp_dp_comp_mul_b0_mult_31_n196      2e+08   3.435e-15         1.1   0.0004157     0.08802 
+comp_dp_comp_mul_b0_mult_31_n201      2e+08    3.43e-15         1.1   0.0004151     0.08789 
+comp_dp_comp_mul_a1_mult_31_n195      2e+08    3.43e-15         1.1    0.000415     0.08788 
+comp_dp_comp_mul_a1_mult_31_n33  1.626e+08   4.207e-15         1.1   0.0004138     0.08763 
+comp_dp_comp_mul_b0_mult_31_n66  1.989e+08   3.432e-15         1.1   0.0004129     0.08744 
+comp_dp_comp_mul_a1_mult_31_n47  1.646e+08   4.116e-15         1.1   0.0004098     0.08678 
+comp_dp_comp_mul_a1_mult_31_n16  1.776e+08   3.803e-15         1.1   0.0004087     0.08655 
+comp_dp_comp_mul_b1_mult_31_n35   1.78e+08    3.79e-15         1.1   0.0004083     0.08645 
+comp_dp_comp_mul_b1_mult_31_n36   1.78e+08   3.785e-15         1.1   0.0004076     0.08632 
+comp_dp_comp_mul_b1_mult_31_n16  1.776e+08   3.781e-15         1.1   0.0004063     0.08604 
+comp_dp_comp_mul_b1_mult_31_n261   1.42e+08    4.72e-15         1.1   0.0004056     0.08589 
+comp_dp_comp_mul_b0_mult_31_n34      2e+08    3.35e-15         1.1   0.0004053     0.08583 
+comp_dp_comp_mul_a1_mult_31_n5      2e+08   3.348e-15         1.1   0.0004051     0.08578 
+comp_dp_comp_mul_a1_mult_31_n4      2e+08   3.274e-15         1.1   0.0003962      0.0839 
+comp_dp_comp_mul_a1_mult_31_n3      2e+08   3.267e-15         1.1   0.0003953      0.0837 
+comp_dp_comp_mul_b1_mult_31_n83  1.421e+08   4.554e-15         1.1   0.0003915      0.0829 
+comp_dp_comp_mul_b1_mult_31_n5      2e+08   3.212e-15         1.1   0.0003887      0.0823 
+comp_dp_comp_mul_a1_mult_31_n35   1.78e+08   3.598e-15         1.1   0.0003875     0.08206 
+comp_dp_comp_mul_a1_mult_31_n197   1.78e+08    3.58e-15         1.1   0.0003856     0.08165 
+comp_dp_comp_mul_a1_mult_31_n39  1.462e+08   4.348e-15         1.1   0.0003846     0.08145 
+comp_dp_comp_mul_b1_mult_31_n52   1.78e+08   3.563e-15         1.1   0.0003838     0.08128 
+comp_dp_comp_mul_b1_mult_31_n39  1.462e+08   4.337e-15         1.1   0.0003836     0.08123 
+comp_dp_comp_mul_a1_mult_31_n70   1.42e+08    4.44e-15         1.1   0.0003816     0.08081 
+comp_dp_comp_mul_a1_mult_31_n52   1.78e+08   3.534e-15         1.1   0.0003806      0.0806 
+comp_dp_comp_mul_b0_mult_31_n6      2e+08   3.112e-15         1.1   0.0003766     0.07974 
+comp_dp_comp_mul_b0_mult_31_n7      2e+08   3.111e-15         1.1   0.0003765     0.07972 
+comp_dp_comp_sum2_add_1_root_add_27_2_carry[4]      2e+08    3.11e-15         1.1   0.0003763     0.07969 
+comp_dp_comp_mul_b0_mult_31_n8      2e+08    3.11e-15         1.1   0.0003763     0.07968 
+comp_dp_comp_mul_b1_mult_31_n81  1.421e+08   4.362e-15         1.1    0.000375      0.0794 
+comp_dp_comp_mul_b0_mult_31_n4      2e+08   3.084e-15         1.1   0.0003732     0.07903 
+comp_dp_comp_mul_b1_mult_31_n6      2e+08   3.075e-15         1.1   0.0003721      0.0788 
+comp_dp_comp_mul_b0_mult_31_n3      2e+08   3.071e-15         1.1   0.0003715     0.07867 
+comp_dp_comp_mul_a1_mult_31_n75   1.42e+08   4.323e-15         1.1   0.0003715     0.07866 
+comp_dp_comp_mul_b1_mult_31_n75   1.42e+08   4.292e-15         1.1   0.0003689     0.07811 
+comp_dp_comp_sum2_add_1_root_add_27_2_carry[6]      2e+08   3.045e-15         1.1   0.0003685     0.07802 
+comp_dp_comp_mul_b1_mult_31_n73   1.42e+08   4.281e-15         1.1   0.0003679     0.07791 
+comp_dp_comp_mul_a1_mult_31_n89  1.424e+08   4.267e-15         1.1   0.0003677     0.07787 
+comp_dp_comp_mul_a1_mult_31_n261   1.18e+08   5.138e-15         1.1   0.0003669     0.07769 
+comp_dp_comp_mul_b0_mult_31_n23      2e+08   3.032e-15         1.1   0.0003668     0.07768 
+comp_dp_comp_mul_b1_mult_31_n47  1.646e+08   3.683e-15         1.1   0.0003667     0.07765 
+comp_dp_comp_mul_b0_mult_31_n5      2e+08   3.027e-15         1.1   0.0003663     0.07756 
+comp_dp_comp_mul_b0_mult_31_n28      2e+08   3.019e-15         1.1   0.0003653     0.07735 
+comp_dp_comp_mul_b1_mult_31_n70   1.42e+08   4.243e-15         1.1   0.0003646     0.07722 
+comp_dp_comp_mul_b0_mult_31_n50      2e+08   3.011e-15         1.1   0.0003644     0.07716 
+comp_dp_comp_sum2_add_1_root_add_27_2_carry[5]      2e+08   3.004e-15         1.1   0.0003635     0.07698 
+comp_dp_comp_mul_b1_mult_31_n4      2e+08   2.993e-15         1.1   0.0003622     0.07669 
+comp_dp_comp_mul_a1_mult_31_n73   1.42e+08   4.206e-15         1.1   0.0003614     0.07653 
+comp_dp_comp_mul_b1_mult_31_n50  1.776e+08   3.353e-15         1.1   0.0003603      0.0763 
+comp_dp_comp_mul_b0_mult_31_n87      2e+08   2.961e-15         1.1   0.0003583     0.07587 
+comp_dp_comp_mul_b0_mult_31_n46      2e+08    2.96e-15         1.1   0.0003582     0.07584 
+comp_dp_comp_mul_b1_mult_31_n204  1.421e+08   4.164e-15         1.1    0.000358     0.07581 
+comp_dp_comp_mul_b1_mult_31_n3      2e+08   2.953e-15         1.1   0.0003573     0.07566 
+comp_dp_comp_mul_b0_mult_31_n198      2e+08    2.95e-15         1.1   0.0003569     0.07558 
+comp_dp_comp_mul_b0_mult_31_n90      2e+08   2.949e-15         1.1   0.0003568     0.07556 
+comp_dp_comp_sum2_add_1_root_add_27_2_carry[3]      2e+08   2.949e-15         1.1   0.0003568     0.07555 
+comp_dp_comp_mul_b1_mult_31_n78  1.421e+08   4.117e-15         1.1   0.0003539     0.07494 
+comp_dp_comp_mul_b1_mult_31_n89  1.424e+08   4.101e-15         1.1   0.0003534     0.07484 
+comp_dp_comp_mul_b1_mult_31_n82  1.421e+08   4.096e-15         1.1   0.0003522     0.07457 
+comp_dp_comp_sum2_add_1_root_add_27_2_carry[2]      2e+08   2.906e-15         1.1   0.0003516     0.07445 
+comp_dp_comp_mul_b1_mult_31_n197  1.689e+08   3.439e-15         1.1   0.0003514     0.07441 
+comp_dp_comp_mul_b0_mult_31_n212      2e+08   2.882e-15         1.1   0.0003487     0.07384 
+comp_dp_comp_mul_a1_mult_31_n81  1.421e+08   4.051e-15         1.1   0.0003483     0.07375 
+comp_dp_comp_sum2_add_1_root_add_27_2_carry[1]  1.944e+08   2.952e-15         1.1   0.0003472     0.07351 
+comp_dp_comp_mul_a1_mult_31_n37  1.469e+08   3.901e-15         1.1   0.0003466      0.0734 
+comp_dp_comp_mul_a1_mult_31_n78  1.421e+08    4.03e-15         1.1   0.0003465     0.07336 
+comp_dp_comp_mul_b0_mult_31_n24      2e+08   2.857e-15         1.1   0.0003456     0.07319 
+comp_dp_comp_mul_b1_mult_31_n72   1.42e+08   4.001e-15         1.1   0.0003439     0.07282 
+comp_dp_comp_mul_b1_mult_31_n212      2e+08   2.837e-15         1.1   0.0003433      0.0727 
+comp_dp_comp_mul_a1_mult_31_n204  1.421e+08   3.986e-15         1.1   0.0003427     0.07257 
+comp_dp_comp_mul_a1_mult_31_n82  1.421e+08   3.978e-15         1.1    0.000342     0.07241 
+comp_dp_comp_mul_a1_mult_31_n71   1.42e+08   3.978e-15         1.1   0.0003418     0.07239 
+comp_dp_comp_mul_b0_mult_31_n15      2e+08   2.824e-15         1.1   0.0003417     0.07236 
+comp_dp_comp_mul_a1_mult_31_n24   1.78e+08    3.17e-15         1.1   0.0003415     0.07231 
+comp_dp_comp_mul_a1_mult_31_n72   1.42e+08   3.971e-15         1.1   0.0003412     0.07226 
+comp_dp_comp_mul_b1_mult_31_n8  1.691e+08   3.334e-15         1.1   0.0003411     0.07223 
+comp_dp_comp_mul_b1_mult_31_n7  1.789e+08   3.145e-15         1.1   0.0003405      0.0721 
+comp_dp_comp_mul_b1_mult_31_n223  1.091e+08   5.145e-15         1.1   0.0003396      0.0719 
+comp_dp_comp_mul_a1_mult_31_n36  1.475e+08   3.801e-15         1.1   0.0003392     0.07184 
+comp_dp_comp_mul_b1_mult_31_n71   1.42e+08   3.937e-15         1.1   0.0003384     0.07165 
+comp_dp_comp_mul_a1_mult_31_n80  1.421e+08   3.903e-15         1.1   0.0003355     0.07105 
+comp_dp_comp_mul_b1_mult_31_n40   1.78e+08   3.109e-15         1.1   0.0003349     0.07092 
+comp_dp_comp_mul_b1_mult_31_n80  1.421e+08   3.853e-15         1.1   0.0003313     0.07015 
+comp_dp_comp_mul_b1_mult_31_n46   1.78e+08   3.068e-15         1.1   0.0003304     0.06997 
+comp_dp_comp_mul_a1_mult_31_n212      2e+08   2.715e-15         1.1   0.0003285     0.06956 
+comp_dp_comp_mul_a1_mult_31_n34  1.776e+08   3.041e-15         1.1   0.0003268     0.06921 
+comp_dp_comp_mul_a1_mult_31_n83  1.421e+08   3.753e-15         1.1   0.0003227     0.06833 
+comp_dp_comp_mul_a1_mult_31_n23   1.78e+08   2.975e-15         1.1   0.0003204     0.06784 
+comp_dp_comp_mul_b1_mult_31_n34  1.776e+08   2.976e-15         1.1   0.0003198     0.06772 
+comp_dp_comp_mul_a1_mult_31_n28   1.78e+08   2.969e-15         1.1   0.0003197     0.06771 
+comp_dp_comp_mul_b1_mult_31_n23   1.78e+08   2.967e-15         1.1   0.0003195     0.06766 
+comp_dp_comp_mul_b1_mult_31_n79  1.421e+08   3.708e-15         1.1   0.0003188      0.0675 
+comp_dp_comp_mul_a1_mult_31_n79  1.421e+08   3.698e-15         1.1   0.0003179     0.06732 
+comp_dp_comp_mul_b1_mult_31_n28   1.78e+08   2.936e-15         1.1   0.0003162     0.06696 
+comp_dp_comp_mul_a1_mult_31_n40   1.78e+08   2.923e-15         1.1   0.0003149     0.06667 
+comp_dp_comp_mul_b1_mult_31_n199  1.424e+08   3.652e-15         1.1   0.0003147     0.06664 
+comp_dp_comp_mul_b1_mult_31_n87  1.424e+08   3.633e-15         1.1    0.000313     0.06629 
+comp_dp_comp_mul_b1_mult_31_n24   1.78e+08   2.906e-15         1.1    0.000313     0.06627 
+comp_dp_comp_mul_b1_mult_31_n91  1.351e+08   3.812e-15         1.1   0.0003116     0.06599 
+comp_dp_comp_mul_b1_mult_31_n2      2e+08   2.565e-15         1.1   0.0003104     0.06573 
+comp_dp_comp_mul_a1_mult_31_n50  1.776e+08   2.882e-15         1.1   0.0003098     0.06559 
+comp_dp_comp_mul_b0_mult_31_n211      2e+08   2.559e-15         1.1   0.0003096     0.06557 
+comp_dp_comp_mul_a1_mult_31_n199  1.424e+08   3.589e-15         1.1   0.0003092     0.06548 
+DOUT[3]                        9.091e+07   5.615e-15         1.1   0.0003088     0.06539 
+comp_dp_comp_mul_a1_mult_31_n85  1.349e+08    3.73e-15         1.1   0.0003045     0.06448 
+comp_dp_comp_mul_a1_mult_31_n95  1.201e+08   4.189e-15         1.1   0.0003043     0.06444 
+DOUT[1]                        9.091e+07   5.491e-15         1.1    0.000302     0.06395 
+comp_dp_comp_mul_b1_mult_31_n97  1.201e+08   4.152e-15         1.1   0.0003016     0.06387 
+comp_dp_comp_mul_a1_mult_31_n91  1.424e+08   3.495e-15         1.1   0.0003012     0.06377 
+comp_dp_comp_mul_b0_mult_31_n49  1.153e+08   4.314e-15         1.1    0.000301     0.06374 
+comp_dp_n1                     2.733e+07   1.818e-14         1.1   0.0003005     0.06364 
+comp_dp_comp_mul_b1_mult_31_n88  1.424e+08   3.473e-15         1.1   0.0002992     0.06337 
+comp_dp_comp_mul_a1_mult_31_n87  1.424e+08   3.467e-15         1.1   0.0002988     0.06327 
+comp_dp_comp_mul_a1_mult_31_n97  1.201e+08    4.09e-15         1.1   0.0002971      0.0629 
+comp_dp_comp_mul_b1_mult_31_n95  1.201e+08   4.088e-15         1.1    0.000297     0.06289 
+comp_dp_comp_mul_a1_mult_31_n94  1.201e+08   4.046e-15         1.1   0.0002939     0.06223 
+comp_dp_comp_mul_b1_mult_31_n266  1.136e+08   4.237e-15         1.1   0.0002913     0.06169 
+comp_dp_comp_mul_a1_mult_31_n194  1.114e+08   4.312e-15         1.1   0.0002906     0.06154 
+comp_dp_comp_mul_b1_mult_31_n194  1.201e+08   3.998e-15         1.1   0.0002904      0.0615 
+comp_dp_comp_mul_a1_mult_31_n15  1.776e+08   2.683e-15         1.1   0.0002883     0.06105 
+comp_dp_comp_sum1_add_1_root_add_27_2_carry[7]  1.526e+08   3.115e-15         1.1   0.0002876     0.06091 
+comp_dp_comp_mul_a1_mult_31_n90  1.424e+08   3.334e-15         1.1   0.0002873     0.06083 
+comp_dp_comp_mul_b1_mult_31_n90  1.424e+08   3.324e-15         1.1   0.0002864     0.06065 
+comp_dp_comp_mul_b1_mult_31_n43   1.21e+08    3.91e-15         1.1   0.0002862      0.0606 
+DOUT[4]                        9.091e+07   5.189e-15         1.1   0.0002854     0.06044 
+comp_dp_comp_mul_b0_mult_31_n84  1.091e+08   4.311e-15         1.1   0.0002845     0.06025 
+comp_dp_comp_mul_a1_mult_31_n2      2e+08   2.349e-15         1.1   0.0002842     0.06019 
+comp_dp_comp_mul_b0_mult_31_n53  1.359e+08   3.442e-15         1.1   0.0002829     0.05991 
+DOUT[2]                        9.091e+07   5.077e-15         1.1   0.0002792     0.05913 
+comp_dp_comp_mul_b1_mult_31_n15  1.776e+08   2.598e-15         1.1   0.0002792     0.05911 
+comp_dp_comp_mul_a1_mult_31_n88  1.424e+08   3.219e-15         1.1   0.0002774     0.05873 
+comp_dp_comp_mul_b0_mult_31_n232  1.303e+08   3.505e-15         1.1   0.0002763     0.05851 
+comp_dp_comp_mul_b1_mult_31_n94  1.201e+08    3.79e-15         1.1   0.0002753     0.05829 
+comp_dp_comp_mul_b1_mult_31_n45  1.049e+08   4.336e-15         1.1   0.0002751     0.05825 
+comp_dp_comp_mul_b0_mult_31_n2      2e+08   2.272e-15         1.1   0.0002749     0.05821 
+comp_dp_comp_mul_b1_mult_31_n85  1.349e+08    3.36e-15         1.1   0.0002742     0.05807 
+comp_dp_comp_mul_b1_mult_31_n254  1.091e+08   4.151e-15         1.1    0.000274     0.05801 
+comp_dp_comp_mul_a1_mult_31_n245  1.091e+08   4.138e-15         1.1   0.0002731     0.05783 
+comp_dp_comp_mul_b1_mult_31_n245  1.091e+08   4.137e-15         1.1    0.000273     0.05782 
+DOUT[5]                        9.091e+07   4.915e-15         1.1   0.0002703     0.05724 
+comp_dp_comp_mul_a1_mult_31_n96  1.201e+08   3.671e-15         1.1   0.0002667     0.05647 
+comp_dp_comp_mul_a1_mult_31_n98  1.201e+08    3.67e-15         1.1   0.0002666     0.05646 
+comp_dp_comp_mul_b1_mult_31_n256  1.091e+08   4.027e-15         1.1   0.0002658     0.05628 
+comp_dp_comp_mul_b1_mult_31_n96  1.201e+08   3.653e-15         1.1   0.0002653     0.05618 
+comp_dp_comp_sum1_add_1_root_add_27_2_carry[6]  1.465e+08   2.957e-15         1.1   0.0002622     0.05551 
+comp_dp_comp_mul_b1_mult_31_n98  1.201e+08   3.608e-15         1.1   0.0002621     0.05549 
+comp_dp_comp_mul_a1_mult_31_n9  1.144e+08    3.78e-15         1.1   0.0002616      0.0554 
+comp_dp_comp_mul_b0_mult_31_n224      2e+08   2.156e-15         1.1   0.0002609     0.05525 
+comp_dp_comp_mul_a1_mult_31_n6  1.471e+08   2.927e-15         1.1   0.0002604     0.05514 
+comp_dp_comp_sum1_add_1_root_add_27_2_carry[5]  1.362e+08   3.156e-15         1.1     0.00026     0.05506 
+comp_dp_comp_mul_a1_mult_31_n255  1.091e+08   3.917e-15         1.1   0.0002585     0.05474 
+comp_dp_comp_mul_b1_mult_31_n219  1.091e+08   3.864e-15         1.1    0.000255       0.054 
+DOUT[6]                        9.091e+07   4.636e-15         1.1    0.000255     0.05399 
+comp_dp_comp_mul_b1_mult_31_n264  1.136e+08   3.706e-15         1.1   0.0002548     0.05396 
+comp_dp_comp_mul_b1_mult_31_n255  1.091e+08   3.853e-15         1.1   0.0002543     0.05384 
+comp_dp_comp_mul_a1_mult_31_n205   1.35e+08   3.085e-15         1.1   0.0002519     0.05333 
+DOUT[7]                        9.091e+07   4.578e-15         1.1   0.0002518     0.05332 
+comp_dp_comp_mul_b1_mult_31_n247  1.091e+08   3.813e-15         1.1   0.0002517     0.05329 
+comp_dp_comp_mul_a1_mult_31_n220  1.091e+08   3.811e-15         1.1   0.0002515     0.05327 
+comp_dp_comp_mul_a1_mult_31_n249  1.091e+08   3.809e-15         1.1   0.0002514     0.05324 
+comp_dp_comp_mul_a1_mult_31_n221  1.091e+08   3.799e-15         1.1   0.0002507     0.05309 
+comp_dp_comp_mul_a1_mult_31_n219  1.091e+08   3.781e-15         1.1   0.0002495     0.05284 
+comp_dp_comp_mul_a1_mult_31_n211   1.42e+08   2.903e-15         1.1   0.0002495     0.05283 
+comp_dp_comp_mul_a1_mult_31_n240  1.091e+08    3.75e-15         1.1   0.0002475     0.05241 
+comp_dp_comp_mul_b1_mult_31_n220  1.091e+08    3.75e-15         1.1   0.0002475     0.05241 
+comp_dp_comp_mul_b1_mult_31_n240  1.091e+08   3.746e-15         1.1   0.0002472     0.05236 
+comp_dp_comp_mul_a1_mult_31_n217  1.091e+08   3.736e-15         1.1   0.0002466     0.05222 
+comp_dp_comp_mul_a1_mult_31_n48      2e+08   2.033e-15         1.1    0.000246     0.05209 
+comp_dp_comp_mul_a1_mult_31_n247  1.091e+08   3.722e-15         1.1   0.0002456     0.05201 
+comp_dp_comp_mul_a1_mult_31_n256  1.091e+08   3.719e-15         1.1   0.0002455     0.05198 
+comp_dp_comp_mul_a1_mult_31_n241  1.091e+08   3.708e-15         1.1   0.0002447     0.05182 
+comp_dp_comp_mul_b1_mult_31_n222  1.091e+08   3.698e-15         1.1   0.0002441     0.05169 
+comp_dp_comp_mul_a1_mult_31_n246  1.091e+08   3.696e-15         1.1   0.0002439     0.05165 
+comp_dp_comp_mul_b1_mult_31_n258  1.091e+08    3.69e-15         1.1   0.0002435     0.05157 
+comp_dp_comp_mul_b1_mult_31_n217  1.091e+08   3.689e-15         1.1   0.0002435     0.05156 
+comp_dp_comp_mul_b0_mult_31_n76  1.091e+08   3.689e-15         1.1   0.0002434     0.05155 
+comp_dp_comp_mul_a1_mult_31_n248  1.091e+08   3.685e-15         1.1   0.0002432      0.0515 
+comp_dp_comp_mul_b1_mult_31_n205   1.35e+08   2.977e-15         1.1    0.000243     0.05146 
+comp_dp_comp_mul_a1_mult_31_n239  1.091e+08   3.678e-15         1.1   0.0002427      0.0514 
+comp_dp_comp_mul_a1_mult_31_n254  1.091e+08    3.67e-15         1.1   0.0002422      0.0513 
+comp_dp_comp_mul_a1_mult_31_n222  1.091e+08    3.67e-15         1.1   0.0002422     0.05129 
+comp_dp_comp_mul_a1_mult_31_n238  1.091e+08   3.665e-15         1.1   0.0002419     0.05122 
+comp_dp_comp_mul_b1_mult_31_n239  1.091e+08   3.658e-15         1.1   0.0002414     0.05112 
+comp_dp_comp_mul_a1_mult_31_n258  1.091e+08   3.656e-15         1.1   0.0002413     0.05109 
+comp_dp_comp_mul_b1_mult_31_n237  1.062e+08   3.753e-15         1.1   0.0002412     0.05107 
+comp_dp_comp_mul_b1_mult_31_n257  1.091e+08   3.644e-15         1.1   0.0002405     0.05093 
+comp_dp_comp_mul_a1_mult_31_n223  1.091e+08    3.64e-15         1.1   0.0002403     0.05088 
+comp_dp_comp_mul_b1_mult_31_n249  1.091e+08   3.639e-15         1.1   0.0002402     0.05086 
+comp_dp_comp_mul_b1_mult_31_n229  1.091e+08   3.636e-15         1.1     0.00024     0.05081 
+comp_dp_comp_mul_b1_mult_31_n238  1.091e+08   3.632e-15         1.1   0.0002397     0.05076 
+comp_dp_comp_mul_b1_mult_31_n221  1.091e+08    3.63e-15         1.1   0.0002396     0.05073 
+comp_dp_comp_mul_b1_mult_31_n248  1.091e+08   3.619e-15         1.1   0.0002389     0.05058 
+comp_dp_comp_mul_b1_mult_31_n228  1.091e+08   3.617e-15         1.1   0.0002387     0.05055 
+comp_dp_comp_mul_b1_mult_31_n263  1.091e+08   3.616e-15         1.1   0.0002387     0.05054 
+comp_dp_comp_mul_a1_mult_31_n43  1.019e+08   3.861e-15         1.1   0.0002382     0.05043 
+comp_dp_comp_mul_a1_mult_31_n216  1.091e+08   3.608e-15         1.1   0.0002382     0.05043 
+comp_dp_comp_mul_b1_mult_31_n252  1.091e+08   3.595e-15         1.1   0.0002373     0.05025 
+comp_dp_comp_mul_b0_mult_31_n225      2e+08    1.96e-15         1.1   0.0002372     0.05023 
+comp_dp_comp_mul_a1_mult_31_n263  1.091e+08   3.575e-15         1.1   0.0002359     0.04996 
+comp_dp_comp_mul_a1_mult_31_n228  1.091e+08   3.568e-15         1.1   0.0002355     0.04987 
+comp_dp_comp_mul_a1_mult_31_n237  1.062e+08   3.656e-15         1.1    0.000235     0.04975 
+comp_dp_comp_mul_b1_mult_31_n246  1.091e+08   3.558e-15         1.1   0.0002348     0.04972 
+comp_dp_comp_mul_b0_mult_31_n265      2e+08   1.935e-15         1.1   0.0002341     0.04958 
+comp_dp_comp_mul_a1_mult_31_n252  1.091e+08   3.541e-15         1.1   0.0002337     0.04949 
+comp_dp_comp_mul_b1_mult_31_n250  1.091e+08   3.537e-15         1.1   0.0002334     0.04943 
+comp_dp_comp_mul_a1_mult_31_n229  1.091e+08   3.535e-15         1.1   0.0002333      0.0494 
+comp_dp_comp_mul_b1_mult_31_n216  1.091e+08    3.53e-15         1.1    0.000233     0.04933 
+comp_dp_comp_mul_b0_mult_31_n54      2e+08   1.915e-15         1.1   0.0002317     0.04906 
+comp_dp_comp_mul_a1_mult_31_n257  1.091e+08   3.508e-15         1.1   0.0002316     0.04903 
+comp_dp_comp_mul_a1_mult_31_n250  1.091e+08     3.5e-15         1.1    0.000231     0.04892 
+comp_dp_comp_mul_b1_mult_31_n241  1.091e+08   3.497e-15         1.1   0.0002308     0.04887 
+comp_dp_comp_sum1_add_1_root_add_27_2_carry[4]  1.208e+08   3.156e-15         1.1   0.0002306     0.04883 
+comp_dp_comp_mul_b0_mult_31_n48      2e+08   1.901e-15         1.1     0.00023      0.0487 
+comp_dp_comp_mul_b0_mult_31_n251      2e+08   1.896e-15         1.1   0.0002294     0.04858 
+comp_dp_comp_mul_b0_mult_31_n264      2e+08   1.885e-15         1.1    0.000228     0.04829 
+comp_dp_comp_mul_b0_mult_31_n213      2e+08   1.873e-15         1.1   0.0002266     0.04799 
+comp_dp_comp_mul_a1_mult_31_n46  1.264e+08   2.951e-15         1.1   0.0002257      0.0478 
+comp_dp_comp_mul_b0_mult_31_n51      2e+08   1.858e-15         1.1   0.0002249     0.04762 
+comp_dp_comp_mul_b0_mult_31_n202      2e+08   1.857e-15         1.1   0.0002247     0.04758 
+comp_dp_comp_mul_a1_mult_31_n196  1.048e+08   3.526e-15         1.1   0.0002236     0.04735 
+comp_dp_comp_mul_a1_mult_31_n7   1.21e+08   3.016e-15         1.1   0.0002208     0.04675 
+comp_dp_comp_mul_b0_mult_31_n243      2e+08   1.822e-15         1.1   0.0002205     0.04669 
+comp_dp_comp_mul_b0_mult_31_n253      2e+08   1.819e-15         1.1   0.0002201     0.04661 
+comp_dp_comp_mul_b1_mult_31_n9  1.126e+08   3.196e-15         1.1   0.0002178     0.04613 
+comp_dp_comp_mul_b1_mult_31_n196  1.048e+08   3.424e-15         1.1   0.0002171     0.04598 
+comp_dp_comp_mul_b0_mult_31_n41   1.16e+08   3.088e-15         1.1   0.0002168      0.0459 
+comp_dp_comp_mul_b1_mult_31_n211   1.42e+08   2.514e-15         1.1    0.000216     0.04574 
+comp_dp_comp_mul_b0_mult_31_n266      2e+08   1.765e-15         1.1   0.0002136     0.04523 
+comp_dp_comp_mul_b0_mult_31_n194      2e+08   1.728e-15         1.1   0.0002091     0.04427 
+comp_dp_comp_mul_b1_mult_31_n48      2e+08   1.715e-15         1.1   0.0002075     0.04394 
+comp_dp_comp_mul_a1_mult_31_n45  7.129e+07    4.41e-15         1.1   0.0001902     0.04028 
+comp_dp_comp_mul_a1_mult_31_n54   1.78e+08   1.745e-15         1.1   0.0001879     0.03979 
+comp_dp_comp_mul_b1_mult_31_n54  1.689e+08   1.774e-15         1.1   0.0001813     0.03839 
+comp_dp_y[3]                       2e+08   1.451e-15         1.1   0.0001755     0.03717 
+comp_dp_y[1]                       2e+08   1.438e-15         1.1   0.0001739     0.03683 
+comp_dp_N3                     2.948e+07   9.726e-15         1.1   0.0001735     0.03673 
+comp_dp_comp_sum1_add_1_root_add_27_2_carry[2]  9.196e+07   3.111e-15         1.1   0.0001731     0.03665 
+comp_dp_y[0]                       2e+08   1.429e-15         1.1   0.0001729     0.03661 
+comp_dp_comp_mul_a1_mult_31_n230  7.054e+07    4.03e-15         1.1    0.000172     0.03642 
+comp_dp_comp_mul_a1_mult_31_n76  6.308e+07   4.422e-15         1.1   0.0001688     0.03574 
+comp_dp_comp_mul_b1_mult_31_n66    7.2e+07   3.874e-15         1.1   0.0001688     0.03573 
+comp_dp_y[4]                       2e+08   1.393e-15         1.1   0.0001686      0.0357 
+comp_dp_comp_sum1_add_1_root_add_27_2_carry[3]   9.45e+07   2.903e-15         1.1    0.000166     0.03515 
+comp_dp_y[6]                       2e+08   1.369e-15         1.1   0.0001657     0.03508 
+comp_dp_comp_mul_a1_mult_31_n8  8.837e+07   3.087e-15         1.1    0.000165     0.03495 
+comp_dp_comp_mul_b1_mult_31_n65  6.975e+07   3.836e-15         1.1   0.0001619     0.03428 
+comp_dp_comp_mul_a1_mult_31_n233  7.178e+07   3.681e-15         1.1   0.0001598     0.03385 
+comp_dp_y[5]                       2e+08   1.302e-15         1.1   0.0001575     0.03335 
+comp_dp_comp_mul_b1_mult_31_n230  6.783e+07   3.821e-15         1.1   0.0001568      0.0332 
+comp_dp_comp_mul_b1_mult_31_n233  7.178e+07   3.593e-15         1.1    0.000156     0.03304 
+comp_dp_comp_mul_b1_mult_31_n206   1.42e+08   1.798e-15         1.1   0.0001545     0.03272 
+comp_dp_y[2]                       2e+08   1.267e-15         1.1   0.0001533     0.03246 
+comp_dp_comp_mul_b1_mult_31_n76  6.308e+07   3.996e-15         1.1   0.0001525     0.03229 
+comp_dp_comp_mul_b1_mult_31_n231  6.409e+07   3.921e-15         1.1    0.000152      0.0322 
+comp_dp_comp_mul_b1_mult_31_n84  6.307e+07   3.951e-15         1.1   0.0001507     0.03192 
+comp_dp_comp_mul_a1_mult_31_n251   1.35e+08   1.841e-15         1.1   0.0001503     0.03182 
+comp_dp_comp_mul_a1_mult_31_n84  6.307e+07   3.927e-15         1.1   0.0001498     0.03173 
+comp_dp_comp_mul_a1_mult_31_n231  6.601e+07   3.748e-15         1.1   0.0001497      0.0317 
+comp_dp_comp_mul_b1_mult_31_n251   1.35e+08   1.832e-15         1.1   0.0001496     0.03168 
+comp_dp_comp_mul_a1_mult_31_n66    7.2e+07   3.345e-15         1.1   0.0001457     0.03085 
+comp_dp_comp_mul_a1_mult_31_n243  1.091e+08   2.029e-15         1.1   0.0001339     0.02836 
+comp_dp_comp_mul_b1_mult_31_n224  1.201e+08   1.827e-15         1.1   0.0001327      0.0281 
+comp_dp_comp_mul_a1_mult_31_n265  1.136e+08   1.864e-15         1.1   0.0001281     0.02713 
+comp_dp_comp_mul_a1_mult_31_n65  5.486e+07    3.85e-15         1.1   0.0001278     0.02706 
+comp_dp_comp_mul_a1_mult_31_n206   1.18e+08   1.785e-15         1.1   0.0001275     0.02699 
+comp_dp_comp_mul_a1_mult_31_n253  1.091e+08   1.924e-15         1.1    0.000127     0.02689 
+comp_dp_comp_mul_b0_mult_31_n210  1.818e+07   1.146e-14         1.1   0.0001261     0.02669 
+comp_dp_comp_mul_a1_mult_31_n224  1.114e+08   1.866e-15         1.1   0.0001258     0.02664 
+comp_dp_comp_mul_b1_mult_31_n210  1.818e+07   1.137e-14         1.1   0.0001251     0.02648 
+comp_dp_comp_mul_b1_mult_31_n202  1.091e+08    1.89e-15         1.1   0.0001247     0.02641 
+comp_dp_comp_mul_b1_mult_31_n265  1.136e+08   1.814e-15         1.1   0.0001247     0.02641 
+comp_dp_comp_mul_b1_mult_31_n243  1.091e+08    1.85e-15         1.1   0.0001221     0.02586 
+comp_dp_comp_mul_a1_mult_31_n202  1.091e+08   1.847e-15         1.1   0.0001219     0.02581 
+comp_dp_comp_mul_a1_mult_31_n225  1.091e+08   1.829e-15         1.1   0.0001207     0.02556 
+comp_dp_comp_mul_a1_mult_31_n53  5.743e+07   3.462e-15         1.1   0.0001203     0.02547 
+comp_dp_comp_mul_b1_mult_31_n225  1.091e+08   1.808e-15         1.1   0.0001193     0.02526 
+comp_dp_comp_mul_a1_mult_31_n210  1.818e+07   1.078e-14         1.1   0.0001185      0.0251 
+comp_dp_comp_mul_b1_mult_31_n213  1.091e+08   1.794e-15         1.1   0.0001184     0.02508 
+comp_dp_comp_mul_b1_mult_31_n253  1.091e+08   1.791e-15         1.1   0.0001182     0.02503 
+comp_dp_comp_mul_a1_mult_31_n213  1.091e+08   1.783e-15         1.1   0.0001177     0.02492 
+comp_dp_comp_mul_b1_mult_31_n51  1.048e+08   1.849e-15         1.1   0.0001173     0.02483 
+comp_dp_w1[0]                  9.091e+07   2.089e-15         1.1   0.0001149     0.02433 
+comp_dp_comp_mul_b0_mult_31_n236  1.671e+08   1.136e-15         1.1   0.0001149     0.02432 
+comp_dp_comp_mul_b0_mult_31_n259  1.047e+08   1.811e-15         1.1   0.0001147     0.02429 
+comp_dp_comp_mul_b1_mult_31_n53  5.469e+07   3.464e-15         1.1   0.0001146     0.02427 
+comp_dp_comp_mul_b0_mult_31_n234  1.045e+08   1.799e-15         1.1   0.0001138     0.02409 
+comp_dp_comp_mul_b0_mult_31_n260   1.05e+08   1.775e-15         1.1   0.0001128     0.02389 
+comp_dp_comp_mul_a1_mult_31_n51  1.048e+08   1.759e-15         1.1   0.0001116     0.02362 
+comp_dp_comp_mul_b0_mult_31_n209  1.818e+07   9.957e-15         1.1   0.0001095     0.02319 
+comp_dp_N14                    1.016e+08    1.77e-15         1.1   0.0001088     0.02305 
+comp_dp_comp_sum1_add_1_root_add_27_2_carry[1]  5.398e+07   3.295e-15         1.1   0.0001076     0.02278 
+comp_dp_comp_mul_b1_mult_31_n242  1.136e+08    1.55e-15         1.1   0.0001065     0.02256 
+comp_dp_comp_mul_b1_mult_31_n209  1.818e+07    9.53e-15         1.1   0.0001048      0.0222 
+comp_dp_comp_mul_a1_mult_31_n209  1.818e+07    9.12e-15         1.1   0.0001003     0.02124 
+comp_dp_comp_mul_a1_mult_31_n242  1.136e+08   1.421e-15         1.1   9.767e-05     0.02068 
+comp_cu_n4                     2.186e+07   7.332e-15         1.1   9.698e-05     0.02054 
+comp_dp_N15                    1.018e+08   1.513e-15         1.1   9.319e-05     0.01973 
+comp_dp_N18                    1.018e+08   1.437e-15         1.1   8.855e-05     0.01875 
+comp_dp_N19                    1.019e+08   1.379e-15         1.1   8.502e-05       0.018 
+comp_dp_comp_mul_b1_mult_31_n232  3.993e+07   3.519e-15         1.1   8.499e-05       0.018 
+comp_dp_comp_mul_a1_mult_31_n232  3.993e+07   3.481e-15         1.1    8.41e-05     0.01781 
+comp_cu_n3                     1.867e+07   7.442e-15         1.1   8.406e-05      0.0178 
+comp_dp_N13                    1.015e+08   1.367e-15         1.1   8.396e-05     0.01778 
+comp_dp_N16                    1.018e+08   1.336e-15         1.1   8.227e-05     0.01742 
+comp_dp_N17                    1.018e+08   1.335e-15         1.1   8.224e-05     0.01742 
+comp_dp_comp_mul_a1_mult_31_n49  3.132e+07   4.291e-15         1.1   8.132e-05     0.01722 
+comp_dp_N12                    1.012e+08   1.296e-15         1.1   7.932e-05      0.0168 
+comp_dp_w1[1]                  9.091e+07   1.421e-15         1.1   7.814e-05     0.01655 
+comp_dp_comp_mul_b1_mult_31_n49  3.132e+07   4.041e-15         1.1   7.658e-05     0.01622 
+VOUT                           1.406e+07   7.807e-15         1.1   6.641e-05     0.01406 
+comp_cu_n5                     1.818e+07   5.813e-15         1.1   6.394e-05     0.01354 
+en_latch                       1.956e+07   5.345e-15         1.1   6.326e-05      0.0134 
+comp_dp_comp_mul_b0_mult_31_n235  8.541e+07   1.142e-15         1.1   5.899e-05     0.01249 
+comp_dp_x[4]                   2.168e+07   4.213e-15         1.1   5.525e-05      0.0117 
+comp_dp_x[7]                   2.168e+07   4.194e-15         1.1     5.5e-05     0.01165 
+comp_dp_x[0]                   2.168e+07   4.122e-15         1.1   5.406e-05     0.01145 
+comp_dp_x[5]                   2.168e+07   4.107e-15         1.1   5.386e-05     0.01141 
+comp_dp_x[2]                   2.168e+07   4.079e-15         1.1   5.349e-05     0.01133 
+comp_dp_x[6]                   2.168e+07   4.045e-15         1.1   5.305e-05     0.01123 
+comp_dp_x[3]                   2.168e+07   4.039e-15         1.1   5.296e-05     0.01122 
+comp_dp_x[1]                   2.168e+07   4.009e-15         1.1   5.258e-05     0.01113 
+comp_dp_comp_mul_b1_mult_31_n41  2.958e+07   2.899e-15         1.1   5.188e-05     0.01099 
+clr_w_reg                      2.733e+07   3.088e-15         1.1   5.106e-05     0.01081 
+comp_dp_comp_mul_a1_mult_31_n41  2.476e+07   2.991e-15         1.1   4.479e-05    0.009485 
+comp_cu_n2                     1.956e+07    3.73e-15         1.1   4.414e-05    0.009347 
+comp_cu_n6                     1.818e+07   3.517e-15         1.1   3.868e-05    0.008191 
+comp_dp_comp_mul_b1_mult_31_n236  5.662e+07   1.119e-15         1.1   3.833e-05    0.008117 
+comp_dp_comp_mul_a1_mult_31_n236  5.662e+07   1.058e-15         1.1   3.623e-05    0.007672 
+comp_dp_comp_mul_b1_mult_31_n260  2.968e+07   1.995e-15         1.1   3.581e-05    0.007584 
+comp_dp_comp_mul_a1_mult_31_n234   2.93e+07   1.936e-15         1.1   3.431e-05    0.007265 
+comp_cu_n8                     2.733e+07   2.001e-15         1.1   3.308e-05    0.007006 
+comp_dp_comp_mul_a1_mult_31_n260  2.968e+07   1.821e-15         1.1   3.269e-05    0.006922 
+comp_dp_comp_mul_b1_mult_31_n234   2.93e+07   1.805e-15         1.1   3.199e-05    0.006775 
+comp_dp_comp_mul_b1_mult_31_n259  2.956e+07   1.767e-15         1.1    3.16e-05    0.006692 
+comp_dp_comp_mul_a1_mult_31_n259  2.956e+07   1.767e-15         1.1   3.159e-05    0.006689 
+comp_cu_n10                    2.371e+07   2.074e-15         1.1   2.975e-05      0.0063 
+comp_cu_present_state[0]       2.186e+07    2.24e-15         1.1   2.962e-05    0.006273 
+comp_cu_present_state[2]        6.41e+06   7.605e-15         1.1   2.949e-05    0.006246 
+comp_dp_N11                    2.168e+07   2.164e-15         1.1   2.837e-05    0.006009 
+comp_cu_present_state[1]       1.867e+07   1.745e-15         1.1   1.972e-05    0.004175 
+comp_cu_N53                    2.186e+07   1.432e-15         1.1   1.894e-05    0.004011 
+comp_dp_N9                     2.168e+07   1.227e-15         1.1   1.609e-05    0.003407 
+comp_cu_n9                     1.408e+07   1.859e-15         1.1   1.584e-05    0.003355 
+comp_cu_N54                    1.867e+07   1.383e-15         1.1   1.562e-05    0.003308 
+comp_dp_N4                     2.168e+07   1.132e-15         1.1   1.484e-05    0.003142 
+comp_dp_N6                     2.168e+07   1.121e-15         1.1    1.47e-05    0.003114 
+comp_dp_comp_mul_b1_mult_31_n235  2.038e+07   1.192e-15         1.1    1.47e-05    0.003113 
+comp_dp_comp_mul_a1_mult_31_n235  2.038e+07   1.178e-15         1.1   1.452e-05    0.003075 
+comp_dp_N7                     2.168e+07   1.106e-15         1.1   1.451e-05    0.003073 
+comp_dp_N5                     2.168e+07   1.105e-15         1.1   1.449e-05    0.003069 
+comp_dp_N8                     2.168e+07   1.078e-15         1.1   1.414e-05    0.002994 
+comp_dp_sync_DIN[6]            1.818e+07    1.21e-15         1.1   1.331e-05    0.002818 
+comp_dp_sync_DIN[5]            1.818e+07   1.176e-15         1.1   1.293e-05    0.002738 
+comp_dp_sync_DIN[7]            1.818e+07   1.159e-15         1.1   1.275e-05    0.002701 
+comp_dp_sync_DIN[4]            1.818e+07   1.158e-15         1.1   1.274e-05    0.002698 
+comp_dp_sync_DIN[2]            1.818e+07   1.118e-15         1.1    1.23e-05    0.002604 
+comp_dp_sync_DIN[1]            1.818e+07   1.103e-15         1.1   1.214e-05     0.00257 
+comp_dp_sync_DIN[3]            1.818e+07   1.061e-15         1.1   1.167e-05    0.002471 
+comp_cu_n1                      6.41e+06   1.862e-15         1.1   7.221e-06    0.001529 
+comp_cu_n7                     4.851e+06   1.808e-15         1.1   5.307e-06    0.001124 
+comp_cu_N55                     6.41e+06   1.326e-15         1.1   5.141e-06    0.001089 
+b0[6]                          1.818e+07   9.722e-15           0           0           0 
+b0[5]                          1.818e+07       1e-14           0           0           0 
+b0[4]                          1.818e+07    1.01e-14           0           0           0 
+b0[3]                          1.818e+07   1.033e-14           0           0           0 
+b0[2]                          1.818e+07   3.688e-15           0           0           0 
+b0[1]                          1.818e+07   8.976e-15           0           0           0 
+b0[7]                          1.818e+07   1.212e-14           0           0           0 
+a1[7]                          1.818e+07   2.028e-14           0           0           0 
+b0[0]                                  0           0           0           0           0 
+b1[0]                                  0           0           0           0           0 
+b1[1]                          1.818e+07   8.262e-15           0           0           0 
+b1[2]                          1.818e+07    3.59e-15           0           0           0 
+b1[3]                          1.818e+07   1.002e-14           0           0           0 
+b1[5]                          1.818e+07   1.019e-14           0           0           0 
+b1[6]                          1.818e+07   1.043e-14           0           0           0 
+b1[7]                          1.818e+07   1.955e-14           0           0           0 
+a1[6]                          1.818e+07   1.074e-14           0           0           0 
+b1[4]                          1.818e+07    9.81e-15           0           0           0 
+comp_dp_comp_mul_b1_y_7_           2e+08           0         1.1           0           0 
+CLK                            1.818e+08   3.179e-14           0           0           0 
+comp_dp_comp_mul_b0_y_7_           2e+08           0         1.1           0           0 
+DIN[0]                                 0           0           0           0           0 
+DIN[1]                         1.818e+07   6.825e-15           0           0           0 
+DIN[2]                         1.818e+07   6.526e-15           0           0           0 
+DIN[3]                         1.818e+07   6.282e-15           0           0           0 
+DIN[4]                         1.818e+07   5.992e-15           0           0           0 
+RST_n                          1.818e+07   5.478e-15           0           0           0 
+DIN[6]                         1.818e+07   5.539e-15           0           0           0 
+DIN[7]                         1.818e+07   5.308e-15           0           0           0 
+VIN                            1.818e+07   5.455e-15           0           0           0 
+a1[0]                                  0           0           0           0           0 
+a1[1]                          1.818e+07   8.643e-15           0           0           0 
+a1[2]                          1.818e+07    3.68e-15           0           0           0 
+a1[3]                          1.818e+07   1.028e-14           0           0           0 
+a1[4]                          1.818e+07   1.034e-14           0           0           0 
+a1[5]                          1.818e+07   1.035e-14           0           0           0 
+DIN[5]                         1.818e+07   5.602e-15           0           0           0 
+
+
+Domain                 Voltage     Internal   Switching     Leakage       Total  Percentage 
+                                   Power      Power         Power         Power  (%)        
+-----------------------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------------------
+*	Power Distribution Summary: 
+* 		Highest Average Power: comp_dp_comp_sum1_add_1_root_add_27_2_U1_1 (FA_X1): 	  0.004028 
+* 		Highest Leakage Power:       comp_dp_DOUT_reg_1_ (DFF_X1): 	 7.911e-05 
+* 		Total Cap: 	2.56343e-12 F
+* 		Total instances in design:   459
+* 		Total instances in design with no power:     0
+*          Total instances in design with no activity:     0
+* 		Total Fillers and Decap:     0
+-----------------------------------------------------------------------------------------
+
