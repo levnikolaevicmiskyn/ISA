@@ -8,3 +8,11 @@ Reports:
 - Connectivity: no problems
 - Geometry: 0 violations
 - Gates=1143 Cells=459 Area=912.4 um^2
+
+Place & Route:
+
+- open a shell
+- type "source /software/scripts/init_innovus17.11"
+- type "innovus -nowin"
+- once innovus is opened (can require a very long time) type "source place_and_route.do"
+- once finished type "exit"
