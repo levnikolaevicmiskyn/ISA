@@ -4,7 +4,7 @@ use IEEE.numeric_std.all;
 
 
 library work;
-use work.constants;
+use work.constants.all;
 use work.fpconv.all;
 use work.packets;
 
