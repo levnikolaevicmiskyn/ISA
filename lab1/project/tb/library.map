@@ -1,2 +1,0 @@
-library testLib testbench.v
-library rtlLib ../src/*.vhd

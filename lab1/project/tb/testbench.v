@@ -55,9 +55,10 @@ module testbench();
 	);
 endmodule
 
+
 // Configuration
 config tbconf;
 	design testLib.testbench;
-	default liblist testLib rtlLib;
-	instance testbench.comp_IIRFilter use work.IIRFilter:IIRFilter_standard;
-endconfig;
+	default liblist rtlLib testLib work;
+	instance testbench.comp_IIRFilter use work.IIRFilter_standard:config;
+endconfig
