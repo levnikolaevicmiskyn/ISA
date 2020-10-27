@@ -4,15 +4,15 @@ use IEEE.numeric_std.all;
 
 
 library work;
-use work.constants.all;
+use work.constants;
 use work.fpconv.all;
 use work.packets;
 
 entity Datapath is
     port (
         CLK:    in  std_logic;              -- Clock signal
-        b: 		in  std_logic_vector(NBCOEFF*NBINT-1 downto 0);     			-- Filter b parameters (constant)
-        a:     	in  std_logic_vector(NACOEFF*NBINT-1 downto 0);     			-- Filter -a parameters (constant)
+        b: 		in  std_logic_vector(constants.NBCOEFF*constants.NBINT-1 downto 0);     			-- Filter b parameters (constant)
+        a:     	in  std_logic_vector(constants.NACOEFF*constants.NBINT-1 downto 0);     			-- Filter -a parameters (constant)
         DIN:    in  signed(7 downto 0);     -- Input sample
         -- Control Unit signals
         clr_w_reg: in std_logic;            -- Clear delay register
@@ -55,12 +55,12 @@ architecture RTL of Datapath is
     signal t_tmp, ff_tmp: signed(NA-1 downto 0); -- Feedforward multiplier output
     signal t, ff: signed(NB-1 downto 0);
     signal a1_int, b0_int, b1_int: signed(NA-1 downto 0);
-	signal a1, b0, b1: signed(NBINT-1 downto 0);
+	signal a1, b0, b1: signed(constants.NBINT-1 downto 0);
 	
 begin
-	a1 <= packets.extract(a_bundle, 0, NBINT);
-	b0 <= packets.extract(b_bundle, 0, NBINT);
-	b1 <= packets.extract(b_bundle, 1, NBINT);
+	a1 <= packets.extract(a, 0, constants.NBINT);
+	b0 <= packets.extract(b, 0, constants.NBINT);
+	b1 <= packets.extract(b, 1, constants.NBINT);
     -- Resize coefficients to match the internal representation: the least significant bit is dropped and 
     -- sign is extendend to avoid overflow.
     a1_int <= fpresize(a1, 1, 7, NIa, NF);

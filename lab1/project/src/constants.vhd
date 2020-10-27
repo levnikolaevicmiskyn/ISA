@@ -9,7 +9,7 @@ package constants is
 	constant NIb	: positive := 1;	 -- This is used by the feedforward adders (closer to the output)  
 	
 	constant NBINT 	: positive := 8;     -- Interface bitwidth for all signals
-	constant NACOEFF : positive := 2;    -- Number of a coefficients
+	constant NACOEFF : positive := 1;    -- Number of a coefficients
 	constant NBCOEFF : positive := 2;
 	
 end constants;

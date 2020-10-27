@@ -6,7 +6,9 @@ module testbench();
 	localparam [N-1:0] b1 = 53;
 	localparam [N-1:0] b0 = 53;
 	localparam [N-1:0] a1 = 21;
-	
+	localparam [2*N-1:0] b = {b1, b0};
+	localparam [N-1:0] a = a1;
+
  	wire clk;
 	wire rst_n;
 	wire end_sim;
@@ -16,6 +18,7 @@ module testbench();
 	
 	wire vin;
 	wire vout;
+
 	
 	// Testbench infrastructure
 	clk_gen 
@@ -43,9 +46,8 @@ module testbench();
 	IIRFilter comp_IIRFilter(
 		.CLK(clk),
 		.RST_n(rst_n),
-		.b1(b1),
-		.b0(b0),
-		.a1(a1),
+		.b(b),
+		.a(a),
 		.VIN(vin),
 		.DIN(input_data),
 		.DOUT(output_data),
