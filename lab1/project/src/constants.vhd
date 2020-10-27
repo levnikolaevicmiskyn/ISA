@@ -12,8 +12,6 @@ package constants is
 	constant NACOEFF : positive := 2;    -- Number of a coefficients
 	constant NBCOEFF : positive := 2;
 	
-	type a_bundle is std_logic_vector(NACOEFF*NBINT-1 downto 0);
-	type b_bundle is std_logic_vector(NBCOEFF*NBINT-1 downto 0);
 end constants;
 
 package body constants is 

@@ -11,8 +11,8 @@ use work.packets;
 entity Datapath is
     port (
         CLK:    in  std_logic;              -- Clock signal
-        b: 		in  b_bundle;     			-- Filter b parameters (constant)
-        a:     	in  a_bundle;     			-- Filter -a parameters (constant)
+        b: 		in  std_logic_vector(NBCOEFF*NBINT-1 downto 0);     			-- Filter b parameters (constant)
+        a:     	in  std_logic_vector(NACOEFF*NBINT-1 downto 0);     			-- Filter -a parameters (constant)
         DIN:    in  signed(7 downto 0);     -- Input sample
         -- Control Unit signals
         clr_w_reg: in std_logic;            -- Clear delay register

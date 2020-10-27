@@ -10,8 +10,8 @@ entity IIRFilter is
     port (
         CLK:    in  std_logic;              -- Clock signal
         RST_n:  in  std_logic;              -- Synchronous reset
-        b: 		in  b_bundle;     			-- Filter b parameters (constant)
-        a:     	in  a_bundle;     			-- Filter a parameters (constant)
+        b: 		in  std_logic_vector(NBCOEFF*NBINT-1 downto 0);     			-- Filter b parameters (constant)
+        a:     	in  std_logic_vector(NACOEFF*NBINT-1 downto 0);     			-- Filter a parameters (constant)
         VIN:    in  std_logic;              -- Input valid
         DIN:    in  signed(7 downto 0);     -- Input sample
         DOUT:   out signed(7 downto 0);     -- Output sample
@@ -23,8 +23,8 @@ architecture RTL of IIRFilter is
     component Datapath is
         port (
             CLK:    in  std_logic;              -- Clock signal
-            b1, b0: in  signed(7 downto 0);     -- Filter b parameters (constant)
-            a1:     in  signed(7 downto 0);     -- Filter -a parameters (constant)
+            b: 		in  std_logic_vector(NACOEFF*NBINT-1 downto 0);     -- Filter b parameters (constant)
+            a:    	in  std_logic_vector(NACOEFF*NBINT-1 downto 0);     -- Filter -a parameters (constant)
             DIN:    in  signed(7 downto 0);     -- Input sample
             -- Control Unit signals
             clr_w_reg: in std_logic;            -- Clear delay register
