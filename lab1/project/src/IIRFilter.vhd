@@ -53,17 +53,6 @@ begin
         port map(clk, b, a, DIN, clr_w_reg, en_latch, DOUT);
 end RTL;
 
-configuration IIRFilter_standard of IIRFilter is
-	for RTL 
-		for comp_dp: Datapath
-			use entity work.Datapath(RTL);
-		end for;
-		for comp_cu: controlUnit
-			use entity work.controlUnit(behavior); 
-		end for;
-	end for;
-end IIRFilter_standard;
-
 -- ---------------------------------------------------------------
 -- ---------------------FAST ARCHITECTURE-------------------------
 
@@ -108,7 +97,18 @@ configuration IIRFilter_fast of IIRFilter is
 			use entity work.Datapath(fastRTL);
 		end for;
 		for comp_cu: controlUnit
-			use entity work.controlUnit(fastfsm); 
+			use entity work.controlUnit(behavior); 
 		end for;
 	end for;
 end IIRFilter_fast;
+
+configuration IIRFilter_standard of IIRFilter is
+	for RTL 
+		for comp_dp: Datapath
+			use entity work.Datapath(RTL);
+		end for;
+		for comp_cu: controlUnit
+			use entity work.controlUnit(behavior); 
+		end for;
+	end for;
+end IIRFilter_standard;

@@ -43,7 +43,7 @@ module testbench();
 		);
 		
 	// IIR filter
-	IIRFilter comp_IIRFilter(
+	IIRFilter_standard comp_IIRFilter(
 		.CLK(clk),
 		.RST_n(rst_n),
 		.b(b),
@@ -58,7 +58,7 @@ endmodule
 
 // Configuration
 config tbconf;
-	design testLib.testbench;
-	default liblist rtlLib testLib work;
+	design work.testbench;
+	default liblist work;
 	instance testbench.comp_IIRFilter use work.IIRFilter_standard:config;
 endconfig
