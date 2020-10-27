@@ -54,3 +54,10 @@ module testbench();
 		.VOUT(vout)
 	);
 endmodule
+
+// Configuration
+config tbconf;
+	design testLib.testbench;
+	default liblist testLib rtlLib;
+	instance testbench.comp_IIRFilter use work.IIRFilter:IIRFilter_standard;
+endconfig;
