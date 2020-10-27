@@ -1,15 +1,18 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
-use work.fpconv.all;
+
 
 library work;
 use work.constants;
+use work.fpconv.all;
+use work.packets;
+
 entity Datapath is
     port (
         CLK:    in  std_logic;              -- Clock signal
-        b1, b0: in  signed(7 downto 0);     -- Filter b parameters (constant)
-        a1:     in  signed(7 downto 0);     -- Filter -a parameters (constant)
+        b: 		in  b_bundle;     			-- Filter b parameters (constant)
+        a:     	in  a_bundle;     			-- Filter -a parameters (constant)
         DIN:    in  signed(7 downto 0);     -- Input sample
         -- Control Unit signals
         clr_w_reg: in std_logic;            -- Clear delay register
@@ -52,7 +55,12 @@ architecture RTL of Datapath is
     signal t_tmp, ff_tmp: signed(NA-1 downto 0); -- Feedforward multiplier output
     signal t, ff: signed(NB-1 downto 0);
     signal a1_int, b0_int, b1_int: signed(NA-1 downto 0);
+	signal a1, b0, b1: signed(NBINT-1 downto 0);
+	
 begin
+	a1 <= packets.extract(a_bundle, 0, NBINT);
+	b0 <= packets.extract(b_bundle, 0, NBINT);
+	b1 <= packets.extract(b_bundle, 1, NBINT);
     -- Resize coefficients to match the internal representation: the least significant bit is dropped and 
     -- sign is extendend to avoid overflow.
     a1_int <= fpresize(a1, 1, 7, NIa, NF);
@@ -73,9 +81,9 @@ begin
     begin
 		if clr_w_reg = '1' then
 			x <= (others => '0');
-    elsif en_latch = '1' then
-      x <= fpresize(sync_DIN, 1, 7, NIa, NF);
-    end if;
+		elsif en_latch = '1' then
+			x <= fpresize(sync_DIN, 1, 7, NIa, NF);
+		end if;
     end process proc_input_latch;
 
     -- Internal structure
