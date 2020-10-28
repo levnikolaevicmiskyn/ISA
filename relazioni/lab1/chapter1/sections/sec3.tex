@@ -1,6 +1,47 @@
 \section{Reference Model}
-Following the project specifications, the filter is going to be implemented in hardware and will use an 8 bit \textbf{fixed point} representation: this simplifies the structure of the filter, but limits its precision.
 To properly verify the functionality of the filter, it is necessary to have a reference model that also works with 8 bit fixed point numbers. In addition, this allows for an insightful comparison of the filter's behavior when it is working in floating point (in Matlab) versus fixed point.
 
+
 Truly fixed point operations are modeled in a C program where coefficients and data are stored using the standard \texttt{int} data type. A scale factor equal to $2^{n_b-1}$ is implied throughout the execution.\\
-The loss in precision arising from truncating the $n_b-1$ least significant bits at the output of every hardware multiplier is simulated in C using the right-shift operator \texttt{>>}.
+The loss in precision arising from truncating the least significant bits at the output of every hardware multiplier is simulated in C using the right-shift operator \texttt{>>}.
+
+As shown in \autoref{eqn:iir-1}, there is a subtraction among the operations. To simplify the hardware, it is easier to transform the operation in an addition by changing the sign of $a_1$, as in
+\begin{align}
+	w[n] &= x[n] + (- a_1) w[n-1]
+\end{align}
+To better mirror this behavior, some small changes were necessary in the source files: first of all, $a_1$ had to be sign-swapped, then, inside the \texttt{myfilter} function, this section
+\begin{Verbatim}
+for (i=0; i<N; i++) {
+	fb -= (sw[i]*a[i]) >> (NB-1);    // Subtraction here
+	ff += (sw[i]*b[i]) >> (NB-1);
+}
+\end{Verbatim}
+was changed into this
+\begin{Verbatim}
+for (i=0; i<N; i++) {
+	fb += (sw[i]*a[i]) >> (NB-1);    // Addition here (a[i] changed sign)
+	ff += (sw[i]*b[i]) >> (NB-1);
+}
+\end{Verbatim}
+To clarify the difference, suppose to have:
+\begin{align*}
+	\texttt{NB} &= 8 & \texttt{a[i]} &= \pm21 \\
+	\texttt{fb} &= 0 & \texttt{sw[i]} &= 1
+\end{align*}
+and notice how the results differ in function of the chosen operation and the actual sign of $\texttt{a[i]}$:
+\setlength{\columnseprule}{0.4pt}
+\begin{multicols}{2}
+	\noindent
+	\begin{align*}
+		0 &- (1 \times -21) \rshift (8 - 1) &= \\
+		0 &- 11101011_2 \rshift 7 &= \\
+		0 &- 11111111_2 &= \\
+		1&
+	\end{align*}
+	\begin{align*}
+		0 &+ (1 \times -(-21)) \rshift (8 - 1) &= \\
+		0 &+ 00010101_2 \rshift 7 &= \\
+		0 &+ 00000000_2 &= \\
+		0&
+	\end{align*}
+\end{multicols}

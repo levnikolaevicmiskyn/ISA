@@ -1,5 +1,5 @@
 \section{THD}
-Rounding the input samples to the closest representable value according to the adopted bitwidth is a nonlinear operation that introduces distortion in the signal, producing spurious harmonics on top of the pure sinusoidal wave expected at the output of a linear filter. The relevant parameter to characterize this effect is the \textit{total harmonic distortion} (THD). The dependence of the THD on the internal bitwidth has been calculated from simulations, with the results reported in figure \ref{fig:thdplot}.
+Rounding the input samples to the closest representable value according to the adopted bitwidth is a nonlinear operation that introduces distortion in the signal, producing spurious harmonics on top of the pure sinusoidal wave expected at the output of a linear filter. The relevant parameter to characterize this effect is the \textit{total harmonic distortion} (THD). The dependence of the THD on the internal bitwidth has been calculated from simulations, with the results reported in \autoref{fig:thdplot}.
 
 %If the internal representation is the same as the one prescribed for the interface ($n_b=8$), then the THD output spectrum is as shown in figure \ref{fig:thd8bit}.
 % TODO: correggere questa immagine
@@ -9,4 +9,4 @@ Rounding the input samples to the closest representable value according to the a
 %	\label{fig:thd8bit}
 %\end{figure}
 
-From these results we conclude that the smallest implementation in terms of area occupied by arithmetic operators requires $n_b=7$ in order to keep the total distortion below $-30\,\textrm{dBc}$, as requested by the specifications.
+From these results we conclude that the smallest implementation in terms of area occupied by arithmetic operators requires $n_b=7$ in order to keep the total distortion below $\SI{-30}{dBc}$, as requested by the specifications.
