@@ -7,7 +7,7 @@
 const int b0 = 53 >> (NBINT-NB);
 const int b[N] = {53 >> (NBINT-NB)};
 const int a[N] = {21 >> (NBINT-NB)};
-const int ASQ = 3;
+const int ASQ = 3 >> (NBINT-NB);
 
 /// Perform fixed point filtering assuming the structure derived by applying the
 /// lookahead method
