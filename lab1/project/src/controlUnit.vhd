@@ -89,3 +89,30 @@ begin
 	end if;
 end process;
 end architecture behavior;
+
+
+architecture fastfsm of controlUnit is
+signal token_dline: std_logic_vector(2 downto 0);
+begin
+proc_delay_line: process(clk)
+	begin
+		if rising_edge(clk) then
+			if rst_n='0' then
+				token_dline <= (OTHERS => '0');
+			else
+				token_dline(2 downto 1) <= token_dline(1 downto 0);
+				token_dline(2) <= VIN;
+			end if;
+		end if;
+	end process;
+	
+proc_rst_reg: process(clk)
+begin
+	if rising_edge(clk) then
+		clr_delay_regs <= not rst_n;
+	end if;
+end process;
+
+en_latch <= token_dline(2);
+VOUT <= token_dline(0);
+end architecture fastfsm;
