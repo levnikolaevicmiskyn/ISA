@@ -97,7 +97,7 @@ configuration IIRFilter_fast of IIRFilter is
 			use entity work.Datapath(fastRTL);
 		end for;
 		for comp_cu: controlUnit
-			use entity work.controlUnit(behavior); 
+			use entity work.controlUnit(fastfsm); 
 		end for;
 	end for;
 end IIRFilter_fast;

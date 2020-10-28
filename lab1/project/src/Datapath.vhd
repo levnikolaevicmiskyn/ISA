@@ -173,13 +173,14 @@ architecture fastRTL of Datapath is
 	-- Intermediate variables
 	signal w0, w1: signed(NA-1 downto 0);
 	-- Multiplier M3
-	signal m3out: signed(NA-1 downto 0);
+	signal m3out, m3out_del: signed(NA-1 downto 0);
 	-- Adder A3
-	signal a3a, a3b: signed(NB-1 downto 0)
+	signal a3a, a3b: signed(NB-1 downto 0);
 	
 	-- Coefficients
     signal a1_int, b0_int, b1_int, a1sq_int: signed(NA-1 downto 0);
 	signal a1, b0, b1, a1sq: signed(constants.NBINT-1 downto 0);
+	signal a1_int_b: signed(NB-1 downto 0);
 	
 begin
 	a1 <= packets.extract(a, 0, constants.NBINT);
@@ -189,6 +190,7 @@ begin
     -- Resize coefficients to match the internal representation: the least significant bit is dropped and 
     -- sign is extendend to avoid overflow.
     a1_int <= fpresize(a1, 1, 7, NIa, NF);
+	a1_int_b <= fpresize(a1, 1, 7, NIb, NF);
     b0_int <= fpresize(b0, 1, 7, NIa, NF);
     b1_int <= fpresize(b1, 1, 7, NIa, NF);
     a1sq_int <= fpresize(a1sq, 1, 7, NIa, NF);
@@ -229,11 +231,12 @@ begin
 			else
 				al1a <= ml2out;
 			end if;
+		end if;
 	end process;
 	
 	comp_ml2: multiplier
 		generic map(NIb, NF)
-		port map(x_nb, a1_int, ml2out);
+		port map(x_nb, a1_int_b, ml2out);
 	
 	-- Represent x at the input of ML2 with NIb integer bit (=1)
 	x_nb <= fpresize(x, NIa, NF, NIb, NF);
@@ -244,12 +247,13 @@ begin
 	
 	proc_reg_ml1_al1: process(clk)
 	begin
-		if rising_edge(clk)
+		if rising_edge(clk) then
 			if clr_w_reg='1' then
 				al1b <= (OTHERS => '0');
 			else
 				al1b <= fpresize(ml1out, NIa, NF, NIb, NF);
 			end if;
+		end if;
 	end process;
 	
 	-- This register delays w0 by one clock cycle. It also works as a pipeline register before the
@@ -262,6 +266,7 @@ begin
 			else
 				w1 <= w0;
 			end if;
+		end if;
 	end process;
 	
 	comp_m3: multiplier

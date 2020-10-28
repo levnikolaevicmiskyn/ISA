@@ -175,7 +175,7 @@ def main():
     # Launch reference filter
     @status_update("Compiling and running C filter...", "Error: C filter could not be compiled or launched")
     def _reference():
-        status = run_reference('./cfilter.out', 'samples.txt', 'results-C.txt')
+        status = run_reference('./myfilterii_fast.out', 'samples.txt', 'results-C.txt')
         return status.returncode
 
     _reference()

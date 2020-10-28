@@ -6,8 +6,9 @@ module testbench();
 	localparam [N-1:0] b1 = 53;
 	localparam [N-1:0] b0 = 53;
 	localparam [N-1:0] a1 = 21;
+	localparam [N-1:0] asq = 3;
 	localparam [2*N-1:0] b = {b1, b0};
-	localparam [N-1:0] a = a1;
+	localparam [2*N-1:0] a = {asq, a1};
 
  	wire clk;
 	wire rst_n;
@@ -43,7 +44,7 @@ module testbench();
 		);
 		
 	// IIR filter
-	IIRFilter_standard comp_IIRFilter(
+	IIRFilter_fast comp_IIRFilter(
 		.CLK(clk),
 		.RST_n(rst_n),
 		.b(b),
@@ -56,15 +57,15 @@ module testbench();
 endmodule
 
 
-config IIRFilter_standard;
-	design work.IIRFilter;
-	default liblist work;
-	instance work.IIRFilter use work.IIRFilter_standard:config;
-endconfig
+//config IIRFilter_standard;
+//	design work.IIRFilter;
+//	default liblist work;
+//	instance IIRFilter. use work.IIRFilter_standard:config;
+//endconfig
 
 // Configuration
 config tbconf;
 	design work.testbench;
 	default liblist work;
-	instance testbench.comp_IIRFilter use work.IIRFilter_standard:config;
+	instance testbench.comp_IIRFilter use work.IIRFilter_fast:config;
 endconfig

@@ -13,4 +13,4 @@ vcom -93 -work work ../tb/*.vhd
 vlog -work work ../tb/testbench.v
 
 # Start simulation
-vsim -c -do " vsim work.testbench; run $1; quit"
+vsim -c -do " vsim work.tbconf; run $1; quit"
