@@ -1,0 +1,6 @@
+\section{Reference Model}
+Following the project specifications, the filter is going to be implemented in hardware and will use an 8 bit \textbf{fixed point} representation: this simplifies the structure of the filter, but limits its precision.
+To properly verify the functionality of the filter, it is necessary to have a reference model that also works with 8 bit fixed point numbers. In addition, this allows for an insightful comparison of the filter's behavior when it is working in floating point (in Matlab) versus fixed point.
+
+Truly fixed point operations are modeled in a C program where coefficients and data are stored using the standard \texttt{int} data type. A scale factor equal to $2^{n_b-1}$ is implied throughout the execution.\\
+The loss in precision arising from truncating the $n_b-1$ least significant bits at the output of every hardware multiplier is simulated in C using the right-shift operator \texttt{>>}.
