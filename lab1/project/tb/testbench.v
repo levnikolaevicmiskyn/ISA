@@ -56,6 +56,12 @@ module testbench();
 endmodule
 
 
+config IIRFilter_standard;
+	design work.IIRFilter;
+	default liblist work;
+	instance work.IIRFilter use work.IIRFilter_standard:config;
+endconfig
+
 // Configuration
 config tbconf;
 	design work.testbench;
