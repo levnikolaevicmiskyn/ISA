@@ -162,18 +162,17 @@ architecture fastRTL of Datapath is
 	signal x_nb: signed(NB-1 downto 0); -- x represented with only 1 integer bit
 	
     signal y: signed(NB-1 downto 0);
-	-- Adder AL2
-	signal al2fb, al2out: signed(NA-1 downto 0);
-	-- Adder AL1
-	signal al1a, al1b, al1out: signed(NB-1 downto 0);
+	-- Adder A1
+	signal a1a, a1out, a1out_del: signed(NA-1 downto 0);
 	-- Adder ML2
-	signal ml2out: signed(NB-1 downto 0);
+	signal m2out, m2out_del: signed(NB-1 downto 0);
 	-- Adder ML1
-	signal ml1out: signed(NA-1 downto 0);
+	signal m1out: signed(NA-1 downto 0);
 	-- Intermediate variables
 	signal w0, w1: signed(NA-1 downto 0);
 	-- Multiplier M3
-	signal m3out, m3out_del: signed(NA-1 downto 0);
+	signal m3out, m4out: signed(NA-1 downto 0);
+	signal m4out_del: signed(NB-1 downto 0);
 	-- Adder A3
 	signal a3a, a3b: signed(NB-1 downto 0);
 	
@@ -212,46 +211,57 @@ begin
 			x <= fpresize(sync_DIN, 1, 7, NIa, NF);
 		end if;
     end process proc_input_latch;
-
-	comp_al2: adder
+	
+	comp_a1: adder
 		generic map(NA)
-		port map(x, al2fb, '0', w0, open);
+		port map(a1a, x, '0', a1out, open);
 	
-	comp_al1: adder
-		generic map(NB)
-		port map(al1a, al1b, '0', al1out, open);
-	
-	al2fb <= fpresize(al1out, NIb, NF, NIa, NF);
-	
-	proc_reg_ml2_al1 : process(clk)
+	proc_reg_m1_a1 : process(clk)
 	begin
 		if rising_edge(clk) then
 			if clr_w_reg = '1' then
-				al1a <= (OTHERS => '0');
+				a1a <= (OTHERS => '0');
 			else
-				al1a <= ml2out;
+				a1a <= fpresize(m1out, NIb, NF, NIa, NF);
 			end if;
 		end if;
 	end process;
 	
-	comp_ml2: multiplier
+	-- -a1*x(n)
+	comp_m1: multiplier
 		generic map(NIb, NF)
-		port map(x_nb, a1_int_b, ml2out);
+		port map(x_nb, a1_int_b, m1out);
 	
 	-- Represent x at the input of ML2 with NIb integer bit (=1)
 	x_nb <= fpresize(x, NIa, NF, NIb, NF);
 	
-	comp_ml1: multiplier
-		generic map(NIa, NF)
-		port map(w1, a1sq_int, ml1out);
+	proc_reg_a1_a2 : process(clk)
+	begin
+		if rising_edge(clk) then
+			if clr_w_reg = '1' then
+				a1out_del <= (OTHERS => '0');
+			else
+				a1out_del <= a1out;
+			end if;
+		end if;
+	end process;
 	
-	proc_reg_ml1_al1: process(clk)
+	comp_a2: adder
+	generic map(NA)
+	port map(a1out_del, m2out_del, '0', w0, open);
+	
+	-- Loop multiplier
+	comp_m2: multiplier
+		generic map(NIa, NF)
+		port map(w1, a1sq_int, m2out);
+	
+	proc_reg_m2_a2: process(clk)
 	begin
 		if rising_edge(clk) then
 			if clr_w_reg='1' then
-				al1b <= (OTHERS => '0');
+				m2out_del <= (OTHERS => '0');
 			else
-				al1b <= fpresize(ml1out, NIa, NF, NIb, NF);
+				m2out_del <= m2out;
 			end if;
 		end if;
 	end process;
@@ -272,15 +282,21 @@ begin
 	comp_m3: multiplier
 		generic map(NIa, NF)
 		port map(w1, b0_int, m3out);
+		
+	comp_m4: multiplier
+		generic map(NIa, NF)
+		port map(w1, b1_int, m4out);
 	
-	-- Pipeline register at the output of M3
+	proc
+	
+	-- Pipeline register at the output of M3 and M4
 	proc_feedforward_pipe_reg: process(clk)
 	begin
 		if rising_edge(clk) then
 			if clr_w_reg = '1' then
-				m3out_del <= (OTHERS => '0');
+				m4out_del <= (OTHERS => '0');
 			else
-				m3out_del <= m3out;
+				m4out_del <= fpresize(m4out, NIa, NF, NIb, NF);
 			end if;
 		end if;
 	end process;
@@ -292,8 +308,10 @@ begin
 		if rising_edge(clk) then
 			if clr_w_reg = '1' then
 				a3b <= (OTHERS => '0');
+				a3a <= (OTHERS => '0')
 			else
-				a3b <= a3a;
+				a3b <= m4out_del;
+				a3a <= fpresize(m3out, NIa, NF, NIb, NF);
 			end if;
 		end if;
 	end process;
