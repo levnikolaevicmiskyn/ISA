@@ -1,5 +1,5 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #define N 1 /// order of the filter
 #define NB 7  /// number of bits (internal representation)
