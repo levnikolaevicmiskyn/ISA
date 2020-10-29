@@ -212,6 +212,8 @@ begin
 		end if;
     end process proc_input_latch;
 	
+
+	x_nb <= fpresize(x, NIa, NF, NIb, NF);
 	comp_a1: adder
 		generic map(NA)
 		port map(a1a, x, '0', a1out, open);
@@ -231,9 +233,6 @@ begin
 	comp_m1: multiplier
 		generic map(NIb, NF)
 		port map(x_nb, a1_int_b, m1out);
-	
-	-- Represent x at the input of ML2 with NIb integer bit (=1)
-	x_nb <= fpresize(x, NIa, NF, NIb, NF);
 	
 	proc_reg_a1_a2 : process(clk)
 	begin

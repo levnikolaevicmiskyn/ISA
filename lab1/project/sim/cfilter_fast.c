@@ -3,36 +3,40 @@
 
 #define NBINT 8
 #define NB 7 //Interface
+#define N 2
 const int b0 = 53 >> (NBINT-NB);
-const int b1 = 62 >> (NBINT-NB);
-const int b2 = 8 >> (NBINT-NB);
+const int b1 = 53 >> (NBINT-NB);
 const int ASQ = 3 >> (NBINT-NB);
+const int a1 = 21 >> (NBINT-NB);
 
 /// Perform fixed point filtering assuming the structure derived by applying the
 /// lookahead method
 int myfilter(int x){
-    static int sw[2]; // Temporary variable shift register
+    static int sw[N]; // Temporary variable shift register
     static int first_run = 0; // Flag
     int w;
     int y;
     int i;
+    static int x_reg=0;
 
     if (first_run == 0){
         first_run = 1;
-        sw[0]=0;
-        sw[1] =0;
+        for(i=0; i < N; i++)
+            sw[i] = 0;
     }
 
     /// Adapt x to the internal representation
     x = x >> (NBINT-NB);
 
     /// Calculate feedback and feedforward terms
-    w = x + ((ASQ*sw[1])>>(NB-1));
-    y = ((w*b0) >> (NB-1)) + ((sw[0]*b1) >> (NB-1)) + ((sw[1]*b2) >> (NB-1));
+    w = x + (a1*x_reg >> (NB-1)) + ((ASQ*sw[1])>>(NB-1));
+    y = ((w*b0) >> (NB-1)) + ((sw[0]*b1) >> (NB-1));
 
     // Push a the last value of w into the shift register
-    sw[1] = sw[0];
+    for (i=N-1; i > 0; i--)
+        sw[i] = sw[i-1];
     sw[0] = w;
+    x_reg = x;
     return (y << (NBINT-NB));
 }
 

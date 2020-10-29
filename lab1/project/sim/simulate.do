@@ -5,6 +5,7 @@ vlib work
 vcom -93 -work work ../src/fpconv.vhd
 vcom -93 -work work ../src/constants.vhd
 vcom -93 -work work ../src/packets.vhd
+vcom -93 -work work ../src/controlUnit.vhd
 vcom -93 -work work ../src/*.vhd
 vcom -93 -work work ../tb/simconsts.vhd
 vcom -93 -work work ../tb/*.vhd
