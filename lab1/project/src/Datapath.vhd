@@ -165,9 +165,9 @@ architecture fastRTL of Datapath is
 	-- Adder A1
 	signal a1a, a1out, a1out_del: signed(NA-1 downto 0);
 	-- Adder ML2
-	signal m2out, m2out_del: signed(NB-1 downto 0);
+	signal m2out, m2out_del: signed(NA-1 downto 0);
 	-- Adder ML1
-	signal m1out: signed(NA-1 downto 0);
+	signal m1out: signed(NB-1 downto 0);
 	-- Intermediate variables
 	signal w0, w1: signed(NA-1 downto 0);
 	-- Multiplier M3
@@ -287,8 +287,6 @@ begin
 		generic map(NIa, NF)
 		port map(w1, b1_int, m4out);
 	
-	proc
-	
 	-- Pipeline register at the output of M3 and M4
 	proc_feedforward_pipe_reg: process(clk)
 	begin
@@ -301,14 +299,12 @@ begin
 		end if;
 	end process;
 	
-	a3a <= fpresize(m3out_del, NIa, NF, NIb, NF);
-	
 	proc_feedforward_reg: process(clk)
 	begin
 		if rising_edge(clk) then
 			if clr_w_reg = '1' then
 				a3b <= (OTHERS => '0');
-				a3a <= (OTHERS => '0')
+				a3a <= (OTHERS => '0');
 			else
 				a3b <= m4out_del;
 				a3a <= fpresize(m3out, NIa, NF, NIb, NF);

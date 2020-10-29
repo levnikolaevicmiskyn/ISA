@@ -92,7 +92,8 @@ end architecture behavior;
 
 
 architecture fastfsm of controlUnit is
-signal token_dline: std_logic_vector(3 downto 0);
+constant NPIPE: integer := 3;
+signal token_dline: std_logic_vector(2+NPIPE-1 downto 0);
 begin
 proc_delay_line: process(clk)
 	begin
