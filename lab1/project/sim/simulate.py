@@ -154,6 +154,7 @@ def main():
             os.remove("./samples.txt")
             os.remove("./results-C.txt")
             os.remove("./results-VHDL.txt")
+            
         except OSError:
             pass
         return 0
@@ -184,7 +185,7 @@ def main():
     @status_update("Simulating VHDL...", "Simulation unsuccesful")
     def _simulate():
         nonlocal time
-        status = run_simulation(simulation_duration, './simulate.do')
+        status = run_simulation(simulation_duration, './simulate_standard.do')
         return status.returncode
 
     _simulate()

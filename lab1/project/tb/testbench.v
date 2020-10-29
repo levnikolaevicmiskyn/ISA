@@ -44,7 +44,7 @@ module testbench();
 		);
 		
 	// IIR filter
-	IIRFilter_fast comp_IIRFilter(
+	IIRFilter comp_IIRFilter(
 		.CLK(clk),
 		.RST_n(rst_n),
 		.b(b),
@@ -55,17 +55,4 @@ module testbench();
 		.VOUT(vout)
 	);
 endmodule
-
-
-//config IIRFilter_standard;
-//	design work.IIRFilter;
-//	default liblist work;
-//	instance IIRFilter. use work.IIRFilter_standard:config;
-//endconfig
-
-// Configuration
-config tbconf;
-	design work.testbench;
-	default liblist work;
-	instance testbench.comp_IIRFilter use work.IIRFilter_fast:config;
-endconfig
+	

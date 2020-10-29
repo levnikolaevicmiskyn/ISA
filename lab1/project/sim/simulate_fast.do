@@ -5,8 +5,11 @@ vlib work
 vcom -93 -work work ../src/fpconv.vhd
 vcom -93 -work work ../src/constants.vhd
 vcom -93 -work work ../src/packets.vhd
+vcom -93 -work work ../src/adder.vhd
+vcom -93 -work work ../src/multiplier.vhd
+vcom -93 -work work ../src/Datapath.vhd
 vcom -93 -work work ../src/controlUnit.vhd
-vcom -93 -work work ../src/*.vhd
+vcom -93 -work work ../src/IIRFilter_fast.vhd
 vcom -93 -work work ../tb/simconsts.vhd
 vcom -93 -work work ../tb/*.vhd
 
@@ -14,4 +17,4 @@ vcom -93 -work work ../tb/*.vhd
 vlog -work work ../tb/testbench.v
 
 # Start simulation
-vsim -c -do " vsim work.tbconf; run $1; quit"
+vsim -c -do " vsim work.testbench; run $1; quit"
