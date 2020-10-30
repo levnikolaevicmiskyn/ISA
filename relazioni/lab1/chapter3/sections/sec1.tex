@@ -1,0 +1,34 @@
+\section{Derivation}
+It is possible to further optimize the filter with this technique, which simply consists in the substitution of the expressions for the instant $n-1$ to where they appear in the expressions for the instant $n$.\\
+Considering \autoref{eqn:iir}, notice how $w[n-1]$ appears in the expressions for $w[n]$ and $y[n]$.
+\begin{align}
+	w[n-1] = x[n-1] - a_1 w[n-2]
+	\label{eqn:w-lookahead}
+\end{align}
+Substituting \autoref{eqn:w-lookahead} into \autoref{eqn:iir}:
+\begin{align*}
+	\begin{cases}
+		w[n] &= x[n] - a_1 (x[n-1] - a_1 w[n-2]) 		\\
+		y[n] &= b_0 w[n] + b_1 (x[n-1] - a_1 w[n-2])
+	\end{cases}
+\end{align*}
+\begin{align}
+	\begin{cases}
+		w[n] &= x[n] - a_1 x[n-1] + a_1^2 w[n-2] 		\\
+		y[n] &= b_1 x[n-1] + b_0 w[n] - a_1 b_1 w[n-2]
+	\end{cases}
+	\label{eqn:iir-lookahead-bad}
+\end{align}
+
+\autoref{eqn:iir-lookahead-bad} shows the standard result from the look ahead technique. But let's consider: where is this substitution actually worth? The complexity and the amount of operators increased in both equations. Is it possible to make a single substitution instead of two, while still maintaining the advantages of the look ahead?
+
+The answer is yes. Considering all the possible cases, the best choice is to use the new expression for $w[n]$ but to keep the old $y[n]$. This way, $b_1 x[n-1]$ does not appear in the equation for $y[n]$, saving one multiplier and one adder, while still letting a complete optimization and bringing the critical delay to $1 \times T_\text{mul}$.\\
+For this reason, the final set of equations used in the look-ahead architecture is the following:
+\begin{align}
+	\begin{cases}
+		w[n] &= x[n] - a_1 x[n-1] + a_1^2 w[n-2] 		\\
+		y[n] &= b_0 w[n] + b_1 w[n-1]
+	\end{cases}
+	\label{eqn:iir-lookahead}
+\end{align}
+Its implementation and optimizations are explored in the following sections.
