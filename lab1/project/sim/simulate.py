@@ -185,7 +185,7 @@ def main():
     @status_update("Simulating VHDL...", "Simulation unsuccesful")
     def _simulate():
         nonlocal time
-        status = run_simulation(simulation_duration, './simulate_standard.do')
+        status = run_simulation(simulation_duration, './simulate_fast.do')
         return status.returncode
 
     _simulate()

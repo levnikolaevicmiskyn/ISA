@@ -7,9 +7,9 @@ vcom -93 -work work ../src/constants.vhd
 vcom -93 -work work ../src/packets.vhd
 vcom -93 -work work ../src/adder.vhd
 vcom -93 -work work ../src/multiplier.vhd
-vcom -93 -work work ../src/Datapath.vhd
-vcom -93 -work work ../src/controlUnit.vhd
-vcom -93 -work work ../src/IIRFilter_fast.vhd
+vcom -93 -work work ../src/Datapath_fast.vhd
+vcom -93 -work work ../src/controlUnit_fast.vhd
+vcom -93 -work work ../src/IIRFilter.vhd
 vcom -93 -work work ../tb/simconsts.vhd
 vcom -93 -work work ../tb/*.vhd
 

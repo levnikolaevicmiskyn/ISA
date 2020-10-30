@@ -19,9 +19,6 @@ entity IIRFilter is
     );
 end entity;
 
--- ---------------------------------------------------------------
--- ---------------------FAST ARCHITECTURE-------------------------
-
 architecture RTL of IIRFilter is
     component Datapath is
         port (
@@ -44,10 +41,7 @@ architecture RTL of IIRFilter is
     		clr_delay_regs, en_latch: OUT STD_LOGIC
     	);
     end component;
-
-    for comp_cu: controlUnit use entity work.controlUnit(fastfsm);
-    for comp_dp: Datapath use entity work.Datapath(fastRTL);
-
+    
     signal clr_w_reg, en_latch: std_logic;
 	
 begin
