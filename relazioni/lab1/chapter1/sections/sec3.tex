@@ -9,7 +9,7 @@ As shown in \autoref{eqn:iir}, there is a subtraction among the operations. To s
 \begin{align}
 	w[n] &= x[n] + (- a_1) w[n-1]
 \end{align}
-To better mirror this behavior, some small changes were necessary in the source files: first of all, $a_1$ had to be sign-swapped, then, inside the \texttt{myfilter} function, this section
+To better mirror this behavior, some small changes were necessary in the source files: first of all, $a_1$ had to be sign-flipped, then, inside the \texttt{myfilter} function, this section
 \begin{Verbatim}
 for (i=0; i<N; i++) {
 	fb -= (sw[i]*a[i]) >> (NB-1);    // Subtraction here
@@ -28,7 +28,7 @@ To clarify the difference, suppose to have:
 	\texttt{NB} &= 8 & \texttt{a[i]} &= \pm21 \\
 	\texttt{fb} &= 0 & \texttt{sw[i]} &= 1
 \end{align*}
-and notice how the results differ in function of the chosen operation and the actual sign of $\texttt{a[i]}$:
+and notice how the results differ depending on the chosen operation and the actual sign of $\texttt{a[i]}$:
 \setlength{\columnseprule}{0.4pt}
 \begin{multicols}{2}
 	\noindent
