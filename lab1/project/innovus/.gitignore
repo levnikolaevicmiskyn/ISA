@@ -5,7 +5,7 @@
 *.ptiavg
 *.enc
 .top.db
-power.db*
+*.db*
 
 IIRFilter_design.enc.dat/
 
