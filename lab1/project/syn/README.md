@@ -1,5 +1,4 @@
 Synthesis:
-
 - open a shell
 - type "rm -rf work"
 - type "mkdir work"
@@ -16,7 +15,7 @@ Synthesis:
 Verification and Power back-annotation (Synthesis is mandatory first)
 
 - open a shell
-- go in folder sim and run simulate.py with post_synth_simulate.do as .do file
+- go in folder sim and run simulate.py with post_synth_simulate_[standard|fast].do as .do file
 - go back in this folder
 - type "chmod u+x vcd2saif.sh"
 - type "./vcd2saif.sh"

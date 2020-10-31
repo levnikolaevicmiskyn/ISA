@@ -1,13 +1,14 @@
 
-Information: There are 9 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+Information: There are 11 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
 
 
 
   Beginning Pass 1 Mapping
   ------------------------
-  Processing 'multiplier_N_BIT_I2_N_BIT_F6_0'
   Processing 'adder_N_BIT7'
-  Processing 'adder_N_BIT8'
+  Processing 'multiplier_N_BIT_I2_N_BIT_F6_0'
+  Processing 'adder_N_BIT8_0'
+  Processing 'multiplier_N_BIT_I1_N_BIT_F6'
   Processing 'Datapath'
 Information: The register 'DOUT_reg[0]' is a constant and will be removed. (OPT-1206)
   Processing 'controlUnit'
@@ -19,21 +20,27 @@ Information: Updating design information... (UID-85)
   Beginning Implementation Selection
   ----------------------------------
   Processing 'adder_N_BIT7_DW01_add_0'
-  Processing 'adder_N_BIT8_DW01_add_0'
+  Processing 'adder_N_BIT8_1_DW01_add_0'
+  Processing 'adder_N_BIT8_0_DW01_add_0'
   Mapping 'multiplier_N_BIT_I2_N_BIT_F6_1_DW_mult_tc_0'
-  Mapping 'multiplier_N_BIT_I2_N_BIT_F6_0_DW_mult_tc_0'
   Mapping 'multiplier_N_BIT_I2_N_BIT_F6_2_DW_mult_tc_0'
+  Mapping 'multiplier_N_BIT_I2_N_BIT_F6_0_DW_mult_tc_0'
+  Mapping 'multiplier_N_BIT_I1_N_BIT_F6_DW_mult_tc_0'
 Information: Skipping clock gating on design IIRFilter, since there are no registers. (PWR-806)
-Information: Skipping clock gating on design adder_N_BIT8, since there are no registers. (PWR-806)
-Information: Skipping clock gating on design adder_N_BIT7, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design adder_N_BIT8_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design multiplier_N_BIT_I1_N_BIT_F6, since there are no registers. (PWR-806)
 Information: Skipping clock gating on design multiplier_N_BIT_I2_N_BIT_F6_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design adder_N_BIT7, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design adder_N_BIT8_1, since there are no registers. (PWR-806)
 Information: Skipping clock gating on design multiplier_N_BIT_I2_N_BIT_F6_1, since there are no registers. (PWR-806)
 Information: Skipping clock gating on design multiplier_N_BIT_I2_N_BIT_F6_2, since there are no registers. (PWR-806)
 Information: Skipping clock gating on design adder_N_BIT7_DW01_add_0, since there are no registers. (PWR-806)
-Information: Skipping clock gating on design adder_N_BIT8_DW01_add_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design adder_N_BIT8_1_DW01_add_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design adder_N_BIT8_0_DW01_add_0, since there are no registers. (PWR-806)
 Information: Skipping clock gating on design multiplier_N_BIT_I2_N_BIT_F6_1_DW_mult_tc_0, since there are no registers. (PWR-806)
-Information: Skipping clock gating on design multiplier_N_BIT_I2_N_BIT_F6_0_DW_mult_tc_0, since there are no registers. (PWR-806)
 Information: Skipping clock gating on design multiplier_N_BIT_I2_N_BIT_F6_2_DW_mult_tc_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design multiplier_N_BIT_I2_N_BIT_F6_0_DW_mult_tc_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design multiplier_N_BIT_I1_N_BIT_F6_DW_mult_tc_0, since there are no registers. (PWR-806)
 Information: Performing clock-gating on design controlUnit. (PWR-730)
 Information: Performing clock-gating on design Datapath. (PWR-730)
 
@@ -44,19 +51,20 @@ Information: Performing clock-gating on design Datapath. (PWR-730)
    ELAPSED            WORST NEG   SETUP    DESIGN                            
     TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
   --------- --------- --------- --------- --------- -------------------------
-    0:00:06     950.2      0.00       0.0       0.0                          
-    0:00:06     950.2      0.00       0.0       0.0                          
-    0:00:06     950.2      0.00       0.0       0.0                          
-    0:00:06     950.2      0.00       0.0       0.0                          
-    0:00:06     950.2      0.00       0.0       0.0                          
-    0:00:07     921.2      0.00       0.0       0.0                          
-    0:00:07     921.2      0.00       0.0       0.0                          
-    0:00:07     921.2      0.00       0.0       0.0                          
-    0:00:07     921.2      0.00       0.0       0.0                          
-    0:00:07     921.2      0.00       0.0       0.0                          
-    0:00:07     921.2      0.00       0.0       0.0                          
-    0:00:07     921.2      0.00       0.0       0.0                          
-    0:00:07     921.2      0.00       0.0       0.0                          
+    0:00:10    1504.8      0.00       0.0       0.0                          
+    0:00:11    1504.8      0.00       0.0       0.0                          
+    0:00:11    1504.8      0.00       0.0       0.0                          
+    0:00:11    1504.8      0.00       0.0       0.0                          
+    0:00:11    1504.8      0.00       0.0       0.0                          
+    0:00:12    1429.0      0.00       0.0       0.0                          
+    0:00:12    1428.7      0.00       0.0       0.0                          
+    0:00:13    1428.7      0.00       0.0       0.0                          
+    0:00:13    1428.7      0.00       0.0       0.0                          
+    0:00:13    1428.7      0.00       0.0       0.0                          
+    0:00:13    1428.7      0.00       0.0       0.0                          
+    0:00:13    1428.7      0.00       0.0       0.0                          
+    0:00:13    1428.7      0.00       0.0       0.0                          
+    0:00:13    1428.7      0.00       0.0       0.0                          
 
 
 
@@ -67,9 +75,9 @@ Information: Performing clock-gating on design Datapath. (PWR-730)
    ELAPSED            WORST NEG   SETUP    DESIGN                            
     TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
   --------- --------- --------- --------- --------- -------------------------
-    0:00:07     921.2      0.00       0.0       0.0                          
-    0:00:07     921.2      0.00       0.0       0.0                          
-    0:00:07     921.2      0.00       0.0       0.0                          
+    0:00:13    1428.7      0.00       0.0       0.0                          
+    0:00:13    1428.7      0.00       0.0       0.0                          
+    0:00:14    1426.8      0.00       0.0       0.0                          
 
 
   Beginning Area-Recovery Phase  (cleanup)
@@ -79,17 +87,21 @@ Information: Performing clock-gating on design Datapath. (PWR-730)
    ELAPSED            WORST NEG   SETUP    DESIGN                            
     TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
   --------- --------- --------- --------- --------- -------------------------
-    0:00:07     921.2      0.00       0.0       0.0                          
-    0:00:07     921.2      0.00       0.0       0.0                          
-    0:00:07     921.2      0.00       0.0       0.0                          
-    0:00:07     921.2      0.00       0.0       0.0                          
-    0:00:07     921.2      0.00       0.0       0.0                          
-    0:00:07     921.2      0.00       0.0       0.0                          
-    0:00:07     921.2      0.00       0.0       0.0                          
-    0:00:07     921.2      0.00       0.0       0.0                          
-    0:00:07     921.2      0.00       0.0       0.0                          
-    0:00:07     921.2      0.00       0.0       0.0                          
-    0:00:07     921.2      0.00       0.0       0.0                          
+    0:00:14    1426.8      0.00       0.0       0.0                          
+    0:00:14    1426.8      0.00       0.0       0.0                          
+    0:00:14    1425.8      0.00       0.0       0.0                          
+    0:00:14    1424.7      0.00       0.0       0.0                          
+    0:00:14    1423.6      0.00       0.0       0.0                          
+    0:00:14    1422.6      0.00       0.0       0.0                          
+    0:00:14    1421.5      0.00       0.0       0.0                          
+    0:00:14    1421.5      0.00       0.0       0.0                          
+    0:00:14    1421.5      0.00       0.0       0.0                          
+    0:00:14    1421.5      0.00       0.0       0.0                          
+    0:00:14    1421.5      0.00       0.0       0.0                          
+    0:00:14    1421.5      0.00       0.0       0.0                          
+    0:00:14    1421.5      0.00       0.0       0.0                          
+    0:00:14    1421.5      0.00       0.0       0.0                          
+    0:00:14    1421.5      0.00       0.0       0.0                          
 Loading db file '/software/dk/nangate45/synopsys/NangateOpenCellLibrary_typical_ecsm_nowlm.db'
 
 

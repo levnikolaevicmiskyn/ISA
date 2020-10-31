@@ -7,14 +7,14 @@ Report : timing
         -max_paths 1
 Design : IIRFilter
 Version: O-2018.06-SP4
-Date   : Sun Oct 25 09:28:21 2020
+Date   : Sat Oct 31 13:10:39 2020
 ****************************************
 
 Operating Conditions: typical   Library: NangateOpenCellLibrary
 Wire Load Model Mode: top
 
-  Startpoint: a1[2] (input port clocked by CLK)
-  Endpoint: comp_dp/DOUT_reg[7]
+  Startpoint: a[10] (input port clocked by CLK)
+  Endpoint: comp_dp/m2out_del_reg[7]
             (rising edge-triggered flip-flop clocked by CLK)
   Path Group: CLK
   Path Type: max
@@ -28,87 +28,48 @@ Wire Load Model Mode: top
   clock CLK (rise edge)                                   0.00       0.00
   clock network delay (ideal)                             0.00       0.00
   input external delay                                    0.50       0.50 f
-  a1[2] (in)                                              0.00       0.50 f
-  comp_dp/a1[2] (Datapath)                                0.00       0.50 f
-  comp_dp/comp_mul_a1/b[1] (multiplier_N_BIT_I2_N_BIT_F6_0)
+  a[10] (in)                                              0.00       0.50 f
+  comp_dp/a[10] (Datapath)                                0.00       0.50 f
+  comp_dp/comp_m2/b[1] (multiplier_N_BIT_I2_N_BIT_F6_0)
                                                           0.00       0.50 f
-  comp_dp/comp_mul_a1/mult_31/b[1] (multiplier_N_BIT_I2_N_BIT_F6_0_DW_mult_tc_0)
+  comp_dp/comp_m2/mult_31/b[1] (multiplier_N_BIT_I2_N_BIT_F6_0_DW_mult_tc_0)
                                                           0.00       0.50 f
-  comp_dp/comp_mul_a1/mult_31/U164/ZN (INV_X1)            0.04       0.54 r
-  comp_dp/comp_mul_a1/mult_31/U187/Z (XOR2_X1)            0.08       0.63 r
-  comp_dp/comp_mul_a1/mult_31/U184/ZN (OAI22_X1)          0.05       0.67 f
-  comp_dp/comp_mul_a1/mult_31/U36/S (HA_X1)               0.08       0.75 f
-  comp_dp/comp_mul_a1/mult_31/U156/ZN (INV_X1)            0.03       0.78 r
-  comp_dp/comp_mul_a1/mult_31/U190/ZN (OAI222_X1)         0.06       0.84 f
-  comp_dp/comp_mul_a1/mult_31/U189/ZN (AOI222_X1)         0.11       0.95 r
-  comp_dp/comp_mul_a1/mult_31/U188/ZN (OAI222_X1)         0.07       1.01 f
-  comp_dp/comp_mul_a1/mult_31/U9/CO (FA_X1)               0.10       1.11 f
-  comp_dp/comp_mul_a1/mult_31/U8/CO (FA_X1)               0.09       1.20 f
-  comp_dp/comp_mul_a1/mult_31/U7/CO (FA_X1)               0.09       1.29 f
-  comp_dp/comp_mul_a1/mult_31/U6/CO (FA_X1)               0.09       1.38 f
-  comp_dp/comp_mul_a1/mult_31/U5/CO (FA_X1)               0.09       1.47 f
-  comp_dp/comp_mul_a1/mult_31/U4/CO (FA_X1)               0.09       1.56 f
-  comp_dp/comp_mul_a1/mult_31/U3/CO (FA_X1)               0.09       1.65 f
-  comp_dp/comp_mul_a1/mult_31/U170/Z (XOR2_X1)            0.07       1.72 f
-  comp_dp/comp_mul_a1/mult_31/U169/ZN (XNOR2_X1)          0.06       1.78 f
-  comp_dp/comp_mul_a1/mult_31/product[13] (multiplier_N_BIT_I2_N_BIT_F6_0_DW_mult_tc_0)
+  comp_dp/comp_m2/mult_31/U169/ZN (INV_X1)                0.04       0.54 r
+  comp_dp/comp_m2/mult_31/U190/Z (XOR2_X1)                0.08       0.63 r
+  comp_dp/comp_m2/mult_31/U187/ZN (OAI22_X1)              0.05       0.67 f
+  comp_dp/comp_m2/mult_31/U36/S (HA_X1)                   0.08       0.75 f
+  comp_dp/comp_m2/mult_31/U153/ZN (INV_X1)                0.03       0.78 r
+  comp_dp/comp_m2/mult_31/U193/ZN (OAI222_X1)             0.06       0.84 f
+  comp_dp/comp_m2/mult_31/U192/ZN (AOI222_X1)             0.11       0.95 r
+  comp_dp/comp_m2/mult_31/U191/ZN (OAI222_X1)             0.07       1.01 f
+  comp_dp/comp_m2/mult_31/U9/CO (FA_X1)                   0.10       1.11 f
+  comp_dp/comp_m2/mult_31/U8/CO (FA_X1)                   0.09       1.20 f
+  comp_dp/comp_m2/mult_31/U7/CO (FA_X1)                   0.09       1.29 f
+  comp_dp/comp_m2/mult_31/U6/CO (FA_X1)                   0.09       1.38 f
+  comp_dp/comp_m2/mult_31/U5/CO (FA_X1)                   0.09       1.47 f
+  comp_dp/comp_m2/mult_31/U4/CO (FA_X1)                   0.09       1.56 f
+  comp_dp/comp_m2/mult_31/U3/CO (FA_X1)                   0.09       1.65 f
+  comp_dp/comp_m2/mult_31/U173/Z (XOR2_X1)                0.07       1.72 f
+  comp_dp/comp_m2/mult_31/U172/ZN (XNOR2_X1)              0.06       1.78 f
+  comp_dp/comp_m2/mult_31/product[13] (multiplier_N_BIT_I2_N_BIT_F6_0_DW_mult_tc_0)
                                                           0.00       1.78 f
-  comp_dp/comp_mul_a1/y[7] (multiplier_N_BIT_I2_N_BIT_F6_0)
+  comp_dp/comp_m2/y[7] (multiplier_N_BIT_I2_N_BIT_F6_0)
                                                           0.00       1.78 f
-  comp_dp/comp_sum1/b[7] (adder_N_BIT8)                   0.00       1.78 f
-  comp_dp/comp_sum1/add_1_root_add_27_2/B[7] (adder_N_BIT8_DW01_add_0)
-                                                          0.00       1.78 f
-  comp_dp/comp_sum1/add_1_root_add_27_2/U1_7/S (FA_X1)
-                                                          0.18       1.96 r
-  comp_dp/comp_sum1/add_1_root_add_27_2/SUM[7] (adder_N_BIT8_DW01_add_0)
-                                                          0.00       1.96 r
-  comp_dp/comp_sum1/sum[7] (adder_N_BIT8)                 0.00       1.96 r
-  comp_dp/comp_mul_b0/a[7] (multiplier_N_BIT_I2_N_BIT_F6_2)
-                                                          0.00       1.96 r
-  comp_dp/comp_mul_b0/mult_31/a[7] (multiplier_N_BIT_I2_N_BIT_F6_2_DW_mult_tc_0)
-                                                          0.00       1.96 r
-  comp_dp/comp_mul_b0/mult_31/U244/Z (XOR2_X1)            0.08       2.04 r
-  comp_dp/comp_mul_b0/mult_31/U243/ZN (NAND2_X1)          0.06       2.10 f
-  comp_dp/comp_mul_b0/mult_31/U223/ZN (OAI22_X1)          0.08       2.18 r
-  comp_dp/comp_mul_b0/mult_31/U30/S (HA_X1)               0.09       2.26 r
-  comp_dp/comp_mul_b0/mult_31/U28/S (FA_X1)               0.13       2.39 f
-  comp_dp/comp_mul_b0/mult_31/U8/S (FA_X1)                0.13       2.52 f
-  comp_dp/comp_mul_b0/mult_31/product[7] (multiplier_N_BIT_I2_N_BIT_F6_2_DW_mult_tc_0)
-                                                          0.00       2.52 f
-  comp_dp/comp_mul_b0/y[1] (multiplier_N_BIT_I2_N_BIT_F6_2)
-                                                          0.00       2.52 f
-  comp_dp/comp_sum2/a[1] (adder_N_BIT7)                   0.00       2.52 f
-  comp_dp/comp_sum2/add_1_root_add_27_2/A[1] (adder_N_BIT7_DW01_add_0)
-                                                          0.00       2.52 f
-  comp_dp/comp_sum2/add_1_root_add_27_2/U1_1/CO (FA_X1)
-                                                          0.10       2.62 f
-  comp_dp/comp_sum2/add_1_root_add_27_2/U1_2/CO (FA_X1)
-                                                          0.09       2.71 f
-  comp_dp/comp_sum2/add_1_root_add_27_2/U1_3/CO (FA_X1)
-                                                          0.09       2.80 f
-  comp_dp/comp_sum2/add_1_root_add_27_2/U1_4/CO (FA_X1)
-                                                          0.09       2.89 f
-  comp_dp/comp_sum2/add_1_root_add_27_2/U1_5/CO (FA_X1)
-                                                          0.09       2.99 f
-  comp_dp/comp_sum2/add_1_root_add_27_2/U1_6/S (FA_X1)
-                                                          0.13       3.12 r
-  comp_dp/comp_sum2/add_1_root_add_27_2/SUM[6] (adder_N_BIT7_DW01_add_0)
-                                                          0.00       3.12 r
-  comp_dp/comp_sum2/sum[6] (adder_N_BIT7)                 0.00       3.12 r
-  comp_dp/DOUT_reg[7]/D (DFF_X1)                          0.01       3.12 r
-  data arrival time                                                  3.12
+  comp_dp/U41/ZN (AND2_X1)                                0.04       1.81 f
+  comp_dp/m2out_del_reg[7]/D (DFF_X1)                     0.01       1.82 f
+  data arrival time                                                  1.82
 
-  clock CLK (rise edge)                                  11.00      11.00
-  clock network delay (ideal)                             0.00      11.00
-  clock uncertainty                                      -0.07      10.93
-  comp_dp/DOUT_reg[7]/CK (DFF_X1)                         0.00      10.93 r
-  library setup time                                     -0.03      10.90
-  data required time                                                10.90
+  clock CLK (rise edge)                                   7.44       7.44
+  clock network delay (ideal)                             0.00       7.44
+  clock uncertainty                                      -0.07       7.37
+  comp_dp/m2out_del_reg[7]/CK (DFF_X1)                    0.00       7.37 r
+  library setup time                                     -0.04       7.33
+  data required time                                                 7.33
   --------------------------------------------------------------------------
-  data required time                                                10.90
-  data arrival time                                                 -3.12
+  data required time                                                 7.33
+  data arrival time                                                 -1.82
   --------------------------------------------------------------------------
-  slack (MET)                                                        7.77
+  slack (MET)                                                        5.51
 
 
 1

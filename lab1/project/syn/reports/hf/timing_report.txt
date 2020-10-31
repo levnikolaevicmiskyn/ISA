@@ -7,14 +7,14 @@ Report : timing
         -max_paths 1
 Design : IIRFilter
 Version: O-2018.06-SP4
-Date   : Sun Oct 25 09:28:02 2020
+Date   : Sat Oct 31 13:10:07 2020
 ****************************************
 
 Operating Conditions: typical   Library: NangateOpenCellLibrary
 Wire Load Model Mode: top
 
-  Startpoint: a1[3] (input port clocked by CLK)
-  Endpoint: comp_dp/DOUT_reg[7]
+  Startpoint: a[9] (input port clocked by CLK)
+  Endpoint: comp_dp/m2out_del_reg[7]
             (rising edge-triggered flip-flop clocked by CLK)
   Path Group: CLK
   Path Type: max
@@ -27,101 +27,48 @@ Wire Load Model Mode: top
   --------------------------------------------------------------------------
   clock CLK (rise edge)                                   0.00       0.00
   clock network delay (ideal)                             0.00       0.00
-  input external delay                                    0.50       0.50 f
-  a1[3] (in)                                              0.00       0.50 f
-  comp_dp/a1[3] (Datapath)                                0.00       0.50 f
-  comp_dp/comp_mul_a1/b[2] (multiplier_N_BIT_I2_N_BIT_F6_0)
-                                                          0.00       0.50 f
-  comp_dp/comp_mul_a1/mult_31/b[2] (multiplier_N_BIT_I2_N_BIT_F6_0_DW_mult_tc_0)
-                                                          0.00       0.50 f
-  comp_dp/comp_mul_a1/mult_31/U292/ZN (XNOR2_X1)          0.05       0.55 f
-  comp_dp/comp_mul_a1/mult_31/U291/ZN (OAI22_X1)          0.06       0.61 r
-  comp_dp/comp_mul_a1/mult_31/U290/ZN (NAND3_X1)          0.03       0.64 f
-  comp_dp/comp_mul_a1/mult_31/U155/Z (MUX2_X1)            0.07       0.72 f
-  comp_dp/comp_mul_a1/mult_31/U286/ZN (OAI222_X1)         0.07       0.79 r
-  comp_dp/comp_mul_a1/mult_31/U206/ZN (NAND2_X1)          0.04       0.82 f
-  comp_dp/comp_mul_a1/mult_31/U152/ZN (AND3_X2)           0.05       0.88 f
-  comp_dp/comp_mul_a1/mult_31/U285/ZN (OAI222_X1)         0.06       0.93 r
-  comp_dp/comp_mul_a1/mult_31/U260/ZN (NAND2_X1)          0.04       0.98 f
-  comp_dp/comp_mul_a1/mult_31/U262/ZN (NAND3_X1)          0.04       1.02 r
-  comp_dp/comp_mul_a1/mult_31/U222/ZN (NAND2_X1)          0.03       1.05 f
-  comp_dp/comp_mul_a1/mult_31/U173/ZN (NAND3_X1)          0.04       1.09 r
-  comp_dp/comp_mul_a1/mult_31/U248/ZN (NAND2_X1)          0.03       1.12 f
-  comp_dp/comp_mul_a1/mult_31/U158/ZN (NAND3_X1)          0.04       1.16 r
-  comp_dp/comp_mul_a1/mult_31/U210/ZN (XNOR2_X1)          0.04       1.20 f
-  comp_dp/comp_mul_a1/mult_31/product[9] (multiplier_N_BIT_I2_N_BIT_F6_0_DW_mult_tc_0)
-                                                          0.00       1.20 f
-  comp_dp/comp_mul_a1/y[3] (multiplier_N_BIT_I2_N_BIT_F6_0)
-                                                          0.00       1.20 f
-  comp_dp/comp_sum1/b[3] (adder_N_BIT8)                   0.00       1.20 f
-  comp_dp/comp_sum1/add_1_root_add_27_2/B[3] (adder_N_BIT8_DW01_add_0)
-                                                          0.00       1.20 f
-  comp_dp/comp_sum1/add_1_root_add_27_2/U1_3/CO (FA_X1)
-                                                          0.11       1.31 f
-  comp_dp/comp_sum1/add_1_root_add_27_2/U15/ZN (NAND2_X1)
-                                                          0.03       1.34 r
-  comp_dp/comp_sum1/add_1_root_add_27_2/U16/ZN (NAND3_X1)
-                                                          0.04       1.38 f
-  comp_dp/comp_sum1/add_1_root_add_27_2/U1_5/CO (FA_X1)
-                                                          0.10       1.47 f
-  comp_dp/comp_sum1/add_1_root_add_27_2/U18/ZN (NAND2_X1)
-                                                          0.03       1.51 r
-  comp_dp/comp_sum1/add_1_root_add_27_2/U20/ZN (NAND3_X1)
-                                                          0.04       1.54 f
-  comp_dp/comp_sum1/add_1_root_add_27_2/U1_7/S (FA_X1)
-                                                          0.15       1.69 r
-  comp_dp/comp_sum1/add_1_root_add_27_2/SUM[7] (adder_N_BIT8_DW01_add_0)
-                                                          0.00       1.69 r
-  comp_dp/comp_sum1/sum[7] (adder_N_BIT8)                 0.00       1.69 r
-  comp_dp/comp_mul_b0/a[7] (multiplier_N_BIT_I2_N_BIT_F6_2)
-                                                          0.00       1.69 r
-  comp_dp/comp_mul_b0/mult_31/a[7] (multiplier_N_BIT_I2_N_BIT_F6_2_DW_mult_tc_0)
-                                                          0.00       1.69 r
-  comp_dp/comp_mul_b0/mult_31/U325/Z (XOR2_X1)            0.07       1.77 r
-  comp_dp/comp_mul_b0/mult_31/U324/ZN (NAND2_X1)          0.04       1.81 f
-  comp_dp/comp_mul_b0/mult_31/U318/ZN (OAI21_X1)          0.06       1.86 r
-  comp_dp/comp_mul_b0/mult_31/U30/CO (HA_X1)              0.07       1.93 r
-  comp_dp/comp_mul_b0/mult_31/U181/ZN (XNOR2_X1)          0.06       1.99 r
-  comp_dp/comp_mul_b0/mult_31/U24/S (FA_X1)               0.12       2.12 f
-  comp_dp/comp_mul_b0/mult_31/U7/S (FA_X1)                0.13       2.25 f
-  comp_dp/comp_mul_b0/mult_31/product[8] (multiplier_N_BIT_I2_N_BIT_F6_2_DW_mult_tc_0)
-                                                          0.00       2.25 f
-  comp_dp/comp_mul_b0/y[2] (multiplier_N_BIT_I2_N_BIT_F6_2)
-                                                          0.00       2.25 f
-  comp_dp/comp_sum2/a[2] (adder_N_BIT7)                   0.00       2.25 f
-  comp_dp/comp_sum2/add_1_root_add_27_2/A[2] (adder_N_BIT7_DW01_add_0)
-                                                          0.00       2.25 f
-  comp_dp/comp_sum2/add_1_root_add_27_2/U28/ZN (NAND2_X1)
-                                                          0.05       2.29 r
-  comp_dp/comp_sum2/add_1_root_add_27_2/U30/ZN (NAND3_X1)
-                                                          0.04       2.33 f
-  comp_dp/comp_sum2/add_1_root_add_27_2/U13/ZN (NAND2_X1)
-                                                          0.03       2.36 r
-  comp_dp/comp_sum2/add_1_root_add_27_2/U14/ZN (NAND3_X1)
-                                                          0.04       2.39 f
-  comp_dp/comp_sum2/add_1_root_add_27_2/U1_4/CO (FA_X1)
-                                                          0.10       2.49 f
-  comp_dp/comp_sum2/add_1_root_add_27_2/U3/ZN (NAND2_X1)
-                                                          0.03       2.53 r
-  comp_dp/comp_sum2/add_1_root_add_27_2/U6/ZN (NAND3_X1)
-                                                          0.04       2.56 f
-  comp_dp/comp_sum2/add_1_root_add_27_2/U16/ZN (XNOR2_X1)
-                                                          0.06       2.62 f
-  comp_dp/comp_sum2/add_1_root_add_27_2/SUM[6] (adder_N_BIT7_DW01_add_0)
-                                                          0.00       2.62 f
-  comp_dp/comp_sum2/sum[6] (adder_N_BIT7)                 0.00       2.62 f
-  comp_dp/DOUT_reg[7]/D (DFF_X1)                          0.01       2.63 f
-  data arrival time                                                  2.63
+  input external delay                                    0.50       0.50 r
+  a[9] (in)                                               0.00       0.50 r
+  comp_dp/a[9] (Datapath)                                 0.00       0.50 r
+  comp_dp/comp_m2/b[0] (multiplier_N_BIT_I2_N_BIT_F6_0)
+                                                          0.00       0.50 r
+  comp_dp/comp_m2/mult_31/b[0] (multiplier_N_BIT_I2_N_BIT_F6_0_DW_mult_tc_0)
+                                                          0.00       0.50 r
+  comp_dp/comp_m2/mult_31/U166/ZN (INV_X1)                0.03       0.53 f
+  comp_dp/comp_m2/mult_31/U223/Z (XOR2_X1)                0.07       0.60 f
+  comp_dp/comp_m2/mult_31/U222/ZN (OAI22_X1)              0.05       0.66 r
+  comp_dp/comp_m2/mult_31/U34/S (HA_X1)                   0.08       0.74 r
+  comp_dp/comp_m2/mult_31/U33/S (FA_X1)                   0.12       0.86 f
+  comp_dp/comp_m2/mult_31/U184/ZN (INV_X1)                0.03       0.89 r
+  comp_dp/comp_m2/mult_31/U178/ZN (OR2_X1)                0.03       0.92 r
+  comp_dp/comp_m2/mult_31/U179/ZN (NAND3_X1)              0.04       0.96 f
+  comp_dp/comp_m2/mult_31/U9/CO (FA_X1)                   0.09       1.05 f
+  comp_dp/comp_m2/mult_31/U8/CO (FA_X1)                   0.09       1.14 f
+  comp_dp/comp_m2/mult_31/U7/CO (FA_X1)                   0.09       1.23 f
+  comp_dp/comp_m2/mult_31/U6/CO (FA_X1)                   0.09       1.32 f
+  comp_dp/comp_m2/mult_31/U5/CO (FA_X1)                   0.10       1.42 f
+  comp_dp/comp_m2/mult_31/U172/ZN (NAND2_X1)              0.03       1.45 r
+  comp_dp/comp_m2/mult_31/U174/ZN (NAND3_X1)              0.04       1.49 f
+  comp_dp/comp_m2/mult_31/U3/CO (FA_X1)                   0.09       1.58 f
+  comp_dp/comp_m2/mult_31/U189/Z (XOR2_X1)                0.07       1.65 f
+  comp_dp/comp_m2/mult_31/U188/ZN (XNOR2_X1)              0.06       1.70 f
+  comp_dp/comp_m2/mult_31/product[13] (multiplier_N_BIT_I2_N_BIT_F6_0_DW_mult_tc_0)
+                                                          0.00       1.70 f
+  comp_dp/comp_m2/y[7] (multiplier_N_BIT_I2_N_BIT_F6_0)
+                                                          0.00       1.70 f
+  comp_dp/U72/ZN (AND2_X1)                                0.04       1.74 f
+  comp_dp/m2out_del_reg[7]/D (DFF_X1)                     0.01       1.75 f
+  data arrival time                                                  1.75
 
-  clock CLK (rise edge)                                   2.74       2.74
-  clock network delay (ideal)                             0.00       2.74
-  clock uncertainty                                      -0.07       2.67
-  comp_dp/DOUT_reg[7]/CK (DFF_X1)                         0.00       2.67 r
-  library setup time                                     -0.04       2.63
-  data required time                                                 2.63
+  clock CLK (rise edge)                                   1.86       1.86
+  clock network delay (ideal)                             0.00       1.86
+  clock uncertainty                                      -0.07       1.79
+  comp_dp/m2out_del_reg[7]/CK (DFF_X1)                    0.00       1.79 r
+  library setup time                                     -0.04       1.75
+  data required time                                                 1.75
   --------------------------------------------------------------------------
-  data required time                                                 2.63
-  data arrival time                                                 -2.63
+  data required time                                                 1.75
+  data arrival time                                                 -1.75
   --------------------------------------------------------------------------
   slack (MET)                                                        0.00
 
