@@ -41,7 +41,7 @@ architecture RTL of IIRFilter is
     		clr_delay_regs, en_latch: OUT STD_LOGIC
     	);
     end component;
-
+    
     signal clr_w_reg, en_latch: std_logic;
 	
 begin
@@ -52,25 +52,3 @@ begin
     comp_dp: Datapath
         port map(clk, b, a, DIN, clr_w_reg, en_latch, DOUT);
 end RTL;
-
-configuration IIRFilter_standard of IIRFilter is
-	for RTL 
-		for comp_dp: Datapath
-			use entity work.Datapath(RTL);
-		end for;
-		for comp_cu: controlUnit
-			use entity work.controlUnit(behavior); 
-		end for;
-	end for;
-end IIRFilter_standard;
-
---configuration IIRFilter_fast of IIRFilter is
---	for RTL 
---		for comp_dp: Datapath
---			use entity work.Datapath(fastRTL);
---		end for;
---		for comp_cu: controlUnit
---			use entity work.controlUnit(fastfsm); 
---		end for;
---	end for;
---end IIRFilter_fast;

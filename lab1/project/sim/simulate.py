@@ -154,6 +154,7 @@ def main():
             os.remove("./samples.txt")
             os.remove("./results-C.txt")
             os.remove("./results-VHDL.txt")
+            
         except OSError:
             pass
         return 0
@@ -175,7 +176,7 @@ def main():
     # Launch reference filter
     @status_update("Compiling and running C filter...", "Error: C filter could not be compiled or launched")
     def _reference():
-        status = run_reference('./cfilter.out', 'samples.txt', 'results-C.txt')
+        status = run_reference('./cfilter_fast.out', 'samples.txt', 'results-C.txt')
         return status.returncode
 
     _reference()
@@ -184,7 +185,7 @@ def main():
     @status_update("Simulating VHDL...", "Simulation unsuccesful")
     def _simulate():
         nonlocal time
-        status = run_simulation(simulation_duration, './simulate.do')
+        status = run_simulation(simulation_duration, './simulate_fast.do')
         return status.returncode
 
     _simulate()
