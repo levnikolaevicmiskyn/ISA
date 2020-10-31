@@ -1,4 +1,3 @@
-\subsection{Internal parallelism}
 \subsection{Accuracy}
 From a preliminary investigation regarding the dependence of THD on the representation accuracy, which is linked to $n_b$, we found that $n_b=7$ is enough to meet the requirements. This means that dropping the least significant bit from the input samples (represented on 8 bits) can simplify internal computations with an acceptable degradation in performance. The previous analysis has been carried out using a model where numbers include $n_b-1$ fractional bits (the binary digits with weights $2^{-1}$, $2^{-2}$, ..., $2^{n_b-2}$), therefore we can expect that allocating 6 fractional bits for all the internal variables in the VHDL implementation will provide enough accuracy for our purposes.
 
