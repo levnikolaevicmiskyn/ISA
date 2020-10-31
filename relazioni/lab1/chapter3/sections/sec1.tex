@@ -53,3 +53,6 @@ Similarly to the first architecture, the sequence $w[n]$ can take on values slig
 	\caption{Final DFG. Colors identify registers corresponding to the DFG in figure \autoref{fig:fast_dfg_inter}}
 	\label{fig:fast_dfg_final}
 \end{figure}
+
+\section{Control Unit}
+The addition of pipeline stages increases dramatically the number of possible states in our FSM, making it impractical to describe the control unit by enumerating all of them. We resorted to a structural description consisting of a delay line where a number of flip-flops are connected in cascade. The delay line contains two flip flops plus one additional flip flop for each pipeline stage, which amounts to 5 delay units. One additional register samples the reset signal and controls the \texttt{clear\_w\_regs}, causing the unit to enter the reset state for a single clock cycle.The latch enable signal is found at the output of the first flip flop, whereas VOUT is found
