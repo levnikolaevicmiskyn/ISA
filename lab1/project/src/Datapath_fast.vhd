@@ -22,7 +22,7 @@ entity Datapath is
     );
 end entity;
 
-architecture RTL of Datapath is
+architecture JLookAhead of Datapath is
     component adder is
         generic	(N_BIT: positive);
         port (
@@ -214,4 +214,4 @@ begin
             DOUT <= fpresize(y, NIb, NF, 1, 7);
         end if;
     end process proc_out_reg;
-end architecture RTL;
+end architecture JLookAhead;

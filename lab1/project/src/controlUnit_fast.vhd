@@ -9,7 +9,7 @@ entity controlUnit is
 end entity controlUnit;
 
 
-architecture behavior of controlUnit is
+architecture JLookAhead of controlUnit is
 constant NPIPE: integer := 3;
 signal token_dline: std_logic_vector(2+NPIPE-1 downto 0);
 begin
@@ -34,4 +34,4 @@ end process;
 
 en_latch <= token_dline(token_dline'length-1);
 VOUT <= token_dline(0);
-end architecture behavior;
+end architecture JLookAhead;
