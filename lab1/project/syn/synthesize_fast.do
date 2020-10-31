@@ -3,7 +3,7 @@ remove_design -designs
 
 # Analyze components
 analyze -f vhdl -lib WORK ../src/fpconv.vhd
-analyze -f vhdl -lib WORK ../src/constants.vhd
+analyze -f vhdl -lib WORK ../src/constants_fast.vhd
 analyze -f vhdl -lib WORK ../src/packets.vhd
 analyze -f vhdl -lib WORK ../src/multiplier.vhd
 analyze -f vhdl -lib WORK ../src/adder.vhd
