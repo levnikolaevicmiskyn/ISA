@@ -77,13 +77,20 @@ begin
 	b0 <= packets.extract(b, 0, constants.NBINT);
 	b1 <= packets.extract(b, 1, constants.NBINT);
 	a1sq <= packets.extract(a, 1, constants.NBINT);
-    -- Resize coefficients to match the internal representation: the least significant bit is dropped and 
-    -- sign is extendend to avoid overflow.
-    a1_int <= fpresize(a1, 1, 7, NIa, NF);
-	a1_int_b <= fpresize(a1, 1, 7, NIb, NF);
-    b0_int <= fpresize(b0, 1, 7, NIa, NF);
-    b1_int <= fpresize(b1, 1, 7, NIa, NF);
-    a1sq_int <= fpresize(a1sq, 1, 7, NIa, NF);
+
+	coeff_reg_proc: process(clk)
+	begin
+		if rising_edge(clk) then
+			-- Resize coefficients to match the internal representation: the least significant bit is dropped and 
+    		-- sign is extendend to avoid overflow.
+			a1_int <= fpresize(a1, 1, 7, NIa, NF);
+			a1_int_b <= fpresize(a1, 1, 7, NIb, NF);
+    		b0_int <= fpresize(b0, 1, 7, NIa, NF);
+    		b1_int <= fpresize(b1, 1, 7, NIa, NF);
+    		a1sq_int <= fpresize(a1sq, 1, 7, NIa, NF);
+		end if;
+	end process;
+
     -- Sample input data on every clock rising edge
     proc_input_sample: process(clk)
     begin

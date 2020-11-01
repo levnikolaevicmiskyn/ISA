@@ -1,0 +1,74 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : IIRFilter
+Version: O-2018.06-SP4
+Date   : Sun Nov  1 23:38:24 2020
+****************************************
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: comp_dp/w1_reg[3]
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: comp_dp/a3a_reg[6]
+            (rising edge-triggered flip-flop clocked by CLK)
+  Path Group: CLK
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  IIRFilter          5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  comp_dp/w1_reg[3]/CK (DFF_X1)                           0.00       0.00 r
+  comp_dp/w1_reg[3]/Q (DFF_X1)                            0.19       0.19 r
+  comp_dp/comp_m3/a[3] (multiplier_N_BIT_I2_N_BIT_F6_2)
+                                                          0.00       0.19 r
+  comp_dp/comp_m3/mult_31/a[3] (multiplier_N_BIT_I2_N_BIT_F6_2_DW_mult_tc_0)
+                                                          0.00       0.19 r
+  comp_dp/comp_m3/mult_31/U171/ZN (INV_X1)                0.08       0.27 f
+  comp_dp/comp_m3/mult_31/U170/ZN (INV_X1)                0.09       0.36 r
+  comp_dp/comp_m3/mult_31/U164/ZN (XNOR2_X1)              0.13       0.48 r
+  comp_dp/comp_m3/mult_31/U256/ZN (NAND2_X1)              0.10       0.58 f
+  comp_dp/comp_m3/mult_31/U210/ZN (OAI22_X1)              0.08       0.66 r
+  comp_dp/comp_m3/mult_31/U34/S (HA_X1)                   0.08       0.75 r
+  comp_dp/comp_m3/mult_31/U33/S (FA_X1)                   0.12       0.86 f
+  comp_dp/comp_m3/mult_31/U155/ZN (INV_X1)                0.03       0.89 r
+  comp_dp/comp_m3/mult_31/U191/ZN (OAI222_X1)             0.06       0.95 f
+  comp_dp/comp_m3/mult_31/U9/CO (FA_X1)                   0.10       1.05 f
+  comp_dp/comp_m3/mult_31/U8/CO (FA_X1)                   0.09       1.14 f
+  comp_dp/comp_m3/mult_31/U7/CO (FA_X1)                   0.09       1.23 f
+  comp_dp/comp_m3/mult_31/U6/CO (FA_X1)                   0.09       1.32 f
+  comp_dp/comp_m3/mult_31/U5/CO (FA_X1)                   0.09       1.41 f
+  comp_dp/comp_m3/mult_31/U4/CO (FA_X1)                   0.09       1.50 f
+  comp_dp/comp_m3/mult_31/U3/S (FA_X1)                    0.13       1.63 r
+  comp_dp/comp_m3/mult_31/product[12] (multiplier_N_BIT_I2_N_BIT_F6_2_DW_mult_tc_0)
+                                                          0.00       1.63 r
+  comp_dp/comp_m3/y[6] (multiplier_N_BIT_I2_N_BIT_F6_2)
+                                                          0.00       1.63 r
+  comp_dp/U14/ZN (AND2_X1)                                0.04       1.66 r
+  comp_dp/a3a_reg[6]/D (DFF_X1)                           0.01       1.67 r
+  data arrival time                                                  1.67
+
+  clock CLK (rise edge)                                   4.80       4.80
+  clock network delay (ideal)                             0.00       4.80
+  clock uncertainty                                      -0.07       4.73
+  comp_dp/a3a_reg[6]/CK (DFF_X1)                          0.00       4.73 r
+  library setup time                                     -0.03       4.70
+  data required time                                                 4.70
+  --------------------------------------------------------------------------
+  data required time                                                 4.70
+  data arrival time                                                 -1.67
+  --------------------------------------------------------------------------
+  slack (MET)                                                        3.02
+
+
+1

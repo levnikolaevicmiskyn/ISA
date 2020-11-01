@@ -18,8 +18,8 @@ analyze -f vhdl -lib WORK ../src/IIRFilter.vhd
 set power_preserve_rtl_hier_names true
 elaborate IIRFilter -arch RTL -lib WORK
 
-# Setup clock
-create_clock -name CLK -period 1.86 {CLK}
+# Setup clock (old period = 1.86)
+create_clock -name CLK -period 1.34 {CLK}
 set_dont_touch_network CLK
 
 # Set uncertainties and synthesis variables
@@ -30,11 +30,11 @@ set OLOAD [load_of NangateOpenCellLibrary/BUF_X4/A]
 set_load $OLOAD [all_outputs]
 
 # Compile
-compile > reports/hf/compile_report.txt
+compile > reports/hf_fast/compile_report.txt
 
 # Save reports
-report_timing > reports/hf/timing_report.txt
-report_area > reports/hf/area_report.txt
+report_timing > reports/hf_fast/timing_report.txt
+report_area > reports/hf_fast/area_report.txt
 
 
 ### Synthesis At Lower Frequency (without clock gating)###
@@ -47,7 +47,7 @@ set power_preserve_rtl_hier_names true
 elaborate IIRFilter -arch RTL -lib WORK > reports/lf/elaborate_result.txt
 
 # Setup clock (4Tmin)
-create_clock -name CLK -period 7.44 {CLK}
+create_clock -name CLK -period 4.8 {CLK}
 set_dont_touch_network CLK
 
 # Set uncertainties and synthesis variables
@@ -58,14 +58,14 @@ set OLOAD [load_of NangateOpenCellLibrary/BUF_X4/A]
 set_load $OLOAD [all_outputs]
 
 # Run check_design to report potential problems (warnings)
-check_design > reports/lf/check_design.txt
+check_design > reports/lf_fast/check_design.txt
 
 # Compile
-compile > reports/lf/compile_result.txt
+compile > reports/lf_fast/compile_result.txt
 
 # Save reports
-report_timing > reports/lf/timing_report.txt
-report_area > reports/lf/area_report.txt
+report_timing > reports/lf_fast/timing_report.txt
+report_area > reports/lf_fast/area_report.txt
 
 # Netlist and constraint file export
 ungroup -all -flatten
