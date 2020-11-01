@@ -1,5 +1,23 @@
+\section{Datapath}
+The datapath has been derived directly from the DFG from \autoref{fig:iir-dfd}, obtaining the architecture shown in \autoref{fig:datapath-simple}.
+
+\begin{figure}[htbp]
+	\centering
+	\makebox[\textwidth][c]{
+	\includegraphics[width=\textwidth]{./chapter2/images/datapath.png}}
+	\caption{IIR filter datapath}
+	\label{fig:datapath-simple}
+\end{figure}
+
+The specified timing requires input data to be sampled on the same clock cycles where \texttt{VIN} is asserted. For this reason, the input register \texttt{R1} is always enabled. The most convenient solution to carry on operations only when data is actually valid is to place a latch at the output of \texttt{R1}.\\
+This is because appending another register instead of a latch will increase the overall latency; while selectively enabling the internal registers complicates their internal structures. Furthermore, the input latch will also act as a power gating circuit, preventing the waste of power in the internal combinatorial nodes when the input samples are not valid.
+
+Overall, the only real commands needed from the control unit are \texttt{en\_latch} and \texttt{clr\_w\_reg}.
+
 \subsection{Accuracy}
-From a preliminary investigation regarding the dependence of THD on the representation accuracy, which is linked to $n_b$, we found that $n_b=7$ is enough to meet the requirements. This means that dropping the least significant bit from the input samples (represented on 8 bits) can simplify internal computations with an acceptable degradation in performance. The previous analysis has been carried out using a model where numbers include $n_b-1$ fractional bits (the binary digits with weights $2^{-1}$, $2^{-2}$, ..., $2^{n_b-2}$), therefore we can expect that allocating 6 fractional bits for all the internal variables in the VHDL implementation will provide enough accuracy for our purposes.
+Given the results from \autoref{sec:THD}, it is possible to see that $n_b=7$ is enough to meet the requirements. This means that dropping the least significant bit from the input samples (represented on 8 bits) can simplify the internal computations with an acceptable degradation in accuracy.
+
+The previous analysis had been carried using a model where numbers include $n_b-1$ fractional bits (the binary digits with weights $2^{-1}$, $2^{-2}$, ..., $2^{n_b-2}$), therefore it is expectable that allocating 6 fractional bits for all the internal variables in the VHDL implementation will provide enough accuracy.
 
 \subsection{Avoiding overflow}
 The C reference model is accurate in predicting the error introduced by truncation, which affects the output of every multiplier block, but it neglects the inability to represent a number larger or equal to 1 in absolute value with the single integer bit available in the standard fixed-point format.\\
@@ -31,6 +49,3 @@ As for the operators in the feedforward part, multiplying $w[n]$ and $w[n-1]$ by
 	\caption{THD as a function of $n_b$}
 	\label{fig:thdplot}
 \end{figure}
-
-\subsection{Datapath}
-The datapath has been derived directly from the DFG in figure \autoref{fig:iir-dfd}. The specified timing requires to sample the incoming data in the same clock period where VIN is asserted. This is achieved by placing a register (\texttt{R1}) that latches the input at every clock cycle. Only valid inputs should be processed by the filter, therefore a latch is inserted in cascade at the output of \texttt{R1}. The latch enable is driven by the control unit so that the content of the input register is presented to the actual filter only when the input sample is valid. On the contrary, as long as VIN='0' the latch performs a gating function preventing the invalid content of the first register from reaching the filter. In this way, data registers within the filter need to be initialized to zero during the reset phase but do not need an enable signal because all internal values are held constant by the latch until a new samples is available.
