@@ -15,9 +15,9 @@ This is because appending another register instead of a latch will increase the 
 Overall, the only real commands needed from the control unit are \texttt{en\_latch} and \texttt{clr\_w\_reg}, since the \texttt{W} register should still be initialized.
 
 \subsection{Accuracy}
-Given the results from \autoref{sec:THD}, it is possible to see that $n_b=7$ is enough to meet the requirements. This means that dropping the least significant bit from the input samples (represented on 8 bits) can simplify the internal computations with an acceptable degradation in accuracy.
+From the preliminary investigation in \autoref{sec:THD}, it is possible to see that $n_b=7$ is enough to meet the requirements. This means that dropping the least significant bit from the input samples (represented on 8 bits) can simplify the internal computations with an acceptable degradation in performance.
 
-The previous analysis had been carried using a model where numbers include $n_b-1$ fractional bits (the binary digits with weights $2^{-1}$, $2^{-2}$, ..., $2^{n_b-2}$), therefore it is expectable that allocating 6 fractional bits for all the internal variables in the VHDL implementation will provide enough accuracy.
+The previous analysis has been carried using a model where numbers include $n_b-1$ fractional bits (the binary digits with weights $2^{-1}$, $2^{-2}$, ..., $2^{n_b-2}$), therefore it is expectable that allocating 6 fractional bits for all the internal variables in the VHDL implementation will provide enough accuracy.
 
 \subsection{Avoiding overflow}
 The C reference model is accurate in predicting the error introduced by truncation, which affects the output of every multiplier block, but it neglects the inability to represent a number larger or equal to 1 in absolute value with the single integer bit available in the standard fixed-point format.\\
