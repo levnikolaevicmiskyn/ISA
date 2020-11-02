@@ -142,7 +142,7 @@ begin
 			end if;
 		end if;
 	end process;
-	
+
 	comp_a2: adder
 	generic map(NA)
 	port map(a1out_del, m2out_del, '0', w0, open);

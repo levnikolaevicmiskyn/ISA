@@ -18,8 +18,8 @@ analyze -f vhdl -lib WORK ../src/IIRFilter.vhd
 set power_preserve_rtl_hier_names true
 elaborate IIRFilter -arch RTL -lib WORK
 
-# Setup clock (old period = 1.86)
-create_clock -name CLK -period 1.34 {CLK}
+# Setup clock (old period = 1.86, 1.34)
+create_clock -name CLK -period 0 {CLK}
 set_dont_touch_network CLK
 
 # Set uncertainties and synthesis variables

@@ -7,7 +7,7 @@ Report : timing
         -max_paths 1
 Design : IIRFilter
 Version: O-2018.06-SP4
-Date   : Sun Nov  1 23:38:24 2020
+Date   : Mon Nov  2 15:11:43 2020
 ****************************************
 
 Operating Conditions: typical   Library: NangateOpenCellLibrary
@@ -54,7 +54,7 @@ Wire Load Model Mode: top
                                                           0.00       1.63 r
   comp_dp/comp_m3/y[6] (multiplier_N_BIT_I2_N_BIT_F6_2)
                                                           0.00       1.63 r
-  comp_dp/U14/ZN (AND2_X1)                                0.04       1.66 r
+  comp_dp/U15/ZN (AND2_X1)                                0.04       1.66 r
   comp_dp/a3a_reg[6]/D (DFF_X1)                           0.01       1.67 r
   data arrival time                                                  1.67
 

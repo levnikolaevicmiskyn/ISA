@@ -9,16 +9,15 @@ Information: Evaluating DesignWare library utilization. (UISN-27)
 ============================================================================
 
 
-Information: There are 11 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+Information: There are 6 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
 
 
 
   Beginning Pass 1 Mapping
   ------------------------
-  Processing 'adder_N_BIT7'
   Processing 'multiplier_N_BIT_I2_N_BIT_F6_0'
-  Processing 'adder_N_BIT8_0'
-  Processing 'multiplier_N_BIT_I1_N_BIT_F6'
+  Processing 'adder_N_BIT7'
+  Processing 'adder_N_BIT8'
   Processing 'Datapath'
 Information: The register 'DOUT_reg[0]' is a constant and will be removed. (OPT-1206)
   Processing 'controlUnit'
@@ -30,12 +29,10 @@ Information: Updating design information... (UID-85)
   Beginning Implementation Selection
   ----------------------------------
   Processing 'adder_N_BIT7_DW01_add_0'
-  Processing 'adder_N_BIT8_1_DW01_add_0'
-  Processing 'adder_N_BIT8_0_DW01_add_0'
+  Processing 'adder_N_BIT8_DW01_add_0'
   Mapping 'multiplier_N_BIT_I2_N_BIT_F6_1_DW_mult_tc_0'
-  Mapping 'multiplier_N_BIT_I2_N_BIT_F6_2_DW_mult_tc_0'
   Mapping 'multiplier_N_BIT_I2_N_BIT_F6_0_DW_mult_tc_0'
-  Mapping 'multiplier_N_BIT_I1_N_BIT_F6_DW_mult_tc_0'
+  Mapping 'multiplier_N_BIT_I2_N_BIT_F6_2_DW_mult_tc_0'
 
   Beginning Mapping Optimizations  (Medium effort)
   -------------------------------
@@ -44,19 +41,23 @@ Information: Updating design information... (UID-85)
    ELAPSED            WORST NEG   SETUP    DESIGN                            
     TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
   --------- --------- --------- --------- --------- -------------------------
-    0:00:10    1474.7      0.00       0.0       0.0                          
-    0:00:10    1474.7      0.00       0.0       0.0                          
-    0:00:10    1474.7      0.00       0.0       0.0                          
-    0:00:10    1474.7      0.00       0.0       0.0                          
-    0:00:10    1474.7      0.00       0.0       0.0                          
-    0:00:11    1435.9      0.00       0.0       0.0                          
-    0:00:12    1437.5      0.00       0.0       0.0                          
-    0:00:12    1437.5      0.00       0.0       0.0                          
-    0:00:12    1437.5      0.00       0.0       0.0                          
-    0:00:12    1437.5      0.00       0.0       0.0                          
-    0:00:12    1437.5      0.00       0.0       0.0                          
-    0:00:12    1437.5      0.00       0.0       0.0                          
-    0:00:12    1437.5      0.00       0.0       0.0                          
+    0:00:12    1095.9      0.05       0.1       0.0                          
+    0:00:13    1095.9      0.04       0.0       0.0                          
+    0:00:13    1095.9      0.04       0.0       0.0                          
+    0:00:13    1096.2      0.03       0.0       0.0                          
+    0:00:13    1096.2      0.03       0.0       0.0                          
+    0:00:13    1060.8      0.04       0.0       0.0                          
+    0:00:14    1062.9      0.03       0.0       0.0                          
+    0:00:14    1063.7      0.02       0.0       0.0                          
+    0:00:14    1065.3      0.02       0.0       0.0                          
+    0:00:14    1066.4      0.00       0.0       0.0                          
+    0:00:14    1067.2      0.00       0.0       0.0                          
+    0:00:14    1067.2      0.00       0.0       0.0                          
+    0:00:14    1067.2      0.00       0.0       0.0                          
+    0:00:14    1067.2      0.00       0.0       0.0                          
+    0:00:14    1067.2      0.00       0.0       0.0                          
+    0:00:14    1067.2      0.00       0.0       0.0                          
+    0:00:14    1067.2      0.00       0.0       0.0                          
 
 
 
@@ -67,9 +68,9 @@ Information: Updating design information... (UID-85)
    ELAPSED            WORST NEG   SETUP    DESIGN                            
     TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
   --------- --------- --------- --------- --------- -------------------------
-    0:00:12    1437.5      0.00       0.0       0.0                          
-    0:00:12    1437.5      0.00       0.0       0.0                          
-    0:00:13    1435.6      0.00       0.0       0.0                          
+    0:00:14    1067.2      0.00       0.0       0.0                          
+    0:00:14    1067.2      0.00       0.0       0.0                          
+    0:00:15    1066.7      0.00       0.0       0.0                          
 
 
   Beginning Area-Recovery Phase  (cleanup)
@@ -79,22 +80,19 @@ Information: Updating design information... (UID-85)
    ELAPSED            WORST NEG   SETUP    DESIGN                            
     TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
   --------- --------- --------- --------- --------- -------------------------
-    0:00:13    1435.6      0.00       0.0       0.0                          
-    0:00:13    1435.6      0.00       0.0       0.0                          
-    0:00:13    1434.5      0.00       0.0       0.0                          
-    0:00:13    1433.5      0.00       0.0       0.0                          
-    0:00:13    1432.4      0.00       0.0       0.0                          
-    0:00:13    1431.3      0.00       0.0       0.0                          
-    0:00:13    1430.3      0.00       0.0       0.0                          
-    0:00:13    1430.3      0.00       0.0       0.0                          
-    0:00:13    1430.3      0.00       0.0       0.0                          
-    0:00:13    1429.2      0.00       0.0       0.0                          
-    0:00:13    1429.2      0.00       0.0       0.0                          
-    0:00:13    1429.2      0.00       0.0       0.0                          
-    0:00:13    1429.2      0.00       0.0       0.0                          
-    0:00:13    1429.2      0.00       0.0       0.0                          
-    0:00:13    1429.2      0.00       0.0       0.0                          
-    0:00:13    1429.2      0.00       0.0       0.0                          
+    0:00:15    1066.7      0.00       0.0       0.0                          
+    0:00:15    1066.7      0.00       0.0       0.0                          
+    0:00:15    1063.7      0.00       0.0       0.0                          
+    0:00:15    1063.7      0.00       0.0       0.0                          
+    0:00:15    1063.7      0.00       0.0       0.0                          
+    0:00:15    1063.7      0.00       0.0       0.0                          
+    0:00:15    1063.7      0.00       0.0       0.0                          
+    0:00:15    1063.7      0.00       0.0       0.0                          
+    0:00:15    1063.7      0.00       0.0       0.0                          
+    0:00:15    1063.7      0.00       0.0       0.0                          
+    0:00:15    1063.7      0.00       0.0       0.0                          
+    0:00:15    1063.7      0.00       0.0       0.0                          
+    0:00:15    1063.7      0.00       0.0       0.0                          
 Loading db file '/software/dk/nangate45/synopsys/NangateOpenCellLibrary_typical_ecsm_nowlm.db'
 
 
