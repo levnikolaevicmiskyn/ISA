@@ -1,4 +1,3 @@
-Information: Updating design information... (UID-85)
 Warning: There are infeasible paths detected in your design that were ignored during optimization. Please run 'report_timing -attributes' and/or 'create_qor_snapshot/query_qor_snapshot -infeasible_paths' to identify these paths.  (OPT-1721)
  
 ****************************************
@@ -8,7 +7,7 @@ Report : timing
         -max_paths 1
 Design : IIRFilter
 Version: O-2018.06-SP4
-Date   : Mon Nov  2 15:11:16 2020
+Date   : Mon Nov  2 15:41:19 2020
 ****************************************
 
 Operating Conditions: typical   Library: NangateOpenCellLibrary
