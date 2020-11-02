@@ -53,6 +53,12 @@ Overall area & 1780 & 1877\\
 As for the area used up by adders, it is 10\% larger if the yellow stage is removed, with buffers taking up more space. In fact, breaking the path \texttt{A1-A2} could also translate into a more relaxed constraint on the delay of each one of them, perhaps attainable with simpler and more compact architectures. However, the area used up by register itself largely outweighs this reduction, resulting in a larger overall area.
 The final DFG that corresponds to the actual VHDL implementation is in figure \ref{fig:fast_dfg_final}.
 
+\begin{table}
+	\centering
+	\input{./chapter3/reps/timing_with_pipe.tex}
+	\caption{Excerpt of the timing report with constraint $T_{ck}=0$ (yellow stage included)}
+\end{table}
+
 \paragraph{A formal approach to retiming} Retiming can be easily done by inspection in this particular case, as shown in \autoref{fig:fast_dfg_inter}. However, for larger designs this task cannot be handled without a more formal and algorithmic approach. The problem can be cast as a system of inequalities expressing the feasibility constraint for retiming, which states that the final number of delays on each edge must be nonnegative. Moreover, there has to be at least one register on paths joining operators whose combined delay is larger than the critical path. 
 
 
