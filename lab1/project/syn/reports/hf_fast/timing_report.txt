@@ -1,0 +1,72 @@
+Information: Updating design information... (UID-85)
+Warning: There are infeasible paths detected in your design that were ignored during optimization. Please run 'report_timing -attributes' and/or 'create_qor_snapshot/query_qor_snapshot -infeasible_paths' to identify these paths.  (OPT-1721)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : IIRFilter
+Version: O-2018.06-SP4
+Date   : Mon Nov  2 15:11:16 2020
+****************************************
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: comp_dp/w1_reg[1]
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: comp_dp/m4out_del_reg[4]
+            (rising edge-triggered flip-flop clocked by CLK)
+  Path Group: CLK
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  IIRFilter          5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  comp_dp/w1_reg[1]/CK (DFF_X1)                           0.00       0.00 r
+  comp_dp/w1_reg[1]/Q (DFF_X1)                            0.17       0.17 r
+  comp_dp/comp_m4/a[1] (multiplier_N_BIT_I2_N_BIT_F6_1)
+                                                          0.00       0.17 r
+  comp_dp/comp_m4/mult_31/a[1] (multiplier_N_BIT_I2_N_BIT_F6_1_DW_mult_tc_1)
+                                                          0.00       0.17 r
+  comp_dp/comp_m4/mult_31/U338/ZN (INV_X1)                0.04       0.22 f
+  comp_dp/comp_m4/mult_31/U294/ZN (INV_X1)                0.10       0.32 r
+  comp_dp/comp_m4/mult_31/U218/ZN (XNOR2_X1)              0.13       0.45 r
+  comp_dp/comp_m4/mult_31/U320/ZN (NAND2_X1)              0.09       0.54 f
+  comp_dp/comp_m4/mult_31/U364/ZN (OAI22_X1)              0.08       0.62 r
+  comp_dp/comp_m4/mult_31/U93/CO (HA_X1)                  0.07       0.69 r
+  comp_dp/comp_m4/mult_31/U88/S (FA_X1)                   0.11       0.80 f
+  comp_dp/comp_m4/mult_31/U87/S (FA_X1)                   0.14       0.95 r
+  comp_dp/comp_m4/mult_31/U238/ZN (NOR2_X1)               0.03       0.97 f
+  comp_dp/comp_m4/mult_31/U401/ZN (OAI21_X1)              0.06       1.03 r
+  comp_dp/comp_m4/mult_31/U244/ZN (AOI21_X1)              0.04       1.07 f
+  comp_dp/comp_m4/mult_31/U406/ZN (OAI21_X1)              0.05       1.12 r
+  comp_dp/comp_m4/mult_31/U376/ZN (XNOR2_X1)              0.06       1.17 r
+  comp_dp/comp_m4/mult_31/product[10] (multiplier_N_BIT_I2_N_BIT_F6_1_DW_mult_tc_1)
+                                                          0.00       1.17 r
+  comp_dp/comp_m4/y[4] (multiplier_N_BIT_I2_N_BIT_F6_1)
+                                                          0.00       1.17 r
+  comp_dp/U63/ZN (AND2_X1)                                0.04       1.21 r
+  comp_dp/m4out_del_reg[4]/D (DFF_X1)                     0.01       1.22 r
+  data arrival time                                                  1.22
+
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  clock uncertainty                                      -0.07      -0.07
+  comp_dp/m4out_del_reg[4]/CK (DFF_X1)                    0.00      -0.07 r
+  library setup time                                     -0.03      -0.10
+  data required time                                                -0.10
+  --------------------------------------------------------------------------
+  data required time                                                -0.10
+  data arrival time                                                 -1.22
+  --------------------------------------------------------------------------
+  slack (VIOLATED)                                                  -1.32
+
+
+1

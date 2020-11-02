@@ -1,17 +1,11 @@
 \section{Derivation}
-It is possible to further optimize the filter using the look-ahead technique, which simply consists in the substitution of the expressions for the instant $n-1$ to where they appear in the expressions for the instant $n$. The aim is to introduce a larger delay in the feedback loop so as to reduce $T_{\infty}$, paving the way for universal techniques such as retiming.\\
+It is possible to further optimize the filter using the look-ahead technique, which simply consists in unrolling a recursive relation to obtain another equivalent one that depends explicitly on instants further back in time. The aim is to introduce a larger delay in the feedback loop so as to reduce $T_{\infty}$, paving the way for universal techniques such as retiming.\\
 Considering \autoref{eqn:iir}, notice that $w[n-1]$ appears in the expressions for $w[n]$ and $y[n]$.
 \begin{align}
 	w[n-1] = x[n-1] - a_1 w[n-2]
 	\label{eqn:w-lookahead}
 \end{align}
-Substituting \autoref{eqn:w-lookahead} back into \autoref{eqn:iir}:
-\begin{align*}
-	\begin{cases}
-		w[n] &= x[n] - a_1 (x[n-1] - a_1 w[n-2]) 		\\
-		y[n] &= b_0 w[n] + b_1 (x[n-1] - a_1 w[n-2])
-	\end{cases}
-\end{align*}
+Substituting \autoref{eqn:w-lookahead} back into both the equations that define direct form II (\autoref{eqn:iir}):
 \begin{align}
 	\begin{cases}
 		w[n] &= x[n] - a_1 x[n-1] + a_1^2 w[n-2] 		\\
@@ -20,10 +14,9 @@ Substituting \autoref{eqn:w-lookahead} back into \autoref{eqn:iir}:
 	\label{eqn:iir-lookahead-bad}
 \end{align}
 
-\autoref{eqn:iir-lookahead-bad} shows the standard result from the look ahead technique. But let's consider: is this substitution actually worth it? The complexity and the amount of operators has increased in both equations. Is it possible to make a single substitution instead of two, while still maintaining the advantages of the look ahead?
-
-The answer is yes. In fact, the look-ahead technique is very useful in tackling loops that cannot be sped up using universal techniques either because there are too few registers involved or they might have an unacceptably large $T_{\infty}$. It is not really well suited for purely feedforward structures within the DFG, where standard pipelining can effectively cut critical paths. For this reason and after having considered several alternatives, we chose to use the new expression for $w[n]$ (which includes a feedback) while keeping the old $y[n]$. In this way, $b_1 x[n-1]$ does not appear in the equation for $y[n]$, saving one multiplier and one adder, while still letting a complete optimization and bringing the critical delay to $T_{CP}=1 \times T_\text{mul}$.\\
-The final set of equations used in the look-ahead architecture is the following:
+\autoref{eqn:iir-lookahead-bad} shows the result obtained by performing the same substitution in the output equation as well. It is clear that this is not convenient because the number of operators required in the feedforward part would be increased unnecessarily. In fact, the look-ahead technique is very useful in tackling loops that cannot be sped up using universal techniques either because there are too few registers involved or they might have an unacceptably large $T_{\infty}$. It is not really well suited for purely feedforward structures within the DFG, where standard pipelining can effectively cut critical paths. In conclusion, the solution is to use the new expression for $w[n]$ (which includes a feedback) while retaining the unmodified $y[n]$. In this way, $b_1 x[n-1]$ does not appear in the equation for $y[n]$, saving one multiplier and one adder, while still allowing a complete optimization that, as will be discussed, brings the critical delay down to $T_{CP}=1 \times T_\text{mul}$.
+\\
+The \textbf{final set of equations} used in the look-ahead architecture is the following:
 \begin{align}
 	\begin{cases}
 		w[n] &= x[n] - a_1 x[n-1] + a_1^2 w[n-2] 		\\
@@ -34,7 +27,35 @@ The final set of equations used in the look-ahead architecture is the following:
 Its implementation and optimizations are explored in the following sections.
 
 \subsection{Retiming and pipelining}
-The preliminary result of a direct mapping of these equations into a DFG is in figure \autoref{fig:fast_dfg_inter}. First of all, pipeline registers can be placed on feedforward cutsets in order to break critical paths. As for the feedback loop, it is clear that look-ahead has changed $T_{\infty}$ that has now decreased to $\frac{T_m+T_a}{2}$. Moreover, the introduction of a second register enables the use of retiming to bring the critical path closer the its lower bound (loop bound). By moving the pink register in the position indicated by the dashed arrow, thus separating the multiplier from the adder, $T_{CP}$ is reduced to $T_m$ (assuming $T_m > T_a$). Another slight optimization consists in replacing the two orange registers by a single one positioned at the output of the adder, as can be seen in figure \autoref{fig:fast_dfg_final}. The final DFG that corresponds to the actual VHDL implementation is in figure \ref{fig:fast_dfg_final}.
+The preliminary result of a direct mapping of these equations into a DFG is in figure \autoref{fig:fast_dfg_inter}. It is clear that pipeline registers can be placed on feedforward cutsets in order to break critical paths. Since the feedback loop sets a lower bound on $T_{cp}$, retiming will be applied first in order to leverage the possibilities opened by the look-ahead transformation, and only then the correct distribution of pipeline stages will be determined accordingly.
+
+\paragraph{Retiming} As for the feedback loop, it is clear that look-ahead has changed $T_{\infty}$ that has now decreased to $\frac{T_m+T_a}{2}$. Moreover, the introduction of a second register enables the use of retiming to bring the critical path closer the its lower bound (loop bound). By moving the pink register in the position indicated by the dashed arrow, thus separating the multiplier from the adder, $T_{CP}$ is reduced to $T_m$ (assuming $T_m > T_a$). Another slight optimization consists in replacing the two orange registers by a single one positioned at the output of the adder, as can be seen in figure \autoref{fig:fast_dfg_final}. 
+
+\paragraph{Pipeline stages} The loop contains a critical path equal to a single multiplier delay, therefore the correct number and placement of pipeline register is to be determined so as to remove any feedforward path with a delay larger than $T_m$. It follows that there must be a delay element on every edge joining an adder and a multiplier ($T_m + T_a > T_m$). The stages indicated with the blue and brown dashed lines in figure \autoref{fig:fast_dfg_inter} serve exactly this purpose. On the other hand, the yellow line corresponds to a pipeline stage separating two adders: this is actually useful only if $2T_a>T_m$. According to timing reports collected during the synthesis of the standard architecture, DesignWare can provide operators with delays as low as $T_m = 0.82 \,\textrm{ns}$ and $T_a=0.32\,\textrm{ns}$ when constrained for maximum speed. These numbers suggest that the path formed by \texttt{A1} and \texttt{A2} without the interposed yellow register is not the critical one since the multiplier has still a slightly larger delay ($T_m=0.82 > 2T_a =0.64$). However, the implementation of fast operators might involve larger structures in terms of area (complexity). In short, there is a trade off and the optimal solution depends on the actual parameters of the available library cells and the specific design goals. In order to assess the impact of adding the yellow pipeline stage, the two cases have been synthesized separately. Since the aim is to discover the impact on performance (speed), these synthesis are run with a constraint on $T_{clk}$ set to zero.
+
+\begin{table}[h]
+\begin{tabular}{|lll|}
+	\hline
+Parameter	&  Without & With pipeline stage \\\hline
+Minimum clock period & 1.32 & 1.19\\
+Adder Area & 58.52 (Buf/Inv 8.5) & 53.7 (Buf/Inv 6.9)\\
+Combinational Area & 1310 & 1371\\
+Buf/Inv Area& 111 & 122.6\\
+Noncombinational Area& 470 & 506.5\\
+Overall area & 1780 & 1877\\
+\hline
+\end{tabular}
+\caption{Comparison}
+\label{tab:comparison}
+\end{table}
+
+\autoref{tab:comparison} shows that the compiler finds a slightly faster solution (11\%) when synthesizing the design with the additional pipeline stage.\\
+As for the area used up by adders, it is 10\% larger if the yellow stage is removed, with buffers taking up more space. In fact, breaking the path \texttt{A1-A2} could also translate into a more relaxed constraint on the delay of each one of them, perhaps attainable with simpler and more compact architectures. However, the area used up by register itself largely outweighs this reduction, resulting in a larger overall area.
+The final DFG that corresponds to the actual VHDL implementation is in figure \ref{fig:fast_dfg_final}.
+
+\paragraph{A formal approach to retiming} Retiming can be easily done by inspection in this particular case, as shown in \autoref{fig:fast_dfg_inter}. However, for larger designs this task cannot be handled without a more formal and algorithmic approach. The problem can be cast as a system of inequalities expressing the feasibility constraint for retiming, which states that the final number of delays on each edge must be nonnegative. Moreover, there has to be at least one register on paths joining operators whose combined delay is larger than the critical path. 
+
+
 \subsection{Accuracy}
 This new computational structure has also been modeled with a C program in order to perform fast design analyses such as finding of the minimum number of fractional bits that provide the specified accuracy. Although in this case the total harmonic distortion has different values than those found previously, the simulation points towards the same conclusion that a minimum number of $n=7$ bits is necessary.
 \subsection{Parallelism}

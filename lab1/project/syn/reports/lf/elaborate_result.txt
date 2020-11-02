@@ -25,7 +25,19 @@ Presto compilation completed successfully.
 Information: Building the design 'Datapath'. (HDL-193)
 
 Inferred memory devices in process
-	in routine Datapath line 88 in file
+	in routine Datapath line 81 in file
+		'../src/Datapath_fast.vhd'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|    a1_int_b_reg     | Flip-flop |   7   |  Y  | N  | N  | N  | N  | N  | N  |
+|     b0_int_reg      | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+|     b1_int_reg      | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+|    a1sq_int_reg     | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+
+Inferred memory devices in process
+	in routine Datapath line 95 in file
 		'../src/Datapath_fast.vhd'.
 ===============================================================================
 |    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
@@ -34,7 +46,7 @@ Inferred memory devices in process
 ===============================================================================
 
 Inferred memory devices in process
-	in routine Datapath line 97 in file
+	in routine Datapath line 104 in file
 		'../src/Datapath_fast.vhd'.
 ===========================================================================
 |    Register Name    | Type  | Width | Bus | MB | AR | AS | SR | SS | ST |
@@ -43,7 +55,7 @@ Inferred memory devices in process
 ===========================================================================
 
 Inferred memory devices in process
-	in routine Datapath line 112 in file
+	in routine Datapath line 119 in file
 		'../src/Datapath_fast.vhd'.
 ===============================================================================
 |    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
@@ -52,16 +64,7 @@ Inferred memory devices in process
 ===============================================================================
 
 Inferred memory devices in process
-	in routine Datapath line 128 in file
-		'../src/Datapath_fast.vhd'.
-===============================================================================
-|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
-===============================================================================
-|    a1out_del_reg    | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
-===============================================================================
-
-Inferred memory devices in process
-	in routine Datapath line 148 in file
+	in routine Datapath line 155 in file
 		'../src/Datapath_fast.vhd'.
 ===============================================================================
 |    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
@@ -70,7 +73,7 @@ Inferred memory devices in process
 ===============================================================================
 
 Inferred memory devices in process
-	in routine Datapath line 161 in file
+	in routine Datapath line 168 in file
 		'../src/Datapath_fast.vhd'.
 ===============================================================================
 |    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
@@ -79,7 +82,7 @@ Inferred memory devices in process
 ===============================================================================
 
 Inferred memory devices in process
-	in routine Datapath line 181 in file
+	in routine Datapath line 188 in file
 		'../src/Datapath_fast.vhd'.
 ===============================================================================
 |    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
@@ -88,7 +91,7 @@ Inferred memory devices in process
 ===============================================================================
 
 Inferred memory devices in process
-	in routine Datapath line 192 in file
+	in routine Datapath line 199 in file
 		'../src/Datapath_fast.vhd'.
 ===============================================================================
 |    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
@@ -98,7 +101,7 @@ Inferred memory devices in process
 ===============================================================================
 
 Inferred memory devices in process
-	in routine Datapath line 210 in file
+	in routine Datapath line 217 in file
 		'../src/Datapath_fast.vhd'.
 ===============================================================================
 |    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
