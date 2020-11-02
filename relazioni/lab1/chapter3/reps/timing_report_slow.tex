@@ -1,0 +1,29 @@
+\begin{tabular}{|lll|}\hline
+Point                                      &             Incr    &   Path\\\hline
+  clock CLK (rise edge)                                 &  0.00    &   0.00\\
+  clock network delay (ideal)                          &   0.00     &  0.00\\
+  comp\_dp/w1\_reg[3]/CK (DFF\_X1)                         &  0.00    &   0.00 \\
+  comp\_dp/w1\_reg[3]/Q (DFF\_X1)                          &  0.19    &   0.19 \\
+  comp\_dp/comp\_m3/a{[3]}   				& 0.00     &  0.19 \\
+  comp\_dp/comp\_m3/mult\_31/a{[3]}                          &  0.00    &   0.19 \\
+  comp\_dp/comp\_m3/mult\_31/U171/ZN (INV\_X1)               & 0.08    &   0.27 \\
+  ...& &\\
+  comp\_dp/comp\_m3/mult\_31/U3/S (FA\_X1)                    &0.13    &   1.63 \\
+  comp\_dp/comp\_m3/mult\_31/product{[12]}       &0.00 &      1.63 \\
+  comp\_dp/comp\_m3/y{[6]}  &0.00     &  1.63 \\
+  comp\_dp/U15/ZN (AND2\_X1)                              &  0.04    &   1.66 \\
+  comp\_dp/a3a\_reg[6]/D (DFF\_X1)                          & 0.01    &   1.67 \\
+  data arrival time                                      & &            1.67\\
+\hline
+  clock CLK (rise edge)                                &   4.80   &    4.80\\
+  clock network delay (ideal)                          &   0.00   &    4.80\\
+  clock uncertainty                                    &  -0.07   &    4.73\\
+  comp\_dp/a3a\_reg{[6]}/CK (DFF\_X1)                       &   0.00  &    4.73 \\
+  library setup time                                   &  -0.03  &     4.70\\
+  data required time                                   &          &    4.70\\
+  \hline
+  data required time                                    &         &    4.70\\
+  data arrival time                                       &        &  -1.67\\
+  \hline
+  slack (MET)                                             &        &   3.02\\\hline
+\end{tabular}
