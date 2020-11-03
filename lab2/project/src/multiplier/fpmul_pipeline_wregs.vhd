@@ -73,7 +73,7 @@ ARCHITECTURE pipeline OF FPmul IS
    SIGNAL isZ_tab_stage2  : std_logic;
    
    -- Input register
-   CONSTANT NPIPE: integer := 2;
+   CONSTANT NPIPE: integer := 1;
    SIGNAL FP_A_DEL, FP_B_DEL: std_logic_vector(31 downto 0);
    TYPE dline_type is array(NPIPE-1 downto 0) of std_logic_vector(31 downto 0);
    SIGNAL DLINE_A, DLINE_B: dline_type;
