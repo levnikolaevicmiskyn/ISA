@@ -34,35 +34,28 @@ The preliminary result of a direct mapping of these equations into a DFG is in f
 \paragraph{Pipeline stages} The loop contains a critical path equal to a single multiplier delay, therefore the correct number and placement of pipeline register is to be determined so as to remove any feedforward path with a delay larger than $T_m$. It follows that there must be a delay element on every edge joining an adder and a multiplier ($T_m + T_a > T_m$). The stages indicated with the blue and brown dashed lines in figure \autoref{fig:fast_dfg_inter} serve exactly this purpose. On the other hand, the yellow line corresponds to a pipeline stage separating two adders: this is actually useful only if $2T_a>T_m$. According to timing reports collected during the synthesis of the standard architecture, DesignWare can provide operators with delays as low as $T_m = 0.82 \,\textrm{ns}$ and $T_a=0.32\,\textrm{ns}$ when constrained for maximum speed. These numbers suggest that the path formed by \texttt{A1} and \texttt{A2} without the interposed yellow register is not the critical one since the multiplier has still a slightly larger delay ($T_m=0.82 > 2T_a =0.64$). However, the implementation of fast operators might involve larger structures in terms of area (complexity). In short, there is a trade off and the optimal solution depends on the actual parameters of the available library cells and the specific design goals. In order to assess the impact of adding the yellow pipeline stage, the two cases have been synthesized separately. Since the aim is to discover the impact on performance (speed), these synthesis are run with a constraint on $T_{clk}$ set to zero.
 
 \begin{table}[h]
-\begin{tabular}{|lll|}
+	\centering
+\begin{tabular}{|l|l|l|}
 	\hline
-Parameter	&  Without & With pipeline stage \\\hline
-Minimum clock period & 1.32 & 1.19\\
-Adder Area & 58.52 (Buf/Inv 8.5) & 53.7 (Buf/Inv 6.9)\\
+\textbf{Parameter}	&  \textbf{2 pipeline stages} & \textbf{3 pipeline stages} \\\hhline{|=|=|=|}
+Minimum clock period & 1.32 ns & 1.19 ns\\\hline
+Adder Area & 58.5 (Buf/Inv 8.5) & 53.7 (Buf/Inv 6.9)\\
 Combinational Area & 1310 & 1371\\
-Buf/Inv Area& 111 & 122.6\\
-Noncombinational Area& 470 & 506.5\\
+Buf/Inv Area& 111 & 123\\
+Noncombinational Area& 470 & 507\\
 Overall area & 1780 & 1877\\
 \hline
+Dynamic power ($T_{ck}=4.8\,\textrm{ns}$) & 201 $\mu$W & 209 $\mu$W \\
+\hline
 \end{tabular}
-\caption{Comparison}
+\caption{Comparison showing the impact of the yellow register. Synthesis is performed for maximum speed for all parameters except for dynamic power, which has been derived at fixed $f_{clk}$ for a fair assessment}
 \label{tab:comparison}
 \end{table}
 
-\autoref{tab:comparison} shows that the compiler finds a slightly faster solution (11\%) when synthesizing the design with the additional pipeline stage.\\
-As for the area used up by adders, it is 10\% larger if the yellow stage is removed, with buffers taking up more space. In fact, breaking the path \texttt{A1-A2} could also translate into a more relaxed constraint on the delay of each one of them, perhaps attainable with simpler and more compact architectures. However, the area used up by register itself largely outweighs this reduction, resulting in a larger overall area.
+\autoref{tab:comparison} shows that the compiler finds a slightly faster solution (11\%) when synthesizing the design with the additional pipeline stage. This is not due to a different critical path, because both timing reports list the path through a multiplier. It is more likely a consequence of the heuristic nature of the algorithm used to search the design space, which targets a global optimization with a complex cost function that accounts for several factors beside speed.\\
+As for the area used up by adders, it becomes 10\% larger if the yellow stage is removed, with buffers taking up more space. In fact, breaking the path \texttt{A1-A2} could also translate into a more relaxed constraint on the delay of each one of them, perhaps attainable with simpler and more compact architectures. However, the area used up by the register itself largely outweighs this reduction (see \textit{Noncombinatinal area}), resulting in a larger overall area. Dynamic power consumption is 4\% higher if the pipeline stage is added. 
+\\In conclusion, this comparison shows that an higher speed is obtained when all operators are isolated by pipeline registers, but this results in a slight increase in area and power dissipation. If the aim is maximum performance the alternative with $T_{min}\approx 1.2 \,\textrm{ns}$ is the best choice, whereas a strategy that prioritizes area or power would lead to the opposite conclusion.
 The final DFG that corresponds to the actual VHDL implementation is in figure \ref{fig:fast_dfg_final}.
-
-\begin{table}
-	\centering
-	\input{./chapter3/reps/timing_with_pipe.tex}
-	\caption{Excerpt of the timing report with constraint $T_{ck}=0$ (yellow stage included)}
-\end{table}
-\begin{table}
-	\centering
-	\input{./chapter3/reps/timing_report_slow.tex}
-	\caption{Excerpt of the timing report with constraint $T_{ck}=4T_{min}$ (yellow stage included)}
-\end{table}
 \paragraph{A formal approach to retiming} Retiming can be easily done by inspection in this particular case, as shown in \autoref{fig:fast_dfg_inter}. However, for larger designs this task cannot be handled without a more formal and algorithmic approach. The problem can be cast as a system of inequalities expressing the feasibility constraint for retiming, which states that the final number of delays on each edge must be nonnegative. Moreover, there has to be at least one register on paths joining operators whose combined delay is larger than the critical path. 
 
 
