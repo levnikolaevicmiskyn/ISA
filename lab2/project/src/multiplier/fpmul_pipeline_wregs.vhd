@@ -166,7 +166,7 @@ BEGIN
 	proc_input_regs: PROCESS(clk)
 	BEGIN
 		if rising_edge(clk) then
-			for i in NPIPE-2 downto 0 loop
+			for i in NPIPE-1 downto 1 loop
 				DLINE_A(i-1) <= DLINE_A(i);
 				DLINE_B(i-1) <= DLINE_B(i);
 			end loop;
