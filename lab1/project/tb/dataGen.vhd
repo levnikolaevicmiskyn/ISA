@@ -7,6 +7,9 @@ use ieee.numeric_std.all;
 library std;
 use std.textio.all;
 
+library work;
+use work.simconsts;
+
 entity dataGen is
 	generic(NB : INTEGER := 8);
 	port(clk, rst_n : in std_logic;
@@ -17,20 +20,18 @@ end dataGen;
 
 architecture behavior of dataGen is
 constant tco : time := 1 ns; -- Clock to output delay
+constant factor: integer := simconsts.SAMPLING_FACTOR;
+
 signal end_sim_s : std_logic;
 signal end_sim_v : std_logic_vector(10 downto 0);
 signal hangon : std_logic := '1'; -- This flag is true right after asynchronous reset, it causes a delay of one clock cycle for the DUT to reset synchronously.
-
+constant factor: integer := 
 signal counter: integer := 0;
 
 begin
 fetch_proc: process (clk, rst_n)
 	file samplefile : text open READ_MODE is "samples.txt";
-	file timingfile : text open READ_MODE is "in_timing.txt";
-	variable linein : line;
 	variable x: integer;
-	variable factor : integer;
-	variable timing_linein : line; 
 begin
 	if rst_n = '0' then
 		data_out <= (others => '0') after tco;
@@ -45,9 +46,6 @@ begin
 			-- Get here in the first clock cycles after the asynchronous reset has been deasserted, during the reset cycle of 
 			-- the DUT. Set the hang on flag to 0 and fetch the time instant when the first sample is to be issued 
 			hangon <= '0';
-			
-			readline(timingfile, timing_linein);
-			read(timing_linein, factor);
 		else
 			counter <= counter + 1;
 			if endfile(samplefile) then
