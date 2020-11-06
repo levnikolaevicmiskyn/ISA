@@ -53,7 +53,7 @@ disable_log = false
 clock = 10ns
 tstart = 0ns
 tend = 20us		# you need to modify tend accordingly with the number of samples you have generated. The clock period should not be touched.
-					tend must be at least (N_samples + 100)* clock. An higher time is not a problem.
+					tend must be at least (N_samples + 100)* clock. A longer time is not a problem.
 tstep = 1ns
 duration = ${Simulation:tend}
 
