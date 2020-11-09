@@ -1,0 +1,73 @@
+\section{Vertools}
+Vertools is a simple verification suite written in \textbf{Python} to conveniently carry all the above listed steps, automatically calling the necessary scripts, managing logs and doing general cleanup operations before and after each run.\\
+Given the variability of the process, Vertools was designed to give the user some level of customizability without the need of manually setting all the verification parameters at every run. For this reason, vertools makes use of \textbf{scoping} to give the user the possibility to set all the parameters in global or local configurations files and to manually override one or more of this parameters through the command line.
+
+\subsection{Setting up the environment}
+Vertools uses external Python packages. It is necessary to install them with Python's package manager, \textbf{pip}. To install the packages,
+\begin{lstlisting}[language=bash]
+    $ cd /path/to/vertools/
+    $ python3 -m pip install -r requirements.txt
+\end{lstlisting}
+And pip will manage the installation. In shared machines, it could be better to install those packages for the current user only by adding the \texttt{--user} flag in the \texttt{python3 -m pip} command.
+
+For Vertools to be able to run, it is necessary to add the path of the package folder to the \texttt{PYTHONPATH} environment variable with
+\begin{lstlisting}[language=bash]
+    $ export PYTHONPATH=${PYTHONPATH}:/path/to/vertools/
+\end{lstlisting}
+
+Finally, Vertools is a Python package, so it should be called with \texttt{python3 /path/to/vertools/}. The simplest solution to treat Vertools as its own command is to add an alias like this:
+\begin{lstlisting}[language=bash]
+    $ alias vertools="python3 /path/to/vertools/"
+\end{lstlisting}
+
+For simplicity, from now on it is assumed that the alias has been created and \texttt{vertools} will be treated as a command.
+
+\subsection{Subcommands}
+To improve the user's control over the operations, the tool's functionality was divided in subcommands. Each subcommand has its own purpose, carries its own functions and has its own flags and settings.
+
+Beside the main \texttt{vertools verify} command, which runs the whole verification process, the user can call:
+
+\begin{itemize}
+    \item \texttt{vertools generate-inputs}: generate the input vectors choosing among various customizable waveforms.
+    \item \texttt{vertools simulate}: set the simulation parameters (like clock period), call the provided simulation command (usually something like \texttt{source simulate.do}) save the logs and check if the expected output was generated.
+    \item \texttt{vertools reference}: call the provided reference command (in this case, the C executable), store logs and check if the expected output was generated.
+    \item \texttt{vertools compare}: compare the simulation and reference outputs, checking first and foremost if the lengths of the produced files are compatible, and then comparing them line by line.
+    \item Other more specific commands which are not worth exploring here, but they can all be reviewed with \texttt{vertools --help}.
+\end{itemize}
+
+Each subcommand can have its own flags, options and even another level of subcommands (like \texttt{generate-inputs}). A specific help for each level of subcommand can be consulted by calling it with the \texttt{--help} flag.
+
+\subsection{Configuration files}
+It is possible to store the verification parameters in a configuration file. This way, it is not necessary to specify these parameters by hand each time. By default, Vertools looks for a file named \texttt{vertools.config} in the directory where the command is called. It is also possible to name the configuration file in other ways: this allows to choose between multiple configurations. In that case, the file should be specified with
+\begin{lstlisting}[language=bash]
+    $ vertools --config filename.config ...
+\end{lstlisting}
+Configuration files support different \textbf{sections}, so that the same variable can have different values in different context (for example, \texttt{tstep} might be different between the input generation and the actual simulation step) and \textbf{interpolation}, meaning that it is possible to expand a variable in the assignment of another variable, bash-style.
+
+\subsection{Program structure}
+Vertools is a high level utility, meaning that it does not take part into the simulation or reference processes if not by managing and editing files and calling commands. Some of the most relevant modules and functionalities are discussed below.
+
+\paragraph{system.py} This module provides some wrapper functions to build an interface with the system. For example, the \texttt{run\_bash} function, which is used to call the simulation and reference commands, does all the necessary setup to run an external bash command and to redirect its output (either to logs or \texttt{/dev/null} when they are disabled).\\
+It can receive a list of strings containing the bash commands which will all be executed in the same shell, which is useful for when some variables should be retained.
+\begin{lstlisting}[language=Python]
+def run_bash(commands, **kwargs):
+    """Run a bash command
+    Args:
+        commands (Union[str, List[str]]): command (or list of commands) to be executed in the same shell
+        **kwargs: arbitrary keyword arguments
+    Returns:
+       subprocess.CompletedProcess
+    """
+    stdout = kwargs.get('stdout', None)
+    stderr = kwargs.get('stderr', None)
+    if stdout is False:
+        stdout = subprocess.DEVNULL
+    if stderr is False:
+        stderr = subprocess.DEVNULL
+    if isinstance(commands, list):
+        command = ' && '.join(commands)
+    else:
+        command = commands
+    status = subprocess.run(command, shell=True, stdout=stdout, stderr=stderr)
+    return status
+\end{lstlisting}

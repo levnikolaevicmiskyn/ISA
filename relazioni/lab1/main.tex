@@ -10,10 +10,10 @@
 \hypersetup{colorlinks=true}
 \hypersetup{linkcolor=black}
 \usepackage{siunitx}	% SI measurement units
-\usepackage{fancyvrb}
 \usepackage{amsmath}
 
 % Graphics packages
+\usepackage{xcolor}
 \usepackage{multicol}
 \usepackage{graphicx}
 \usepackage{float}
@@ -28,6 +28,23 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows,shapes,automata,petri,positioning,calc}
 
+\usepackage{listings}
+\definecolor{codeBackground}{RGB}{60, 60, 65}
+\definecolor{codeColor}{RGB}{240, 240, 240}
+\definecolor{codeComment}{RGB}{200, 200, 200}
+
+\lstdefinestyle{lstStyle}{
+    backgroundcolor=\color{codeBackground},
+    basicstyle=\ttfamily\footnotesize\linespread{0}\color{codeColor},
+    commentstyle=\ttfamily\footnotesize\color{codeComment},
+    keywordstyle=\bf\color{orange},
+    stringstyle=\color{green},
+    breaklines=false,
+    showstringspaces=false,
+    tabsize=2
+}
+\lstset{style=lstStyle}
+
 \title{
 	{\Huge \textbf{Politecnico di Torino}}\\ \ \\
 	{\Huge Integrated Systems Architectures} \\
@@ -36,8 +53,8 @@
 }
 \author{
     {\Large \textsc{Group 12}}\\ \ \\
-	Antonio Carlucci ???\\
-	Gabriele Perrone ???\\
+	Antonio Carlucci ??????????????????????????????\\
+	Gabriele Perrone ??????????????????????????????\\
 	Alessandro Scisca 276032
 }
 \date{} % Do not insert date
