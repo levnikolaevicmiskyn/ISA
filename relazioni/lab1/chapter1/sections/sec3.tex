@@ -10,19 +10,19 @@ As shown in \autoref{eqn:iir}, there is a subtraction among the operations. To s
 	w[n] &= x[n] + (- a_1) w[n-1]
 \end{align}
 To better mirror this behavior, some small changes were necessary in the source files: first of all, $a_1$ had to be sign-flipped, then, inside the \texttt{myfilter} function, this section
-\begin{Verbatim}
+\begin{lstlisting}[language=C]
 for (i=0; i<N; i++) {
 	fb -= (sw[i]*a[i]) >> (NB-1);    // Subtraction here
 	ff += (sw[i]*b[i]) >> (NB-1);
 }
-\end{Verbatim}
+\end{lstlisting}
 was changed into this
-\begin{Verbatim}
+\begin{lstlisting}[language=C]
 for (i=0; i<N; i++) {
 	fb += (sw[i]*a[i]) >> (NB-1);    // Addition here (a[i] changed sign)
 	ff += (sw[i]*b[i]) >> (NB-1);
 }
-\end{Verbatim}
+\end{lstlisting}
 To clarify the difference, suppose to have:
 \begin{align*}
 	\texttt{NB} &= 8 & \texttt{a[i]} &= \pm21 \\
