@@ -28,18 +28,22 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows,shapes,automata,petri,positioning,calc}
 
+\usepackage{mdframed}
 \usepackage{listings}
-\definecolor{codeBackground}{RGB}{60, 60, 65}
-\definecolor{codeColor}{RGB}{240, 240, 240}
-\definecolor{codeComment}{RGB}{200, 200, 200}
+%\definecolor{codeBackground}{RGB}{250, 250, 250}
+\definecolor{codeColor}{RGB}{50, 50, 50}
+\definecolor{codeComment}{RGB}{90, 90, 90}
+\definecolor{codeString}{RGB}{50, 175, 50}
 
 \lstdefinestyle{lstStyle}{
-    backgroundcolor=\color{codeBackground},
+    %backgroundcolor=\color{codeBackground},
     basicstyle=\ttfamily\footnotesize\linespread{0}\color{codeColor},
     commentstyle=\ttfamily\footnotesize\color{codeComment},
     keywordstyle=\bf\color{orange},
-    stringstyle=\color{green},
-    breaklines=false,
+    stringstyle=\color{codeString},
+    frame=tlbr,
+    numbers=left,
+    breaklines=true,
     showstringspaces=false,
     tabsize=2
 }
