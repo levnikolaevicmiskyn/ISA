@@ -5,7 +5,7 @@
 
 package simconsts is
 	constant LATENCY		: positive := 2;
-	constant SAMPLING_FACTOR	: positive := 1;
+	constant SAMPLING_FACTOR	: positive := 3;
 end simconsts;
 
 package body simconsts is 

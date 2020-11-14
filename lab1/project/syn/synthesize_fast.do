@@ -47,7 +47,7 @@ set power_preserve_rtl_hier_names true
 elaborate IIRFilter -arch RTL -lib WORK > reports/lf/elaborate_result.txt
 
 # Setup clock (4Tmin)
-create_clock -name CLK -period 4.8 {CLK}
+create_clock -name CLK -period 4.08 {CLK}
 set_dont_touch_network CLK
 
 # Set uncertainties and synthesis variables
@@ -80,29 +80,29 @@ write_sdc ../netlist/IIRFilter.sdc
 
 ### Synthesis at lower frequency (with clock gating) ###
 # Clear design
-remove_design -designs
+#remove_design -designs
 
 # Elaborate
-set power_preserve_rtl_hier_names true
-elaborate IIRFilter -arch RTL -lib WORK
+#set power_preserve_rtl_hier_names true
+#elaborate IIRFilter -arch RTL -lib WORK
 
 # Setup clock
-create_clock -name CLK -period 11 {CLK}
-set_dont_touch_network CLK
+#create_clock -name CLK -period 11 {CLK}
+#set_dont_touch_network CLK
 
 # Set uncertainties and synthesis variables
-set_clock_uncertainty 0.07 [get_clocks CLK]
-set_input_delay 0.5 -max -clock CLK [remove_from_collection [all_inputs] CLK]
-set_output_delay 0.5 -max -clock CLK [all_outputs]
-set OLOAD [load_of NangateOpenCellLibrary/BUF_X4/A]
-set_load $OLOAD [all_outputs]
+#set_clock_uncertainty 0.07 [get_clocks CLK]
+#set_input_delay 0.5 -max -clock CLK [remove_from_collection [all_inputs] CLK]
+#set_output_delay 0.5 -max -clock CLK [all_outputs]
+#set OLOAD [load_of NangateOpenCellLibrary/BUF_X4/A]
+#set_load $OLOAD [all_outputs]
 
 # Run check_design to report potential problems (warnings)
-check_design
+#check_design
 
 # Compile
-compile -gate_clock > reports/lf/compile_result_gateck.txt
+#compile -gate_clock > reports/lf/compile_result_gateck.txt
 
 # Save reports
-report_timing > reports/lf/timing_report_gateck.txt
-report_area > reports/lf/area_report_gateck.txt
+#report_timing > reports/lf/timing_report_gateck.txt
+#report_area > reports/lf/area_report_gateck.txt

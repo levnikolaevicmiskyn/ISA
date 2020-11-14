@@ -25,12 +25,12 @@ constant factor: integer := simconsts.SAMPLING_FACTOR;
 signal end_sim_s : std_logic;
 signal end_sim_v : std_logic_vector(10 downto 0);
 signal hangon : std_logic := '1'; -- This flag is true right after asynchronous reset, it causes a delay of one clock cycle for the DUT to reset synchronously.
-constant factor: integer := 
 signal counter: integer := 0;
 
 begin
 fetch_proc: process (clk, rst_n)
 	file samplefile : text open READ_MODE is "samples.txt";
+	variable linein: line;
 	variable x: integer;
 begin
 	if rst_n = '0' then
