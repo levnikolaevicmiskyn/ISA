@@ -12,10 +12,13 @@ use work.simconsts;
 
 entity dataGen is
 	generic(NB : INTEGER := 8);
-	port(clk, rst_n : in std_logic;
-		data_out : out signed(NB-1 downto 0);
-		end_sim, vout: out std_logic
-	);
+	port(
+		clk			: in std_logic;					-- clock
+		rst_n 		: in std_logic;					-- low active asynchronous reset
+		data_out	: out signed(NB-1 downto 0);	-- generated data taken from file
+		end_sim		: out std_logic; 				-- end simulation signal
+		vout		: out std_logic					-- data validation signal
+		);
 end dataGen;
 
 architecture behavior of dataGen is
