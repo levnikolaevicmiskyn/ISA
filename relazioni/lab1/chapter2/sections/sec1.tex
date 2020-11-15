@@ -4,15 +4,15 @@ The datapath has been derived directly from the DFG from \autoref{fig:iir-dfd}, 
 \begin{figure}[htbp]
 	\centering
 	\makebox[\textwidth][c]{
-	\includegraphics[width=\textwidth]{./chapter2/images/datapath.png}}
+	\includegraphics[width=\textwidth]{./chapter2/images/datapath.pdf}}
 	\caption{IIR filter datapath}
 	\label{fig:datapath-simple}
 \end{figure}
 
 The specified timing requires input data to be sampled on the same clock cycles where \texttt{VIN} is asserted. For this reason, the input register \texttt{R1} is always enabled. The most convenient solution to carry on operations only when data is actually valid is to place a latch at the output of \texttt{R1}.\\
-This is because appending another register instead of a latch will increase the overall latency; while selectively enabling the internal registers complicates their internal structures. Furthermore, the input latch will also perform a gating function (\textbf{guarded evaluation}), preventing the waste of power in the internal combinational nodes when the input samples are not valid.
+This is because appending another register instead of a latch will increase the overall latency; while selectively enabling the internal registers complicates their internal structures. Furthermore, the input latch will also perform a gating function (\textbf{guarded evaluation}), preventing the waste of power in the internal combinational nodes when the input samples are not valid. The only internal register that actually needs to be disabled is the one storing $w_{n-1}$ in the feedback path, controlled by the \texttt{en\_regs} signal.
 
-Overall, the only real commands needed from the control unit are \texttt{en\_latch} and \texttt{clr\_w\_reg}, since the \texttt{W} register should still be initialized.
+Overall, the only real commands needed from the control unit are \texttt{en\_latch}, \texttt{en\_regs} and \texttt{clr\_w\_reg}, since the \texttt{W} register should still be initialized.
 
 \subsection{Accuracy}
 From the preliminary investigation in \autoref{sec:THD}, it is possible to see that $n_b=7$ is enough to meet the requirements. This means that dropping the least significant bit from the input samples (represented on 8 bits) can simplify the internal computations with an acceptable degradation in performance.
@@ -34,7 +34,7 @@ Hence, assuming $|x[n]|\leq 1$,
 	1.2
 \end{align*}
 According to this computation, two integer bits are enough to avoid overflow at the nodes where $w[n]$ is processed within the DFG. As a consequence, the adder and multiplier in the feedback loop in \autoref{lab1:fig:iir-dfd} will operate on inputs with 2 integer bits and 6 fractional bits, as already determined by the previous reasoning on the internal accuracy.\\
-As for the operators in the feedforward part, multiplying $w[n]$ and $w[n-1]$ by $b_1$ and $b_2$ will always produce a result lower than 1 in magnitude, for which a single digit to the left of the radix point suffices. Therefore the output of those multipliers is resized to match the same format used by the final adder consisting of 1 integer and 6 fractional bits. The eighth digit, which is always zero, is appended to the final result, thus becoming its LSB, to comply with the specified interface format. A summary of the internal parallelism used throughout the filter is reported in \autoref{lab1:fig:parallelism}.
+As for the operators in the feedforward part, multiplying $w[n]$ and $w[n-1]$ by $b_1$ and $b_2$ will always produce a result lower than 1 in magnitude, for which a single digit to the left of the radix point suffices. Therefore the output of those multipliers is resized to match the same format used by the final adder consisting of 1 integer and 6 fractional bits. The eighth digit, which is always zero, is appended to the final result, thus becoming its LSB, to comply with the specified interface format. A summary of the internal parallelism used throughout the filter is reported in \autoref{fig:datapath-simple}, where the format $a.b$ stands for $a$ integer bits and $b$ fractional bits. All operators are assumed to accept operands and to provide the result in the same format: a resizing block is implied on edges where different format labels are specified at the endpoints.
 \begin{figure}[htbp]
 	\centering
 	\makebox[\textwidth][c]{
