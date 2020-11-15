@@ -49,3 +49,5 @@ As for the operators in the feedforward part, multiplying $w[n]$ and $w[n-1]$ by
 	\caption{THD as a function of $n_b$}
 	\label{fig:thdplot}
 \end{figure}
+
+\paragraph{Transfer function} A comparison of transfer functions obtained in floating point arithmetic (using Matlab) and fixed point with varying bitwidth is shown in \autoref{fig:tfcomparison}. The DC gain of the filter decreases as $n_b$ is decreased, this is due to the truncation of results done after several of the operations involved in the actual implementation. Integrating the losses incurred in while removing the least significant bits results in a loss in a gain loss. The transfer function was obtained by computing the FFT of the impulse response (discrete).
