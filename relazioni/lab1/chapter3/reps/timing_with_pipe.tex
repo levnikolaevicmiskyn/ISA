@@ -1,24 +1,28 @@
+
 \begin{tabular}[t]{|lrr|}  
 	\hline
-\textbf{Point}                                                  & \textbf{Incr}   &    \textbf{Path}\\\hline
-  clock CLK (rise edge)                                  & 0.00   &    0.00\\
-  clock network delay (ideal)                             &0.00   &    0.00\\
-  comp\_dp/w1\_reg[1]/CK                         & 0.00   &    0.00\\
-  comp\_dp/w1\_reg[1]/Q                             &0.16   &    0.16\\
-  comp\_dp/comp\_m2/a[1]    &0.00   &    0.16\\
-  {[...]} & &\\
-  comp\_dp/m2out\_del\_reg[5]/D                    &0.01   &    1.08\\
-  data arrival time                                      &     &       1.08\\
+	\textbf{Point}                                                  & \textbf{Incr}   &    \textbf{Path}\\\hline
+clock CLK (rise edge)                                 &  0.00     &   0.00\\
+clock network delay (ideal)                          &    0.00     &  0.00\\
+comp\_dp/w1\_reg[0]/CK                     &    0.00     &   0.00 \\
+comp\_dp/w1\_reg[0]/Q                          &  0.10   &     0.10\\ comp\_dp/comp\_m2/a[0]  &0.00    &    0.10\\
+comp\_dp/comp\_m2/mult\_31/a[0]  & 0.00     &   0.10       \\
+...& &\\
+comp\_dp/m2out\_del\_reg[6]/D       &              0.01    &    0.92\\
+data arrival time               &                 &                    0.92\\
 \hline
-  clock CLK (rise edge)                                  & 0.00  &     0.00\\
-  clock network delay (ideal)                           &  0.00   &    0.00\\
-  clock uncertainty                                     & -0.07  &    -0.07\\
-  comp\_dp/m2out\_del\_reg[5]/CK                 &   0.00   &   -0.07\\
-  library setup time                                   &  -0.04   &   -0.11\\
-  data required time                                   &            & -0.11\\
+clock CLK (rise edge)                        &            0.00     &   0.00\\
+clock network delay (ideal)                    &          0.00      &  0.00\\
+clock uncertainty                              &         -0.07   &    -0.07\\
+comp\_dp/m2out\_del\_reg[6]/CK  &                   0.00    &   -0.07 \\
+library setup time                &                      -0.03    &   -0.10\\
+data required time                                           & &      -0.10\\
 \hline
-  data required time                                    & &            -0.11\\
-  data arrival time                                     & &            -1.08\\
+data required time                                          &  &       -0.10\\
+data arrival time                                             &  &     -0.92\\
 \hline
-  slack (VIOLATED)                                         & &         -1.19\\\hline
+slack (VIOLATED)                                                &  &   -1.02\\\hline
+
 \end{tabular}
+
+

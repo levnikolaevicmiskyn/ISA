@@ -38,23 +38,23 @@ The preliminary result of a direct mapping of these equations into a DFG is in f
 \begin{tabular}{|l|l|l|}
 	\hline
 \textbf{Parameter}	&  \textbf{2 pipeline stages} & \textbf{3 pipeline stages} \\\hhline{|=|=|=|}
-Minimum clock period & 1.32 ns & 1.19 ns\\\hline
-Adder Area & 58.5 (Buf/Inv 8.5) & 53.7 (Buf/Inv 6.9)\\
-Combinational Area & 1310 & 1371\\
-Buf/Inv Area& 111 & 123\\
-Noncombinational Area& 470 & 507\\
-Overall area & 1780 & 1877\\
+Minimum clock period & 1.05 ns & 1.02 ns\\\hline
+Adder Area & 51.9 (Buf/Inv 6.9) & 48.4 (Buf/Inv 6.9)\\
+Combinational Area & 1389 & 1437\\
+Buf/Inv Area& 163 & 168\\
+Noncombinational Area& 466 & 505\\
+Overall area & 1856 & 1942\\
 \hline
-Dynamic power ($T_{ck}=4.8\,\textrm{ns}$) & 201 $\mu$W & 209 $\mu$W \\
+Dynamic power ($T_{ck}=4.08\,\textrm{ns}$) & 252 $\mu$W & 260 $\mu$W \\
 \hline
 \end{tabular}
 \caption{Comparison showing the impact of the yellow register. Synthesis is performed for maximum speed for all parameters except for dynamic power, which has been derived at fixed $f_{clk}$ for a fair assessment}
 \label{tab:comparison}
 \end{table}
 
-\autoref{tab:comparison} shows that the compiler finds a slightly faster solution (11\%) when synthesizing the design with the additional pipeline stage. This is not due to a different critical path, because both timing reports list the path through a multiplier. It is more likely a consequence of the heuristic nature of the algorithm used to search the design space, which targets a global optimization with a complex cost function that accounts for several factors beside speed.\\
-As for the area used up by adders, it becomes 10\% larger if the yellow stage is removed, with buffers taking up more space. In fact, breaking the path \texttt{A1-A2} could also translate into a more relaxed constraint on the delay of each one of them, perhaps attainable with simpler and more compact architectures. However, the area used up by the register itself largely outweighs this reduction (see \textit{Noncombinatinal area}), resulting in a larger overall area. Dynamic power consumption is 4\% higher if the pipeline stage is added. 
-\\In conclusion, this comparison shows that an higher speed is obtained when all operators are isolated by pipeline registers, but this results in a slight increase in area and power dissipation. If the aim is maximum performance the alternative with $T_{min}\approx 1.2 \,\textrm{ns}$ is the best choice, whereas a strategy that prioritizes area or power would lead to the opposite conclusion.
+\autoref{tab:comparison} shows that the compiler finds a slightly faster solution (3\%) when synthesizing the design with the additional pipeline stage. This is not due to a different critical path, because both timing reports list the path through a multiplier. It is more likely a consequence of the heuristic nature of the algorithm used to search the design space, which targets a global optimization with a complex cost function that accounts for several factors beside speed.\\
+As for the area used up by adders, it becomes 7\% larger if the yellow stage is removed, with buffers taking up more space. In fact, breaking the path \texttt{A1-A2} could also translate into a more relaxed constraint on the delay of each one of them, perhaps attainable with simpler and more compact architectures. However, the area used up by the register itself largely outweighs this reduction (see \textit{Noncombinatinal area}), resulting in a larger overall area. Dynamic power consumption is 4\% higher if the pipeline stage is added. 
+\\In conclusion, this comparison shows that an higher speed is obtained when all operators are isolated by pipeline registers, but this results in a slight increase in area and power dissipation. If the aim is maximum performance the alternative with $T_{min}\approx 1.02 \,\textrm{ns}$ is the best choice, whereas a strategy that prioritizes area or power would lead to the opposite conclusion.
 The final DFG that corresponds to the actual VHDL implementation is in figure \ref{fig:fast_dfg_final}.
 \paragraph{A formal approach to retiming} Retiming can be easily done by inspection in this particular case, as shown in \autoref{fig:fast_dfg_inter}. However, for larger designs this task cannot be handled without a more formal and algorithmic approach. The problem can be cast as a system of inequalities expressing the feasibility constraint for retiming, which states that the final number of delays on each edge must be nonnegative. Moreover, there has to be at least one register on paths joining operators whose combined delay is larger than the critical path. The introduction of pipeline stages can be equivalently thought of as inserting a number of input registers and the performing retiming to transfer them to the desired cutsets. In this case this is convenient because both problems can be addressed using this formal approach. The system of inequalities is the following
 \begin{align*}
@@ -92,4 +92,4 @@ Similarly to the first architecture, the sequence $w[n]$ can take on values slig
 \end{figure}
 
 \section{Control Unit}
-The addition of pipeline stages increases dramatically the number of possible states in our FSM, making it impractical to describe the control unit by enumerating all of them. We resorted to a structural description consisting of a delay line where a number of flip-flops are connected in cascade. The delay line contains two flip flops plus one additional flip flop for each pipeline stage, which amounts to a total of five delay units. One additional register samples the reset signal and controls \texttt{clear\_w\_regs}, a signal that causes the unit to enter the reset state for a single clock cycle, where both the datapath registers and the delay line are cleared. The latch enable signal is found at the output of the first flip flop, whereas VOUT corresponds to the end of the delay line.
+The addition of pipeline stages increases dramatically the number of possible states in our FSM, making it impractical to describe the control unit by enumerating all of them. We resorted to a structural description consisting of a delay line where a number of flip-flops are connected in cascade. The delay line contains two flip flops plus one additional flip flop for each pipeline stage, which amounts to a total of five delay units. One additional register samples the reset signal and controls \texttt{clear\_w\_regs}, a signal that causes the unit to enter the reset state for a single clock cycle, where both the datapath registers and the delay line are cleared. The latch enable signal is found at the output of the first flip flop, whereas \texttt{en\_regs} corresponds to the \texttt{Q} output of the second flip-flop. Finally, VOUT corresponds to the end of the delay line.

@@ -1,0 +1,20 @@
+\begin{table}
+	\centering
+\begin{tabular}{|l|l|l|l|l|}
+	\hline
+\textbf{Group}                &           \textbf{Internal  Power} &  \textbf{Switching  Power}  &   \textbf{Leakage  Power}     & \textbf{Total  Power} \\
+\hline
+Sequential       &                 0.2251  &    0.0481  &  0.008513   &   0.2817 (31.31\%) \\
+Macro                       &           0    &       0       &    0      &     0  \\
+IO                         &            0       &    0     &      0      &     0 \\
+Combinational                &     0.3317   &   0.2646  &   0.02178    &  0.6181 (68.69\%) \\
+Clock (Combinational)        &          0      &     0     &      0    &       0  \\
+Clock (Sequential)             &        0     &      0      &     0     &      0 \\
+\hline
+Total                      &       0.5568   &   0.3127  &    0.0303    &  0.8998 \\\hline
+\hline
+\textbf{CLK}                         &      0.2225   &  0.04583  &  0.008194   &   0.2765 (30.73\%) \\\hline
+\end{tabular}
+\caption{Power report after place \& route: Group Power for Rail VDD and CLK}
+\label{fig:innpwrvdd}
+\end{table}
