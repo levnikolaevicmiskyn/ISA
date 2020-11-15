@@ -10,22 +10,26 @@ use work.packets;
 
 entity Datapath is
     port (
-        CLK:    in  std_logic;              -- Clock signal
-        b: 		in  std_logic_vector(constants.NBCOEFF*constants.NBINT-1 downto 0);     			-- Filter b parameters (constant)
-        a:     	in  std_logic_vector(constants.NACOEFF*constants.NBINT-1 downto 0);     			-- Filter -a parameters (constant)
-        DIN:    in  signed(7 downto 0);     -- Input sample
+        CLK:  in  std_logic;              -- Clock signal
+        b:    in  std_logic_vector (
+                        constants.NBCOEFF*constants.NBINT-1 downto 0
+                  );                      -- Filter b parameters (constant)
+        a:    in  std_logic_vector (
+                        constants.NACOEFF*constants.NBINT-1 downto 0
+                   );                     -- Filter -a parameters (constant)
+        DIN:  in  signed(7 downto 0);     -- Input sample
         -- Control Unit signals
-        clr_w_reg: in std_logic;            -- Clear delay register
+        clr_w_reg:          in std_logic;            -- Clear delay register
         en_latch, en_regs:  in std_logic;            -- Enable latch
         -- Output
-        DOUT:   out signed(7 downto 0)      -- Output sample
+        DOUT:               out signed(7 downto 0)   -- Output sample
     );
 end entity;
 
 
 architecture RTL of Datapath is
     component adder is
-        generic	(N_BIT: positive);
+        generic    (N_BIT: positive);
         port (
             a:         in  signed(N_BIT-1 downto 0);
             b:         in  signed(N_BIT-1 downto 0);
@@ -44,9 +48,9 @@ architecture RTL of Datapath is
     end component;
 
     constant NIa: natural := constants.NIa;
-	constant NF: natural := constants.NF;   -- Internal data parallelism
+    constant NF: natural := constants.NF;   -- Internal data parallelism
     constant NIb: natural := constants.NIb; -- This must be the same as the interface, adopted by the last two adders
-	constant NA : natural := NIa + NF;
+    constant NA : natural := NIa + NF;
     constant NB: natural := NIb + NF;
     signal sync_DIN, sync_DOUT: signed(7 downto 0);
     signal x: signed(NA-1 downto 0);
@@ -55,23 +59,23 @@ architecture RTL of Datapath is
     signal t_tmp, ff_tmp: signed(NA-1 downto 0); -- Feedforward multiplier output
     signal t, ff: signed(NB-1 downto 0);
     signal a1_int, b0_int, b1_int: signed(NA-1 downto 0);
-	signal a1, b0, b1: signed(constants.NBINT-1 downto 0);
-	
-begin
-	a1 <= packets.extract(a, 0, constants.NBINT);
-	b0 <= packets.extract(b, 0, constants.NBINT);
-	b1 <= packets.extract(b, 1, constants.NBINT);
+    signal a1, b0, b1: signed(constants.NBINT-1 downto 0);
 
-	proc_coeff_reg: process(clk)
-	begin
-    -- Resize coefficients to match the internal representation: the least significant bit is dropped and 
+begin
+    a1 <= packets.extract(a, 0, constants.NBINT);
+    b0 <= packets.extract(b, 0, constants.NBINT);
+    b1 <= packets.extract(b, 1, constants.NBINT);
+
+    proc_coeff_reg: process(clk)
+    begin
+    -- Resize coefficients to match the internal representation: the least significant bit is dropped and
     -- sign is extendend to avoid overflow.
-		if rising_edge(clk) then    
-			a1_int <= fpresize(a1, 1, 7, NIa, NF);
-    		b0_int <= fpresize(b0, 1, 7, NIa, NF);
-   		 	b1_int <= fpresize(b1, 1, 7, NIa, NF);
-    	end if;
-	end process;
+        if rising_edge(clk) then
+            a1_int <= fpresize(a1, 1, 7, NIa, NF);
+            b0_int <= fpresize(b0, 1, 7, NIa, NF);
+                b1_int <= fpresize(b1, 1, 7, NIa, NF);
+        end if;
+    end process;
 
     -- Sample input data on every clock rising edge
     proc_input_sample: process(clk)
@@ -85,11 +89,11 @@ begin
     -- valid
     proc_input_latch: process(en_latch, clr_w_reg, sync_DIN)
     begin
-		if clr_w_reg = '1' then
-			x <= (others => '0');
-		elsif en_latch = '1' then
-			x <= fpresize(sync_DIN, 1, 7, NIa, NF);
-		end if;
+        if clr_w_reg = '1' then
+            x <= (others => '0');
+        elsif en_latch = '1' then
+            x <= fpresize(sync_DIN, 1, 7, NIa, NF);
+        end if;
     end process proc_input_latch;
 
     -- Internal structure
