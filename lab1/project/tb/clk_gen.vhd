@@ -5,14 +5,14 @@ use ieee.std_logic_unsigned.all;
 
 entity clk_gen is
   port (
-    END_SIM : in  std_logic;
-    CLK     : out std_logic;
-    RST_n   : out std_logic);
+    END_SIM : in  std_logic;	-- end simulation signal
+    CLK     : out std_logic;	-- generated clock
+    RST_n   : out std_logic);	-- low active generated reset
 end clk_gen;
 
 architecture beh of clk_gen is
 
-  constant Ts : time := 4.8 ns;
+  constant Ts : time := 4.08 ns;
   
   signal CLK_i : std_logic;
   

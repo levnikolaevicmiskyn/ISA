@@ -10,10 +10,14 @@ library work;
 use work.simconsts;
 
 entity dataSink is
-	generic(NB : integer := 8);
-	port (clk, rst_n: in std_logic;
-		  vin, vout: in std_logic;
-		  din: in signed(NB-1 downto 0));
+	generic(NB : integer := 8);				-- parallelism of the filter output
+	port(
+		clk		: in std_logic;				-- clock 
+		rst_n	: in std_logic;				-- low active asynchronous reset
+		vin		: in std_logic;				-- input data validation of the filter
+		vout	: in std_logic;				-- output data validation of the filter
+		din		: in signed(NB-1 downto 0)	-- data from the filter
+		);
 end dataSink;
 
 
