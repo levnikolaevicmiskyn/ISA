@@ -24,7 +24,8 @@ architecture test of tb_adder is
 	signal c_in, c_out: std_logic;
 
 begin
-
+	
+	-- process for generating in order all the possible input combinations
 	input_proc: process
         begin
             a_in <= "0000";

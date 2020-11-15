@@ -1,2 +1,19 @@
 \chapter{Synthesis}
-\todo{Add reports (timing, area, power) with brief comments/comparisons }
+The minimum clock period is found to be $T_{min0=}$. The timing reports derived after synthesizing with $T_{clk}=T_{min}$ and $T_{clk}=4T_{min}$ are reported in \autoref{tab:timing_rep_standard}.
+The command \texttt{report\_area} returns the data shown in \autoref{tab:area_rep_standard}.
+\subsection{Post-synth simulation}
+A simulation of the synthesized netlist accurately provides the switching activity for every internal net. The resulting power report is in \autoref{tab:power_report_standard}.
+\subsection{Place \& Route}
+\paragraph{Global routing} This step ends without reporting any critical error, the final summary shows the overall routed length for each metal layer involved:
+
+
+\paragraph{Timing analysis} The worst slack is ...
+
+
+\paragraph{Connectivity verification} The are 0 warning or violations for this step.
+
+
+\paragraph{Gate count} Total area and cell/gate count is:
+
+
+\paragraph{Power analysis} Results are reported in \autoref{tab:post_pr_power_report}.

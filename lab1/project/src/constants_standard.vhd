@@ -4,16 +4,18 @@
 
 package constants is
 
-	constant NF	: positive := 6;
-	constant NIa	: positive := 2;	-- This is used by all multipliers and adders except for the feedforward adders
-	constant NIb	: positive := 1;	 -- This is used by the feedforward adders (closer to the output)  
-	
-	constant NBINT 	: positive := 8;     -- Interface bitwidth for all signals
-	constant NACOEFF : positive := 1;    -- Number of a coefficients
-	constant NBCOEFF : positive := 2;
-	
+    constant NF      : positive := 6;
+    -- This is used by all multipliers and adders except for the feedforward adders
+    constant NIa     : positive := 2;
+    -- This is used by the feedforward adders (closer to the output)
+    constant NIb     : positive := 1;
+
+    constant NBINT   : positive := 8;    -- Interface bitwidth for all signals
+    constant NACOEFF : positive := 1;    -- Number of a coefficients
+    constant NBCOEFF : positive := 2;
+
 end constants;
 
-package body constants is 
-	
+package body constants is
+
 end constants;
