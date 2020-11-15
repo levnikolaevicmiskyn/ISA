@@ -4,41 +4,47 @@ Elaborated 1 design.
 Current design is now 'IIRFilter'.
 Information: Building the design 'controlUnit'. (HDL-193)
 
-Inferred memory devices in process
-	in routine controlUnit line 16 in file
-		'../src/controlUnit_fast.vhd'.
-===============================================================================
-|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
-===============================================================================
-|   token_dline_reg   | Flip-flop |   5   |  Y  | N  | N  | N  | N  | N  | N  |
-===============================================================================
+Statistics for case statements in always block at line 17 in file
+	'../src/controlUnit_standard.vhd'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            26            |    auto/auto     |
+===============================================
+
+Statistics for case statements in always block at line 45 in file
+	'../src/controlUnit_standard.vhd'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            47            |    auto/auto     |
+===============================================
 
 Inferred memory devices in process
-	in routine controlUnit line 28 in file
-		'../src/controlUnit_fast.vhd'.
+	in routine controlUnit line 84 in file
+		'../src/controlUnit_standard.vhd'.
 ===============================================================================
 |    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
 ===============================================================================
-| clr_delay_regs_reg  | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|  present_state_reg  | Flip-flop |   3   |  Y  | N  | N  | N  | N  | N  | N  |
 ===============================================================================
 Presto compilation completed successfully.
 Information: Building the design 'Datapath'. (HDL-193)
 
 Inferred memory devices in process
-	in routine Datapath line 81 in file
-		'../src/Datapath_fast.vhd'.
+	in routine Datapath line 65 in file
+		'../src/Datapath_standard.vhd'.
 ===============================================================================
 |    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
 ===============================================================================
-|    a1_int_b_reg     | Flip-flop |   7   |  Y  | N  | N  | N  | N  | N  | N  |
+|     a1_int_reg      | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
 |     b0_int_reg      | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
 |     b1_int_reg      | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
-|    a1sq_int_reg     | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
 ===============================================================================
 
 Inferred memory devices in process
-	in routine Datapath line 95 in file
-		'../src/Datapath_fast.vhd'.
+	in routine Datapath line 77 in file
+		'../src/Datapath_standard.vhd'.
 ===============================================================================
 |    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
 ===============================================================================
@@ -46,8 +52,8 @@ Inferred memory devices in process
 ===============================================================================
 
 Inferred memory devices in process
-	in routine Datapath line 104 in file
-		'../src/Datapath_fast.vhd'.
+	in routine Datapath line 86 in file
+		'../src/Datapath_standard.vhd'.
 ===========================================================================
 |    Register Name    | Type  | Width | Bus | MB | AR | AS | SR | SS | ST |
 ===========================================================================
@@ -55,35 +61,8 @@ Inferred memory devices in process
 ===========================================================================
 
 Inferred memory devices in process
-	in routine Datapath line 119 in file
-		'../src/Datapath_fast.vhd'.
-===============================================================================
-|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
-===============================================================================
-|       a1a_reg       | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
-===============================================================================
-
-Inferred memory devices in process
-	in routine Datapath line 135 in file
-		'../src/Datapath_fast.vhd'.
-===============================================================================
-|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
-===============================================================================
-|    a1out_del_reg    | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
-===============================================================================
-
-Inferred memory devices in process
-	in routine Datapath line 155 in file
-		'../src/Datapath_fast.vhd'.
-===============================================================================
-|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
-===============================================================================
-|    m2out_del_reg    | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
-===============================================================================
-
-Inferred memory devices in process
-	in routine Datapath line 168 in file
-		'../src/Datapath_fast.vhd'.
+	in routine Datapath line 117 in file
+		'../src/Datapath_standard.vhd'.
 ===============================================================================
 |    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
 ===============================================================================
@@ -91,27 +70,8 @@ Inferred memory devices in process
 ===============================================================================
 
 Inferred memory devices in process
-	in routine Datapath line 188 in file
-		'../src/Datapath_fast.vhd'.
-===============================================================================
-|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
-===============================================================================
-|    m4out_del_reg    | Flip-flop |   7   |  Y  | N  | N  | N  | N  | N  | N  |
-===============================================================================
-
-Inferred memory devices in process
-	in routine Datapath line 199 in file
-		'../src/Datapath_fast.vhd'.
-===============================================================================
-|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
-===============================================================================
-|       a3a_reg       | Flip-flop |   7   |  Y  | N  | N  | N  | N  | N  | N  |
-|       a3b_reg       | Flip-flop |   7   |  Y  | N  | N  | N  | N  | N  | N  |
-===============================================================================
-
-Inferred memory devices in process
-	in routine Datapath line 217 in file
-		'../src/Datapath_fast.vhd'.
+	in routine Datapath line 128 in file
+		'../src/Datapath_standard.vhd'.
 ===============================================================================
 |    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
 ===============================================================================
@@ -121,13 +81,10 @@ Presto compilation completed successfully.
 Information: Building the design 'adder' instantiated from design 'Datapath' with
 	the parameters "N_BIT=8". (HDL-193)
 Presto compilation completed successfully.
-Information: Building the design 'multiplier' instantiated from design 'Datapath' with
-	the parameters "N_BIT_I=1,N_BIT_F=6". (HDL-193)
+Information: Building the design 'adder' instantiated from design 'Datapath' with
+	the parameters "N_BIT=7". (HDL-193)
 Presto compilation completed successfully.
 Information: Building the design 'multiplier' instantiated from design 'Datapath' with
 	the parameters "N_BIT_I=2,N_BIT_F=6". (HDL-193)
-Presto compilation completed successfully.
-Information: Building the design 'adder' instantiated from design 'Datapath' with
-	the parameters "N_BIT=7". (HDL-193)
 Presto compilation completed successfully.
 1

@@ -1,0 +1,72 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : IIRFilter
+Version: O-2018.06-SP4
+Date   : Sun Nov  1 23:38:04 2020
+****************************************
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: comp_dp/a1_int_b_reg[1]
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: comp_dp/a1a_reg[6]
+            (rising edge-triggered flip-flop clocked by CLK)
+  Path Group: CLK
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  IIRFilter          5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  comp_dp/a1_int_b_reg[1]/CK (DFF_X1)                     0.00       0.00 r
+  comp_dp/a1_int_b_reg[1]/Q (DFF_X1)                      0.09       0.09 r
+  comp_dp/comp_m1/b[1] (multiplier_N_BIT_I1_N_BIT_F6)     0.00       0.09 r
+  comp_dp/comp_m1/mult_31/b[1] (multiplier_N_BIT_I1_N_BIT_F6_DW_mult_tc_0)
+                                                          0.00       0.09 r
+  comp_dp/comp_m1/mult_31/U127/ZN (AND2_X1)               0.05       0.14 r
+  comp_dp/comp_m1/mult_31/U44/CO (HA_X1)                  0.06       0.20 r
+  comp_dp/comp_m1/mult_31/U42/S (FA_X1)                   0.11       0.30 f
+  comp_dp/comp_m1/mult_31/U135/ZN (INV_X1)                0.03       0.34 r
+  comp_dp/comp_m1/mult_31/U166/ZN (OAI222_X1)             0.05       0.39 f
+  comp_dp/comp_m1/mult_31/U131/ZN (NAND2_X1)              0.04       0.43 r
+  comp_dp/comp_m1/mult_31/U110/ZN (AND3_X1)               0.05       0.48 r
+  comp_dp/comp_m1/mult_31/U165/ZN (OAI222_X1)             0.05       0.53 f
+  comp_dp/comp_m1/mult_31/U8/CO (FA_X1)                   0.09       0.62 f
+  comp_dp/comp_m1/mult_31/U7/CO (FA_X1)                   0.09       0.71 f
+  comp_dp/comp_m1/mult_31/U6/CO (FA_X1)                   0.09       0.81 f
+  comp_dp/comp_m1/mult_31/U5/CO (FA_X1)                   0.09       0.90 f
+  comp_dp/comp_m1/mult_31/U4/CO (FA_X1)                   0.09       0.99 f
+  comp_dp/comp_m1/mult_31/U3/CO (FA_X1)                   0.09       1.08 f
+  comp_dp/comp_m1/mult_31/U148/ZN (XNOR2_X1)              0.06       1.13 f
+  comp_dp/comp_m1/mult_31/U140/ZN (XNOR2_X1)              0.05       1.18 f
+  comp_dp/comp_m1/mult_31/product[12] (multiplier_N_BIT_I1_N_BIT_F6_DW_mult_tc_0)
+                                                          0.00       1.18 f
+  comp_dp/comp_m1/y[6] (multiplier_N_BIT_I1_N_BIT_F6)     0.00       1.18 f
+  comp_dp/U21/ZN (AND2_X1)                                0.04       1.22 f
+  comp_dp/a1a_reg[6]/D (DFF_X1)                           0.01       1.23 f
+  data arrival time                                                  1.23
+
+  clock CLK (rise edge)                                   1.20       1.20
+  clock network delay (ideal)                             0.00       1.20
+  clock uncertainty                                      -0.07       1.13
+  comp_dp/a1a_reg[6]/CK (DFF_X1)                          0.00       1.13 r
+  library setup time                                     -0.04       1.09
+  data required time                                                 1.09
+  --------------------------------------------------------------------------
+  data required time                                                 1.09
+  data arrival time                                                 -1.23
+  --------------------------------------------------------------------------
+  slack (VIOLATED)                                                  -0.14
+
+
+1

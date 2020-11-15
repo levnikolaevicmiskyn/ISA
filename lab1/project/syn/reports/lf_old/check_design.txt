@@ -2,27 +2,24 @@
 ****************************************
 check_design summary:
 Version:     O-2018.06-SP4
-Date:        Sun Nov 15 17:20:28 2020
+Date:        Sun Nov  1 23:25:23 2020
 ****************************************
 
                    Name                                            Total
 --------------------------------------------------------------------------------
-Inputs/Outputs                                                      5
-    Unconnected ports (LINT-28)                                     5
+Inputs/Outputs                                                      4
+    Unconnected ports (LINT-28)                                     4
 
-Cells                                                               3
-    Connected to power or ground (LINT-32)                          3
+Cells                                                               2
+    Connected to power or ground (LINT-32)                          2
 --------------------------------------------------------------------------------
 
 Warning: In design 'Datapath', port 'b[8]' is not connected to any nets. (LINT-28)
 Warning: In design 'Datapath', port 'b[0]' is not connected to any nets. (LINT-28)
-Warning: In design 'Datapath', port 'a[8]' is not connected to any nets. (LINT-28)
 Warning: In design 'Datapath', port 'a[0]' is not connected to any nets. (LINT-28)
 Warning: In design 'Datapath', port 'DIN[0]' is not connected to any nets. (LINT-28)
-Warning: In design 'Datapath', a pin on submodule 'comp_a1' is connected to logic 1 or logic 0. (LINT-32)
+Warning: In design 'Datapath', a pin on submodule 'comp_sum1' is connected to logic 1 or logic 0. (LINT-32)
    Pin 'carry_in' is connected to logic 0. 
-Warning: In design 'Datapath', a pin on submodule 'comp_a2' is connected to logic 1 or logic 0. (LINT-32)
-   Pin 'carry_in' is connected to logic 0. 
-Warning: In design 'Datapath', a pin on submodule 'comp_a3' is connected to logic 1 or logic 0. (LINT-32)
+Warning: In design 'Datapath', a pin on submodule 'comp_sum2' is connected to logic 1 or logic 0. (LINT-32)
    Pin 'carry_in' is connected to logic 0. 
 1

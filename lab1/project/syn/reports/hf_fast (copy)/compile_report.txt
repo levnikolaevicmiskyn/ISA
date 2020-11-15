@@ -1,0 +1,173 @@
+Information: Checking out the license 'DesignWare'. (SEC-104)
+Information: Evaluating DesignWare library utilization. (UISN-27)
+
+============================================================================
+| DesignWare Building Block Library  |         Version         | Available |
+============================================================================
+| Basic DW Building Blocks           | O-2018.06-DWBB_201806.4 |     *     |
+| Licensed DW Building Blocks        | O-2018.06-DWBB_201806.4 |     *     |
+============================================================================
+
+
+Information: There are 8 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+
+
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'adder_N_BIT7'
+  Processing 'multiplier_N_BIT_I2_N_BIT_F6_0'
+  Processing 'adder_N_BIT8_0'
+  Processing 'multiplier_N_BIT_I1_N_BIT_F6'
+  Processing 'Datapath'
+Information: The register 'DOUT_reg[0]' is a constant and will be removed. (OPT-1206)
+  Processing 'controlUnit'
+  Processing 'IIRFilter'
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+
+  Beginning Implementation Selection
+  ----------------------------------
+  Processing 'adder_N_BIT7_DW01_add_0'
+  Processing 'adder_N_BIT8_1_DW01_add_0'
+  Processing 'adder_N_BIT8_0_DW01_add_0'
+  Mapping 'multiplier_N_BIT_I2_N_BIT_F6_0_DW_mult_tc_0'
+  Mapping 'multiplier_N_BIT_I2_N_BIT_F6_1_DW_mult_tc_0'
+  Mapping 'multiplier_N_BIT_I2_N_BIT_F6_2_DW_mult_tc_0'
+  Mapping 'multiplier_N_BIT_I1_N_BIT_F6_DW_mult_tc_0'
+
+  Beginning Mapping Optimizations  (Medium effort)
+  -------------------------------
+Information: compile falsified 441 infeasible paths. (OPT-1720)
+  Mapping Optimization (Phase 1)
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:00:45    2481.2      1.08      48.8       7.1                          
+    0:00:46    2481.2      1.08      48.8       7.1                          
+    0:00:46    2481.2      1.08      48.8       7.1                          
+    0:00:46    2478.6      1.08      48.7       6.9                          
+    0:00:46    2478.6      1.08      48.7       6.9                          
+    0:00:53    1800.8      1.09      44.8       0.0                          
+    0:00:56    1793.6      1.06      44.3       0.0                          
+    0:00:57    1791.8      1.06      44.3       0.0                          
+    0:00:59    1792.6      1.05      44.0       0.0                          
+    0:00:59    1793.6      1.05      44.0       0.0                          
+    0:01:01    1793.6      1.05      44.0       0.0                          
+    0:01:01    1793.6      1.05      44.0       0.0                          
+    0:01:01    1793.6      1.05      44.0       0.0                          
+    0:01:01    1793.6      1.05      44.0       0.0                          
+    0:01:01    1793.6      1.05      44.0       0.0                          
+    0:01:01    1793.6      1.05      44.0       0.0                          
+
+
+
+  Beginning Delay Optimization Phase
+  ----------------------------------
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:01:01    1793.6      1.05      44.0       0.0                          
+    0:01:04    1798.4      1.02      43.8       0.0 comp_dp/m4out_del_reg[4]/D
+    0:01:05    1802.9      1.01      43.7       0.0 comp_dp/a3a_reg[6]/D     
+    0:01:07    1805.6      1.01      43.4       0.0 comp_dp/m4out_del_reg[6]/D
+    0:01:08    1809.3      1.01      43.4       0.0 comp_dp/a3a_reg[6]/D     
+    0:01:10    1812.8      1.00      43.3       1.8 comp_dp/m2out_del_reg[4]/D
+    0:01:12    1830.3      0.99      43.1       3.9 comp_dp/m2out_del_reg[4]/D
+    0:01:14    1830.9      0.98      42.9       3.9 comp_dp/a3a_reg[6]/D     
+    0:01:15    1836.7      0.97      42.8       3.9 comp_dp/m4out_del_reg[6]/D
+    0:01:17    1839.1      0.97      42.7       3.9 comp_dp/m2out_del_reg[4]/D
+    0:01:19    1843.4      0.97      42.7       3.9 comp_dp/m2out_del_reg[4]/D
+    0:01:20    1845.2      0.96      42.7       3.9 comp_dp/a3a_reg[6]/D     
+    0:01:22    1845.0      0.96      42.6       3.9 comp_dp/m2out_del_reg[4]/D
+    0:01:24    1846.8      0.96      42.6       3.9 comp_dp/m2out_del_reg[4]/D
+    0:01:25    1849.8      0.96      42.6       3.9 comp_dp/a3a_reg[4]/D     
+    0:01:28    1851.4      0.96      42.6       3.9 comp_dp/m2out_del_reg[5]/D
+    0:01:29    1854.3      0.95      42.5       3.9 comp_dp/m4out_del_reg[6]/D
+    0:01:31    1856.9      0.95      42.6       3.9 comp_dp/a3a_reg[4]/D     
+    0:01:33    1857.5      0.95      42.5       3.9 comp_dp/m4out_del_reg[6]/D
+    0:01:34    1862.0      0.95      42.5       8.2 comp_dp/m4out_del_reg[6]/D
+    0:01:36    1865.2      0.95      42.4       8.2 comp_dp/a3a_reg[4]/D     
+    0:01:39    1865.5      0.95      42.4       6.4 comp_dp/a3a_reg[6]/D     
+    0:01:43    1866.3      0.95      42.4       6.4                          
+    0:01:45    1866.3      0.95      42.4       6.4                          
+
+
+  Beginning Design Rule Fixing  (max_capacitance)
+  ----------------------------
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:01:45    1866.3      0.95      42.4       6.4                          
+    0:01:47    1871.0      0.94      42.4       0.0 comp_dp/a3a_reg[4]/D     
+    0:01:49    1871.8      0.94      42.4       0.0 comp_dp/m4out_del_reg[6]/D
+    0:01:51    1870.2      0.94      42.3       0.0 comp_dp/m2out_del_reg[5]/D
+    0:01:53    1874.5      0.94      42.3       0.0 comp_dp/m4out_del_reg[6]/D
+    0:01:54    1876.4      0.94      42.3       0.0 comp_dp/m2out_del_reg[7]/D
+    0:01:56    1880.1      0.94      42.3       0.0 comp_dp/m4out_del_reg[6]/D
+    0:02:01    1880.4      0.94      42.3       0.0                          
+    0:02:04    1880.6      0.94      42.3       0.0                          
+    0:02:05    1881.9      0.94      42.3       0.0                          
+    0:02:07    1884.9      0.94      42.3       0.0                          
+    0:02:08    1883.3      0.94      42.2       0.0                          
+    0:02:09    1884.6      0.94      42.1       0.0                          
+    0:02:10    1886.5      0.94      42.1       0.0                          
+    0:02:12    1885.7      0.94      42.1       0.0                          
+    0:02:13    1888.1      0.94      42.0       0.0                          
+    0:02:14    1888.3      0.94      42.0       0.0                          
+    0:02:15    1888.6      0.94      42.0       0.0                          
+    0:02:17    1889.7      0.94      42.0       0.0                          
+    0:02:17    1890.7      0.94      42.0       0.0                          
+
+
+  Beginning Area-Recovery Phase  (cleanup)
+  -----------------------------
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:02:17    1890.7      0.94      42.0       0.0                          
+    0:02:17    1890.7      0.94      42.0       0.0                          
+    0:02:19    1882.5      0.94      42.0       0.0                          
+    0:02:20    1881.7      0.94      42.0       0.0                          
+    0:02:20    1881.4      0.94      42.0       0.0                          
+    0:02:20    1881.4      0.94      42.0       0.0                          
+    0:02:20    1881.4      0.94      42.0       0.0                          
+    0:02:20    1881.4      0.94      42.0       0.0                          
+    0:02:20    1868.6      0.94      42.0       0.0                          
+    0:02:20    1868.6      0.94      42.0       0.0                          
+    0:02:20    1868.6      0.94      42.0       0.0                          
+    0:02:20    1868.6      0.94      42.0       0.0                          
+    0:02:20    1868.6      0.94      42.0       0.0                          
+    0:02:20    1868.6      0.94      42.0       0.0                          
+    0:02:26    1868.6      0.94      42.0       0.0                          
+    0:02:31    1865.2      0.94      42.0       0.0                          
+    0:02:33    1867.6      0.94      42.0       0.0                          
+    0:02:35    1869.2      0.94      42.0       0.0                          
+    0:02:36    1869.7      0.94      41.9       0.0                          
+    0:02:38    1870.5      0.94      41.9       0.0                          
+    0:02:39    1872.4      0.94      41.9       0.0                          
+    0:02:40    1874.8      0.94      41.9       0.0                          
+    0:02:42    1875.6      0.94      41.9       0.0                          
+    0:02:43    1876.9      0.94      41.9       0.0                          
+    0:02:45    1876.9      0.94      41.9       0.0                          
+    0:02:46    1876.6      0.94      41.9       0.0                          
+    0:02:47    1876.9      0.94      41.9       0.0                          
+    0:02:49    1877.4      0.94      41.9       0.0 comp_dp/a3a_reg[6]/D     
+Loading db file '/software/dk/nangate45/synopsys/NangateOpenCellLibrary_typical_ecsm_nowlm.db'
+
+
+Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
+
+
+  Optimization Complete
+  ---------------------
+1
