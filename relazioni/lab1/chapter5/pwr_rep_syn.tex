@@ -1,0 +1,20 @@
+
+\begin{table}
+	\centering
+	\begin{tabular}{|l|l|l|l|l|}
+		\hline
+Power Group  &Internal Power  &    Switching Power     &   Leakage Power     &    Total Power   \\
+\hline
+io\_pad          &   0.0000        &    0.0000  &          0.0000        &    0.0000  (0.00\%)\\
+memory           &  0.0000        &    0.0000    &        0.0000        &    0.0000  (0.00\%)\\
+black\_box        &  0.0000      &      0.0000    &        0.0000      &      0.0000  (0.00\%)\\
+clock\_network     & 0.0000     &       0.0000     &       0.0000     &       0.0000  (0.00\%)\\
+register         & 29.5835     &       1.5295       & 3.8171e+03     &      34.9300  (24.07\%)\\
+sequential        & 0.3539    &        0.2502  &        329.9172    &        0.9340  (0.64\%)\\
+combinational    & 49.0587   &        43.6288   &     1.6596e+04   &       109.2838  (75.29\%)\\
+\hline
+Total         &    78.9960 uW      &  45.4085 uW  &   2.0743e+04 nW  &     145.1478 uW\\\hline
+\end{tabular}
+\caption{Power report (Synopsys) at $T_{ck} = 4T_{min}$}
+\label{tab:power_report_standard}
+\end{table}
