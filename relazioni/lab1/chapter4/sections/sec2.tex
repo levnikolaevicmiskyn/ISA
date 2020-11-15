@@ -50,7 +50,7 @@ The only instance where Vertools edits the content of a VHDL file is during the 
 
 Some of the most relevant modules and functionalities are discussed below.
 
-\paragraph{cli.py} This is the module managing and setting the Command Line Interface. It uses the default \texttt{argparse} library which offers a helpful interface to handle command line arguments and flags (and to generate their help outputs) without the need of manually implementing a custom basic interpreter. As an example, the following lines of code generate the top level command (\texttt{vertools}) and its first subcommand (\texttt{generate-inputs}|\texttt{simulate}|...).
+\paragraph{cli.py} This is the module managing and setting the Command Line Interface. It uses the default \texttt{argparse} library which offers a helpful interface to handle command line arguments and flags (and to generate their help outputs) without the need of manually implementing a custom basic interpreter. As an example, the following lines of code generate the top level command (\texttt{vertools}) and its first subcommand (\texttt{generate-inputs}/\texttt{simulate}/...).
 \begin{lstlisting}[language=Python, keywords={None}]
 vertools = argparse.ArgumentParser(
     formatter_class=argparse.ArgumentDefaultsHelpFormatter,
@@ -69,7 +69,7 @@ subparsers = vertools.add_subparsers(
 )
 \end{lstlisting}
 
-\paragraph{commands.py} In this module are implemented the actual command functionalities. All commands are implemented as classes inheriting from the custom \texttt{CommandAPI} class, which exposes three methods - \texttt{setup}, \texttt{run}, \texttt{exit}. These methods implement the respective steps of the execution of a command and, by default, are all called in sequence. This division can be helpful, for instance, when multiple commands share the same setup steps, allowing the user to define them only once.
+\paragraph{commands.py} The actual command procedures are implemented here. All commands are implemented as classes inheriting from the custom \texttt{CommandAPI} class, which exposes three methods - \texttt{setup}, \texttt{run}, \texttt{exit}. These methods implement the respective steps of the execution of a command and, by default, are all called in sequence. This division can be helpful, for instance, when multiple commands share the same setup steps, allowing the user to define them only once.
 \begin{lstlisting}[language=Python]
 class CommandAPI:
 """Program command base class
@@ -121,8 +121,8 @@ def __call__(self):
     self.exit()
 \end{lstlisting}
 
-\paragraph{system.py} This module provides some wrapper functions to build an interface with the system. For example, the \texttt{run\_bash} function, which is used to call the simulation and reference commands, does all the necessary setup to run an external bash command and to redirect its output (either to logs or \texttt{/dev/null} when they are disabled).\\
-It can receive a list of strings containing the bash commands which will all be executed in the same shell, which is useful for when some variables should be retained.
+\paragraph{system.py} This module provides some wrapper functions to build an interface with the system. For example, the \texttt{run\_bash} function (which is the one used to call the simulation and reference commands) handles all the necessary steps to run an external bash command in a subshell and to redirect its output either to logs or \texttt{/dev/null}, when they are disabled.\\
+It can receive a list of strings containing the bash commands which will all be executed in the same shell, which is useful for when some environment variables are shared.
 
 \begin{lstlisting}[language=Python, morekeywords={None}]
 def run_bash(commands, **kwargs):
