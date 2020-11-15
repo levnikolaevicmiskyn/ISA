@@ -16,7 +16,7 @@ entity Datapath is
         DIN:    in  signed(7 downto 0);     -- Input sample
         -- Control Unit signals
         clr_w_reg: in std_logic;            -- Clear delay register
-        en_latch:  in std_logic;            -- Enable latch
+        en_latch, en_regs:  in std_logic;            -- Enable latch
         -- Output
         DOUT:   out signed(7 downto 0)      -- Output sample
     );
@@ -134,7 +134,7 @@ begin
 	
 	proc_reg_a1_a2 : process(clk)
 	begin
-		if rising_edge(clk) then
+	if rising_edge(clk) then
 			if clr_w_reg = '1' then
 				a1out_del <= (OTHERS => '0');
 			else
@@ -142,7 +142,7 @@ begin
 			end if;
 		end if;
 	end process;
-
+	
 	comp_a2: adder
 	generic map(NA)
 	port map(a1out_del, m2out_del, '0', w0, open);
@@ -157,7 +157,7 @@ begin
 		if rising_edge(clk) then
 			if clr_w_reg='1' then
 				m2out_del <= (OTHERS => '0');
-			else
+			elsif en_regs='1' then
 				m2out_del <= m2out;
 			end if;
 		end if;
@@ -170,7 +170,7 @@ begin
 		if rising_edge(clk) then
 			if clr_w_reg='1' then
 				w1 <= (OTHERS => '0');
-			else
+			elsif en_regs='1' then
 				w1 <= w0;
 			end if;
 		end if;

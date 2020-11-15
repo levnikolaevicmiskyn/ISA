@@ -4,7 +4,7 @@ use ieee.std_logic_1164.all;
 entity controlUnit is
 	port(clk, rst_n, VIN: in std_logic;
 		VOUT: out std_logic;
-		clr_delay_regs, en_latch: out std_logic
+		clr_delay_regs, en_latch, en_regs: out std_logic
 		);
 end entity controlUnit;
 
@@ -21,7 +21,8 @@ begin
 	VOUT <= '0';
 	en_latch <= '0';
 	clr_delay_regs <= '0';
-	
+	en_regs <= '0';
+
 	case present_state is
 		when RESET_ST =>
 			clr_delay_regs <= '1';
@@ -29,8 +30,10 @@ begin
 			-- Wait for a new sample
 		when LATCH_EN_1 =>
 			en_latch <= '1';
+			en_regs <= '1';
 		when LATCH_EN_OUT_VAL =>
 			en_latch <= '1';
+			en_regs <= '1';
 			VOUT <= '1';
 		when OUT_VAL =>
 			VOUT <= '1';

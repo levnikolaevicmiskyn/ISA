@@ -16,7 +16,7 @@ entity Datapath is
         DIN:    in  signed(7 downto 0);     -- Input sample
         -- Control Unit signals
         clr_w_reg: in std_logic;            -- Clear delay register
-        en_latch:  in std_logic;            -- Enable latch
+        en_latch, en_regs:  in std_logic;            -- Enable latch
         -- Output
         DOUT:   out signed(7 downto 0)      -- Output sample
     );
@@ -119,7 +119,7 @@ begin
         if rising_edge(clk) then
             if clr_w_reg = '1' then
                 w1 <= (others => '0');
-            else
+            elsif en_regs='1' then
                 w1 <= w0;
             end if;
         end if;

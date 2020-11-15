@@ -28,7 +28,7 @@ architecture RTL of IIRFilter is
             DIN:    in  signed(7 downto 0);     -- Input sample
             -- Control Unit signals
             clr_w_reg: in std_logic;            -- Clear delay register
-            en_latch: in std_logic;             -- Enable latch
+            en_latch, en_regs: in std_logic;             -- Enable latch
             -- Output
             DOUT:   out signed(7 downto 0)     -- Output sample
         );
@@ -38,17 +38,17 @@ architecture RTL of IIRFilter is
     	port (
             clk, rst_n, VIN: IN STD_LOGIC;
     		VOUT: OUT STD_LOGIC;
-    		clr_delay_regs, en_latch: OUT STD_LOGIC
+    		clr_delay_regs, en_latch, en_regs: OUT STD_LOGIC
     	);
     end component;
     
-    signal clr_w_reg, en_latch: std_logic;
+    signal clr_w_reg, en_latch, en_regs: std_logic;
 	
 begin
 	
     -- Instantiate control unit and dapath
     comp_cu: controlUnit
-        port map(clk, rst_n, VIN, VOUT, clr_w_reg, en_latch);
+        port map(clk, rst_n, VIN, VOUT, clr_w_reg, en_latch, en_regs);
     comp_dp: Datapath
-        port map(clk, b, a, DIN, clr_w_reg, en_latch, DOUT);
+        port map(clk, b, a, DIN, clr_w_reg, en_latch, en_regs, DOUT);
 end RTL;

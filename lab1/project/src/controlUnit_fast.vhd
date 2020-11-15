@@ -4,7 +4,7 @@ use ieee.std_logic_1164.all;
 entity controlUnit is
 	port(clk, rst_n, VIN: in std_logic;
 		VOUT: out std_logic;
-		clr_delay_regs, en_latch: out std_logic
+		clr_delay_regs, en_latch, en_regs: out std_logic
 		);
 end entity controlUnit;
 
@@ -33,5 +33,6 @@ begin
 end process;
 
 en_latch <= token_dline(token_dline'length-1);
+en_regs <= token_dline(token_dline'length-2);--2
 VOUT <= token_dline(0);
 end architecture JLookAhead;
