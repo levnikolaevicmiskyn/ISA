@@ -1,6 +1,7 @@
 \chapter{Synthesis}
-The minimum clock period is found to be $T_{min0=}$. The timing reports derived after synthesizing with $T_{clk}=T_{min}$ and $T_{clk}=4T_{min}$ are reported in \autoref{tab:timing_rep_standard}.
+The minimum clock period is found to be $T_{min0}=2.74\,\textrm{ns}$ by doing several synthesis steps after the maximum frequency analysis in order to be able to meet the constraint. The timing reports derived after synthesizing with $T_{clk}=T_{min}$ and $T_{clk}=4T_{min}=11\,\textrm{ns}$ are reported in \autoref{tab:timing_rep_standard}.
 The command \texttt{report\_area} returns the data shown in \autoref{tab:area_rep_standard}.
+\input{./chapter5/timrep.tex}
 \subsection{Post-synth simulation}
 A simulation of the synthesized netlist accurately provides the switching activity for every internal net. The resulting power report is in \autoref{tab:power_report_standard}. To observe how power consumption is influenced by the data rate, it could be interesting to perform a power analysis corresponding to \texttt{SAMPLING\_FACTOR=4}, that is when new data is available once every four clock cycles. The bottom line of the corresponding power report is in \autoref{tab:pdiss4}. The overall power is halved with respect to continuous operation.
 \begin{table}
