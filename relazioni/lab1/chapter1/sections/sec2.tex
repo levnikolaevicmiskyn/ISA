@@ -16,10 +16,9 @@ This DFD implements the Direct Form II of an IIR filter. In this specific case, 
 	\label{eqn:iir}
 \end{align}
 It is thus necessary to determine the values of the $a$ and $b$ parameters. Thanks to the provided Matlab script \texttt{myiir\_design.m}, the derived results are:
-\todo{Replace with correct coefficients (<1)}
 \begin{align}
-    a &= [-21] \\
-    b &= [53,\ 53]
+    a &= [-0.1641] \\
+    b &= [0.4141,\ 0.4141]
 \end{align}
 
 Following the project specifications, the filter is going to be implemented in hardware and will use an 8 bit \textbf{fixed point} representation: this simplifies the structure of the filter, but limits its precision. Moreover, the internal structure of the filter will be developed to prevent overflows by choosing a wide-enough parallelism in order to maximize the effectiveness of the filter.
