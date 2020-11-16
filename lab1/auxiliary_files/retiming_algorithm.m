@@ -14,10 +14,10 @@ N=7; % Number of nodes (operators)
 % corresponds to edge i->j
 edges = [1 8; 2 8; 2 1; 3, 2; 3, 4; 4, 3; 5, 3; 6, 3; 7, 5; 7, 6];
 
-Delta=2; % Number of pipeline stages
+Delta=3; % Number of pipeline stages
 
 % The number of registers (delays) on each edges are listed in vector D
-D = [Delta, Delta, 1, 0, 0, 2, 1, 2, 0, 0]';
+D = [Delta, Delta, 1, 0, 0, 2, 0, 1, 0, 0]';
 
 E=size(edges, 1);
 % Omega is one if the path containing two adders is considered critical and
