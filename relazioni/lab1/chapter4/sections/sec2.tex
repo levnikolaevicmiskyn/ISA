@@ -1,31 +1,34 @@
 \section{Vertools}
-Vertools is a simple verification suite written in \textbf{Python} to conveniently carry all the above listed steps, automatically calling the necessary commands, managing logs and doing general cleanup operations before and after each run.\\
-Given the variability of the verification process, Vertools was designed to give the user some level of customizability without the need of manually setting all the verification parameters at every run. For this reason, vertools makes use of \textbf{scoping} to give the user the possibility to set all the parameters in global or local configurations files and to manually override one or more of this parameters through the command line.
+\label{sec:vertools}
+Vertools is a simple verification tool written in \textbf{Python} used to aid the verification process. It automatically calls the necessary commands, checks the outputs, manages logs and does general cleanup operations before and after each run.
+
+Vertools is an high level utility, meaning that it is not intrusive: it avoids, whenever possible, to edit any of the files used by the other programs or to perform similar operations. The only instance where Vertools edits the content of a VHDL file is during the simulation phase, where it sets the clock period in a specified clock generator. \\
+This is not only because the verification process is logically supposed to not change the sources, but also becasue letting a (newly written) software fiddle with such sensitive files is dangerous. This leaves some operations which could, in theory, be implemented with an additional parameter to the hands of the user. For example, if multiple architectures are definded for the same component, it is up to the user to compile the right file or to manually edit the compilation command called by Vertools.
+
+Before going into the details of its usage, it is necessary to correctly prepare the environment for its usage.
 
 \subsection{Setting up the environment}
-Vertools uses external Python packages. It is necessary to install them with Python's package manager, \textbf{pip}. To install the packages,
+Vertools uses external Python packages which can be installed through Python's package manager, \textbf{pip}. To install them,
 \begin{lstlisting}[language=bash]
     $ cd /path/to/vertools/
     $ python3 -m pip install -r requirements.txt
 \end{lstlisting}
 In shared machines, it could be better to install those packages for the current user only by adding the \texttt{--user} flag in the \texttt{python3 -m pip} command.
 
-For Vertools to be able to run, it is necessary to add the path of the package folder to the \texttt{PYTHONPATH} environment variable with
+For Vertools to be able to run, it is necessary to add the path of the package folder to the \texttt{PYTHONPATH}.
 \begin{lstlisting}[language=bash]
     $ export PYTHONPATH=${PYTHONPATH}:/path/to/vertools/
 \end{lstlisting}
 
-Finally, Vertools is a Python package, so it should be called with \texttt{python3 /path/to/vertools/}. The simplest solution to treat Vertools as its own command is to add an alias like this:
+Finally, Vertools is a Python package, so it should be called with \texttt{python3 /path/to/vertools/}. It can be convenient to create an alias:
 \begin{lstlisting}[language=bash]
     $ alias vertools="python3 /path/to/vertools/"
 \end{lstlisting}
 
-For simplicity, from now on it is assumed that the alias has been created and \texttt{vertools} will be treated as a command.
+For simplicity, from now on it is assumed that the alias has been created and \texttt{vertools} will be treated as a command of its own.
 
 \subsection{Subcommands}
-To improve the user's control over the operations, the tool's functionality was divided in subcommands. Each subcommand has its own purpose, carries its own functions and has its own flags and settings.
-
-Beside the main \texttt{vertools verify} command, which runs the whole verification process, the user can call:
+To improve the granularity of the operations, the tool's functionality is divided in various levels of subcommands. Beside the main \texttt{vertools verify} command, which runs the whole verification process (simulation, reference, comparison), the user can call:
 
 \begin{itemize}
     \item \texttt{vertools generate-inputs}: generate the input vectors choosing among various customizable waveforms.
@@ -35,22 +38,22 @@ Beside the main \texttt{vertools verify} command, which runs the whole verificat
     \item Other more specific commands which are not worth exploring here, but they can all be reviewed with \texttt{vertools --help}.
 \end{itemize}
 
-Each subcommand can have its own flags, options and even another level of subcommands (like \texttt{generate-inputs}). A specific help for each level of subcommand can be consulted by calling it with the \texttt{--help} flag.
+Each subcommand can have its own flags, parameters and even another level of subcommands. For instance, \texttt{generate-inputs} has a subcommand to specify which waveform should be created. Each waveform has a different number of parameters with different meanings. A specific help for each level of subcommand can be consulted by calling it with the \texttt{--help} flag, as in \texttt{vertools generate-inputs sine --help}, which will show the order in which to specify the sine wave parameters.
 
 \subsection{Configuration files}
-It is possible to store the verification parameters in a configuration file. This way, it is not necessary to specify these parameters by hand each time. By default, Vertools looks for a file named \texttt{vertools.config} in the directory where the command is called. It is also possible to name the configuration file in other ways: this allows to choose between multiple configurations. In that case, the file should be specified with
+To grant some level of customizability and reusability, Vertools' operations are parametrized. It is possible to store those verification parameters in a configuration file: this way, it is not necessary to specify them by hand at each run.
+Because Vertools works with the concept of \textit{scoping}, the user can override specific parameters through the appropriate command line options without actually editing the configuration file.
+
+By default, Vertools looks for a file named \texttt{vertools.config} in the directory where the command is called. It is also possible to name the configuration file in other ways: this allows to choose between multiple configurations. In that case, the file should be specified with
 \begin{lstlisting}[language=bash]
     $ vertools --config filename.config COMMAND [ARGUMENTS ...]
 \end{lstlisting}
 Configuration files support different \textbf{sections}, so that the same variable can have different values in different context (for example, \texttt{tstep} might be different between the input generation and the actual simulation step) and \textbf{interpolation}, meaning that it is possible to expand a variable in the assignment of another variable, bash-style.
 
 \subsection{Program structure}
-Vertools is a high level utility, meaning that it does not take part into the simulation or reference processes if not by managing and editing files and calling commands. This is because allowing a (newly written) software to handle delicate files like the VHDL files is dangerous.
-The only instance where Vertools edits the content of a VHDL file is during the simulation phase, where it sets the clock period in the specified clock generator file with the value written in the configuration file.
+The program is composed of multiple modules, responsible to implement its various parts. Some of the modules can be customized to provide additional or ad-hoc functionalities.
 
-Some of the most relevant modules and functionalities are discussed below.
-
-\paragraph{cli.py} This is the module managing and setting the Command Line Interface. It uses the default \texttt{argparse} library which offers a helpful interface to handle command line arguments and flags (and to generate their help outputs) without the need of manually implementing a custom basic interpreter. As an example, the following lines of code generate the top level command (\texttt{vertools}) and its first subcommand (\texttt{generate-inputs}/\texttt{simulate}/...).
+\paragraph{cli.py} This is the module setting and managing the Command Line Interface. It uses the default \texttt{argparse} library which offers a helpful interface to handle command line arguments and flags and to generate their help menus without the need of manually implementing a custom basic interpreter. As an example, the following lines of code generate the top level command (\texttt{vertools}) and its first subcommand (\texttt{generate-inputs}/\texttt{simulate}/...).
 \begin{lstlisting}[language=Python, keywords={None}]
 vertools = argparse.ArgumentParser(
     formatter_class=argparse.ArgumentDefaultsHelpFormatter,
@@ -69,7 +72,7 @@ subparsers = vertools.add_subparsers(
 )
 \end{lstlisting}
 
-\paragraph{commands.py} The actual command procedures are implemented here. All commands are implemented as classes inheriting from the custom \texttt{CommandAPI} class, which exposes three methods - \texttt{setup}, \texttt{run}, \texttt{exit}. These methods implement the respective steps of the execution of a command and, by default, are all called in sequence. This division can be helpful, for instance, when multiple commands share the same setup steps, allowing the user to define them only once.
+\paragraph{commands.py} The actual command procedures are implemented here. All commands are implemented as classes inheriting from the custom \texttt{CommandAPI} class, which exposes three methods - \texttt{setup}, \texttt{run}, \texttt{exit}. These methods implement the respective steps of the execution of a command and, by default, are all called in sequence when the command is requested. This division can be helpful, for instance, when multiple commands share the same setup steps, allowing the user to define them only once.
 \begin{lstlisting}[language=Python]
 class CommandAPI:
 """Program command base class
