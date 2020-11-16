@@ -18,7 +18,13 @@ Overall, the only real commands needed from the control unit are \texttt{en\_lat
 From the preliminary investigation in \autoref{sec:THD}, it is possible to see that $n_b=7$ is enough to meet the requirements. This means that dropping the least significant bit from the input samples (represented on 8 bits) can simplify the internal computations with an acceptable degradation in performance.
 
 The analysis in \autoref{sec:THD} has been carried using a model where numbers include $n_b-1$ fractional bits (the binary digits with weights $2^{-1}$, $2^{-2}$, ..., $2^{n_b-2}$), therefore it is expectable that allocating 6 fractional bits for all the internal variables in the VHDL implementation will provide enough accuracy.
-
+\begin{figure}[htbp]
+	\centering
+	\makebox[\textwidth][c]{
+		\includegraphics[width=0.9\textwidth]{./chapter1/images/thdplot.eps}}
+	\caption{THD as a function of $n_b$}
+	\label{fig:thdplot}
+\end{figure}
 \subsection{Avoiding overflow}
 The C reference model is accurate in predicting the error introduced by truncation, which affects the output of every multiplier block, but it neglects the inability to represent a number larger or equal to 1 in absolute value with the single integer bit available in the standard fixed-point format.\\
 An overflow condition may occur in intermediate steps of the computation where the result would require more than one integer bit. In order to determine the right sizing that guarantees the absence of overflow, the maximum value of the intermediate variable $w[n]$ must be determined. Using \autoref{eqn:iir},
@@ -35,19 +41,13 @@ Hence, assuming $|x[n]|\leq 1$,
 \end{align*}
 According to this computation, two integer bits are enough to avoid overflow at the nodes where $w[n]$ is processed within the DFG. As a consequence, the adder and multiplier in the feedback loop in \autoref{fig:iir-dfd} will operate on inputs with 2 integer bits and 6 fractional bits, as already determined by the previous reasoning on the internal accuracy.\\
 As for the operators in the feedforward part, multiplying $w[n]$ and $w[n-1]$ by $b_1$ and $b_2$ will always produce a result lower than 1 in magnitude, for which a single digit to the left of the radix point suffices. Therefore the output of those multipliers is resized to match the same format used by the final adder consisting of 1 integer and 6 fractional bits. The eighth digit, which is always zero, is appended to the final result, thus becoming its LSB, to comply with the specified interface format. A summary of the internal parallelism used throughout the filter is reported in \autoref{fig:datapath-simple}, where the format $a.b$ stands for $a$ integer bits and $b$ fractional bits. All operators are assumed to accept operands and to provide the result in the same format: a resizing block is implied on edges where different format labels are specified at the endpoints.
+
+
+\paragraph{Transfer function} A comparison of transfer functions obtained in floating point arithmetic (using Matlab) and fixed point with varying bitwidth is shown in \autoref{fig:tfcomparison}. The DC gain of the filter decreases as $n_b$ is decreased, this is due to the truncation of results done after several of the operations involved in the actual implementation. Integrating the losses incurred in while removing the least significant bits results in a loss in a gain loss. The transfer function was obtained by computing the FFT of the impulse response (discrete).
 \begin{figure}[htbp]
 	\centering
 	\makebox[\textwidth][c]{
-	\includegraphics[width=1.4\textwidth]{./chapter1/images/tf_comparison.eps}}
+		\includegraphics[width=1.4\textwidth]{./chapter1/images/tf_comparison.eps}}
 	\caption{Transfer function for a few values of $n_b$}
 	\label{fig:tfcomparison}
 \end{figure}
-\begin{figure}[htbp]
-	\centering
-	\makebox[\textwidth][c]{
-	\includegraphics[width=1.1\textwidth]{./chapter1/images/thdplot.eps}}
-	\caption{THD as a function of $n_b$}
-	\label{fig:thdplot}
-\end{figure}
-
-\paragraph{Transfer function} A comparison of transfer functions obtained in floating point arithmetic (using Matlab) and fixed point with varying bitwidth is shown in \autoref{fig:tfcomparison}. The DC gain of the filter decreases as $n_b$ is decreased, this is due to the truncation of results done after several of the operations involved in the actual implementation. Integrating the losses incurred in while removing the least significant bits results in a loss in a gain loss. The transfer function was obtained by computing the FFT of the impulse response (discrete).
