@@ -1,0 +1,15 @@
+\section{Post-synth simulation}
+\input{./chapter5/pwr_rep_syn.tex}
+A simulation of the synthesized netlist accurately provides the switching activity for every internal net. The resulting power report is in \autoref{tab:power_report_standard}. To observe how power consumption is influenced by the data rate, it could be interesting to perform a power analysis corresponding to \texttt{SAMPLING\_FACTOR=4}, that is when new data is available once every four clock cycles. The bottom line of the corresponding power report is in \autoref{tab:pdiss4}. The overall power is halved with respect to continuous operation.
+\begin{table}
+	\centering
+    \begin{tabular}{|l|l|}
+        \hline
+        Total internal power          &   52.6260 uW  \\
+        Total switching power &      24.5493 uW \\
+        Total leakage power &    2.0762e+04 nW    \\
+        Total power &    97.9375 uW\\\hline
+    \end{tabular}
+    \caption{Total dissipated power (bottom line in Synopsys power report) when \texttt{SAMPLING\_FACTOR}=4}
+    \label{tab:pdiss4}
+\end{table}

@@ -2,7 +2,7 @@
 The minimum clock period is found to be $T_{min0}=2.74\,\textrm{ns}$ by doing several synthesis steps after the maximum frequency analysis in order to be able to meet the constraint. The timing reports derived after synthesizing with $T_{clk}=T_{min}$ and $T_{clk}=4T_{min}=11\,\textrm{ns}$ are reported in \autoref{tab:timing_rep_standard}.
 The command \texttt{report\_area} returns the data shown in \autoref{tab:area_rep_standard}.
 
-\begin{table}[h]
+\begin{table}[htbp]
 	\centering
 	\begin{tabular}{|l|l|}\hline
 		Combinational area&                795.606\\
@@ -15,44 +15,6 @@ The command \texttt{report\_area} returns the data shown in \autoref{tab:area_re
 	\label{tab:area_rep_standard}
 \end{table}
 \input{./chapter5/timrep.tex}
-\subsection{Post-synth simulation}
-\input{./chapter5/pwr_rep_syn.tex}
-A simulation of the synthesized netlist accurately provides the switching activity for every internal net. The resulting power report is in \autoref{tab:power_report_standard}. To observe how power consumption is influenced by the data rate, it could be interesting to perform a power analysis corresponding to \texttt{SAMPLING\_FACTOR=4}, that is when new data is available once every four clock cycles. The bottom line of the corresponding power report is in \autoref{tab:pdiss4}. The overall power is halved with respect to continuous operation.
-\begin{table}
-	\centering
-\begin{tabular}{|l|l|}
-\hline
-Total internal power          &   52.6260 uW  \\
-Total switching power &      24.5493 uW \\
-Total leakage power &    2.0762e+04 nW    \\
-Total power &    97.9375 uW\\\hline
-\end{tabular}
-\caption{Total dissipated power (bottom line in Synopsys power report) when \texttt{SAMPLING\_FACTOR}=4}
-\label{tab:pdiss4}
-\end{table}
 
-
-\subsection{Place \& Route}
-\paragraph{Global routing} This step ends without reporting any critical error, the final summary shows the overall routed length for each metal layer involved:\todo{Copy and paste log file}
-
-
-\paragraph{Timing analysis} The worst slack is $8.56\,\textrm{ns}$, slighly larger than the one found in Synopsys ($8\,\textrm{ns}$). The same situation occurs with the look-ahead architecture.
-
-
-\paragraph{Connectivity verification} The are 0 warning or violations for this step.
-
-
-\paragraph{Gate count} Total area and cell/gate count is:
-\begin{center}
-\begin{tabular}{|l|l|}
-	\hline 
-	Gates & 1143 \\
-	Cells &     459 \\
-	Area &     912.4 um$^2$\\\hline
-\end{tabular}
-\end{center}
-
-
-\paragraph{Power analysis} Results are reported in \autoref{tab:post_pr_power_report}. The total power is slightly larger than the one computed by Synopsys (\autoref{tab:power_report_standard}), this could be expected since Innovus takes into account resistive and capacitive parasitics that will only increase power dissipation.
-
-\input{./chapter5/inn_power_rep_std.tex}
+\input{chapter5/sections/sec1}
+\input{chapter5/sections/sec2}
