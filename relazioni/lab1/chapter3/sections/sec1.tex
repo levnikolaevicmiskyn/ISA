@@ -73,12 +73,13 @@ Where $\epsilon$ can be set to $1$ if a register should be in between operators 
 A solution can be found by building the so-called \textit{constraint graph}, where for each inequality $r_i-r_j < c$  a directed edge is drawn from $j$ to $i$ with a weight equal to $c$. An additional virtual node is connected to all the other nodes by edges of zero length. Finally, an all-point shortest path algorithm is executed on this graph and the result $r_i$ can be found as the shortest path from the virtual node to node $i$.
 \begin{figure}
 	\includegraphics[width=\textwidth]{./chapter2/images/fastdfg_inter_index.pdf}
+	\caption{Numbering of operators for the retiming algorithm (system on inequalities)}
 \end{figure}
 This algorithm has been implemented in the script \texttt{retiming\_algorithm.m} which for this instance returns ($\Delta=3, \,\epsilon=1$):
 \begin{equation*}
 r = {[}-3, -3, -2, -3, -1, -1, 0{]}
 \end{equation*}
-which is equivalent to the solution found by inspection (\autoref{fig:fast_dfg_final}.
+which is equivalent to the solution found by inspection (\autoref{fig:fast_dfg_final}).
 \subsection{Accuracy}
 This new computational structure has also been modeled with a C program in order to perform fast design analyses such as finding of the minimum number of fractional bits that provide the specified accuracy. Although in this case the total harmonic distortion has different values than those found previously, the simulation points towards the same conclusion that a minimum number of $n=7$ bits is necessary.
 \subsection{Parallelism}
