@@ -64,7 +64,7 @@ you need to set the proper .do file:
 >tstart = 0ns  
 >tend = 20us  	
 
-you need to modify tend accordingly with the number of samples you have generated. The clock period should not be touched. tend must be at least (N_samples + 100)* clock. A longer time is not a problem.
+you need to modify tend accordingly with the number of samples you have generated. tend must be at least (N_samples + 100)* clock. A longer time is not a problem.
 >tstep = 1ns  
 >duration = ${Simulation:tend}
 
@@ -111,6 +111,6 @@ The results comparison is managed by vertools:
 
 ## Tips and Tricks
 
-If you want to perform **Simulation**, **Reference** and **Comparison** up to ones first generate the inputs and then you can call vertools with:
+If you want to perform **Simulation**, **Reference** and **Comparison** at once first generate the inputs and then you can call vertools with:
 
 `$ vertools verify`
