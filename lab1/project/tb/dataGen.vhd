@@ -53,7 +53,7 @@ begin
 			counter <= counter + 1;
 			if endfile(samplefile) then
 				vout <= '0' after tco;
-				end_sim_s <= '0' after tco;
+				end_sim_s <= '1' after tco;
 			elsif counter mod factor = 0 then
 			-- Get here if the next sample is to be issued.
 				if not endfile(samplefile) then
@@ -79,10 +79,10 @@ begin
 		for i in end_sim_v'length - 1 downto 1 loop
 			end_sim_v(i-1) <= end_sim_v(i);
 		end loop;
-		end_sim_v(0) <= end_sim_s;
+		end_sim_v(10) <= end_sim_s;
 	end if;
 end process;
 
-end_sim <= end_sim_v(10);
+end_sim <= end_sim_v(0);
 
 end behavior;
