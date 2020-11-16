@@ -1,0 +1,30 @@
+\begin{table}
+\begin{tabular}{|l|l|l|}
+	\hline
+  \textbf{Point}               &                                  \textbf{Incr}     & \textbf{Path}\\
+\hline
+  clock CLK (rise edge)                        &           0.00   &    0.00\\
+  clock network delay (ideal)                  &           0.00    &   0.00\\
+  comp\_dp/w1\_reg[3]/CK                     & 0.00     &  0.00\\
+  comp\_dp/w1\_reg[3]/Q                       &   0.19   &    0.19 \\
+  comp\_dp/comp\_mul\_a1/a[3] & 0.00   &    0.19 \\
+  ... & &\\
+  comp\_dp/comp\_sum2/add\_1\_root\_add\_27\_2/SUM[6] & 0.00   &    2.90 \\
+  comp\_dp/comp\_sum2/sum[6]          &       0.00     &  2.90 \\
+  comp\_dp/DOUT\_reg[7]/D              &           0.01     &  2.91 \\
+  data arrival time                                        &          &2.91 \\
+  clock CLK (rise edge)                             &     11.00   &   11.00\\
+  clock network delay (ideal)                        &     0.00   &   11.00\\
+  clock uncertainty                                   &   -0.07  &    10.93\\
+  comp\_dp/DOUT\_reg[7]/CK                 &       0.00   &   10.93 \\
+  library setup time                        &             -0.03     & 10.90\\
+  data required time                          &                     & 10.90\\
+\hline
+  data required time                                           &  &   10.90\\
+  data arrival time                                             & &    -2.91\\
+\hline
+  slack (MET)                                                     & &   7.99\\\hline
+  \end{tabular}
+\caption{Timing report at $T_{clk}=11\,\textrm{ns}$}
+\label{tab:timing_rep_standard}
+\end{table}
