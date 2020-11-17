@@ -1,0 +1,8 @@
+\chapter{Conclusion}
+The results of this development process is a small, fast and power efficient first order IIR filter. Both of its architectures were obtained after a series of theoretical studies and tweaks through simulations, which allowed to develop the best possible structures. As few operators as possible were instantiated to minimize the area and power consumption, and various optimization techniques such as pipelining, retiming and guarded evaluation were applied to furhter improve the performance.
+
+The filter's basic architecture can have work with a clock of \SI{360}{MHz}, consume a total power of \SI{230}{\micro W} whilst occupying an area of \SI{910}{\micro m ^2}. Most importantly, it filters with an almost ideal profile, as seen in \autoref{fig:tfcomparison}. The internal parallelism makes so that there are no overflows and the minimal parallelism is chosen so that THD is better than \SI{-30}{dBc}.
+
+Its more advanced version, implemented with the J-Look Ahead technique, can bring the clock frequency to almost \SI{1}{GHz}, with a consumption of \SI{285}{\micro W} and an area of \SI{1565}{\micro m^2}.
+
+Further optimizations or adaptations to particular needs favouring higher speeds, smaller areas or power consumptions, can be implemented by changing the internal architectures of the most complex components (the adders and multipliers), or by changing the strucure of the filter alltogether. 
