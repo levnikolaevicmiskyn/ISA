@@ -7,7 +7,7 @@ Report : timing
         -max_paths 1
 Design : IIRFilter
 Version: O-2018.06-SP4
-Date   : Sun Nov 15 18:30:13 2020
+Date   : Mon Nov 16 08:51:41 2020
 ****************************************
 
 Operating Conditions: typical   Library: NangateOpenCellLibrary
@@ -49,19 +49,19 @@ Wire Load Model Mode: top
   comp_dp/comp_mul_a1/y[1] (multiplier_N_BIT_I2_N_BIT_F6_0)
                                                           0.00       0.83 f
   comp_dp/comp_sum1/b[1] (adder_N_BIT8)                   0.00       0.83 f
-  comp_dp/comp_sum1/add_1_root_add_27_2/B[1] (adder_N_BIT8_DW01_add_0)
+  comp_dp/comp_sum1/add_1_root_add_23_2/B[1] (adder_N_BIT8_DW01_add_0)
                                                           0.00       0.83 f
-  comp_dp/comp_sum1/add_1_root_add_27_2/U1_1/CO (FA_X1)
+  comp_dp/comp_sum1/add_1_root_add_23_2/U1_1/CO (FA_X1)
                                                           0.10       0.93 f
-  comp_dp/comp_sum1/add_1_root_add_27_2/U1_2/CO (FA_X1)
+  comp_dp/comp_sum1/add_1_root_add_23_2/U1_2/CO (FA_X1)
                                                           0.09       1.02 f
-  comp_dp/comp_sum1/add_1_root_add_27_2/U1_3/CO (FA_X1)
+  comp_dp/comp_sum1/add_1_root_add_23_2/U1_3/CO (FA_X1)
                                                           0.09       1.11 f
-  comp_dp/comp_sum1/add_1_root_add_27_2/U1_4/CO (FA_X1)
+  comp_dp/comp_sum1/add_1_root_add_23_2/U1_4/CO (FA_X1)
                                                           0.09       1.21 f
-  comp_dp/comp_sum1/add_1_root_add_27_2/U1_5/S (FA_X1)
+  comp_dp/comp_sum1/add_1_root_add_23_2/U1_5/S (FA_X1)
                                                           0.15       1.36 r
-  comp_dp/comp_sum1/add_1_root_add_27_2/SUM[5] (adder_N_BIT8_DW01_add_0)
+  comp_dp/comp_sum1/add_1_root_add_23_2/SUM[5] (adder_N_BIT8_DW01_add_0)
                                                           0.00       1.36 r
   comp_dp/comp_sum1/sum[5] (adder_N_BIT8)                 0.00       1.36 r
   comp_dp/comp_mul_b0/a[5] (multiplier_N_BIT_I2_N_BIT_F6_2)
@@ -85,19 +85,19 @@ Wire Load Model Mode: top
   comp_dp/comp_mul_b0/y[2] (multiplier_N_BIT_I2_N_BIT_F6_2)
                                                           0.00       2.12 f
   comp_dp/comp_sum2/a[2] (adder_N_BIT7)                   0.00       2.12 f
-  comp_dp/comp_sum2/add_1_root_add_27_2/A[2] (adder_N_BIT7_DW01_add_0)
+  comp_dp/comp_sum2/add_1_root_add_23_2/A[2] (adder_N_BIT7_DW01_add_0)
                                                           0.00       2.12 f
-  comp_dp/comp_sum2/add_1_root_add_27_2/U1_2/CO (FA_X1)
+  comp_dp/comp_sum2/add_1_root_add_23_2/U1_2/CO (FA_X1)
                                                           0.10       2.22 f
-  comp_dp/comp_sum2/add_1_root_add_27_2/U1_3/CO (FA_X1)
+  comp_dp/comp_sum2/add_1_root_add_23_2/U1_3/CO (FA_X1)
                                                           0.09       2.31 f
-  comp_dp/comp_sum2/add_1_root_add_27_2/U1_4/CO (FA_X1)
+  comp_dp/comp_sum2/add_1_root_add_23_2/U1_4/CO (FA_X1)
                                                           0.09       2.40 f
-  comp_dp/comp_sum2/add_1_root_add_27_2/U1_5/CO (FA_X1)
+  comp_dp/comp_sum2/add_1_root_add_23_2/U1_5/CO (FA_X1)
                                                           0.09       2.49 f
-  comp_dp/comp_sum2/add_1_root_add_27_2/U1_6/S (FA_X1)
+  comp_dp/comp_sum2/add_1_root_add_23_2/U1_6/S (FA_X1)
                                                           0.13       2.62 r
-  comp_dp/comp_sum2/add_1_root_add_27_2/SUM[6] (adder_N_BIT7_DW01_add_0)
+  comp_dp/comp_sum2/add_1_root_add_23_2/SUM[6] (adder_N_BIT7_DW01_add_0)
                                                           0.00       2.62 r
   comp_dp/comp_sum2/sum[6] (adder_N_BIT7)                 0.00       2.62 r
   comp_dp/DOUT_reg[7]/D (DFF_X1)                          0.01       2.63 r

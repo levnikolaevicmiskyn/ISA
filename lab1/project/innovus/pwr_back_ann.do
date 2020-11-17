@@ -17,7 +17,7 @@ set_power_output_dir ./
 set_default_switching_activity -reset
 set_default_switching_activity -input_activity 0.2 -period 10.0
 read_activity_file -reset
-read_activity_file -format VCD -scope /testbench/comp_IIRFilter -start {} -end {} -block {} ../vcd/design.vcd
+read_activity_file -format VCD -scope testbench/comp_IIRFilter -start {} -end {} -block {} ../vcd/design.vcd
 set_power -reset
 set_powerup_analysis -reset
 set_dynamic_power_simulation -reset

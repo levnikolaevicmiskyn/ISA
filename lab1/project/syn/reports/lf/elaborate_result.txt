@@ -4,24 +4,24 @@ Elaborated 1 design.
 Current design is now 'IIRFilter'.
 Information: Building the design 'controlUnit'. (HDL-193)
 
-Statistics for case statements in always block at line 17 in file
+Statistics for case statements in always block at line 22 in file
 	'../src/controlUnit_standard.vhd'
 ===============================================
 |           Line           |  full/ parallel  |
 ===============================================
-|            26            |    auto/auto     |
+|            31            |    auto/auto     |
 ===============================================
 
-Statistics for case statements in always block at line 45 in file
+Statistics for case statements in always block at line 50 in file
 	'../src/controlUnit_standard.vhd'
 ===============================================
 |           Line           |  full/ parallel  |
 ===============================================
-|            47            |    auto/auto     |
+|            52            |    auto/auto     |
 ===============================================
 
 Inferred memory devices in process
-	in routine controlUnit line 84 in file
+	in routine controlUnit line 89 in file
 		'../src/controlUnit_standard.vhd'.
 ===============================================================================
 |    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
@@ -32,7 +32,7 @@ Presto compilation completed successfully.
 Information: Building the design 'Datapath'. (HDL-193)
 
 Inferred memory devices in process
-	in routine Datapath line 65 in file
+	in routine Datapath line 69 in file
 		'../src/Datapath_standard.vhd'.
 ===============================================================================
 |    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
@@ -43,7 +43,7 @@ Inferred memory devices in process
 ===============================================================================
 
 Inferred memory devices in process
-	in routine Datapath line 77 in file
+	in routine Datapath line 81 in file
 		'../src/Datapath_standard.vhd'.
 ===============================================================================
 |    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
@@ -52,7 +52,7 @@ Inferred memory devices in process
 ===============================================================================
 
 Inferred memory devices in process
-	in routine Datapath line 86 in file
+	in routine Datapath line 90 in file
 		'../src/Datapath_standard.vhd'.
 ===========================================================================
 |    Register Name    | Type  | Width | Bus | MB | AR | AS | SR | SS | ST |
@@ -61,7 +61,7 @@ Inferred memory devices in process
 ===========================================================================
 
 Inferred memory devices in process
-	in routine Datapath line 117 in file
+	in routine Datapath line 121 in file
 		'../src/Datapath_standard.vhd'.
 ===============================================================================
 |    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
@@ -70,7 +70,7 @@ Inferred memory devices in process
 ===============================================================================
 
 Inferred memory devices in process
-	in routine Datapath line 128 in file
+	in routine Datapath line 132 in file
 		'../src/Datapath_standard.vhd'.
 ===============================================================================
 |    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
