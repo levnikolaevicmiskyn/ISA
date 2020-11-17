@@ -72,7 +72,7 @@ subparsers = vertools.add_subparsers(
 )
 \end{lstlisting}
 
-\paragraph{commands.py} The actual command procedures are implemented here. All commands are implemented as classes inheriting from the custom \texttt{CommandAPI} class, which exposes three methods - \texttt{setup}, \texttt{run}, \texttt{exit}. These methods implement the respective steps of the execution of a command and, by default, are all called in sequence when the command is requested. This division can be helpful, for instance, when multiple commands share the same setup steps, allowing the user to define them only once.
+\paragraph{commands.py} The actual command procedures are implemented here. All commands are implemented as classes inheriting from the custom \texttt{CommandAPI} class, which exposes three methods - \texttt{setup}, \texttt{run}, \texttt{exit}. These methods implement the respective steps of the execution of a command and, by default, are all called in sequence when the command is requested. This division can be helpful, for instance, when multiple commands share the same setup steps, allowing the user to define them only once. Furthermore, the setup function can also halt the execution of the command by returning \texttt{False} when something goes wrong.
 \begin{lstlisting}[language=Python]
 class CommandAPI:
 """Program command base class

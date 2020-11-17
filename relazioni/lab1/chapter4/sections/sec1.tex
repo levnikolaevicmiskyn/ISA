@@ -16,4 +16,4 @@ The task of verifying a design using a logical simulator such as ModelSim can be
 	\item Monitor (\texttt{dataSink.vhd}): it collects output samples in a text file for further analysis and verifies that the status signal \texttt{VOUT} is asserted with the right timing. This is done by probing the control signal \texttt{VIN} and ensuring that \texttt{VOUT} is issued after a latency period (in clock cycles) given as a constant and dependent on the internal architecture. If any unexpecyed behavior is detected, a warning message appears on the output log.
 \end{itemize}
 
-The described verification steps are executed with an automated Python script, described in \autoref{sec:vertools}.
+The described verification steps are executed with an automated Python script, discussed in \autoref{sec:vertools}.
