@@ -1,0 +1,3 @@
+[submodule "vertools"]
+	path = vertools
+	url = git@github.com:arscisca/vertools.git
