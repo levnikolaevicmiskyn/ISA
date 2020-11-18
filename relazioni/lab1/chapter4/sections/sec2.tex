@@ -3,7 +3,7 @@
 Vertools is a simple verification tool written in \textbf{Python} used to aid the verification process. It automatically calls the necessary commands, checks the outputs, manages logs and does general cleanup operations before and after each run.
 
 Vertools is an high level utility, meaning that it is not intrusive: it avoids, whenever possible, to edit any of the files used by the other programs or to perform similar operations. The only instance where Vertools edits the content of a VHDL file is during the simulation phase, where it sets the clock period in a specified clock generator. \\
-This is not only because the verification process is logically supposed to not change the sources, but also becasue letting a (newly written) software fiddle with such sensitive files is dangerous. This leaves some operations which could, in theory, be implemented with an additional parameter to the hands of the user. For example, if multiple architectures are definded for the same component, it is up to the user to compile the right file or to manually edit the compilation command called by Vertools.
+This is not only because the verification process is logically supposed to not change the sources, but also because letting a (newly written) software fiddle with such sensitive files is dangerous. This leaves some operations which could, in theory, be implemented with an additional parameter to the hands of the user. For example, if multiple architectures are defined for the same component, it is up to the user to compile the right file or to manually edit the compilation command called by Vertools.
 
 Before going into the details of its usage, it is necessary to correctly prepare the environment for its usage.
 
