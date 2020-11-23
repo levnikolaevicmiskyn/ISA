@@ -8,8 +8,11 @@ f2.close()
 conts = conts[0:start+1] + declarations + conts[end:]
 f3 = open("comps.txt", "r")
 body = f3.readlines()
+f3.close()
 start = conts.index("-- BEGIN AUTOGEN COMPS\n");
 end = conts.index("-- END AUTOGEN COMPS\n");
 conts = conts[0:start+1] + body + conts[end:]
 fout = open("multiplier.vhd", "w")
 fout.writelines(conts)
+fout.close()
+f.close()
