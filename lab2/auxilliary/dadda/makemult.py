@@ -1,3 +1,5 @@
+import sys
+
 f = open("template.vhd", "r")
 conts = f.readlines()
 start = conts.index("-- BEGIN AUTOGEN DECL\n")
@@ -12,7 +14,7 @@ f3.close()
 start = conts.index("-- BEGIN AUTOGEN COMPS\n");
 end = conts.index("-- END AUTOGEN COMPS\n");
 conts = conts[0:start+1] + body + conts[end:]
-fout = open("multiplier.vhd", "w")
+fout = open("MBE_" + sys.argv[1] +  "bit.vhd", "w")
 fout.writelines(conts)
 fout.close()
 f.close()
