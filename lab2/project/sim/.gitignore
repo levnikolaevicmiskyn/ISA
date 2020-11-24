@@ -3,3 +3,4 @@ vsim.wlf
 modelsim.ini
 vlog.opt
 transcript
+log-sim.txt

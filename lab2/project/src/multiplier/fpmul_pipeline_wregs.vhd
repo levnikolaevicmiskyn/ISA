@@ -13,6 +13,9 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
+library work;
+use work.simconsts;
+
 ENTITY FPmul IS
    PORT( 
       FP_A : IN     std_logic_vector (31 DOWNTO 0);
@@ -73,7 +76,7 @@ ARCHITECTURE pipeline OF FPmul IS
    SIGNAL isZ_tab_stage2  : std_logic;
    
    -- Input register
-   CONSTANT NPIPE: integer := 1;
+   CONSTANT NPIPE: integer := simconsts.NPIPE;
    SIGNAL FP_A_DEL, FP_B_DEL: std_logic_vector(31 downto 0);
    TYPE dline_type is array(NPIPE-1 downto 0) of std_logic_vector(31 downto 0);
    SIGNAL DLINE_A, DLINE_B: dline_type;

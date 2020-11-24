@@ -3,7 +3,7 @@
 module testbench();
 	localparam N = 32;
 	
-	wire clk;
+	wire clk, end_sim;
 	wire [N-1:0] input_data;
 	wire [N-1:0] output_data;
 	
@@ -16,6 +16,7 @@ module testbench();
 		#(.N(N))
 		comp_dataGen(
 			.clk(clk),  
+			.end_sim(end_sim),
 			.data_out(input_data)
 		);
 		
@@ -23,6 +24,7 @@ module testbench();
 		#(.N(N))
 		comp_dataSink(
 			.clk(clk),
+			.end_sim(end_sim),
 			.din(output_data)
 		);
 		
