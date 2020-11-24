@@ -1,7 +1,5 @@
-clear all
-close all
-
-N = 32;
+function [] = daddagenerator(N)
+%N = 32;
 
 %% Determine number of dots in each column (N even)
 % Standard dots
@@ -158,7 +156,7 @@ for ii = 1:size(n, 1)
 end
 fclose(fid_comps);
 fclose(fid_decl);
-
+end
 
 function r = d(j)   
         if j > 1

@@ -1,0 +1,60 @@
+Warning: Design 'FPmul' has '1' unresolved references. For more detailed information, use the "link" command. (UID-341)
+Warning: There are infeasible paths detected in your design that were ignored during optimization. Please run 'report_timing -attributes' and/or 'create_qor_snapshot/query_qor_snapshot -infeasible_paths' to identify these paths.  (OPT-1721)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : FPmul
+Version: O-2018.06-SP4
+Date   : Tue Nov 24 10:28:50 2020
+****************************************
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: I3/SIG_out_round_reg[27]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: I4/FP_Z_reg[23]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  FPmul              5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  I3/SIG_out_round_reg[27]/CK (DFF_X2)                    0.00       0.00 r
+  I3/SIG_out_round_reg[27]/Q (DFF_X2)                     0.10       0.10 f
+  U374/ZN (INV_X1)                                        0.05       0.15 r
+  U401/ZN (NAND2_X2)                                      0.04       0.19 f
+  U402/ZN (NOR2_X2)                                       0.05       0.24 r
+  U403/ZN (NAND4_X2)                                      0.06       0.30 f
+  U406/ZN (NOR2_X2)                                       0.05       0.35 r
+  U407/ZN (AOI21_X2)                                      0.05       0.40 f
+  U181/ZN (NAND2_X2)                                      0.06       0.46 r
+  U474/ZN (INV_X1)                                        0.04       0.50 f
+  U479/ZN (NAND2_X1)                                      0.07       0.56 r
+  U480/ZN (OAI211_X1)                                     0.05       0.62 f
+  I4/FP_Z_reg[23]/D (DFF_X1)                              0.01       0.62 f
+  data arrival time                                                  0.62
+
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  clock uncertainty                                      -0.07      -0.07
+  I4/FP_Z_reg[23]/CK (DFF_X1)                             0.00      -0.07 r
+  library setup time                                     -0.04      -0.11
+  data required time                                                -0.11
+  --------------------------------------------------------------------------
+  data required time                                                -0.11
+  data arrival time                                                 -0.62
+  --------------------------------------------------------------------------
+  slack (VIOLATED)                                                  -0.74
+
+
+1
