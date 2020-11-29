@@ -41,5 +41,6 @@ This design is synthesized in the following flavors:
 - NPIPE = 1 and *optimize_register*: reports available in *reports/multiplier_MBE/[...]_opt_reg.txt*
 - NPIPE = 2 and *optimize_register*: reports available in *reports/multiplier_MBE/[...]_opt_reg_npipe2.txt*
 - NPIPE = 4 and *optimize_register*: reports available in *reports/multiplier_MBE/[...]_opt_reg_npipe4.txt*
+To repeat the synthesis:
 - Run syn/synthesize_MBE.sh
 
