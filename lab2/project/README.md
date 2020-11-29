@@ -1,4 +1,4 @@
-**Part 1: Additional input registers**
+# Part 1: Additional input registers #
 
 **Verification**
 
@@ -13,7 +13,7 @@ The number of additional pipeline registers in NPIPE, defined in *tb/simconsts.v
 - Results available in *reports/multiplier_pipeline[_{CSA, pparch}]*
 
 
-**Part 2: stage 2 pipeline register**
+# Part 2: stage 2 pipeline register #
 
 In this part one pipeline register is added manually in stage 2. The number of input pipeline registers is specified in *tb/simconsts_stage2_pipelined.vhd*.
 
@@ -26,7 +26,7 @@ In this part one pipeline register is added manually in stage 2. The number of i
 - Run *syn/synthesize_stage2_pipe.sh*
 - Read results
 
-**Part 3: MBE**
+# Part 3: MBE #
 
 In this part the multiplier in stage 2 is implemented using MBE. The number of input pipeline registers is specified in *tb/simconsts.vhd*.
 
