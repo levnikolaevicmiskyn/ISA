@@ -1,6 +1,7 @@
 **Part 1**
 
 **Additional input registers: verification**
+
 The number of additional pipe registers is NPIPE, defined in *tb/simconsts.vhd*, defaults to 1
 - Run sim/simulate_base.sh
 
@@ -15,6 +16,7 @@ The number of additional pipeline registers in NPIPE, defined in *tb/simconsts.v
 **Part 2**
 
 In this part one pipeline register is added manually in stage 2. The number of input pipeline registers is specified in *tb/simconsts_stage2_pipelined.vhd*.
+
 **Stage 2 pipeline register: verification**
 
 - Run *sim/simulate_stage2_pipe.sh*
@@ -27,11 +29,13 @@ In this part one pipeline register is added manually in stage 2. The number of i
 **Part 3: MBE**
 
 In this part the multiplier in stage 2 is implemented using MBE. The number of input pipeline registers is specified in *tb/simconsts.vhd*.
+
 **Verification**
 
 - Run sim/simulate_MBE.sh
 
-** Synthesis **
+**Synthesis**
+
 This design is synthesized in the following flavors:
 - No *optimize_register*: reports available in *reports/multiplier_MBE*
 - NPIPE = 1 and *optimize_register*: reports available in *reports/multiplier_MBE/[...]_opt_reg.txt*
