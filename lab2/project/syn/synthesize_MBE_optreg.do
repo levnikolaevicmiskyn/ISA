@@ -8,9 +8,9 @@ analyze -f vhdl -lib WORK ../src/common/unpackfp_unpackfp.vhd
 analyze -f vhdl -lib WORK ../tb/simconsts.vhd
 analyze -f vhdl -lib WORK ../src/MBE/HA.vhd
 analyze -f vhdl -lib WORK ../src/MBE/FA.vhd
-analyze -f vhdl -lib WORK ../src/MBE/MBE.vhd
+analyze -f vhdl -lib WORK ../src/MBE/MBE_24bit.vhd
 analyze -f vhdl -lib WORK ../src/multiplier/fpmul_stage1_struct.vhd
-analyze -f vhdl -lib WORK ../src/multiplier/fpmul_stage2_MBE.vhd
+analyze -f vhdl -lib WORK ../src/multiplier/fpmul_stage2_MBE_24bit.vhd
 analyze -f vhdl -lib WORK ../src/multiplier/fpmul_stage3_struct.vhd
 analyze -f vhdl -lib WORK ../src/multiplier/fpmul_stage4_struct.vhd
 analyze -f vhdl -lib WORK ../src/multiplier/fpmul_pipeline_wregs.vhd

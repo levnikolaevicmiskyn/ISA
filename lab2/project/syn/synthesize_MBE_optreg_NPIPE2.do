@@ -5,7 +5,7 @@ analyze -f vhdl -lib WORK ../src/common/fpnormalize_fpnormalize.vhd
 analyze -f vhdl -lib WORK ../src/common/packfp_packfp.vhd
 analyze -f vhdl -lib WORK ../src/common/fpround_fpround.vhd
 analyze -f vhdl -lib WORK ../src/common/unpackfp_unpackfp.vhd
-analyze -f vhdl -lib WORK ../tb/simconsts.vhd
+analyze -f vhdl -lib WORK ../tb/simconsts_NPIPE2.vhd
 analyze -f vhdl -lib WORK ../src/MBE/HA.vhd
 analyze -f vhdl -lib WORK ../src/MBE/FA.vhd
 analyze -f vhdl -lib WORK ../src/MBE/MBE_24bit.vhd
@@ -36,7 +36,8 @@ set_load $OLOAD [all_outputs]
 
 # Compile
 compile
+optimize_registers -clock clk
 
-report_resources > reports/multiplier_MBE/report_resources.txt
-report_area > reports/multiplier_MBE/report_area.txt
-report_timing > reports/multiplier_MBE/report_timing.txt
+report_resources > reports/multiplier_MBE/report_resources_opt_reg_npipe2.txt
+report_area > reports/multiplier_MBE/report_area_opt_reg_npipe2.txt
+report_timing > reports/multiplier_MBE/report_timing_opt_reg_npipe2.txt
