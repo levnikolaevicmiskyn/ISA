@@ -1,4 +1,3 @@
-Warning: Design 'FPmul' has '1' unresolved references. For more detailed information, use the "link" command. (UID-341)
 Warning: There are infeasible paths detected in your design that were ignored during optimization. Please run 'report_timing -attributes' and/or 'create_qor_snapshot/query_qor_snapshot -infeasible_paths' to identify these paths.  (OPT-1721)
  
 ****************************************
@@ -8,15 +7,16 @@ Report : timing
         -max_paths 1
 Design : FPmul
 Version: O-2018.06-SP4
-Date   : Tue Nov 24 13:11:52 2020
+Date   : Sun Nov 29 19:08:49 2020
 ****************************************
 
 Operating Conditions: typical   Library: NangateOpenCellLibrary
 Wire Load Model Mode: top
 
-  Startpoint: I4/FP_Z_reg[0]
+  Startpoint: I1/B_SIG_reg[19]
               (rising edge-triggered flip-flop clocked by clk)
-  Endpoint: FP_Z[0] (output port clocked by clk)
+  Endpoint: I2/SIG_in_reg[12]
+            (rising edge-triggered flip-flop clocked by clk)
   Path Group: clk
   Path Type: max
 
@@ -24,25 +24,50 @@ Wire Load Model Mode: top
   ------------------------------------------------
   FPmul              5K_hvratio_1_1        NangateOpenCellLibrary
 
-  Point                                    Incr       Path
-  -----------------------------------------------------------
-  clock clk (rise edge)                    0.00       0.00
-  clock network delay (ideal)              0.00       0.00
-  I4/FP_Z_reg[0]/CK (DFF_X2)               0.00       0.00 r
-  I4/FP_Z_reg[0]/Q (DFF_X2)                0.11       0.11 r
-  FP_Z[0] (out)                            0.02       0.14 r
-  data arrival time                                   0.14
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  I1/B_SIG_reg[19]/CK (DFF_X1)                            0.00       0.00 r
+  I1/B_SIG_reg[19]/Q (DFF_X1)                             0.11       0.11 r
+  U2858/ZN (XNOR2_X1)                                     0.07       0.19 r
+  U3574/ZN (NAND2_X1)                                     0.05       0.23 f
+  U2679/ZN (NAND2_X1)                                     0.06       0.29 r
+  U4531/Z (MUX2_X1)                                       0.06       0.35 r
+  U2696/ZN (AND3_X1)                                      0.06       0.41 r
+  U2695/ZN (XNOR2_X1)                                     0.06       0.47 r
+  U3083/ZN (XNOR2_X1)                                     0.07       0.53 r
+  U3238/ZN (XNOR2_X1)                                     0.07       0.60 r
+  U2535/Z (XOR2_X1)                                       0.07       0.68 r
+  U4720/ZN (OAI21_X1)                                     0.04       0.72 f
+  U4722/ZN (NAND2_X1)                                     0.04       0.75 r
+  U2603/ZN (XNOR2_X1)                                     0.06       0.81 r
+  U2602/ZN (XNOR2_X1)                                     0.07       0.88 r
+  U2990/ZN (XNOR2_X1)                                     0.05       0.93 f
+  I2/mbe_mult/add_1424/B[26] (FPmul_DW01_add_10)          0.00       0.93 f
+  I2/mbe_mult/add_1424/U741/ZN (NAND2_X1)                 0.04       0.97 r
+  I2/mbe_mult/add_1424/U790/ZN (OAI21_X1)                 0.04       1.01 f
+  I2/mbe_mult/add_1424/U789/ZN (AOI21_X1)                 0.05       1.07 r
+  I2/mbe_mult/add_1424/U822/ZN (OAI21_X1)                 0.03       1.10 f
+  I2/mbe_mult/add_1424/U693/ZN (AOI21_X1)                 0.06       1.16 r
+  I2/mbe_mult/add_1424/U553/Z (BUF_X2)                    0.07       1.22 r
+  I2/mbe_mult/add_1424/U843/ZN (OAI21_X1)                 0.04       1.26 f
+  I2/mbe_mult/add_1424/U772/ZN (XNOR2_X1)                 0.06       1.32 f
+  I2/mbe_mult/add_1424/SUM[32] (FPmul_DW01_add_10)        0.00       1.32 f
+  I2/SIG_in_reg[12]/D (DFF_X1)                            0.01       1.32 f
+  data arrival time                                                  1.32
 
-  clock clk (rise edge)                    0.00       0.00
-  clock network delay (ideal)              0.00       0.00
-  clock uncertainty                       -0.07      -0.07
-  output external delay                   -0.50      -0.57
-  data required time                                 -0.57
-  -----------------------------------------------------------
-  data required time                                 -0.57
-  data arrival time                                  -0.14
-  -----------------------------------------------------------
-  slack (VIOLATED)                                   -0.71
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  clock uncertainty                                      -0.07      -0.07
+  I2/SIG_in_reg[12]/CK (DFF_X1)                           0.00      -0.07 r
+  library setup time                                     -0.04      -0.11
+  data required time                                                -0.11
+  --------------------------------------------------------------------------
+  data required time                                                -0.11
+  data arrival time                                                 -1.32
+  --------------------------------------------------------------------------
+  slack (VIOLATED)                                                  -1.44
 
 
 1

@@ -1,10 +1,9 @@
-Warning: Design 'FPmul' has '1' unresolved references. For more detailed information, use the "link" command. (UID-341)
  
 ****************************************
 Report : resources
 Design : FPmul
 Version: O-2018.06-SP4
-Date   : Tue Nov 24 13:17:11 2020
+Date   : Sun Nov 29 19:40:08 2020
 ****************************************
 
 Resource Sharing Report for design FPmul in file
@@ -14,9 +13,11 @@ Resource Sharing Report for design FPmul in file
 |          |              |            | Contained     |                      |
 | Resource | Module       | Parameters | Resources     | Contained Operations |
 ===============================================================================
-| r325     | DW01_inc     | width=25   |               | I3/I11/add_45        |
-| r327     | DW01_add     | width=8    |               | I3/I9/add_41_aco     |
-| r329     | DW01_add     | width=8    |               | I4/I1/add_41_aco     |
+| r404     | DW01_add     | width=8    |               | add_1_root_I2/add_137_2 |
+| r406     | DW01_add     | width=48   |               | I2/mbe_mult/add_1424 |
+| r408     | DW01_inc     | width=25   |               | I3/I11/add_45        |
+| r410     | DW01_add     | width=8    |               | I3/I9/add_41_aco     |
+| r412     | DW01_add     | width=8    |               | I4/I1/add_41_aco     |
 ===============================================================================
 
 
@@ -25,7 +26,11 @@ Implementation Report
 |                    |                  | Current            | Set            |
 | Cell               | Module           | Implementation     | Implementation |
 ===============================================================================
-| I3/I11/add_45      | DW01_inc         | rpl                |                |
+| I2/mbe_mult/add_1424                  |                    |                |
+|                    | DW01_add         | pparch (area,speed)                 |
+| I3/I11/add_45      | DW01_inc         | pparch (area,speed)                 |
+| add_1_root_I2/add_137_2               |                    |                |
+|                    | DW01_add         | rpl                |                |
 ===============================================================================
 
 1

@@ -3,7 +3,7 @@
 Report : resources
 Design : FPmul
 Version: O-2018.06-SP4
-Date   : Sun Nov 29 20:09:01 2020
+Date   : Sun Nov 29 18:03:27 2020
 ****************************************
 
 Resource Sharing Report for design FPmul in file
@@ -13,17 +13,17 @@ Resource Sharing Report for design FPmul in file
 |          |              |            | Contained     |                      |
 | Resource | Module       | Parameters | Resources     | Contained Operations |
 ===============================================================================
-| r407     | I2_add_137_2_DP_OP_288_7755 |  |          | I2/add_137           |
-| r409     | I2_add_137_2_DP_OP_288_7755 |  |          | I2/add_137_2         |
-| r411     | DW01_add     | width=48   |               | I2/mbe_mult/add_1424 |
-| r413     | DW01_inc     | width=25   |               | I3/I11/add_45        |
-| r415     | DW01_add     | width=8    |               | I3/I9/add_41_aco     |
-| r417     | DW01_add     | width=8    |               | I4/I1/add_41_aco     |
+| r463     | I2_add_137_2_DP_OP_289_7755 |  |          | I2/add_137           |
+| r465     | I2_add_137_2_DP_OP_289_7755 |  |          | I2/add_137_2         |
+| r467     | DW01_add     | width=48   |               | I2/mbe_mult/add_1424 |
+| r469     | DW01_inc     | width=25   |               | I3/I11/add_45        |
+| r471     | DW01_add     | width=8    |               | I3/I9/add_41_aco     |
+| r473     | DW01_add     | width=8    |               | I4/I1/add_41_aco     |
 ===============================================================================
 
 Datapath Report for design FPmul in file ../src/multiplier/fpmul_stage1_struct.vhd 
 
-RTL-datapath Connections for I2_add_137_2_DP_OP_288_7755-str
+RTL-datapath Connections for I2_add_137_2_DP_OP_289_7755-str
 ====================================================================
 |                      |                      |            | Bus   |
 | RTL Wire             | Datapath Port        | Direction  | Width |
@@ -34,7 +34,7 @@ RTL-datapath Connections for I2_add_137_2_DP_OP_288_7755-str
 ====================================================================
 
 
-Datapath Blocks in I2_add_137_2_DP_OP_288_7755-str
+Datapath Blocks in I2_add_137_2_DP_OP_289_7755-str
 ===============================================================================
 |            | Out   |                           | Contained      | Operation |
 | Port       | Width | Datapath Block            | Operation_Line | Type      |
@@ -49,9 +49,9 @@ Implementation Report
 |                    |                  | Current            | Set            |
 | Cell               | Module           | Implementation     | Implementation |
 ===============================================================================
+| I3/I11/add_45      | DW01_inc         | pparch (area,speed)                 |
 | I2/mbe_mult/add_1424                  |                    |                |
 |                    | DW01_add         | pparch (area,speed)                 |
-| I3/I11/add_45      | DW01_inc         | pparch (area,speed)                 |
 ===============================================================================
 
 1

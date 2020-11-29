@@ -72,7 +72,7 @@ begin
 			pprod(i) <= a2;
 		elsif window = "100" then
 			pprod(i) <= a2_neg;
-		elsif window = "111" then
+		else --elsif window = "111" then
 			pprod(i) <= (OTHERS => '1');
 		end if;
 		
