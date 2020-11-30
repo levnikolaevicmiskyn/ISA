@@ -3,7 +3,7 @@
 Report : area
 Design : FPmul
 Version: O-2018.06-SP4
-Date   : Tue Nov 10 18:30:54 2020
+Date   : Mon Nov 30 16:00:10 2020
 ****************************************
 
 Information: Updating design information... (UID-85)

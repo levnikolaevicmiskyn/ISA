@@ -3,9 +3,10 @@
 Report : area
 Design : FPmul
 Version: O-2018.06-SP4
-Date   : Wed Nov 11 17:38:15 2020
+Date   : Mon Nov 30 16:09:07 2020
 ****************************************
 
+Information: Updating design information... (UID-85)
 Library(s) Used:
 
     NangateOpenCellLibrary (File: /software/dk/nangate45/synopsys/NangateOpenCellLibrary_typical_ecsm_nowlm.db)

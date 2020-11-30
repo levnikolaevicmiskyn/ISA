@@ -7,15 +7,15 @@ Report : timing
         -max_paths 1
 Design : FPmul
 Version: O-2018.06-SP4
-Date   : Wed Nov 11 18:18:19 2020
+Date   : Mon Nov 30 16:17:53 2020
 ****************************************
 
 Operating Conditions: typical   Library: NangateOpenCellLibrary
 Wire Load Model Mode: top
 
-  Startpoint: clk_r_REG24_S9
+  Startpoint: clk_r_REG18_S9
               (rising edge-triggered flip-flop clocked by clk)
-  Endpoint: FP_Z[9] (output port clocked by clk)
+  Endpoint: FP_Z[0] (output port clocked by clk)
   Path Group: clk
   Path Type: max
 
@@ -27,10 +27,10 @@ Wire Load Model Mode: top
   -----------------------------------------------------------
   clock clk (rise edge)                    0.00       0.00
   clock network delay (ideal)              0.00       0.00
-  clk_r_REG24_S9/CK (DFF_X2)               0.00       0.00 r
-  clk_r_REG24_S9/Q (DFF_X2)                0.11       0.11 r
-  FP_Z[9] (out)                            0.02       0.14 r
-  data arrival time                                   0.14
+  clk_r_REG18_S9/CK (DFF_X1)               0.00       0.00 r
+  clk_r_REG18_S9/Q (DFF_X1)                0.09       0.09 r
+  FP_Z[0] (out)                            0.02       0.11 r
+  data arrival time                                   0.11
 
   clock clk (rise edge)                    0.00       0.00
   clock network delay (ideal)              0.00       0.00
@@ -39,9 +39,9 @@ Wire Load Model Mode: top
   data required time                                 -0.57
   -----------------------------------------------------------
   data required time                                 -0.57
-  data arrival time                                  -0.14
+  data arrival time                                  -0.11
   -----------------------------------------------------------
-  slack (VIOLATED)                                   -0.71
+  slack (VIOLATED)                                   -0.68
 
 
 1

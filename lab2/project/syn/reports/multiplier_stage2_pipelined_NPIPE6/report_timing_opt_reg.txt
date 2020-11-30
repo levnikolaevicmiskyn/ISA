@@ -7,15 +7,15 @@ Report : timing
         -max_paths 1
 Design : FPmul
 Version: O-2018.06-SP4
-Date   : Wed Nov 11 18:47:05 2020
+Date   : Mon Nov 30 16:27:44 2020
 ****************************************
 
 Operating Conditions: typical   Library: NangateOpenCellLibrary
 Wire Load Model Mode: top
 
-  Startpoint: I2/mult_156/clk_r_REG670_S2
+  Startpoint: I2/mult_156/clk_r_REG359_S2
               (rising edge-triggered flip-flop clocked by clk)
-  Endpoint: I2/mult_156/clk_r_REG507_S3
+  Endpoint: I2/mult_156/clk_r_REG315_S3
             (rising edge-triggered flip-flop clocked by clk)
   Path Group: clk
   Path Type: max
@@ -28,28 +28,28 @@ Wire Load Model Mode: top
   --------------------------------------------------------------------------
   clock clk (rise edge)                                   0.00       0.00
   clock network delay (ideal)                             0.00       0.00
-  I2/mult_156/clk_r_REG670_S2/CK (DFF_X1)                 0.00       0.00 r
-  I2/mult_156/clk_r_REG670_S2/Q (DFF_X1)                  0.16       0.16 r
-  I2/mult_156/U2121/ZN (XNOR2_X1)                         0.06       0.23 f
-  I2/mult_156/U2619/ZN (OAI22_X1)                         0.08       0.31 r
-  I2/mult_156/U2969/ZN (XNOR2_X1)                         0.07       0.39 r
-  I2/mult_156/U2962/ZN (XNOR2_X1)                         0.07       0.46 r
-  I2/mult_156/U2104/ZN (XNOR2_X1)                         0.07       0.53 r
-  I2/mult_156/U1898/ZN (XNOR2_X1)                         0.06       0.59 r
-  I2/mult_156/clk_r_REG507_S3/D (DFF_X1)                  0.01       0.59 r
-  data arrival time                                                  0.59
+  I2/mult_156/clk_r_REG359_S2/CK (DFF_X1)                 0.00       0.00 r
+  I2/mult_156/clk_r_REG359_S2/Q (DFF_X1)                  0.15       0.15 r
+  I2/mult_156/U1627/Z (CLKBUF_X1)                         0.13       0.28 r
+  I2/mult_156/U2423/ZN (OAI22_X1)                         0.06       0.33 f
+  I2/mult_156/U656/S (HA_X1)                              0.09       0.42 f
+  I2/mult_156/U2304/ZN (NAND2_X1)                         0.03       0.45 r
+  I2/mult_156/U2303/ZN (NAND2_X1)                         0.03       0.48 f
+  I2/mult_156/U639/S (FA_X1)                              0.13       0.61 r
+  I2/mult_156/clk_r_REG315_S3/D (DFF_X1)                  0.01       0.62 r
+  data arrival time                                                  0.62
 
   clock clk (rise edge)                                   0.00       0.00
   clock network delay (ideal)                             0.00       0.00
   clock uncertainty                                      -0.07      -0.07
-  I2/mult_156/clk_r_REG507_S3/CK (DFF_X1)                 0.00      -0.07 r
+  I2/mult_156/clk_r_REG315_S3/CK (DFF_X1)                 0.00      -0.07 r
   library setup time                                     -0.03      -0.10
   data required time                                                -0.10
   --------------------------------------------------------------------------
   data required time                                                -0.10
-  data arrival time                                                 -0.59
+  data arrival time                                                 -0.62
   --------------------------------------------------------------------------
-  slack (VIOLATED)                                                  -0.70
+  slack (VIOLATED)                                                  -0.72
 
 
 1
