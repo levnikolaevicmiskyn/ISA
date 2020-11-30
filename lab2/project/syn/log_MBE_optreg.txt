@@ -1,0 +1,623 @@
+Removing design 'FPmul'
+Removing design 'FPmul_DW01_add_3'
+Removing design 'FPmul_DW01_inc_1'
+Removing design 'FPmul_DW01_add_10'
+Running PRESTO HDLC
+Compiling Entity Declaration FPNORMALIZE
+Compiling Architecture FPNORMALIZE of FPNORMALIZE
+Warning:  ../src/common/fpnormalize_fpnormalize.vhd:34: The architecture FPnormalize has already been analyzed. It is being replaced. (VHD-4)
+Presto compilation completed successfully.
+Running PRESTO HDLC
+Compiling Entity Declaration PACKFP
+Compiling Architecture PACKFP of PACKFP
+Warning:  ../src/common/packfp_packfp.vhd:33: The architecture PackFP has already been analyzed. It is being replaced. (VHD-4)
+Presto compilation completed successfully.
+Running PRESTO HDLC
+Compiling Entity Declaration FPROUND
+Compiling Architecture FPROUND of FPROUND
+Warning:  ../src/common/fpround_fpround.vhd:34: The architecture FPround has already been analyzed. It is being replaced. (VHD-4)
+Presto compilation completed successfully.
+Running PRESTO HDLC
+Compiling Entity Declaration UNPACKFP
+Compiling Architecture UNPACKFP of UNPACKFP
+Warning:  ../src/common/unpackfp_unpackfp.vhd:33: The architecture UnpackFP has already been analyzed. It is being replaced. (VHD-4)
+Presto compilation completed successfully.
+Running PRESTO HDLC
+Compiling Package Declaration SIMCONSTS
+Compiling Package Body SIMCONSTS
+Presto compilation completed successfully.
+Running PRESTO HDLC
+Compiling Entity Declaration HA
+Compiling Architecture STRUCTURE of HA
+Warning:  ../src/MBE/HA.vhd:10: The architecture structure has already been analyzed. It is being replaced. (VHD-4)
+Presto compilation completed successfully.
+Running PRESTO HDLC
+Compiling Entity Declaration FA
+Compiling Architecture STRUCTURE of FA
+Warning:  ../src/MBE/FA.vhd:10: The architecture structure has already been analyzed. It is being replaced. (VHD-4)
+Presto compilation completed successfully.
+Running PRESTO HDLC
+Compiling Entity Declaration MBE
+Compiling Architecture RTL of MBE
+Warning:  ../src/MBE/MBE_24bit.vhd:13: The architecture RTL has already been analyzed. It is being replaced. (VHD-4)
+Presto compilation completed successfully.
+Running PRESTO HDLC
+Compiling Entity Declaration FPMUL_STAGE1
+Compiling Architecture STRUCT of FPMUL_STAGE1
+Warning:  ../src/multiplier/fpmul_stage1_struct.vhd:53: The architecture struct has already been analyzed. It is being replaced. (VHD-4)
+Presto compilation completed successfully.
+Running PRESTO HDLC
+Compiling Entity Declaration FPMUL_STAGE2
+Compiling Architecture STRUCT of FPMUL_STAGE2
+Warning:  ../src/multiplier/fpmul_stage2_MBE_24bit.vhd:59: The architecture struct has already been analyzed. It is being replaced. (VHD-4)
+Presto compilation completed successfully.
+Running PRESTO HDLC
+Compiling Entity Declaration FPMUL_STAGE3
+Compiling Architecture STRUCT of FPMUL_STAGE3
+Warning:  ../src/multiplier/fpmul_stage3_struct.vhd:58: The architecture struct has already been analyzed. It is being replaced. (VHD-4)
+Presto compilation completed successfully.
+Running PRESTO HDLC
+Compiling Entity Declaration FPMUL_STAGE4
+Compiling Architecture STRUCT of FPMUL_STAGE4
+Warning:  ../src/multiplier/fpmul_stage4_struct.vhd:51: The architecture struct has already been analyzed. It is being replaced. (VHD-4)
+Presto compilation completed successfully.
+Running PRESTO HDLC
+Compiling Entity Declaration FPMUL
+Compiling Architecture PIPELINE of FPMUL
+Warning:  ../src/multiplier/fpmul_pipeline_wregs.vhd:48: The architecture pipeline has already been analyzed. It is being replaced. (VHD-4)
+Presto compilation completed successfully.
+Running PRESTO HDLC
+
+Inferred memory devices in process
+	in routine FPmul line 169 in file
+		'../src/multiplier/fpmul_pipeline_wregs.vhd'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|     DLINE_A_reg     | Flip-flop |  32   |  Y  | N  | N  | N  | N  | N  | N  |
+|     DLINE_B_reg     | Flip-flop |  32   |  Y  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Elaborated 1 design.
+Current design is now 'FPmul'.
+Information: Building the design 'FPmul_stage1'. (HDL-193)
+
+Inferred memory devices in process
+	in routine FPmul_stage1 line 104 in file
+		'../src/multiplier/fpmul_stage1_struct.vhd'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+| SIGN_out_stage1_reg | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|      A_EXP_reg      | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+|      A_SIG_reg      | Flip-flop |  32   |  Y  | N  | N  | N  | N  | N  | N  |
+|  isINF_stage1_reg   | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|  isNaN_stage1_reg   | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+| isZ_tab_stage1_reg  | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|      B_EXP_reg      | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+|      B_SIG_reg      | Flip-flop |  32   |  Y  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'FPmul_stage2'. (HDL-193)
+
+Inferred memory devices in process
+	in routine FPmul_stage2 line 95 in file
+		'../src/multiplier/fpmul_stage2_MBE_24bit.vhd'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|     EXP_in_reg      | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+|     SIG_in_reg      | Flip-flop |  28   |  Y  | N  | N  | N  | N  | N  | N  |
+| EXP_pos_stage2_reg  | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+| EXP_neg_stage2_reg  | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+
+Inferred memory devices in process
+	in routine FPmul_stage2 line 107 in file
+		'../src/multiplier/fpmul_stage2_MBE_24bit.vhd'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|  isINF_stage2_reg   | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|  isNaN_stage2_reg   | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+| isZ_tab_stage2_reg  | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+| SIGN_out_stage2_reg | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'FPmul_stage3'. (HDL-193)
+
+Inferred memory devices in process
+	in routine FPmul_stage3 line 104 in file
+		'../src/multiplier/fpmul_stage3_struct.vhd'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|  EXP_out_round_reg  | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+|  SIG_out_round_reg  | Flip-flop |  28   |  Y  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+
+Inferred memory devices in process
+	in routine FPmul_stage3 line 114 in file
+		'../src/multiplier/fpmul_stage3_struct.vhd'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|    isINF_tab_reg    | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|      isNaN_reg      | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|     isZ_tab_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|    SIGN_out_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|     EXP_pos_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|     EXP_neg_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'FPmul_stage4'. (HDL-193)
+
+Inferred memory devices in process
+	in routine FPmul_stage4 line 128 in file
+		'../src/multiplier/fpmul_stage4_struct.vhd'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|      FP_Z_reg       | Flip-flop |  32   |  Y  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'UnpackFP'. (HDL-193)
+Presto compilation completed successfully.
+Information: Building the design 'MBE' instantiated from design 'FPmul_stage2' with
+	the parameters "N=24". (HDL-193)
+Presto compilation completed successfully.
+Information: Building the design 'FPnormalize' instantiated from design 'FPmul_stage3' with
+	the parameters "SIG_width=28". (HDL-193)
+Presto compilation completed successfully.
+Information: Building the design 'FPround' instantiated from design 'FPmul_stage3' with
+	the parameters "SIG_width=28". (HDL-193)
+Presto compilation completed successfully.
+Information: Building the design 'PackFP'. (HDL-193)
+Presto compilation completed successfully.
+Information: Building the design 'HA'. (HDL-193)
+Presto compilation completed successfully.
+Information: Building the design 'FA'. (HDL-193)
+Presto compilation completed successfully.
+Information: Updating graph... (UID-83)
+
+Information: There are 46 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+
+
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'FPmul'
+Information: The register 'I1/A_SIG_reg[31]' will be removed. (OPT-1207)
+Information: The register 'I1/A_SIG_reg[30]' will be removed. (OPT-1207)
+Information: The register 'I1/A_SIG_reg[29]' will be removed. (OPT-1207)
+Information: The register 'I1/A_SIG_reg[28]' will be removed. (OPT-1207)
+Information: The register 'I1/A_SIG_reg[27]' will be removed. (OPT-1207)
+Information: The register 'I1/A_SIG_reg[26]' will be removed. (OPT-1207)
+Information: The register 'I1/A_SIG_reg[25]' will be removed. (OPT-1207)
+Information: The register 'I1/A_SIG_reg[24]' will be removed. (OPT-1207)
+Information: The register 'I1/B_SIG_reg[31]' will be removed. (OPT-1207)
+Information: The register 'I1/B_SIG_reg[30]' will be removed. (OPT-1207)
+Information: The register 'I1/B_SIG_reg[29]' will be removed. (OPT-1207)
+Information: The register 'I1/B_SIG_reg[28]' will be removed. (OPT-1207)
+Information: The register 'I1/B_SIG_reg[27]' will be removed. (OPT-1207)
+Information: The register 'I1/B_SIG_reg[26]' will be removed. (OPT-1207)
+Information: The register 'I1/B_SIG_reg[25]' will be removed. (OPT-1207)
+Information: The register 'I1/B_SIG_reg[24]' will be removed. (OPT-1207)
+Information: The register 'I3/SIG_out_round_reg[2]' will be removed. (OPT-1207)
+Information: The register 'I3/SIG_out_round_reg[1]' will be removed. (OPT-1207)
+Information: The register 'I3/SIG_out_round_reg[0]' will be removed. (OPT-1207)
+Information: The register 'I2/SIG_in_reg[1]' will be removed. (OPT-1207)
+Information: The register 'I2/SIG_in_reg[0]' will be removed. (OPT-1207)
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+
+  Beginning Implementation Selection
+  ----------------------------------
+  Processing 'FPmul_DW01_add_0'
+  Processing 'FPmul_DW01_add_1'
+  Processing 'FPmul_DW01_inc_0'
+  Processing 'FPmul_DW01_add_2'
+  Processing 'FPmul_DW01_add_3'
+
+  Beginning Mapping Optimizations  (Medium effort)
+  -------------------------------
+Information: compile falsified 322 infeasible paths. (OPT-1720)
+  Mapping Optimization (Phase 16)
+  Mapping Optimization (Phase 17)
+  Mapping Optimization (Phase 18)
+  Mapping Optimization (Phase 19)
+  Mapping Optimization (Phase 20)
+  Mapping Optimization (Phase 21)
+  Mapping Optimization (Phase 22)
+  Mapping Optimization (Phase 23)
+  Mapping Optimization (Phase 24)
+  Mapping Optimization (Phase 25)
+  Mapping Optimization (Phase 26)
+  Mapping Optimization (Phase 27)
+  Mapping Optimization (Phase 28)
+  Mapping Optimization (Phase 29)
+  Mapping Optimization (Phase 30)
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:12:17    6249.9      1.66     141.0       0.2                          
+    0:12:23    6225.2      1.66     139.2       0.2                          
+    0:12:23    6225.2      1.66     139.2       0.2                          
+    0:12:24    6223.3      1.66     139.2       0.2                          
+    0:12:25    6223.3      1.66     139.2       0.2                          
+    0:12:52    5726.7      1.67     133.3       0.2                          
+    0:13:00    5725.1      1.64     132.7       0.2                          
+    0:13:04    5725.4      1.63     132.5       0.2                          
+    0:13:07    5728.3      1.62     132.4       0.2                          
+    0:13:08    5731.5      1.62     132.3       0.2                          
+    0:13:10    5733.4      1.60     132.2       0.2                          
+    0:13:12    5733.9      1.60     132.1       0.2                          
+    0:13:13    5734.2      1.60     132.1       0.2                          
+    0:13:14    5733.9      1.60     132.1       0.2                          
+    0:13:16    5734.2      1.60     132.1       0.2                          
+    0:13:17    5734.2      1.60     132.1       0.2                          
+    0:13:17    5734.2      1.60     132.1       0.2                          
+    0:13:17    5734.2      1.60     132.1       0.2                          
+    0:13:18    5735.8      1.60     130.6       0.0                          
+    0:13:18    5735.8      1.60     130.6       0.0                          
+    0:13:18    5735.8      1.60     130.6       0.0                          
+    0:13:18    5735.8      1.60     130.6       0.0                          
+
+
+
+  Beginning Delay Optimization Phase
+  ----------------------------------
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:13:18    5735.8      1.60     130.6       0.0                          
+    0:13:21    5740.0      1.59     130.2       0.0 I2/SIG_in_reg[12]/D      
+    0:13:25    5745.3      1.58     130.0       0.0 I2/SIG_in_reg[12]/D      
+    0:13:27    5745.9      1.58     130.0       0.0 I2/SIG_in_reg[12]/D      
+    0:13:28    5744.8      1.57     129.9       0.0 I2/SIG_in_reg[12]/D      
+    0:13:32    5750.4      1.57     129.9       0.0 I2/SIG_in_reg[12]/D      
+    0:13:35    5753.0      1.57     129.8       0.0 I2/SIG_in_reg[18]/D      
+    0:13:37    5755.7      1.57     129.7       0.0 I2/SIG_in_reg[12]/D      
+    0:13:40    5761.0      1.56     129.6       0.0 I2/SIG_in_reg[12]/D      
+    0:13:42    5764.2      1.56     129.6       0.0 I2/SIG_in_reg[12]/D      
+    0:13:44    5767.4      1.56     129.5       0.0 I2/SIG_in_reg[12]/D      
+    0:13:47    5771.9      1.55     129.3       0.0 I2/SIG_in_reg[12]/D      
+    0:13:49    5775.1      1.55     129.2       0.0 I2/SIG_in_reg[18]/D      
+    0:13:51    5773.0      1.55     129.2       0.0 I2/SIG_in_reg[18]/D      
+    0:13:53    5776.7      1.55     129.2       0.0 I2/SIG_in_reg[12]/D      
+    0:13:54    5780.2      1.54     129.1       0.0 I2/SIG_in_reg[12]/D      
+    0:13:57    5781.2      1.54     129.0       0.0 I2/SIG_in_reg[12]/D      
+    0:13:59    5787.6      1.54     129.0       0.0 I2/SIG_in_reg[12]/D      
+    0:14:01    5787.6      1.54     129.0       0.0 I2/SIG_in_reg[12]/D      
+    0:14:03    5791.6      1.54     128.9       0.0 I2/SIG_in_reg[12]/D      
+    0:14:05    5794.5      1.54     128.9       0.0 I2/SIG_in_reg[12]/D      
+    0:14:07    5795.3      1.53     128.8       0.0 I2/SIG_in_reg[12]/D      
+    0:14:09    5798.3      1.53     128.7       0.0 I2/SIG_in_reg[18]/D      
+    0:14:12    5801.7      1.52     128.6       0.0 I2/SIG_in_reg[12]/D      
+    0:14:14    5803.1      1.52     128.6       0.0 I2/SIG_in_reg[12]/D      
+    0:14:16    5805.7      1.52     128.6       0.0 I2/SIG_in_reg[12]/D      
+    0:14:18    5807.6      1.52     128.6       0.0 I2/SIG_in_reg[18]/D      
+    0:14:21    5809.2      1.52     128.6       0.0 I2/SIG_in_reg[12]/D      
+    0:14:23    5812.1      1.52     128.5       0.0 I2/SIG_in_reg[12]/D      
+    0:14:25    5816.1      1.52     128.5       0.0 I2/SIG_in_reg[12]/D      
+    0:14:28    5816.9      1.51     128.4       0.0 I2/SIG_in_reg[12]/D      
+    0:14:29    5820.9      1.51     128.4       0.0 I2/SIG_in_reg[12]/D      
+    0:14:31    5824.6      1.51     128.4       0.0 I2/SIG_in_reg[12]/D      
+    0:14:32    5827.0      1.51     128.3       0.0 I2/SIG_in_reg[12]/D      
+    0:14:34    5827.8      1.51     128.2       0.0 I2/SIG_in_reg[12]/D      
+    0:14:36    5829.9      1.51     128.2       0.0 I2/SIG_in_reg[12]/D      
+    0:14:38    5830.7      1.50     128.2       0.0 I2/SIG_in_reg[12]/D      
+    0:14:40    5834.7      1.50     128.2       0.0 I2/SIG_in_reg[12]/D      
+    0:14:42    5835.5      1.50     128.1       0.0 I2/SIG_in_reg[12]/D      
+    0:14:44    5835.5      1.50     128.1       0.0 I2/SIG_in_reg[12]/D      
+    0:14:45    5836.3      1.50     128.1       0.0 I2/SIG_in_reg[12]/D      
+    0:14:47    5839.5      1.50     128.1       0.0 I2/SIG_in_reg[12]/D      
+    0:14:48    5841.4      1.50     128.3       0.0 I2/SIG_in_reg[12]/D      
+    0:14:51    5840.0      1.50     128.3       0.0 I2/SIG_in_reg[21]/D      
+    0:14:53    5839.5      1.50     128.3       0.0 I2/SIG_in_reg[12]/D      
+    0:14:55    5841.9      1.50     128.3       0.0 I2/SIG_in_reg[21]/D      
+    0:14:58    5845.1      1.49     128.2       0.0 I2/SIG_in_reg[12]/D      
+    0:15:00    5846.9      1.49     128.1       0.0 I2/SIG_in_reg[12]/D      
+    0:15:02    5850.1      1.49     128.1       0.0 I2/SIG_in_reg[18]/D      
+    0:15:06    5851.2      1.49     128.1       0.0 I2/SIG_in_reg[12]/D      
+    0:15:09    5852.3      1.49     128.0       0.0 I2/SIG_in_reg[12]/D      
+    0:15:10    5853.9      1.49     128.0       0.0 I2/SIG_in_reg[12]/D      
+    0:15:13    5854.7      1.49     128.0       0.0 I2/SIG_in_reg[12]/D      
+    0:15:15    5859.7      1.48     127.9       0.0 I2/SIG_in_reg[12]/D      
+    0:15:18    5859.7      1.48     127.9       0.0 I2/SIG_in_reg[12]/D      
+    0:15:19    5862.4      1.48     127.9       0.0 I2/SIG_in_reg[12]/D      
+    0:15:22    5863.4      1.48     127.9       0.0 I2/SIG_in_reg[12]/D      
+    0:15:24    5865.8      1.48     127.9       0.0 I2/SIG_in_reg[26]/D      
+    0:15:26    5868.5      1.48     127.8       0.0 I2/SIG_in_reg[26]/D      
+    0:15:29    5870.4      1.48     127.8       0.0 I2/SIG_in_reg[21]/D      
+    0:15:31    5869.6      1.48     127.8       0.0 I2/SIG_in_reg[12]/D      
+    0:15:34    5873.3      1.48     127.8       0.0 I2/SIG_in_reg[12]/D      
+    0:15:38    5875.1      1.48     127.8       0.0 I2/SIG_in_reg[12]/D      
+    0:15:40    5874.1      1.48     127.8       0.0 I2/SIG_in_reg[12]/D      
+    0:15:41    5876.2      1.48     127.8       0.0 I2/SIG_in_reg[12]/D      
+    0:15:44    5876.2      1.48     127.7       0.0 I2/SIG_in_reg[12]/D      
+    0:15:47    5878.1      1.48     127.7       0.0 I2/SIG_in_reg[12]/D      
+    0:15:50    5883.1      1.48     127.7       0.0 I2/SIG_in_reg[12]/D      
+    0:15:52    5885.0      1.47     127.7       0.0 I2/SIG_in_reg[12]/D      
+    0:15:56    5887.1      1.47     127.7       0.0 I2/SIG_in_reg[18]/D      
+    0:15:57    5887.9      1.47     127.6       0.0 I2/SIG_in_reg[21]/D      
+    0:16:00    5890.8      1.47     127.6       0.0 I2/SIG_in_reg[12]/D      
+    0:16:03    5893.2      1.47     127.6       0.0 I2/SIG_in_reg[12]/D      
+    0:16:05    5895.4      1.47     127.5       0.0 I2/SIG_in_reg[12]/D      
+    0:16:07    5896.4      1.47     127.5       0.0 I2/SIG_in_reg[12]/D      
+    0:16:10    5898.8      1.47     127.5       0.0 I2/SIG_in_reg[12]/D      
+    0:16:12    5906.5      1.47     127.5       0.0 I2/SIG_in_reg[26]/D      
+    0:16:13    5908.9      1.47     127.5       0.0 I2/SIG_in_reg[12]/D      
+    0:16:15    5909.2      1.47     127.5       0.0 I2/SIG_in_reg[12]/D      
+    0:16:17    5909.7      1.47     127.5       0.0 I2/SIG_in_reg[12]/D      
+    0:16:19    5915.8      1.47     127.4       0.0 I2/SIG_in_reg[12]/D      
+    0:16:21    5915.8      1.46     127.4       0.0 I2/SIG_in_reg[12]/D      
+    0:16:23    5916.1      1.46     127.4       0.0 I2/SIG_in_reg[12]/D      
+    0:16:25    5915.8      1.46     127.4       0.0 I2/SIG_in_reg[12]/D      
+    0:16:27    5916.6      1.46     127.4       0.0 I2/SIG_in_reg[12]/D      
+    0:16:29    5918.0      1.46     127.4       0.0 I2/SIG_in_reg[12]/D      
+    0:16:31    5920.4      1.46     127.4       0.0 I2/SIG_in_reg[12]/D      
+    0:16:33    5923.0      1.46     127.3       0.0 I2/SIG_in_reg[12]/D      
+    0:16:34    5924.6      1.46     127.3       0.0 I2/SIG_in_reg[12]/D      
+    0:16:35    5926.5      1.46     127.3       0.0 I2/SIG_in_reg[12]/D      
+    0:16:37    5926.5      1.46     127.3       0.0 I2/SIG_in_reg[12]/D      
+    0:16:38    5924.9      1.46     127.3       0.0 I2/SIG_in_reg[12]/D      
+    0:16:40    5927.3      1.46     127.3       0.0 I2/SIG_in_reg[12]/D      
+    0:16:42    5927.8      1.46     127.3       0.0 I2/SIG_in_reg[18]/D      
+    0:16:43    5933.7      1.46     127.3       0.0 I2/SIG_in_reg[12]/D      
+    0:16:45    5935.5      1.46     127.3       0.0 I2/SIG_in_reg[26]/D      
+    0:16:48    5938.4      1.46     127.3       0.0 I2/SIG_in_reg[12]/D      
+    0:16:49    5937.9      1.46     127.3       0.0 I2/SIG_in_reg[12]/D      
+    0:17:00    5938.2      1.46     127.3       0.0                          
+    0:17:09    5927.3      1.46     127.3       0.0                          
+    0:17:16    5927.8      1.46     127.2       0.0                          
+    0:17:18    5929.1      1.46     127.2       0.0                          
+    0:17:23    5929.4      1.46     127.1       0.0                          
+    0:17:26    5928.9      1.46     127.2       0.0                          
+    0:17:27    5930.7      1.46     127.1       0.0                          
+    0:17:29    5931.5      1.46     127.1       0.0                          
+    0:17:31    5935.0      1.46     127.1       0.0                          
+    0:17:33    5937.1      1.46     127.1       0.0                          
+    0:17:35    5938.7      1.46     127.0       0.0                          
+    0:17:37    5942.2      1.46     127.0       0.0                          
+    0:17:39    5944.8      1.46     127.0       0.0                          
+    0:17:40    5946.4      1.46     127.2       0.0                          
+    0:17:42    5948.3      1.46     127.2       0.0                          
+    0:17:43    5948.8      1.46     127.2       0.0                          
+
+
+  Beginning Area-Recovery Phase  (cleanup)
+  -----------------------------
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:17:43    5948.8      1.46     127.2       0.0                          
+    0:17:43    5948.8      1.46     127.2       0.0                          
+    0:17:50    5915.3      1.46     127.1       0.0                          
+    0:17:53    5904.4      1.46     127.1       0.0                          
+    0:17:54    5898.5      1.46     127.0       0.0                          
+    0:17:54    5895.9      1.46     127.0       0.0                          
+    0:17:54    5895.9      1.46     127.0       0.0                          
+    0:17:54    5895.9      1.46     127.0       0.0                          
+    0:17:55    5895.9      1.46     127.0       0.0                          
+    0:17:56    5882.3      1.46     127.0       0.0                          
+    0:17:57    5881.3      1.46     127.0       0.0                          
+    0:17:57    5881.3      1.46     127.0       0.0                          
+    0:17:57    5881.3      1.46     127.0       0.0                          
+    0:17:57    5881.3      1.46     127.0       0.0                          
+    0:17:57    5881.3      1.46     127.0       0.0                          
+    0:17:57    5881.3      1.46     127.0       0.0                          
+    0:18:00    5883.4      1.46     127.0       0.0 I2/SIG_in_reg[12]/D      
+    0:18:04    5885.5      1.45     126.9       0.0 I2/SIG_in_reg[12]/D      
+    0:18:06    5886.3      1.45     126.9       0.0 I2/SIG_in_reg[12]/D      
+    0:18:08    5887.4      1.45     126.9       0.0 I2/SIG_in_reg[12]/D      
+    0:18:10    5887.9      1.45     126.9       0.0 I2/SIG_in_reg[12]/D      
+    0:18:12    5890.6      1.45     126.9       0.0 I2/SIG_in_reg[24]/D      
+    0:18:15    5895.1      1.45     126.9       0.0 I2/SIG_in_reg[12]/D      
+    0:18:18    5898.5      1.45     126.9       0.0 I2/SIG_in_reg[24]/D      
+    0:18:21    5900.4      1.45     126.9       0.0 I2/SIG_in_reg[12]/D      
+    0:18:24    5902.0      1.45     126.9       0.0 I2/SIG_in_reg[18]/D      
+    0:18:26    5903.3      1.45     126.8       0.0 I2/SIG_in_reg[12]/D      
+    0:18:30    5906.5      1.45     126.9       0.0 I2/SIG_in_reg[12]/D      
+    0:18:32    5909.5      1.45     126.9       0.0 I2/SIG_in_reg[12]/D      
+    0:18:33    5912.1      1.45     126.9       0.0 I2/SIG_in_reg[12]/D      
+    0:18:35    5914.0      1.45     126.9       0.0 I2/SIG_in_reg[12]/D      
+    0:18:38    5915.3      1.44     126.9       0.0 I2/SIG_in_reg[18]/D      
+    0:18:41    5915.8      1.44     126.9       0.0 I2/SIG_in_reg[26]/D      
+    0:18:43    5921.4      1.44     126.9       0.0 I2/SIG_in_reg[12]/D      
+    0:18:47    5922.5      1.44     126.8       0.0 I2/SIG_in_reg[12]/D      
+    0:18:49    5926.5      1.44     126.8       0.0 I2/SIG_in_reg[12]/D      
+    0:18:52    5927.3      1.44     126.8       0.0 I2/SIG_in_reg[12]/D      
+    0:18:54    5928.1      1.44     126.8       0.0 I2/SIG_in_reg[12]/D      
+    0:18:56    5930.5      1.44     126.8       0.0 I2/SIG_in_reg[12]/D      
+    0:19:03    5932.9      1.44     126.7       0.0                          
+    0:19:05    5929.9      1.44     126.7       0.0                          
+    0:19:07    5921.2      1.44     126.7       0.0                          
+    0:19:09    5916.4      1.44     126.7       0.0                          
+    0:19:11    5916.9      1.44     126.7       0.0                          
+    0:19:14    5916.4      1.44     126.8       0.0                          
+    0:19:17    5916.1      1.44     126.8       0.0                          
+    0:19:21    5918.0      1.44     126.7       0.0                          
+    0:19:22    5919.0      1.44     126.7       0.0                          
+    0:19:24    5919.8      1.44     126.7       0.0                          
+    0:19:25    5921.4      1.44     126.7       0.0                          
+    0:19:27    5920.1      1.44     126.6       0.0                          
+    0:19:28    5923.0      1.44     126.6       0.0                          
+    0:19:30    5924.4      1.44     126.6       0.0                          
+    0:19:32    5925.1      1.44     126.6       0.0                          
+    0:19:34    5925.1      1.44     126.6       0.0                          
+    0:19:36    5925.1      1.44     126.6       0.0                          
+    0:19:38    5925.9      1.44     126.5       0.0                          
+    0:19:41    5928.9      1.44     126.5       0.0                          
+    0:19:45    5929.4      1.44     126.5       0.0                          
+    0:19:47    5928.6      1.44     126.5       0.0 I2/SIG_in_reg[12]/D      
+    0:19:51    5928.6      1.44     126.5       0.0 I2/SIG_in_reg[12]/D      
+    0:19:54    5930.5      1.44     126.5       0.0 I2/SIG_in_reg[12]/D      
+    0:19:56    5928.1      1.44     126.5       0.0 I2/SIG_in_reg[12]/D      
+    0:19:58    5931.3      1.44     126.5       0.0 I2/SIG_in_reg[12]/D      
+    0:20:00    5932.1      1.44     126.5       0.0 I2/SIG_in_reg[12]/D      
+    0:20:02    5934.7      1.44     126.5       0.0 I2/SIG_in_reg[12]/D      
+    0:20:12    5935.8      1.44     126.4       0.0                          
+Loading db file '/software/dk/nangate45/synopsys/NangateOpenCellLibrary_typical_ecsm_nowlm.db'
+
+
+Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
+
+
+  Optimization Complete
+  ---------------------
+  Loading design 'FPmul'
+
+  Beginning retiming
+  ------------------
+Information: Updating design information... (UID-85)
+  Retiming FPmul (top)
+  Preferred flip-flop is DFFRS_X1 with setup = 0.04
+
+
+  Retiming base-clock clk, rising edge.
+Warning: Clock period after accounting for worst case set-up and median clock to Q/QN delay is non-positive. Original clock period is 0.00, estimated clock period is -0.19. Using a zero target clock period. (RTDC-19)
+  Beginning minimum period retiming ...
+  ... minimum period retiming done.
+  Beginning minimum area retiming step 1 ...
+  ... minimum area retiming step 1 done.
+  Beginning minimum area retiming step 2 ...
+  
+  ... minimum area retiming step 2 done.
+  Beginning minimum area retiming step 3 ...
+  
+  ... minimum area retiming step 3 done.
+  Beginning final register move ...
+  ... final register move done.
+  Lower bound estimate = 0.66
+  Critical path length = 0.66
+  Clock correction = 0.19 (clock-to-Q delay = 0.09, setup = 0.04, uncertainty = 0.07)
+Warning: Design 'FPmul' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+
+  Retiming complete
+  -----------------
+Information: Performing power optimization. (PWR-850)
+Alib files are up-to-date.
+
+Information: There are 32 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+
+
+Loading db file '/software/dk/nangate45/synopsys/NangateOpenCellLibrary_typical_ecsm_nowlm.db'
+Loaded alib file './alib-52/NangateOpenCellLibrary_typical_ecsm_nowlm.db.alib'
+Information: State dependent leakage is now switched from on to off.
+
+  Beginning Pass 1 Mapping  (Incremental)
+  ------------------------
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:38    7097.4      0.96     360.1       0.0                           151143.5625
+    0:00:38    7097.4      0.96     360.1       0.0                           151143.5625
+
+  Beginning Mapping Optimizations  (Ultra High effort)  (Incremental)
+  -------------------------------
+
+  Beginning Incremental Implementation Selection
+  ----------------------------------------------
+Warning: Current implementation 'rpl' of module 'DW01_add'
+	was not found in the files of synthetic_library.
+	Implementation selection of synthetic design
+	'FPmul_DW01_add_3' (cell 'add_1_root_I2/add_137_2') will take longer. (SYNH-22)
+Information: compile falsified 343 infeasible paths. (OPT-1720)
+    0:00:57    7063.9      0.95     350.6       0.0                           150410.0000
+
+  Beginning Delay Optimization Phase
+  ----------------------------------
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:57    7063.9      0.95     350.6       0.0                           150410.0000
+    0:01:00    7063.9      0.95     350.6       0.0                           150410.0000
+    0:01:08    7013.4      0.95     349.3       0.0                           147672.6719
+    0:01:10    7013.4      0.95     349.3       0.0                           147672.6719
+    0:01:11    7018.1      0.91     344.3       0.0                           147999.5312
+    0:01:11    7018.1      0.91     344.3       0.0                           147999.5312
+    0:01:49    7058.6      0.86     336.7       0.0                           149689.8438
+
+  Beginning Delay Optimization
+  ----------------------------
+    0:01:49    7058.6      0.86     336.7       0.0                           149689.8438
+    0:01:50    7058.6      0.86     336.7       0.0                           149689.8438
+    0:01:50    7058.6      0.86     336.7       0.0                           149689.8438
+    0:01:51    7058.6      0.86     336.7       0.0                           149689.8438
+    0:01:51    7058.6      0.86     336.7       0.0                           149689.8438
+    0:01:55    7058.6      0.86     336.7       0.0                           149689.8438
+    0:01:56    7058.6      0.86     336.7       0.0                           149689.8438
+    0:02:01    7058.3      0.86     336.7       0.0                           149675.4844
+    0:02:02    7058.3      0.86     336.7       0.0                           149675.4844
+    0:02:02    7058.3      0.86     336.7       0.0                           149675.4844
+    0:02:02    7058.3      0.86     336.7       0.0                           149675.4844
+    0:02:03    7058.3      0.86     336.7       0.0                           149675.4844
+    0:02:03    7058.3      0.86     336.7       0.0                           149675.4844
+    0:02:04    7058.3      0.86     336.7       0.0                           149675.4844
+    0:02:04    7058.3      0.86     336.7       0.0                           149675.4844
+    0:02:05    7058.3      0.86     336.7       0.0                           149675.4844
+    0:02:30    7090.5      0.85     334.3       0.0                           150152.6875
+    0:02:49    7110.4      0.84     333.0       0.0                           150591.7969
+    0:03:10    7125.6      0.84     330.9       0.0                           150816.7812
+    0:03:26    7138.6      0.84     329.9       0.0                           150973.0625
+    0:03:44    7147.7      0.84     328.7       0.0                           151138.9531
+    0:04:01    7158.6      0.84     327.2       0.0                           151474.7969
+    0:04:16    7162.8      0.84     326.2       0.0                           151603.4688
+    0:04:30    7176.7      0.84     325.2       0.0                           151880.5781
+    0:04:44    7183.3      0.84     323.9       0.0                           151955.2188
+    0:04:57    7188.9      0.84     322.6       0.0                           151970.7812
+    0:05:09    7198.8      0.84     321.7       0.0                           152140.3125
+    0:05:20    7204.6      0.84     321.0       0.0                           152178.3125
+    0:05:34    7205.9      0.84     319.6       0.0                           152033.3594
+    0:05:46    7210.2      0.84     318.2       0.0                           152058.6250
+    0:05:47    7201.4      0.84     317.8       0.0                           151628.2031
+    0:05:53    7201.4      0.84     317.8       0.0                           151628.2031
+    0:05:54    7201.4      0.84     317.8       0.0                           151628.2031
+    0:05:54    7201.7      0.84     317.8       0.0                           151651.1719
+    0:05:54    7201.7      0.84     317.8       0.0                           151651.1719
+    0:05:58    7225.6      0.83     317.6       0.0                           152504.7812
+    0:05:58    7225.6      0.83     317.6       0.0                           152504.7812
+    0:06:01    7225.6      0.83     317.6       0.0                           152504.7812
+    0:06:01    7225.6      0.83     317.6       0.0                           152504.7812
+    0:06:03    7225.6      0.83     317.6       0.0                           152504.7812
+    0:06:04    7225.6      0.83     317.6       0.0                           152504.7812
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:06:04    7225.6      0.83     317.6       0.0                           152504.7812
+    0:06:10    7221.4      0.83     317.6       0.0                           152348.7031
+    0:06:28    7000.9      0.83     317.9       0.0                           145723.4375
+    0:06:40    6931.7      0.83     320.1       0.0                           143109.2031
+    0:06:41    6931.7      0.83     320.1       0.0                           143109.2031
+    0:07:05    6929.0      0.83     320.0       0.0                           143045.4844
+    0:07:18    6929.0      0.83     319.9       0.0                           143065.9375
+    0:07:18    6929.6      0.83     319.9       0.0                           143116.5156
+    0:07:22    6926.4      0.83     319.9       0.0                           142910.8906
+Loading db file '/software/dk/nangate45/synopsys/NangateOpenCellLibrary_typical_ecsm_nowlm.db'
+
+
+Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
+
+
+  Optimization Complete
+  ---------------------
+Information: State dependent leakage is now switched from off to on.
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+Warning: There is no defined clock in the design. (PWR-80)
