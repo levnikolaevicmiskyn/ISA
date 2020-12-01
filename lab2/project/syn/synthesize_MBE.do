@@ -39,4 +39,5 @@ compile
 
 report_resources > reports/multiplier_MBE/report_resources.txt
 report_area > reports/multiplier_MBE/report_area.txt
+report_area -hierarchy > reports/multiplier_MBE/report_area_hier.txt
 report_timing > reports/multiplier_MBE/report_timing.txt

@@ -40,4 +40,5 @@ optimize_registers -clock clk
 
 report_resources > reports/multiplier_MBE/report_resources_opt_reg_npipe4.txt
 report_area > reports/multiplier_MBE/report_area_opt_reg_npipe4.txt
+report_area -hierarchy > reports/multiplier_MBE/report_area_hier_opt_reg_npipe4.txt
 report_timing > reports/multiplier_MBE/report_timing_opt_reg_npipe4.txt

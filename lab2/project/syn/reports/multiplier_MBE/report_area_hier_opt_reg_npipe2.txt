@@ -1,0 +1,45 @@
+ 
+****************************************
+Report : area
+Design : FPmul
+Version: O-2018.06-SP4
+Date   : Tue Dec  1 10:22:57 2020
+****************************************
+
+Library(s) Used:
+
+    NangateOpenCellLibrary (File: /software/dk/nangate45/synopsys/NangateOpenCellLibrary_typical_ecsm_nowlm.db)
+
+Number of ports:                          295
+Number of nets:                          5287
+Number of cells:                         4848
+Number of combinational cells:           4298
+Number of sequential cells:               545
+Number of macros/black boxes:               0
+Number of buf/inv:                        575
+Number of references:                      42
+
+Combinational area:               4655.531962
+Buf/Inv area:                      338.086002
+Noncombinational area:            2475.129912
+Macro/Black Box area:                0.000000
+Net Interconnect area:      undefined  (Wire load has zero net area)
+
+Total cell area:                  7130.661874
+Total area:                 undefined
+
+Hierarchical area distribution
+------------------------------
+
+                                  Global cell area          Local cell area
+                                  ------------------  ---------------------------- 
+Hierarchical cell                 Absolute   Percent  Combi-     Noncombi-  Black-
+                                  Total      Total    national   national   boxes   Design
+--------------------------------  ---------  -------  ---------  ---------  ------  ----------------
+FPmul                             7130.6619    100.0  4207.8540  2013.3539  0.0000  FPmul
+I2/mbe_mult/add_1424               705.4320      9.9   352.1840   353.2480  0.0000  FPmul_DW01_add_9
+I3/I11/add_45                      204.0220      2.9    95.4940   108.5280  0.0000  FPmul_DW01_inc_1
+--------------------------------  ---------  -------  ---------  ---------  ------  ----------------
+Total                                                 4655.5320  2475.1299  0.0000
+
+1
