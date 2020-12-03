@@ -15,6 +15,8 @@ public:
         int opcode;
         dtype operand1;
         dtype operand2;
+        dtype immediate;
+        int source;
     };
     struct Output {
         dtype result;
@@ -39,6 +41,7 @@ public:
 
 private:
     // ALU internal operations
+    static dtype _getRequestedSource(const Input &input);
     static Output _add(const Input &input);
     static Output _srai(const Input &input);
     // Opcode to function mapper

@@ -62,9 +62,11 @@ ALU::Input ALU::parseInputString(const std::string &instruction) {
         outputss << std::hex << field << ' ';
     }
     // Store fields in the struct
-    outputss >> input.opcode;
-    outputss >> input.operand1;
-    outputss >> input.operand2;
+    outputss >> input.opcode
+             >> input.operand1
+             >> input.operand2
+             >> input.immediate
+             >> input.source;
     return input;
 }
 
@@ -74,14 +76,24 @@ std::string ALU::formatOutputString(const Output &output) {
     return ss.str();
 }
 
+ALU::dtype ALU::_getRequestedSource(const Input &input) {
+    switch(input.source) {
+        case 0:
+            return input.operand2;
+        case 1:
+            return input.immediate;
+    }
+    throw;
+}
+
 ALU::Output ALU::_add(const Input &input) {
-    return Output{input.operand1 + input.operand2};
+    return Output{input.operand1 + _getRequestedSource(input)};
 }
 
 ALU::Output ALU::_srai(const Input &input) {
     // Data is unsigned, so the sign should be handled manually
     dtype MSB = (input.operand1 & 0x80000000);
-    dtype unsigned_result = input.operand1 >> input.operand2;
+    dtype unsigned_result = input.operand1 >> _getRequestedSource(input);
     dtype result = MSB | unsigned_result;
     return Output{result};
 }
