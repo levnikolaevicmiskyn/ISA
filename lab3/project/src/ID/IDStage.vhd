@@ -9,7 +9,7 @@ port(clk: in std_logic;
 	 wb_reg_write: in std_logic 
 	 alu_use_immediate: out std_logic;
 	 alu_op: out t_ALU_OP;
-	 alu_oprnd_1, alu_oprnd_2: out std_logic_vector(31 downto 0);
+	 alu_oprnd_1, alu_oprnd_2, alu_immediate: out std_logic_vector(31 downto 0);
 	 mem_write, mem_read: out std_logic
 	 );
 end entity IDStage;

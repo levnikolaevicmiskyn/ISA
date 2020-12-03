@@ -19,6 +19,8 @@ alu_use_immediate: This is true when the second operand of the adder is the imme
 
 alu_oprnd_1, alu_oprnd_2 (32 bits): ALU operands as fetched from the register file.
 
+alu_immediate (32 bits): Sign-extended immediate value
+
 # IF stage #
 IF_ID_write_n	: write enable for IF/ID pipeline register, active low
 PC_write_n		: do not update PC when this signal is 1
