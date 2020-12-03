@@ -10,11 +10,11 @@ The multiplier is made up of three parts:
 A strategy aimed at minimizing the tree height is put in place as suggested.
 This optimization makes the hardware description non-trivial, since standard \texttt{generate} statements do not readily provide a solution to parametrize this irregular structure given the bitwidth. 
 The preferred approach has been that of using a Matlab script to compute the number and location of all full-adders and half-adders adopting the rules specific to Dadda trees. The outcome is then translated into VHDL code by directly declarating all the needed signals and instantiating components (whose number may grow large in the case $N=32$ or $N=24$).
-The first step in designing a Dadda tree is finding the least integer $J$ such that $d_J > N$, where 
+The first step in designing a Dadda tree is to find the least integer $J$ such that $d_J > N$, where 
 \begin{equation*}
 d_j = \left \lfloor{\frac{3}{2}d_{j-1}}\right \rfloor \hspace{1cm}\,\,d_1 = 2
 \end{equation*}
-The core of the algorithm is best understood with the aid of the \textit{dot representation}. The tree will include several stages (indexed by $j=J, J-1, ..., 2$) where bits of each operand are represented by dots and are suitably aligned in a matrix. For each stage $j$ (starting from $J$) the algorithm runs along the columns allocating the least resources with the aim of having no more than $d_{j-1}$ in the next stage labeled $j-1$. In the following $n_j^i$ is the number of dots allocated in column $i$ within stage $j$, $a_j^i$ is the number of full-adders in column $i$, $b_j^i$ is the number of half adders, $c_j^i$ is the number of remaining dots, which are copied to the next stage.
+The core of the algorithm is best understood with the aid of the \textit{dot representation}. The tree will include several stages (indexed by $j=J, J-1, ..., 2$) where bits of each operand are represented by dots and are suitably aligned in a matrix. For each stage $j$ (starting from $J$) the algorithm runs along the columns allocating the least resources with the aim of having no more than $d_{j-1}$ dots in the next stage labeled $j-1$. In the following $n_j^i$ is the number of dots allocated in column $i$ within stage $j$, $a_j^i$ is the number of full-adders in column $i$, $b_j^i$ is the number of half adders, $c_j^i$ is the number of remaining dots, which are copied to the next stage.
 
 \begin{algorithmic}
 	\FOR{$j = J-1$ \textbf{downto} $1$} 
@@ -40,13 +40,22 @@ The core of the algorithm is best understood with the aid of the \textit{dot rep
 Once the matrices $a$ and $b$ are available, writing VHDL code automatically to instantiate the required number of full adders is a simple matter.
 
 \section{Synthesis}
+
+\begin{figure}
+	\includegraphics[width=\textwidth]{chapter2/images/delays.eps}
+	\caption{Critical path delays as a function of total number of pipeline registers}
+	\label{fig:delays}
+\end{figure}
 This new multiplier replaces the library multiplier instantiated in the second stage of \texttt{fpmul}. In order to fairly assess the impact that this component has on performance, pipeline registers are included and the synthesis process is repeated with several values of \texttt{NPIPE}, the constant denoting the number of pipeline registers.
 \begin{table}
 \begin{tabular}{|l|l|l|l|l|}\hline
 	& No retiming & \texttt{NPIPE=1} & \texttt{NPIPE=2} & \texttt{NPIPE=4}\\\hline
-	T & 1.44$\,\textrm{ns}$ & 0.83$\,\textrm{ns}$& 0.78$\,\textrm{ns}$& 0.76$\,\textrm{ns}$ \\\hline
-	Area & 5935 & 6926 & 7130 & 7992 \\\hline
-	Area (stage2) & & & & \\\hline
+	Clock period & 1.44$\,\textrm{ns}$ & 0.83$\,\textrm{ns}$& 0.78$\,\textrm{ns}$& 0.76$\,\textrm{ns}$ \\\hline
+	Area (total) & 5935 & 6926 & 7130 & 7992 \\\hline
+	Area (combinational) & 4794 & 4842 & 4655 & 4749 \\\hline
+	Area (\texttt{I2/mbe\_mult/add\_1424}) & 372 (6.3 \%)  & 419 (6 \%)  &  705 (9.9 \%)& 654 (8.2 \%)\\\hline
 \end{tabular}
-\caption{}
+\caption{Characterization of the MBE multiplier}
+\label{tab:MBE}
 \end{table}
+\autoref{fig:delays} shows that the multiplier provided by the library is superior to the one synthesized manually using the MBE strategy in terms of delay. Designs that include the MBE multiplier have been synthesized using a larger total area, as apparent by comparing \autoref{tab:MBE} with \autoref{tab:stage2}

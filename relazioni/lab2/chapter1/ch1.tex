@@ -2,3 +2,16 @@
 \section{Pipelining}
 
 \section{Fine grain pipelining}
+\begin{table}
+	
+	\begin{tabular}{|l|l|l|l|l|}
+	\hline
+	&\texttt{NPIPE=1} & \texttt{NPIPE=2} & \texttt{NPIPE=4} & \texttt{NPIPE=6}\\\hline
+	Delay & 0.78 & 0.71 & 0.68 & 0.72 \\\hline
+	Area (total) & & & & \\\hline
+	Area (combinational) & & & & \\\hline
+	\end{tabular}
+
+	\caption{Critical path delay and area with the hardcoded register in the second stage and a varying \texttt{NPIPE}}
+	\label{tab:stage2}
+\end{table}
