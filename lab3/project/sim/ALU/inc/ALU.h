@@ -1,8 +1,9 @@
 #ifndef ALU_ALU_H
 #define ALU_ALU_H
 
-#include<iostream>
+#include <iostream>
 #include <cinttypes>
+#include <exception>
 #include <map>
 #include <functional>
 
@@ -23,6 +24,8 @@ public:
     };
     using ALUFunction = std::function<Output(const Input &)>;
 private:
+    // Static variables
+    static const int N_INPUT_FIELDS = 5;
     // Attributes
     Input m_input;
     Output m_output;
@@ -38,7 +41,11 @@ public:
     // I/O operations
     static Input parseInputString(const std::string &instruction);
     static std::string formatOutputString(const Output &output);
-
+    // Errors
+    class InputFormatError : public std::runtime_error {
+    public:
+        InputFormatError(const std::string &msg);
+    };
 private:
     // ALU internal operations
     static dtype _getRequestedSource(const Input &input);
