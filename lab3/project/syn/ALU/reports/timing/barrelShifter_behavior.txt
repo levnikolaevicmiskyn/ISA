@@ -1,0 +1,44 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : barrelShifter
+Version: O-2018.06-SP4
+Date   : Sat Dec  5 12:44:36 2020
+****************************************
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: sha[1] (input port)
+  Endpoint: y[6] (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  barrelShifter      5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  input external delay                     0.00       0.00 r
+  sha[1] (in)                              0.00       0.00 r
+  U206/ZN (INV_X1)                         0.03       0.03 f
+  U201/ZN (NAND2_X1)                       0.10       0.13 r
+  U186/ZN (INV_X1)                         0.10       0.24 f
+  U138/ZN (AOI22_X1)                       0.09       0.33 r
+  U137/ZN (INV_X1)                         0.02       0.35 f
+  U136/ZN (AOI221_X1)                      0.10       0.45 r
+  U135/ZN (INV_X1)                         0.04       0.49 f
+  U17/ZN (AOI222_X1)                       0.10       0.59 r
+  U16/ZN (OAI221_X1)                       0.05       0.64 f
+  y[6] (out)                               0.00       0.64 f
+  data arrival time                                   0.64
+  -----------------------------------------------------------
+  (Path is unconstrained)
+
+
+1

@@ -1,0 +1,9 @@
+# Ignore work directory
+*/work
+
+# Logs
+*/*.log
+*/log.txt
+
+# Synopsys files
+*/default.svf

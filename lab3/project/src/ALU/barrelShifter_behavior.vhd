@@ -4,9 +4,9 @@ use ieee.numeric_std.all;
 
 entity barrelShifter is
     generic (
-        N: natural;
-        SHA_SIZE: natural;
-        RADIX: natural
+        N: natural := 32;
+        SHA_SIZE: natural := 5;
+        RADIX: natural := 1
     );
     port (
         x: in std_logic_vector(N-1 downto 0);
