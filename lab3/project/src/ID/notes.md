@@ -7,7 +7,7 @@ ID_pc (32 bits)	: program counter
 ID_next_pc (32 bits): output of the incrementer (pc+4)
 EX_rd_bw: Destination register coming from the ID/EX pipeline register (backward)
 EX_mem_read_bw: Mem read signal taken from ID/EX pipeline register (backward)
-ID_misprediction: Signal coming from the EX stage, it is true when a misprediction occurred.
+ID_misprediction: Signal coming from the EX stage, it is true when a misprediction occurs.
 WB_reg_write_bw: Register file write enable coming from the MEM/WB pipeline Register
 WB_rd_bw: Destination register coming from MEM/WB pipeline register
 WB_data: Data coming from MEM_WB pipeline register
