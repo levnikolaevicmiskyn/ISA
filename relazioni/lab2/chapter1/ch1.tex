@@ -16,3 +16,20 @@ In order to further boost the performance of this floating point multiplier, an 
 	\caption{Critical path delay and area with the hardcoded register in the second stage and a varying \texttt{NPIPE}}
 	\label{tab:stage2}
 \end{table}
+
+\paragraph{Critical path delay distribution}
+\autoref{fig:hist2} and \autoref{fig:hist6} show how worst path delays tend to accumulate towards the shortest one as the degree of pipelining increases. This is a general pattern seen when applying this technique.
+\begin{figure}[h]
+	\begin{subfigure}{0.5\textwidth}
+		\centering
+	\includegraphics[width=\textwidth]{chapter1/images/npipe2.png}
+	\caption{Worst path distribution with \texttt{NPIPE=2}}
+	\label{fig:hist2}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{chapter1/images/npipe6.png}
+	\caption{Worst path distribution with \texttt{NPIPE=6}}
+	\label{fig:hist6}
+	\end{subfigure}
+\end{figure}
