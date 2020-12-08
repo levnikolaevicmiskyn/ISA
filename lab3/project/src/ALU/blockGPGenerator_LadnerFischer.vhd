@@ -66,7 +66,7 @@ begin
             comp_upperHalfCombiner_i: GPCombiner
             port map (
                 internal_bg(N/2 - 1), internal_bp(N/2 - 1),
-                g(i), p(i),
+                internal_bg(i), internal_bp(i),
                 bg(i), bp(i)
             );
         end generate gen_combine_upperHalf;
