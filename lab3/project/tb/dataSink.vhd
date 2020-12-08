@@ -27,8 +27,8 @@ begin
     begin
         if rising_edge(clk) then
             if en = '1' then
-                write(lineout, to_integer(signed(data)));
-				writeline(results_file, lineout);
+                hwrite(lineout, data);
+                writeline(results_file, lineout);
             end if;
         end if;
     end process proc_dataReader;

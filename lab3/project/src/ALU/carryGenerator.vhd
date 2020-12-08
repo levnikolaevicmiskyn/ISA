@@ -12,7 +12,9 @@ entity carryGenerator is
 end entity carryGenerator;
 
 architecture structure of carryGenerator is
+    signal cin_vec: std_logic_vector(N-1 downto 0);
 begin
     c(0) <= cin;
-    c(N downto 1) <= bg or (cin and bp);
+    cin_vec <= (others => cin);    
+    c(N downto 1) <= bg or (cin_vec and bp);
 end architecture structure;
