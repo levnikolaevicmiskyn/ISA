@@ -2,6 +2,9 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+library work;
+use work.globals.all;
+
 entity IDStage is
 port(clk: in std_logic;
 	 -- From IF stage
@@ -13,7 +16,7 @@ port(clk: in std_logic;
 	 EX_mem_read_bw: in std_logic;
 	 MEM_branch_wb: in std_logic;
 	 -- From MEM IDStage
-	 ID_misprediction: in std_logic
+	 ID_misprediction: in std_logic;
 	 ID_alt_ta_bw: in std_logic_vector(31 downto 0);
 	 -- From WB stage
 	 WB_reg_write_bw: in std_logic;
@@ -21,7 +24,7 @@ port(clk: in std_logic;
 	 WB_data: in std_logic_vector(31 downto 0);
 
 	 -- IF stage control signals
-	 IF_load_jmp_addr: out std_logic_vector(1 downto 0);
+	 IF_load_jmp_addr: out std_logic;
 	 IF_jmp_addr: out std_logic_vector(31 downto 0);
 	 IF_stall, IF_load_nop: out std_logic;
 	 -- EX stage control signals
@@ -29,7 +32,7 @@ port(clk: in std_logic;
 	 ALU_op: out t_ALU_OP; --u
 	 ALU_oprnd_1, ALU_oprnd_2, ALU_immediate: out std_logic_vector(31 downto 0);
 	 -- MEM stage control signals
-	 MEM_write, MEM_read: out std_logic
+	 MEM_write, MEM_read: out std_logic;
 	 MEM_branch: out std_logic;
 	 ID_alt_ta: out std_logic_vector(31 downto 0);
 	 -- WB stage control signals
@@ -45,7 +48,7 @@ component instDecoder is
 	  port(
 			-- From IF stage
 	    inst: in std_logic_vector(31 downto 0);
-			branch_predicion: in std_logic;
+			branch_prediction: in std_logic;
 	    -- From EX stage
 	    EX_rd_bw: in std_logic_vector(4 downto 0);
 	    EX_mem_read_bw: in std_logic;
@@ -70,13 +73,14 @@ port (clk, reg_write: in std_logic;
 end component;
 
 component BPU is
-  port(pc: in std_logic_vector(31 downto 0);
-       prediction: out std_logic);
+	port(pc: in std_logic_vector(31 downto 0);
+			 ID_misprediction: in std_logic;
+			 prediction: out std_logic);
 end component;
 
 signal read_addr_1, read_addr_2, write_addr_1: std_logic_vector(4 downto 0);
 signal read_data_1, read_data_2, immediate: std_logic_vector(31 downto 0);
-signal oprnd_1_is_pc;
+signal oprnd_1_is_pc: std_logic;
 signal jump_addr_adder_out: std_logic_vector(31 downto 0);
 signal jump, branch: std_logic;
 
@@ -97,7 +101,8 @@ ALU_oprnd_2 <= read_data_2;
 compBPU: BPU port map(ID_pc, ID_misprediction, branch_prediction);
 
 -- Adder to compute the jump or branch target address to be stored in PC
-compAdder: Adder port map(pc, immediate, jump_addr_adder_out);
+compAdder: jump_addr_adder_out <= std_logic_vector(unsigned(ID_pc) + unsigned(immediate));
+--Adder port map(pc, immediate, jump_addr_adder_out);
 
 IF_jmp_addr <= jump_addr_adder_out when ID_misprediction = '0' else ID_alt_ta_bw;
 IF_load_jmp_addr <= jump or ID_misprediction;

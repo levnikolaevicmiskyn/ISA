@@ -9,7 +9,7 @@ use work.HDU_pkg.all;
 entity instDecoder is
   port( -- From IF stage
     inst: in std_logic_vector(31 downto 0);
-    branch_prediction: in std_logic;
+    branch_predicion: in std_logic;
     -- From EX stage
     EX_rd_bw: in std_logic_vector(4 downto 0);
     EX_mem_read_bw: in std_logic;
@@ -39,7 +39,6 @@ begin
   opcode <= inst(6 downto 0);
   funct7 <= inst(31 downto 25);
   funct3 <= inst(14 downto 12);
-
 
   proc_inst_type: process(opcode)
   begin
@@ -83,7 +82,7 @@ begin
       when "0010011" =>
         inst_type <= t_INST_I;
         alu_use_immediate <= '1'; -- Use immediate operand
-        if hazard(rs1_i, rd_i) = '0' then
+        if hazard(rs_1, rd) = '0' then
           if funct3 = "000" then
 					-- ADDI
             op <= alu_op_add;
@@ -119,7 +118,7 @@ begin
 
       when "1100011" =>   -- BEQ
         inst_type <= t_INST_SB;
-        if hazard(rs1_i, rs2_i, rd_i) = '0' then
+        if hazard(rs_1, rs_2, rd) = '0' then
           op <= alu_op_lt; -- Resulting data will be discarded and zero flag will be used to decide on branch
           alu_use_immediate <= '0';
           use_pc <= '0';
@@ -135,7 +134,7 @@ begin
       when "0000011" =>   -- LW
         inst_type <= t_INST_I;
         op <= alu_op_nop;
-        if hazard(rs1_i, rd_i) = '0' then
+        if hazard(rs_1, rd) = '0' then
           WB_reg_write <= '1';
           MEM_read <= '1';
         --mem_to_reg <= '1';
@@ -143,17 +142,17 @@ begin
           IF_stall <= '1';
         end if;
       when "1101111" =>   -- JAL
-        inst_type <= t_INST_J;
+        inst_type <= t_INST_UJ;
         -- In this case sum 4 to the current pc before jumping
         use_pc <= '1';
-        op <= alu_op_inc_4;
+        alu_op <= alu_op_inc_4;
         WB_reg_write <= '1';
         jump <= '1';
 
       when "0100011" =>   -- SW
         inst_type <= t_INST_S;
         op <= alu_op_nop;
-        if hazard(rs1_i, rs2_i, rd_i) = '0' then
+        if hazard(rs_1, rs_2, rd) = '0' then
           WB_reg_write <= '1';
           mem_write <= '1';
         else

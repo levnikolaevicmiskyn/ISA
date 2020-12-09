@@ -14,12 +14,11 @@ port(clk: in std_logic;
 	 MEM_branch_wb: in std_logic;
 	 -- From MEM IDStage
 	 ID_misprediction: in std_logic
-	 ID_alt_ta_bw: in std_logic_vector(31 downto 0);
+         ID_alt_targ_address: in std_logic_vector(31 downto 0);
 	 -- From WB stage
 	 WB_reg_write_bw: in std_logic;
 	 WB_rd_bw: in std_logic_vector(4 downto 0);
 	 WB_data: in std_logic_vector(31 downto 0);
-
 	 -- IF stage control signals
 	 IF_load_jmp_addr: out std_logic_vector(1 downto 0);
 	 IF_jmp_addr: out std_logic_vector(31 downto 0);
@@ -31,7 +30,6 @@ port(clk: in std_logic;
 	 -- MEM stage control signals
 	 MEM_write, MEM_read: out std_logic
 	 MEM_branch: out std_logic;
-	 ID_alt_ta: out std_logic_vector(31 downto 0);
 	 -- WB stage control signals
 	 WB_reg_write: out std_logic;
 	 WB_rd: out std_logic_vector(4 downto 0);
@@ -98,12 +96,22 @@ compBPU: BPU port map(ID_pc, ID_misprediction, branch_prediction);
 
 -- Adder to compute the jump or branch target address to be stored in PC
 compAdder: Adder port map(pc, immediate, jump_addr_adder_out);
-
-IF_jmp_addr <= jump_addr_adder_out when ID_misprediction = '0' else ID_alt_ta_bw;
+IF_jmp_addr <= jump_addr_adder_out when ID_misprediction = '0' else alt_branch_addr_reg;
 IF_load_jmp_addr <= jump or ID_misprediction;
 IF_load_nop <= jump or ID_misprediction;
 
-ID_alt_ta <= ID_next_pc when jump = '1' else jump_addr_adder_out;
+proc_alt_branch_addr_reg: process(clk)
+begin
+	if rising_edge(clk) then
+		if branch = '1' then
+			if jump = '1' then
+				alt_branch_addr_reg <= ID_next_pc;
+			else
+				alt_branch_addr_reg <= jump_addr_adder_out;
+			end if;
+		end if;
+	end if;
+end process;
 
 -- Mispredictions
 EX_load_nop <= ID_misprediction;

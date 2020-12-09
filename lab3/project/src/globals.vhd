@@ -1,4 +1,5 @@
 library ieee;
+use ieee.std_logic_1164.all;
 
 package globals is
 	type t_ALU_OP is (alu_op_shift, alu_op_add, alu_op_xor, alu_op_and, alu_op_nop, alu_op_lt, alu_op_inc_4);
