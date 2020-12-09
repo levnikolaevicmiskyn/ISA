@@ -23,5 +23,6 @@ package body globals is
 				when "" =>y :=alu_op_lt
 				when others => y :=alu_op_inc_4
 			end case;
+			return y;
 	end function getOp;
 end package body;
