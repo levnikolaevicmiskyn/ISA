@@ -15,13 +15,13 @@ package body globals is
 		variable y: t_ALU_OP;
 		begin
 			case x is
-				when "" => y := alu_op_shift
-				when "" =>y :=alu_op_add
-				when "" =>y :=alu_op_xor
-				when "" =>y :=alu_op_and
-				when "" =>y :=alu_op_nop
-				when "" =>y :=alu_op_lt
-				when others => y :=alu_op_inc_4
+				when "" => y := alu_op_shift;
+				when "" =>y :=alu_op_add;
+				when "" =>y :=alu_op_xor;
+				when "" =>y :=alu_op_and;
+				when "" =>y :=alu_op_nop;
+				when "" =>y :=alu_op_lt;
+				when others => y :=alu_op_inc_4;
 			end case;
 			return y;
 	end function getOp;
