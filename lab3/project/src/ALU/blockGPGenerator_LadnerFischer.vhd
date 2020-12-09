@@ -12,6 +12,16 @@ entity blockGPGenerator is
 end entity blockGPGenerator;
 
 architecture LadnerFischer of blockGPGenerator is
+    component blockGPGenerator is
+        generic(N: positive := 32);
+        port (
+            g: in std_logic_vector(N-1 downto 0);       -- Generate vector
+            p: in std_logic_vector(N-1 downto 0);       -- Propagate vector
+            bg: out std_logic_vector(N-1 downto 0);     -- Block generate vector
+            bp: out std_logic_vector(N-1 downto 0)      -- Block propagate vector
+        );
+    end component;
+
     component GPCombiner is
         port (
             gij: in std_logic;      -- Generate bit [i, j]
@@ -28,7 +38,7 @@ architecture LadnerFischer of blockGPGenerator is
 begin
     gen_base_net: if N = 1 generate
         bg(0) <= g(0);
-        bg(0) <= p(0);
+        bp(0) <= p(0);
     end generate gen_base_net;
 
     gen_recursive_net: if N > 1 generate
@@ -56,7 +66,7 @@ begin
             comp_upperHalfCombiner_i: GPCombiner
             port map (
                 internal_bg(N/2 - 1), internal_bp(N/2 - 1),
-                g(i), p(i),
+                internal_bg(i), internal_bp(i),
                 bg(i), bp(i)
             );
         end generate gen_combine_upperHalf;

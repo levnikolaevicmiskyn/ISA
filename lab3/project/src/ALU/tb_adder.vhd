@@ -57,7 +57,9 @@ architecture behavior of tb_adder is
     signal clk: std_logic;
     signal operand1, operand2: std_logic_vector(31 downto 0);
     signal result: std_logic_vector(31 downto 0);
+    signal en_write_file: std_logic;
 begin
+    en_write_file <= '0', '1' after 10 ns;
     comp_clkGen: clockGenerator
         generic map (0 ns)
         port map ('1', open, clk);
@@ -72,5 +74,5 @@ begin
     
     comp_fileWriter: dataSink
         generic map(32, "results.txt")
-        port map(clk, '1', result);
+        port map(clk, en_write_file, result);
 end architecture behavior;

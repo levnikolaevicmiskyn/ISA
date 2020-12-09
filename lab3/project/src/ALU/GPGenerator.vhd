@@ -13,6 +13,6 @@ end entity GPGenerator;
 
 architecture structure of GPGenerator is
 begin
-    g <= a or b;
-    p <= a and b;
+    g <= a and b;
+    p <= a xor b;
 end architecture structure;

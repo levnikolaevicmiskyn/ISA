@@ -26,26 +26,26 @@ begin
     proc_dataReader: process(clk)
         file samplefile: text open READ_MODE is filename;
         variable linein: line;
-        variable iopcode: integer;
-        variable ioperand1: integer;
-        variable ioperand2: integer;
-        variable iimmediate: integer;
-        variable isource: integer;
+        variable tmp_opcode: std_logic_vector(3 downto 0);
+        variable tmp_operand1: std_logic_vector(31 downto 0);
+        variable tmp_operand2: std_logic_vector(31 downto 0);
+        variable tmp_immediate: std_logic_vector(31 downto 0);
+        variable tmp_source: std_logic_vector(3 downto 0);
     begin
         if rising_edge(clk) then
             if en = '1' then
                 if not endfile(samplefile) then
                     readline(samplefile, linein);
-                    read(linein, iopcode);
-                    read(linein, ioperand1);
-                    read(linein, ioperand2);
-                    read(linein, iimmediate);
-                    read(linein, isource);
-                    opcode <= std_logic_vector(to_unsigned(iopcode, 32));
-                    operand1 <= std_logic_vector(to_unsigned(ioperand1, 32));
-                    operand2 <= std_logic_vector(to_unsigned(ioperand2, 32));
-                    immediate <= std_logic_vector(to_unsigned(iimediate, 32));
-                    source <= to_unsigned(isource, 1)(0);
+                    hread(linein, tmp_opcode);
+                    hread(linein, tmp_operand1);
+                    hread(linein, tmp_operand2);
+                    hread(linein, tmp_immediate);
+                    hread(linein, tmp_source);
+                    opcode <= tmp_opcode(2 downto 0);
+                    operand1 <= tmp_operand1;
+                    operand2 <= tmp_operand2;
+                    immediate <= tmp_immediate;
+                    source <= tmp_source(0);
                 end if;
             end if;
         end if;
