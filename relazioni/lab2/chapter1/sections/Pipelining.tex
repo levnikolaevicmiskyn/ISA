@@ -1,1 +1,12 @@
 \section{Pipelining}
+The command \texttt{set\_implementation} can be useful to force Synopsys to use a particular architecture when synthesizing a given component. In our case, the multiplier can be implemented in several ways differing in how partial products are summed. When no directive is given, the zero clock period constraint will drive the algorithm to resort to pparch, the fastest architecture among those analyzed here. The solution denoted as CSA, based on a carry-save adders tree, seems to be less advantageous in both performance and area. 
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|l|l|l|l|}\hline
+		Architecture & Delay & Area & Combinational area \\\hline
+		Unspecified (pparch) & 1.4 & 4122 & 2976 \\\hline
+		CSA & 3.9 & 4906 & 3764 \\\hline
+		pparch & 1.41 & 4104 & 2961 \\\hline
+	\end{tabular}
+\caption{Comparison of multiplier architectures}
+\end{table}
