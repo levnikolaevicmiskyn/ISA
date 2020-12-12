@@ -9,7 +9,7 @@ The multiplier is made up of three parts:
 \end{itemize}
 A strategy aimed at minimizing the tree height is put in place as suggested.
 This optimization makes the hardware description non-trivial, since standard \texttt{generate} statements do not readily provide a solution to parametrize this irregular structure given the bitwidth. 
-The preferred approach has been that of using a Matlab script to compute the number and location of all full-adders and half-adders adopting the rules specific to Dadda trees. The outcome is then translated into VHDL code by directly declarating all the needed signals and instantiating components (whose number may grow large in the case $N=32$ or $N=24$).
+The preferred approach has been that of using a Matlab script to compute the number and location of all full-adders and half-adders adopting the rules specific to Dadda trees. The outcome is then translated into VHDL code by directly declaring all the needed signals and instantiating components (whose number may grow large in the case $N=32$ or $N=24$).
 The first step in designing a Dadda tree is to find the least integer $J$ such that $d_J > N$, where 
 \begin{equation*}
 d_j = \left \lfloor{\frac{3}{2}d_{j-1}}\right \rfloor \hspace{1cm}\,\,d_1 = 2
@@ -39,6 +39,9 @@ The core of the algorithm is best understood with the aid of the \textit{dot rep
 
 Once the matrices $a$ and $b$ are available, writing VHDL code automatically to instantiate the required number of full adders is a simple matter.
 
+
+\subsection{Testbench} Given the complexity of this block, individual testing is recommended so as to ensure that this component can be safely inserted as a sub-unit in a larger design. A fully automated testbench based on random numbers is available in \texttt{src/MBE/}.
+
 \section{Synthesis}
 
 \begin{figure}
@@ -58,4 +61,4 @@ This new multiplier replaces the library multiplier instantiated in the second s
 \caption{Characterization of the MBE multiplier}
 \label{tab:MBE}
 \end{table}
-\autoref{fig:delays} shows that the MBE multiplier can potentially reach the same critical path delay as the library one, provided that more pipeline stages are inserted. This plot shows that there is an optimum number of pipeline stages, beyond which it is no longer possible to break critical paths using this technique. The MBE design reaches the minimum critical path delay with eight registers, whereas four stages are the best choice when resorting to the DeisngWare component. Designs that include the MBE multiplier have been synthesized using a larger total area, as apparent by comparing \autoref{tab:MBE} with \autoref{tab:stage2}.
+\autoref{fig:delays} shows that the MBE multiplier can potentially reach the same critical path delay as the library one, provided that more pipeline stages are inserted. This plot shows that there is an optimum number of pipeline stages, beyond which it is no longer possible to break critical paths using this technique. The MBE design reaches the minimum critical path delay with eight registers, whereas four stages are the best choice when resorting to the DesignWare component. Designs that include the MBE multiplier have been synthesized using a larger total area, as apparent by comparing \autoref{tab:MBE} with \autoref{tab:stage2}.
