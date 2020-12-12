@@ -1,32 +1,35 @@
-\section{Fine grain pipelining}
+\section{Fine Grain Pipelining}
 In order to further boost the performance of this floating point multiplier, an additional pipeline register has been inserted in the second stage just after the multiplier. In this case, however, it has been explicitly coded instead of relying on the automatic retiming tool.
-\begin{table}
 
-	\begin{tabular}{|l|l|l|l|l|}
+\autoref{tab:stage2} shows a full comparison of timing and area requirements as the number of pipeline stages increase.
+\begin{table}[htbp]
+    \centering
+	\begin{tabular}{|r|r|r|r|r|}
 	\hline
-	&\texttt{NPIPE=1} & \texttt{NPIPE=2} & \texttt{NPIPE=4} & \texttt{NPIPE=6}\\\hline
-	Delay & 0.78 & 0.71 & 0.68 & 0.72 \\\hline
-	Area (total) & & & & \\\hline
-	Area (combinational) & & & & \\\hline
+	                        &\texttt{NPIPE=1}  & \texttt{NPIPE=2} & \texttt{NPIPE=4} & \texttt{NPIPE=6}\\\hline
+	Delay                   & 0.78             & 0.71             & 0.68             & 0.72 \\\hline
+    Area (total)            & 5329             & 5595             & 5793             & 6070 \\\hline
+    Area (combinational)    & 3068             & 3039             & 2991             & 2978 \\\hline
 	\end{tabular}
-
 	\caption{Critical path delay and area with the hardcoded register in the second stage and a varying \texttt{NPIPE}}
 	\label{tab:stage2}
 \end{table}
+It is possible to see how the delay decreases as more registers are added. This is no longer true for \texttt{NPIPE} = 6: the overhead introduced by the setup, skew and jitter times of the new registers surpasses the advantages given by theoretical pipelining.\\
+It is interesting to notice how while the total area increases, the combinational area, instead, steadily decreases. This is possibly due to the fact that the pipelining technique relaxes not only the timing constraints of the combinational logic, but also the power constraints: since the combinational paths are broken into smaller sections, there is less necessity for buffers and also the cells themselves no longer need as much driving strength, thus can also be smaller.
 
 \paragraph{Critical path delay distribution}
 \autoref{fig:hist2} and \autoref{fig:hist6} show how worst path delays tend to accumulate towards the shortest one as the degree of pipelining increases. This is a general pattern seen when applying this technique.
 \begin{figure}[htbp]
-	\begin{subfigure}{0.5\textwidth}
-		\centering
-	\includegraphics[width=\textwidth]{chapter1/images/npipe2.png}
-	\caption{Worst path distribution with \texttt{NPIPE=2}}
-	\label{fig:hist2}
-\end{subfigure}
-\begin{subfigure}{0.5\textwidth}
-	\centering
-	\includegraphics[width=\textwidth]{chapter1/images/npipe6.png}
-	\caption{Worst path distribution with \texttt{NPIPE=6}}
-	\label{fig:hist6}
+    \begin{subfigure}{0.5\textwidth}
+	   \centering
+	   \includegraphics[width=\textwidth]{chapter1/images/npipe2.png}
+	   \caption{Worst path distribution with \texttt{NPIPE=2}}
+	   \label{fig:hist2}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+	    \includegraphics[width=\textwidth]{chapter1/images/npipe6.png}
+	    \caption{Worst path distribution with \texttt{NPIPE=6}}
+	    \label{fig:hist6}
 	\end{subfigure}
 \end{figure}
