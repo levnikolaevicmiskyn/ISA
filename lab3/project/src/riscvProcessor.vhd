@@ -95,7 +95,8 @@ begin
         end if;
         
       end if;
-      
     end process;
+
+
     
 end structure;

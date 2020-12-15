@@ -68,6 +68,19 @@ component BPU is
 			 prediction: out std_logic);
 end component;
 
+component adder is
+    generic (N : positive := 32);
+    port (
+        a: in  std_logic_vector(N-1 downto 0);  -- First operand
+        b: in  std_logic_vector(N-1 downto 0);  -- Second operand
+        sub: in std_logic;                      -- Subtract instead of adding
+        s: out std_logic_vector(N-1 downto 0);  -- Sum
+        ovf: out std_logic;                     -- Overflow
+        cout: out std_logic                     -- Output carry
+    );
+end component;
+
+
 signal read_addr_1, read_addr_2, write_addr_1: std_logic_vector(4 downto 0);
 signal read_data_1, read_data_2, immediate: std_logic_vector(31 downto 0);
 signal oprnd_1_is_pc: std_logic;
@@ -91,7 +104,9 @@ EXSigs.oprnd_2 <= read_data_2;
 compBPU: BPU port map(ID_pc, ID_misprediction, branch_prediction);
 
 -- Adder to compute the jump or branch target address to be stored in PC
-compAdder: jump_addr_adder_out <= std_logic_vector(unsigned(ID_pc) + unsigned(immediate));
+--compAdder: jump_addr_adder_out <= std_logic_vector(unsigned(ID_pc) + unsigned(immediate));
+compAdder: adder generic map(32)
+                 port map(ID_pc, immediate, '0', jump_addr_adder_out, open, open);
 --Adder port map(pc, immediate, jump_addr_adder_out);
 
 IFSigs.jmp_addr <= jump_addr_adder_out when ID_misprediction = '0' else ID_alt_ta_bw;
