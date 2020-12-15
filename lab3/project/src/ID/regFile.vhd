@@ -25,18 +25,17 @@ read_addr_2_int  <= to_integer(unsigned(read_addr_2));
 -- Register x0 is always zero
 memory(0) <= (others => '0');
 
-
 proc_rd_wr: process(clk)
-		    begin
-		       if rising_edge(clk) then
-					-- Read
-					read_data_1 <= memory(read_addr_1_int);
-					read_data_2 <= memory(read_addr_2_int);
-					
-					-- Write
-					if write_addr_1_int /= 0 then
-						memory(write_addr_1_int) <= write_data_1;
-					end if;
-			   end if;
-            end process;
+begin
+  if rising_edge(clk) then
+    -- Write
+    if write_addr_1_int /= 0 then
+      memory(write_addr_1_int) <= write_data_1;
+    end if;
+  end if;
+end process;
+
+-- Read
+read_data_1 <= memory(read_addr_1_int);
+read_data_2 <= memory(read_addr_2_int);
 end structure;

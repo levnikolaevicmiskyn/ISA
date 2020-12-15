@@ -8,118 +8,95 @@ entity riscvProcessor is
 end entity riscvProcessor;
 
 architecture structure of riscvProcessor is
-    component IDStage is
-      port(clk: in std_logic;
-         -- From IF stage
-         ID_inst: in std_logic_vector(31 downto 0);
-         ID_pc: in std_logic_vector(31 downto 0);
-         ID_next_pc: in std_logic_vector(31 downto 0);
-         -- From EX stage
-         EX_rd_bw: in std_logic_vector(4 downto 0);
-         EX_mem_read_bw: in std_logic;
-         MEM_branch_wb: in std_logic;
-         -- From MEM IDStage
-         ID_misprediction: in std_logic;
-         ID_alt_ta_bw: in std_logic_vector(31 downto 0);
-         -- From WB stage
-         WB_reg_write_bw: in std_logic;
-         WB_rd_bw: in std_logic_vector(4 downto 0);
-         WB_data: in std_logic_vector(31 downto 0);
+   component IDStage is
+     port(clk: in std_logic;
+	 -- From IF stage
+	 IDSigs: in t_IDSigs;
+	 -- From EX stage
+	 EX_rd_bw: in std_logic_vector(4 downto 0);
+	 EX_mem_read_bw: in std_logic;
+	 -- From MEM IDStage
+	 ID_misprediction: in std_logic;
+	 ID_alt_ta_bw: in std_logic_vector(31 downto 0);
+	 -- From WB stage
+	 WB_reg_write_bw: in std_logic;
+	 WB_rd_bw: in std_logic_vector(4 downto 0);
+	 WB_data: in std_logic_vector(31 downto 0);
 
-         -- IF stage control signals
-         IF_load_jmp_addr: out std_logic;
-         IF_jmp_addr: out std_logic_vector(31 downto 0);
-         IF_stall, IF_load_nop: out std_logic;
-         -- EX stage control signals
-         ALU_use_immediate: out std_logic;
-         ALU_op: out t_ALU_OP; --u
-         ALU_oprnd_1, ALU_oprnd_2, ALU_immediate: out std_logic_vector(31 downto 0);
-         -- MEM stage control signals
-         MEM_write, MEM_read: out std_logic;
-         MEM_branch: out std_logic;
-         ID_alt_ta: out std_logic_vector(31 downto 0);
-         -- WB stage control signals
-         WB_reg_write: out std_logic;
-         WB_rd: out std_logic_vector(4 downto 0);
-         ID_load_nop, EX_load_nop, MEM_load_nop: out std_logic
-         );
-    end component;
+	 -- IF stage control signals
+	 IFSigs: out t_IFSigs;
+	 -- EX stage control signals
+	 EXSigs: out t_EXSigs;
+	 -- MEM stage control signals
+	 MEMSigs: out t_MEMSigs;
+	 -- WB stage control signals
+	 WBSigs: out t_WBSigs;
+	 ID_load_nop, EX_load_nop, MEM_load_nop: out std_logic
+	 );
+   end entity IDStage;
 
-    component IFStage is
-      port (clk: in std_logic;
-            IF_load_jmp_addr: in std_logic;
-            IF_jmp_addr: in std_logic_vector(31 downto 0);
-            IF_stall, IF_load_nop: in std_logic;
-            pc: out std_logic_vector(31 downto 0);
-            next_pc: out std_logic_vector(31 downto 0);
-            instr: out std_logic_vector(31 downto 0));
-    end component;
+ component IFStage is
+  port (clk: in std_logic;
+        IFSigs: in t_IFSigs;
+        IDSigs: out t_IDSigs;
+end component;
 
-    -- Outputs of ID stage
-    -- To IF
-    signal IF_load_jmp_addr: std_logic_vector(1 downto 0);
-    signal IF_jmp_addr: std_logic_vector(31 downto 0);
-    signal IF_stall, IF_load_nop: std_logic;
-    -- To EX
-    signal r_ALU_use_immediate, ALU_use_immediate: std_logic;
-    signal r_ALU_op, ALU_op: t_ALU_OP;
-    signal r_ALU_oprnd_1, ALU_oprnd_1, r_ALU_oprnd_2, ALU_oprnd_2, r_ALU_immediate, ALU_immediate: std_logic_vector(31 downto 0);
-    -- To MEM
-    signal r_MEM_write, MEM_write, r_MEM_read, MEM_read: std_logic;
-    signal r_MEM_branch, MEM_branch: std_logic;
-    signal r_ID_alt_ta, ID_alt_ta: std_logic_vector(31 downto 0);
-    -- To WB
-    signal r_WB_reg_write, WB_reg_write: std_logic;
-    signal r_WB_rd, WB_rd: std_logic_vector(4 downto 0);
-    signal r_ID_load_nop, ID_load_nop, r_EX_load_nop, EX_load_nop, r_MEM_load_nop, MEM_load_nop: std_logic;
-    signal ID_inst, ID_pc, ID_next_pc: std_logic_vector(31 downto 0);
-
-    signal EX_mem_rd_bw, EX_rd_bw: std_logic_vector(31 downto 0);
+    signal IDSigs_IF_out, IDSigs_ID_in: t_IDSigs;
+    signal EXSigs_ID_out, EXSigs_EX_in: t_EXSigs;
+    signal MEMSigs_ID_out, MEMSigs_EX_in, MEMSigs_EX_out, MEMSigs_MEM_in: t_MEMSigs;
+    signal WBSigs_ID_out, WBSigs_EX_in, WBSigs_EX_out, WBSigs_MEM_in, WBSigs_MEM_out, WBSigs_WB_in: t_WBSigs;
+    signal IFSigs_ID_out: t_IFSigs;
+    signal ID_misprediction: std_logic;
+    signal ID_load_nop, EX_load_nop, MEM_load_nop: std_logic;
+    
 begin
     compIDStage: IDStage
-        port map(
-            clk,
-            ID_inst, ID_pc, ID_next_pc,
-            EX_rd_bw, EX_mem_rd_bw,
-            MEM_branch_wb,
-            ID_misprediction, ID_alt_ta_bw,
-            WB_reg_write_bw, WB_rd_bw, WB_data,
-            IF_load_jmp_addr, IF_jmp_addr, IF_stall, IF_load_nop,
-            r_ALU_use_immediate, r_ALU_op, r_ALU_oprnd_1, r_ALU_oprnd_2,
-            r_ALU_immediate,
-            r_MEM_write, r_MEM_read, r_MEM_branch,
-            r_ID_alt_ta,
-            r_WB_reg_write, r_WB_rd,
-            r_ID_load_nop,
-            r_EX_load_nop,
-            r_MEM_load_nop
+        port map(IDSigs_ID_in, WBSigs_EX_in.rd, MEMSigs_EX_in.mem_read, ID_misprediction, MEMSigs_MEM_in.alt_ta, WBSigs_WB_in.reg_write, WBSigs_WB_in.rd, WB_result, IFSigs_ID_out, EXSigs_ID_out, MEMSigs_ID_out, ID_load_nop, EX_load_nop, MEM_load_nop
         );
 
     comp_ID_EX_Reg: process(clk)
     begin
-        if rising_edge(clk) then
-            (
-                ALU_use_immediate, ALU_op, ALU_oprnd_1, ALU_oprnd_2,
-                ALU_immediate,
-                MEM_write, MEM_read, MEM_branch,
-                ID_alt_ta,
-                WB_reg_write, WB_rd,
-                ID_load_nop,
-                EX_load_nop,
-                MEM_load_nop
-            ) <= (
-                r_ALU_use_immediate, r_ALU_op,r_ ALU_oprnd_1, r_ALU_oprnd_2,
-                r_ALU_immediate,
-                r_MEM_write, r_MEM_read, r_MEM_branch,
-                r_ID_alt_ta,
-                r_WB_reg_write, r_WB_rd,
-                r_ID_load_nop,
-                r_EX_load_nop,
-                r_MEM_load_nop
-            );
+      if rising_edge(clk) then
+        if ID_load_nop = '1' then
+          EXSigs_EX_in.op <= ALU_op_nop;
+          EXSigs_EX_in.use_pc <= '0';
+          EXSigs_EX_in.use_immediate <= '0';
+          EXSigs_EX_in.oprnd_1 <= (others => '0');
+          EXSigs_EX_in.oprnd_2 <= (others => '0');
+          EXSigs_EX_in.immediate <= EXSigs_ID_out.immediate;
+          EXSigs_EX_in.next_pc <= EXSigs_ID_out.next_pc;
+
+          MEMSigs_EX_in.mem_write <= '0';
+          MEMSigs_EX_in.branch <= '0';
+          MEMSigs_EX_in.mem_read <= '0';
+          MEMSigs_EX_in.alt_ta <= MEMSigs_ID_out.alt_ta;
+
+          WBSigs_EX_in.reg_write <= '0';
+          WBSigs_EX_in.rd <= (others => '0');
+        else
+          EXSigs_EX_in <= EXSigs_ID_out;
+          MEMSigs_EX_in <= MEMSigs_ID_out;
+          WBSigs_EX_in <= WBSigs_ID_out;
         end if;
     end process;
 
+    compIFStage: IFStage port map(clk, IFSigs_ID_out, IDSigs_IF_out);
 
-    compIFStage: IFStage port map(clk, IF_load_jmp_addr, IF_jmp_addr, IF_stall, IF_load_nop, ID_pc, ID_next_pc, ID_inst);
+    comp_IF_ID_Reg: process(clk)
+    begin
+      if rising_edge(clk) then
+        if IFSigs_ID_out.load_nop = '1' then
+          -- Load a nop instead of the instruction just fetched
+          IDSigs_ID_in.inst <= NOP_instr;
+          IDSigs_ID_in.pc <= IDSigs_IF_out.pc;
+          IDSigs_ID_in.pc <= IDSigs_IF_out.next_pc;
+        else
+          IDSigs_ID_in <= IDSigs_IF_out;
+        end if;
+        
+      end if;
+    end process;
+
+
+    
 end structure;
