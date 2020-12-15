@@ -5,18 +5,31 @@ In order to further boost the performance of this floating point multiplier, an 
 
 \begin{table}[htbp]
     \centering
-	\begin{tabular}{|r|r|r|r|r|r|}
+	\begin{tabular}{|r|r|r|r|r|}
 	\hline
-	                       &\texttt{NPIPE=1} (compile\_ultra) &\texttt{NPIPE=1} & \texttt{NPIPE=2} & \texttt{NPIPE=4} & \texttt{NPIPE=6}\\\hline
-	Delay                   & 1.44 & 0.78             & 0.71             & 0.68             & 0.72 \\\hline
-    Area (total)           & 4408 & 5329             & 5595             & 5793             & 6070 \\\hline
-    Area (combinational)    & 3109 & 3068             & 3039             & 2991             & 2978 \\\hline
+	                       &\texttt{NPIPE=1} & \texttt{NPIPE=2} & \texttt{NPIPE=4} & \texttt{NPIPE=6}\\\hline
+	Delay                   & 0.78             & 0.71             & 0.68             & 0.72 \\\hline
+    Area (total)           & 5329             & 5595             & 5793             & 6070 \\\hline
+    Area (combinational)   & 3068             & 3039             & 2991             & 2978 \\\hline
 	\end{tabular}
 	\caption{Critical path delay and area with the hardcoded register in the second stage and a varying \texttt{NPIPE}}
 	\label{tab:stage2}
 \end{table}
 It is possible to see how the delay decreases as more registers are added. This is no longer true for \texttt{NPIPE} = 6: the overhead introduced by the setup, skew and jitter times of the new registers surpasses the advantages given by theoretical pipelining.\\
 It is interesting to notice how while the total area increases, the combinational area, instead, steadily decreases. This is possibly due to the fact that the pipelining technique relaxes not only the timing constraints of the combinational logic, but also the power constraints: since the combinational paths are broken into smaller sections, there is less necessity for buffers and also the cells themselves no longer need as much driving strength, thus can also be smaller.
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{|r|r|r|}
+		\hline
+								& compile\_ultra 	& optimize\_register \\\hline
+		Delay            		& 1.37				& 0.78  \\\hline
+		Area (total)        	& 4395 				& 5329   \\\hline
+		Area (combinational)	& 3065 				& 3068   \\\hline
+	\end{tabular}
+	\caption{Critical path delay and area with the hardcoded register in the second stage and a varying \texttt{NPIPE}}
+	\label{tab:stage2_opt_vs_ultra}
+\end{table}
 
 \paragraph{Critical path delay distribution}
 \autoref{fig:hist2} and \autoref{fig:hist6} show how worst path delays tend to accumulate towards the shortest one as the degree of pipelining increases. This is a general pattern seen when applying this technique.
