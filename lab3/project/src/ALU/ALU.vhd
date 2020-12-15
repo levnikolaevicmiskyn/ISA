@@ -8,8 +8,7 @@ entity ALU is
         operand2: in std_logic_vector(31 downto 0);     -- Second operand
         result: out std_logic_vector(3 downto 0);       -- Result
         -- Control signals
-        control: in std_logic;                          -- Control signals
-        sel_result: in std_logic_vector(1 downto 0);    -- Result selection
+        control: in std_logic(2 downto 0);              -- Control signals
         -- Flags
         N: out std_logic;   -- Negative flag
         Z: out std_logic;   -- Zero flag
@@ -45,7 +44,7 @@ architecture structure of ALU is
 
     -- Extended controls
     signal sub: std_logic;
-
+    signal sel_result: std_logic_vector(1 downto 0);
     -- Internal results
     signal and_res: std_logic_vector(31 downto 0);
     signal xor_res: std_logic_vector(31 downto 0);
@@ -58,7 +57,8 @@ architecture structure of ALU is
     signal internal_res: std_logic_vector(31 downto 0);
 begin
     -- Controls
-    sub <= control;
+    sub <= control(2);
+    sel_result <= control(1 downto 0);
     -- Operations
     and_res <= operand1 and operand2;
     xor_res <= operand1 xor operand2;
