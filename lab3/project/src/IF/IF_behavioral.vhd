@@ -4,12 +4,8 @@ use ieee.numeric_std.all;
 
 entity IFStage is
   port (clk: in std_logic;
-        IF_load_jmp_addr: in std_logic;
-        IF_jmp_addr: in std_logic_vector(31 downto 0);
-        IF_stall, IF_load_nop: in std_logic;
-        pc: out std_logic_vector(31 downto 0);
-        next_pc: out std_logic_vector(31 downto 0);
-        instr: out std_logic_vector(31 downto 0));
+        IFSigs: in t_IFSigs;
+        IDSigs: out t_IDSigs;
 end entity IFStage;
 
 architecture behavior of IFStage is
@@ -18,28 +14,17 @@ component Memory is
        data: out std_logic_vector(31 downto 0));
 end component;
 
-signal pc_inc, address, data: std_logic_vector(31 downto 0);
-constant NOP: std_logic_vector(31 downto 0) := ((31 downto 7=> '0') & "0010011");
+signal pc_inc, address: std_logic_vector(31 downto 0);
 signal pc_i: std_logic_vector(31 downto 0);
+signal instr: std_logic_vector(31 downto 0);
+
   begin
     pc_inc <= std_logic_vector(unsigned(pc_i) + to_unsigned(4, 32));
-    next_pc <= pc_inc;
-    
-    compMemInterface: Memory port map(address, data);
+    IDSigs.next_pc <= pc_inc;
+    IDSigs.pc <= pc;
+    IDSigs.inst <= instr;
+    compMemInterface: Memory port map(address, instr);
 
-    address <= address when IF_stall = '1' else
-               IF_jmp_addr when IF_load_jmp_addr = '1' else pc_inc;
-
-procOut: process(clk)
-         begin
-           if rising_edge(clk) then
-             pc_i <= address;
-             if IF_load_nop = '0' then
-               instr <= data;
-             else
-               instr <= NOP;
-             end if;
-           end if;
-         end process;
-pc <= pc_i;
+    address <= address when IFSigs.stall  = '1' else
+               IFSigs.jmp_addr when IFSigs.load_jmp_addr = '1' else pc_inc;
   end behavior;

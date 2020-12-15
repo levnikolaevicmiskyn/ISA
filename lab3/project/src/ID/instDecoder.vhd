@@ -146,7 +146,7 @@ begin
         inst_type <= t_INST_J;
         -- In this case sum 4 to the current pc before jumping
         use_pc <= '1';
-        op <= alu_op_inc_4;
+        op <= alu_op_nop;
         WB_reg_write <= '1';
         jump <= '1';
 
