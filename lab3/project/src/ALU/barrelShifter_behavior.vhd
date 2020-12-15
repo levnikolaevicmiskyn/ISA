@@ -4,14 +4,13 @@ use ieee.numeric_std.all;
 
 entity barrelShifter is
     generic (
-        N: natural := 32;
-        SHA_SIZE: natural := 5;
-        RADIX: natural := 1
+        N: natural := 32;           -- Input size
+        SHA_SIZE: natural := 5      -- Shift amount size (usually log2(N))
     );
     port (
-        x: in std_logic_vector(N-1 downto 0);
-        sha: in std_logic_vector(SHA_SIZE-1 downto 0);
-        y: out std_logic_vector(N-1 downto 0)
+        x: in std_logic_vector(N-1 downto 0);           -- Operand
+        sha: in std_logic_vector(SHA_SIZE-1 downto 0);  -- Shift amount
+        y: out std_logic_vector(N-1 downto 0)           -- Result
     );
 end entity barrelShifter;
 
