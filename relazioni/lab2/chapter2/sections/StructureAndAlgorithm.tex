@@ -14,6 +14,8 @@ d_j = \left \lfloor{\frac{3}{2}d_{j-1}}\right \rfloor \hspace{1cm}\,\,d_1 = 2
 \end{equation*}
 The core of the algorithm is best understood with the aid of the \textit{dot representation}. The tree will include several stages (indexed by $j=J, J-1, ..., 2$) where bits of each operand are represented by dots and are suitably aligned in a matrix. For each stage $j$ (starting from $J$) the algorithm runs along the columns allocating the least resources with the aim of having no more than $d_{j-1}$ dots in the next stage labeled $j-1$. In the following $n_j^i$ is the number of dots allocated in column $i$ within stage $j$, $a_j^i$ is the number of full-adders in column $i$, $b_j^i$ is the number of half adders, $c_j^i$ is the number of remaining dots, which are copied to the next stage.
 
+\newpage
+
 \begin{algorithmic}
 	\FOR{$j = J-1$ \textbf{downto} $1$}
 		\FOR{$i=1$ \TO $2N$}
