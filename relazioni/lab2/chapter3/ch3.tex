@@ -4,7 +4,7 @@ In this lab several architectures to implement a floating point multiplier were 
 \begin{table}[htbp]
 	\centering
 	\begin{tabular}{|l|l|l|l|}\hline
-		Architecture                      & Delay (ns) & Area (\SI{}{\micro m^2}) & Combinational area \\ \hline
+		Architecture                      & Delay (ns) & Area (\SI{}{\micro m^2}) & Combinational area (\SI{}{\micro m^2}) \\ \hline
 		CSA                               & 3.9        & 4906                     & 3764 \\ \hline
 		pparch                            & 1.41       & 4104                     & 2961 \\ \hline
         pparch pipelined                  & 0.78       & 5329                     & 3068 \\ \hline
@@ -17,4 +17,4 @@ In this lab several architectures to implement a floating point multiplier were 
     \label{tab:final-comparison}
 \end{table}
 
-It is interesting to notice how, among all the architectures, the pparch with 4 stages of pipeline is among the best, having a very small delay and requiring a relatively small area. The pipelined MBE is also a promising architecture: although it has a larger area (almost 50\% more than the pipelined pparch), the delay is basically the same within this analysis of a limited number of pipeline stages. It is likely that, given the internal structure of an MBE multiplier, more stages of pipeline could further decrease the delay, ultimately rendering it the fastest architecture - still with the drawback of a much larger total area.
+It is interesting to notice how, among all the architectures, the pparch with 4 pipeline stages is one of the best, having a very small delay and requiring a relatively small area. The pipelined MBE is also a promising architecture: although it has a larger area (almost 50\% more than the pipelined pparch), the delay is basically the same within this analysis of a limited number of pipeline stages. It is likely that, given the internal structure of an MBE multiplier, more stages of pipeline could further decrease the delay, ultimately making it the fastest architecture - still with the drawback of a much larger total area.
