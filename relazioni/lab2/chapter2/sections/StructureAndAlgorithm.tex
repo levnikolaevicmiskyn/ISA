@@ -37,7 +37,7 @@ The core of the algorithm is best understood with the aid of the \textit{dot rep
 	\ENDFOR
 \end{algorithmic}
 
-Once the matrices $a$ and $b$ are available, writing VHDL code automatically to instantiate the required number of full adders is a simple matter.
+Once the matrices $a$ and $b$ are available, writing VHDL code automatically to instantiate the required number of full adders is a simple matter. Matlab code that implements this is found in \texttt{auxilliary/dadda}. A Python script is available that produces the final code by using a template containing VHDL code that is independent of the bit-width of the Dadda tree, namely the partial product generation according to the Booth encoding technique.
 
 
 \subsection{Testbench} Given the complexity of this block, individual testing is recommended so as to ensure that this component can be safely inserted as a sub-unit in a larger design. A fully automated testbench based on random numbers is available in \texttt{src/MBE/}.

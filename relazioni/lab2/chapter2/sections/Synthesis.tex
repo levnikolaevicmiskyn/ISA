@@ -20,3 +20,31 @@ This new multiplier replaces the library multiplier instantiated in the second s
 \end{table}
 
 \autoref{fig:delays} shows that the MBE multiplier can potentially reach the same critical path delay as the library one, provided that more pipeline stages are inserted. This plot shows that there is an optimum number of pipeline stages, beyond which it is no longer possible to break critical paths using this technique. The MBE design reaches the minimum critical path delay with eight registers, whereas four stages are the best choice when resorting to the DesignWare component. Designs that include the MBE multiplier have been synthesized using a larger total area, as apparent by comparing \autoref{tab:MBE} with \autoref{tab:stage2}.
+
+\begin{table}
+	\centering
+	\begin{tabular}{|lrr|}\hline
+		Point & Incr & Path \\\hline
+		clock clk (rise edge)        &           0.00 &      0.00\\
+		clock network delay (ideal)  &            0.00    &   0.00\\
+		clk\_r\_REG18\_S9/CK           &    0.00 &      0.00\\
+		clk\_r\_REG18\_S9/Q             &  0.09   &    0.09\\
+		FP\_Z[0] (out)                  &          0.02  &     0.11\\
+		data arrival time                &               &    0.11\\\hline
+		clock clk (rise edge)             &       0.00    &   0.00\\
+		clock network delay (ideal)        &      0.00     &  0.00\\
+		clock uncertainty                   &    -0.07  &    -0.07\\
+		output external delay                &   -0.50   &   -0.57\\\hline
+		data required time                    &           &  -0.57\\
+		data required time                     &         &   -0.57\\
+		data arrival time                       &         &  -0.11\\\hline
+		slack (VIOLATED)                         &         & -0.68\\\hline
+	\end{tabular}
+	\caption{Timing report obtained with a value of \texttt{NPIPE} that minimizes overall delay looks the same in both cases (MBE and Designware)}
+	\label{tab:report}
+\end{table}
+
+It is interesting to note that timing reports (\autoref{tab:report}) obtained in the condition where minimum delay is achieved are the same for the two designs compared in \autoref{fig:delays}. They both consist in a clock-to-output delay that amounts to 0.11 ns, only a fraction of the fixed delay due to clock uncertainty (set to 0.07) and input/output delays (set to 0.5) set in the synthesis script to model a real situation. This shows that in both cases the retiming tool is able to reach the very minimum delay allowed by the available library and the specified uncertainties.
+
+\section{Conclusion}
+In this lab we have compared several architectures to implement a floating point multiplier. The analysis has been focused on adders first by leveraging pipelining applied to predefined architectures and then by writing a custom implementation of the MBE multiplier. 
