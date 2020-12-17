@@ -21,9 +21,13 @@ user can run operations directly from the command line and directly see the resu
 To terminate the program, simply press Ctrl+D or Ctrl+C.
 
 ### Input files
-It is possible to redirect inputs and outputs from and to other files with the usual syntax. In a full example:
+It is possible to use pipes or redirect inputs and outputs from and to other files with the usual bash syntax. In a full example:
 ```shell script
 $ build/ALU < inputs.txt > outputs.txt
+```
+Or, for a pipe
+```shell script
+$ python3 input_generator 10 | build/ALU > outputs.txt
 ```
 This way, the inputs will be read from 'inputs.txt' and the outputs will be stored in 'outputs.txt'
 

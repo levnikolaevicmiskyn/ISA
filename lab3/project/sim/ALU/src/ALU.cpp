@@ -5,10 +5,14 @@
 
 const std::map<int, ALU::ALUFunction> ALU::functions = {
         {0, ALU::_add},
-        {1, ALU::_srai}
+        {1, ALU::_srai},
+        {2, ALU::_and},
+        {3, ALU::_xor},
+        {6, ALU::_sub}
 };
 
-ALU::ALU() = default;
+ALU::ALU() : m_input{0, 0, 0},
+             m_output{0, 0, 0, 0, 0} {}
 
 const ALU::Input &ALU::input() const {
     return m_input;
@@ -20,8 +24,8 @@ const ALU::Output &ALU::output() const {
 
 const ALU::Output &ALU::executeStep(const Input &input) {
     m_input = input;
-    const ALUFunction &function = functions.at(input.opcode);
-    m_output = function(m_input);
+    const ALUFunction &function = functions.at(input.control);
+    m_output.result = function(m_input);
     // Mask result for safety
     m_output.result &= 0xffffffff;
     return m_output;
@@ -69,36 +73,34 @@ ALU::Input ALU::parseInputString(const std::string &instruction) {
         outputss << std::hex << field << ' ';
     }
     // Store fields in the struct
-    outputss >> input.opcode
-             >> input.operand1
+    outputss >> input.operand1
              >> input.operand2
-             >> input.immediate
-             >> input.source;
+             >> input.control;
     return input;
 }
 
 std::string ALU::formatOutputString(const Output &output) {
     std::stringstream ss;
-    ss << std::setfill('0') << std::setw(32/4) << std::hex << output.result;
+    ss << std::setfill('0') << std::setw(32 / 4) << std::hex << output.result << " "
+       << output.N << " "
+       << output.Z << " "
+       << output.C << " "
+       << output.V << " ";
     return ss.str();
 }
 
-ALU::dtype ALU::_getRequestedSource(const Input &input) {
-    switch(input.source) {
-        case 0:
-            return input.operand2;
-        case 1:
-            return input.immediate;
-    }
-    throw;
+
+ALU::dtype ALU::_add(const Input &input) {
+    return input.operand1 + input.operand2;
 }
 
-ALU::Output ALU::_add(const Input &input) {
-    return Output{input.operand1 + _getRequestedSource(input)};
+ALU::dtype ALU::_sub(const Input &input) {
+    return input.operand1 - input.operand2;
 }
 
-ALU::Output ALU::_srai(const Input &input) {
-    dtype shift_amount = _getRequestedSource(input);
+ALU::dtype ALU::_srai(const Input &input) {
+    // Only the last 5 significant bits are considered
+    dtype shift_amount = input.operand2 & ((0x1 << 5) - 1);
     dtype result = input.operand1 >> shift_amount;
     // Data is unsigned, so the sign should be handled manually
     dtype MSB = (input.operand1 & 0x80000000);
@@ -106,7 +108,15 @@ ALU::Output ALU::_srai(const Input &input) {
         dtype sign_ext_mask = ((dtype) -1) & ~((MSB >> shift_amount) - 1);
         result |= sign_ext_mask;
     }
-    return Output{result};
+    return result;
+}
+
+ALU::dtype ALU::_and(const Input &input) {
+    return input.operand1 & input.operand2;
+}
+
+ALU::dtype ALU::_xor(const Input &input) {
+    return input.operand1 ^ input.operand2;
 }
 
 ALU::InputFormatError::InputFormatError(const std::string &msg) : std::runtime_error(msg) {}
