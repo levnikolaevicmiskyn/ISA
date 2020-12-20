@@ -5,7 +5,9 @@ use ieee.numeric_std.all;
 entity IFStage is
   port (clk: in std_logic;
         IFSigs: in t_IFSigs;
-        IDSigs: out t_IDSigs;
+        IDSigs: out t_IDSigs
+        address: out std_logic_vector(31 downto 0);
+        instr: in std_logic_vector(31 downto 0));
 end entity IFStage;
 
 architecture behavior of IFStage is
@@ -23,7 +25,6 @@ signal instr: std_logic_vector(31 downto 0);
     IDSigs.next_pc <= pc_inc;
     IDSigs.pc <= pc;
     IDSigs.inst <= instr;
-    compMemInterface: Memory port map(address, instr);
 
     address <= address when IFSigs.stall  = '1' else
                IFSigs.jmp_addr when IFSigs.load_jmp_addr = '1' else pc_inc;

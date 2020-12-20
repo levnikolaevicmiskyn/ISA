@@ -1,0 +1,18 @@
+library ieee;
+
+use ieee.std_logic_1164.all;
+
+
+entity memoryInterface is
+  port (address: in std_logic_vector(31 downto 0);
+        rd, wr: in std_logic;
+        data_in: in std_logic_vector(31 downto 0);
+        data_out: out std_logic_vector(31 downto 0));
+end entity memoryInterface;
+
+
+architecture behavior of memoryInterface is
+
+begin
+  
+end behavior;
