@@ -26,7 +26,7 @@ begin
         variable linein: line;
         variable tmp_operand1: std_logic_vector(31 downto 0);
         variable tmp_operand2: std_logic_vector(31 downto 0);
-        variable tmp_control: std_logic_vector(2 downto 0);
+        variable tmp_control: std_logic_vector(3 downto 0);
     begin
         if rising_edge(clk) then
             if en = '1' then
@@ -37,7 +37,7 @@ begin
                     hread(linein, tmp_control);
                     operand1 <= tmp_operand1;
                     operand2 <= tmp_operand2;
-                    control <= tmp_control;
+                    control <= tmp_control(2 downto 0);
                 end if;
             end if;
         end if;

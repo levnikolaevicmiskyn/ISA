@@ -6,9 +6,9 @@ entity ALU is
         -- Operands and result
         operand1: in std_logic_vector(31 downto 0);     -- First operand
         operand2: in std_logic_vector(31 downto 0);     -- Second operand
-        result: out std_logic_vector(3 downto 0);       -- Result
+        result: out std_logic_vector(31 downto 0);      -- Result
         -- Control signals
-        control: in std_logic(2 downto 0);              -- Control signals
+        control: in std_logic_vector(2 downto 0);              -- Control signals
         -- Flags
         N: out std_logic;   -- Negative flag
         Z: out std_logic;   -- Zero flag
@@ -50,7 +50,7 @@ architecture structure of ALU is
     signal xor_res: std_logic_vector(31 downto 0);
     signal sum_res: std_logic_vector(31 downto 0);
     signal shift_res: std_logic_vector(31 downto 0);
-    signal res_select: std_logic_vector();
+    signal res_select: std_logic_vector(1 downto 0);
 
     signal adder_cout: std_logic;
     signal adder_ovf: std_logic;
@@ -83,9 +83,9 @@ begin
     begin
         temp_nz := internal_res(0);
         for i in 1 to 31 loop
-            temp_z := temp_nz or internal_res(i)
+            temp_nz := temp_nz or internal_res(i);
         end loop;
-        Z <= not temp_z;
+        Z <= not temp_nz;
     end process proc_Z_flag;
     C <= adder_cout;
     V <= adder_ovf;

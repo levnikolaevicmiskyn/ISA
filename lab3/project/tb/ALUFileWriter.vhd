@@ -24,14 +24,26 @@ begin
     proc_writeData: process(clk)
         file resultfile: text open WRITE_MODE is filename;
         variable lineout: line;
+	variable tmp_N: std_logic_vector(3 downto 0) := "000U";
+	variable tmp_Z: std_logic_vector(3 downto 0) := "000U";
+	variable tmp_C: std_logic_vector(3 downto 0) := "000U";
+	variable tmp_V: std_logic_vector(3 downto 0) := "000U";
     begin
         if rising_edge(clk) then
             if en = '1' then
+                tmp_N(0) := N;
+                tmp_Z(0) := Z;
+                tmp_C(0) := C;
+                tmp_V(0) := V;
                 hwrite(lineout, result);
-                hwrite(lineout, N);
-                hwrite(lineout, Z);
-                hwrite(lineout, C);
-                hwrite(lineout, V);
+                write(lineout, ' ');
+                hwrite(lineout, tmp_N);
+                write(lineout, ' ');
+                hwrite(lineout, tmp_Z);
+                write(lineout, ' ');
+                hwrite(lineout, tmp_C);
+                write(lineout, ' ');
+                hwrite(lineout, tmp_V);
                 writeline(resultfile, lineout);
             end if;
         end if;

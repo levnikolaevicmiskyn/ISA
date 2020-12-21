@@ -10,9 +10,9 @@ architecture behavior of tb_ALU is
             -- Operands and result
             operand1: in std_logic_vector(31 downto 0);     -- First operand
             operand2: in std_logic_vector(31 downto 0);     -- Second operand
-            result: out std_logic_vector(3 downto 0);       -- Result
+            result: out std_logic_vector(31 downto 0);      -- Result
             -- Control signals
-            control: in std_logic(2 downto 0);              -- Control signals
+            control: in std_logic_vector(2 downto 0);       -- Control signals
             -- Flags
             N: out std_logic;   -- Negative flag
             Z: out std_logic;   -- Zero flag
@@ -67,7 +67,7 @@ architecture behavior of tb_ALU is
 
 begin
     comp_clkGen: clockGenerator
-        generic map (1 ps);
+        generic map (0 ps)
         port map ('1', open, clk);
 
     comp_ALUFileReader: ALUFileReader
