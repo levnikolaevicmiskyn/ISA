@@ -50,7 +50,6 @@ architecture structure of ALU is
     signal xor_res: std_logic_vector(31 downto 0);
     signal sum_res: std_logic_vector(31 downto 0);
     signal shift_res: std_logic_vector(31 downto 0);
-    signal res_select: std_logic_vector(1 downto 0);
 
     signal adder_cout: std_logic;
     signal adder_ovf: std_logic;
@@ -70,7 +69,7 @@ begin
         port map(operand1, operand2(4 downto 0), shift_res);
 
     -- Select actual result
-    with res_select select internal_res <=
+    with sel_result select internal_res <=
         sum_res when "00",
         shift_res when "01",
         and_res when "10",

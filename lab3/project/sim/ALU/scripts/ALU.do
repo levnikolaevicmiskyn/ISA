@@ -18,4 +18,4 @@ vcom -work work ../../tb/ALUFileWriter.vhd
 vcom -work work ../../src/ALU/tb_ALU.vhd
 
 # Strart simulation
-vsim -c -do "vsim work.tb_ALU; run 1 us; exit"
+vsim -c -do "vsim work.tb_ALU; run 700 us; exit"

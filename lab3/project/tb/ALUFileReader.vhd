@@ -13,6 +13,7 @@ entity ALUFileReader is
     port (
         clk: in std_logic;
         en: in std_logic;
+        done: out std_logic;
         operand1: out std_logic_vector(31 downto 0);
         operand2: out std_logic_vector(31 downto 0);
         control: out std_logic_vector(2 downto 0)
@@ -30,6 +31,7 @@ begin
     begin
         if rising_edge(clk) then
             if en = '1' then
+                done <= '0';
                 if not endfile(samplefile) then
                     readline(samplefile, linein);
                     hread(linein, tmp_operand1);
@@ -38,6 +40,8 @@ begin
                     operand1 <= tmp_operand1;
                     operand2 <= tmp_operand2;
                     control <= tmp_control(2 downto 0);
+                else
+                    done <= '1';
                 end if;
             end if;
         end if;

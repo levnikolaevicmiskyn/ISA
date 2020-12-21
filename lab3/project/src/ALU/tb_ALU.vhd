@@ -28,6 +28,7 @@ architecture behavior of tb_ALU is
         port (
             clk: in std_logic;
             en: in std_logic;
+            done: out std_logic;
             operand1: out std_logic_vector(31 downto 0);
             operand2: out std_logic_vector(31 downto 0);
             control: out std_logic_vector(2 downto 0)
@@ -63,21 +64,25 @@ architecture behavior of tb_ALU is
     signal operand2: std_logic_vector(31 downto 0);
     signal control: std_logic_vector(2 downto 0);
     signal result: std_logic_vector(31 downto 0);
+    signal done: std_logic;
+    signal rst_n: std_logic;
+    signal wr: std_logic;
     signal N, Z, C, V: std_logic;
 
 begin
+    wr <= (not done) and rst_n;
     comp_clkGen: clockGenerator
-        generic map (0 ps)
-        port map ('1', open, clk);
+        generic map (1 ns)
+        port map ('1', rst_n, clk);
 
     comp_ALUFileReader: ALUFileReader
         generic map ("inputs.txt")
-        port map (clk, '1', operand1, operand2, control);
+        port map (clk, '1', done, operand1, operand2, control);
 
     comp_ALU: ALU
         port map (operand1, operand2, result, control, N, Z, C, V);
 
     comp_ALUFileWriter: ALUFileWriter
         generic map ("results-VHDL.txt")
-        port map(clk, '1', result, N, Z, C, V);
+        port map(clk, wr, result, N, Z, C, V);
 end architecture behavior;
