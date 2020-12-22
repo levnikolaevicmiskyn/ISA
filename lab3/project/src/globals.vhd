@@ -49,6 +49,7 @@ package globals is
   type t_WBSigs is record
     reg_write : std_logic;
     rd        : std_logic_vector(4 downto 0);
+    result : std_logic_vector(31 downto 0);
   end record;
 
   type t_EXData is record
@@ -58,16 +59,16 @@ package globals is
     C      : std_logic;
     V      : std_logic;
   end record;
-end package globals;
 
 constant NOP_INSTR : std_logic_vector(31 downto 0) := ((31 downto 7 => '0') & "0010011");
 
+end package globals;
 package body globals is
   function getOp(signal x : in std_logic_vector(2 downto 0)) return t_ALU_Op is
     variable y : t_ALU_OP;
   begin
     case x is
-      when ""     => y := alu_op_shift;
+      when "111"     => y := alu_op_shift;
       when "000"  => y := alu_op_add;
       when "001"  => y := alu_op_xor;
       when "010"  => y := alu_op_and;
