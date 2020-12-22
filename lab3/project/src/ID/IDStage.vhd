@@ -6,8 +6,7 @@ library work;
 use work.globals.all;
 
 entity IDStage is
-  port(clk              : in std_logic;
-       -- From IF stage
+  port(clk: in std_logic;-- From IF stage
        IDSigs           : in t_IDSigs;
        -- From EX stage
        EX_rd_bw         : in std_logic_vector(4 downto 0);
@@ -19,7 +18,6 @@ entity IDStage is
        WB_reg_write_bw  : in std_logic;
        WB_rd_bw         : in std_logic_vector(4 downto 0);
        WB_data          : in std_logic_vector(31 downto 0);
-
        -- IF stage control signals
        IFSigs                                 : out t_IFSigs;
        -- EX stage control signals
@@ -101,16 +99,16 @@ begin
 -- Assign ALU operands
   EXSigs.oprnd_1       <= read_data_1;
   EXSigs.oprnd_2       <= read_data_2;
-  EXSigs.use_immediate <= use_immediate;
+  EXSigs.use_immediate <= ALU_use_immediate;
   EXSigs.use_pc        <= oprnd_1_is_pc;
   EXSigs.op <= ALU_op;
 
 -- Branch prediction unit
-  compBPU : BPU port map(ID_pc, ID_misprediction, branch_prediction);
+  compBPU : BPU port map(IDSigs.pc, ID_misprediction, branch_prediction);
 
 -- Adder to compute the jump or branch target address to be stored in PC
   compAdder : adder generic map(32)
-    port map(ID_pc, immediate, '0', jump_addr_adder_out, open, open);
+    port map(IDSigs.pc, immediate, '0', jump_addr_adder_out, open, open);
 
   IFSigs.jmp_addr      <= jump_addr_adder_out when ID_misprediction = '0' else ID_alt_ta_bw;
   IFSigs.load_jmp_addr <= jump or ID_misprediction;

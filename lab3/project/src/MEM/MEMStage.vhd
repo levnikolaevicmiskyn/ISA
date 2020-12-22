@@ -16,8 +16,8 @@ entity MEMStage is
     data_in          : in  std_logic_vector(31 downto 0);
     data_out         : out std_logic_vector(31 downto 0);
     -- Signals for WB stage
-    WB_data          : out std_logic_vector(31 downto 0);
-    )
+    WB_data          : out std_logic_vector(31 downto 0)
+    );
 end entity MEMStage;
 
 architecture structure of MEMStage is
