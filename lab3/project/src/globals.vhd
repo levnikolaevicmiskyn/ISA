@@ -7,7 +7,7 @@ package globals is
   constant DATA_MEM_START_ADDR  : integer := 16#10010000#;
   constant INSTR_MEM_LIMIT      : integer := 16#7fffffff#;
 
-  type t_ALU_OP is (alu_op_shift, alu_op_add, alu_op_xor, alu_op_and, alu_op_nop, alu_op_lt);
+  type t_ALU_OP is (alu_op_shift, alu_op_add, alu_op_xor, alu_op_and, alu_op_add0, alu_op_lt);
   constant PC_SEL_JUMP  : std_logic_vector(1 downto 0) := "10";
   constant PC_SEL_STALL : std_logic_vector(1 downto 0) := "01";
   constant PC_SEL_INC   : std_logic_vector(1 downto 0) := "00";
