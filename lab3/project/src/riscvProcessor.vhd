@@ -102,6 +102,8 @@ begin
         EXSigs_EX_in.oprnd_2       <= (others => '0');
         EXSigs_EX_in.immediate     <= EXSigs_ID_out.immediate;
         EXSigs_EX_in.next_pc       <= EXSigs_ID_out.next_pc;
+		EXSigs_EX_in.rs1 <= (others => '0');
+		EXSigs_EX_in.rs2 <= (others => '0');
 
         MEMSigs_EX_in.mem_write <= '0';
         MEMSigs_EX_in.branch    <= '0';

@@ -23,6 +23,8 @@ package globals is
     oprnd_2       : std_logic_vector(31 downto 0);
     immediate     : std_logic_vector(31 downto 0);
     next_pc       : std_logic_vector(31 downto 0);
+	rs1: std_logic_vector(4 downto 0);
+	rs2 : std_logic_vector(4 downto 0);
   end record;
 
   type t_IFSigs is record
