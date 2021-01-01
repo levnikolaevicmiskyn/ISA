@@ -59,7 +59,7 @@ begin
       when "0110011" =>	-- Arithmetic operations
         inst_type <= t_INST_R;
         alu_use_immediate <= '0'; -- Use register operands
-        if hazard(rs1_i, rs2_i, rd_i) = '0' then
+        if hazard(rs1_i, rs2_i, EX_rd_bw, EX_mem_read_bw) = '0' then
           if funct7 = "0000000" and funct3 = "000" then
 					-- ADD
             op <= alu_op_add;
@@ -83,7 +83,7 @@ begin
       when "0010011" =>
         inst_type <= t_INST_I;
         alu_use_immediate <= '1'; -- Use immediate operand
-        if hazard(rs1_i, rd_i) = '0' then
+        if hazard(rs1_i, EX_rd_bw, EX_mem_read_bw) = '0' then
           if funct3 = "000" then
 					-- ADDI
             op <= alu_op_add;
@@ -119,7 +119,7 @@ begin
 
       when "1100011" =>   -- BEQ
         inst_type <= t_INST_SB;
-        if hazard(rs1_i, rs2_i, rd_i) = '0' then
+        if hazard(rs1_i, rs2_i, EX_rd_bw, EX_mem_read_bw) = '0' then
           op <= alu_op_lt; -- Resulting data will be discarded and zero flag will be used to decide on branch
           alu_use_immediate <= '0';
           use_pc <= '0';
@@ -134,8 +134,9 @@ begin
 
       when "0000011" =>   -- LW
         inst_type <= t_INST_I;
-        op <= alu_op_nop;
-        if hazard(rs1_i, rd_i) = '0' then
+        op <= alu_op_add;
+        alu_use_immediate <= '1';
+        if hazard(rs1_i, EX_rd_bw, EX_mem_read_bw) = '0' then
           WB_reg_write <= '1';
           MEM_read <= '1';
         --mem_to_reg <= '1';
@@ -153,7 +154,7 @@ begin
       when "0100011" =>   -- SW
         inst_type <= t_INST_S;
         op <= alu_op_nop;
-        if hazard(rs1_i, rs2_i, rd_i) = '0' then
+        if hazard(rs1_i, rs2_i, EX_rd_bw, EX_mem_read_bw) = '0' then
           WB_reg_write <= '1';
           mem_write <= '1';
         else

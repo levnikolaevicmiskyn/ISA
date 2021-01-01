@@ -102,14 +102,19 @@ begin
   EXSigs.use_immediate <= ALU_use_immediate;
   EXSigs.use_pc        <= oprnd_1_is_pc;
   EXSigs.op <= ALU_op;
+  EXSigs.immediate <= immediate;
+  EXSigs.next_pc <= IDSigs.next_pc;
+  EXSigs.rs1 <= read_addr_1;
+  EXSigs.rs2 <=read_addr_2;
 
 -- Branch prediction unit
   compBPU : BPU port map(IDSigs.pc, ID_misprediction, branch_prediction);
 
 -- Adder to compute the jump or branch target address to be stored in PC
-  compAdder : adder generic map(32)
-    port map(IDSigs.pc, immediate, '0', jump_addr_adder_out, open, open);
-
+  compAdder :-- adder generic map(32)
+    -- port map(IDSigs.pc, immediate, '0', jump_addr_adder_out, open, open);
+    jump_addr_adder_out <= std_logic_vector(unsigned(IDSigs.pc) + unsigned(immediate));
+  
   IFSigs.jmp_addr      <= jump_addr_adder_out when ID_misprediction = '0' else ID_alt_ta_bw;
   IFSigs.load_jmp_addr <= jump or ID_misprediction;
   -- Replace fetched instruction with nop in case of a jump, misprediction or hazard.
@@ -121,9 +126,11 @@ begin
   MEMSigs.branch_taken     <= jump;
   MEMSigs.mem_write <= MEM_write;
   MEMSigs.mem_read  <= MEM_read;
+  MEMSigs.data_for_mem <= read_data_2; -- rs2 is the source for store operations
 
   WBSigs.reg_write <= WB_reg_write;
   WBSigs.rd <= WB_rd;
+  WBSigs.mem_to_reg <= MEM_read;
 
 -- Mispredictions
   EX_load_nop  <= ID_misprediction;

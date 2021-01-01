@@ -4,15 +4,15 @@ library work;
 use work.globals.all;
 
 entity riscvProcessor is
-  port(clk                                        : in  std_logic;
+  port(clk, rst_n                                             : in  std_logic;
        phy_data_mem_addr, phy_instr_mem_addr, phy_data_mem_in : out std_logic_vector(31 downto 0);
-       phy_instr_mem_out, phy_data_mem_out: in std_logic_vector(31 downto 0);
-       phy_data_mem_wr_en                                  : out std_logic);
+       phy_instr_mem_out, phy_data_mem_out                    : in  std_logic_vector(31 downto 0);
+       phy_data_mem_wr_en                                     : out std_logic);
 end entity riscvProcessor;
 
 architecture structure of riscvProcessor is
   component IDStage is
-    port(clk: in std_logic;
+    port(clk              : in std_logic;
          -- From IF stage
          IDSigs           : in t_IDSigs;
          -- From EX stage
@@ -39,23 +39,23 @@ architecture structure of riscvProcessor is
   end component;
 
   component IFStage is
-    port (clk     : in  std_logic;
-          IFSigs  : in  t_IFSigs;
-          IDSigs  : out t_IDSigs;
-          address : out std_logic_vector(31 downto 0);
-          instr   : in  std_logic_vector(31 downto 0));
+    port (clk, rst_n : in  std_logic;
+          IFSigs     : in  t_IFSigs;
+          IDSigs     : out t_IDSigs;
+          address    : out std_logic_vector(31 downto 0);
+          instr      : in  std_logic_vector(31 downto 0));
   end component;
 
-component memoryInterface is
-  port (
-        inst_address, data_address : in  std_logic_vector(31 downto 0);
-        rd, wr                     : in  std_logic;
-        data_in                    : in  std_logic_vector(31 downto 0);
-        data_out, instr_out: out std_logic_vector(31 downto 0);
-        phy_mem_data_in, phy_mem_data_addr, phy_mem_instr_addr: out std_logic_vector(31 downto 0);
-        phy_mem_wr_en: out std_logic;
-        phy_mem_data_out, phy_mem_instr_out: in std_logic_vector(31 downto 0));
-end component;
+  component memoryInterface is
+    port (
+      inst_address, data_address                             : in  std_logic_vector(31 downto 0);
+      rd, wr                                                 : in  std_logic;
+      data_in                                                : in  std_logic_vector(31 downto 0);
+      data_out, instr_out                                    : out std_logic_vector(31 downto 0);
+      phy_mem_data_in, phy_mem_data_addr, phy_mem_instr_addr : out std_logic_vector(31 downto 0);
+      phy_mem_wr_en                                          : out std_logic;
+      phy_mem_data_out, phy_mem_instr_out                    : in  std_logic_vector(31 downto 0));
+  end component;
 
   component MEMStage is
     port(                               -- From control unit
@@ -74,26 +74,52 @@ end component;
       );
   end component;
 
+  component EXStage is
+    port(clk    : in  std_logic;
+         EXSigs : in  t_EXSigs;
+         EXData : out t_EXData
+     -- *** FWD UNIT SIGNALS HERE ***
+         );
+  end component;
+
   signal IDSigs_IF_out, IDSigs_ID_in                                                             : t_IDSigs;
   signal EXSigs_ID_out, EXSigs_EX_in                                                             : t_EXSigs;
   signal MEMSigs_ID_out, MEMSigs_EX_in, MEMSigs_EX_out, MEMSigs_MEM_in                           : t_MEMSigs;
   signal WBSigs_ID_out, WBSigs_EX_in, WBSigs_EX_out, WBSigs_MEM_in, WBSigs_MEM_out, WBSigs_WB_in : t_WBSigs;
-  signal EXData_EX_out, EXData_MEM_in : t_EXData;
-  signal WB_mem_data                                                                             : std_logic_vector(31 downto 0);
+  signal EXData_EX_out, EXData_MEM_in                                                            : t_EXData;
   signal IFSigs_ID_out                                                                           : t_IFSigs;
   signal ID_misprediction                                                                        : std_logic;
   signal ID_load_nop, EX_load_nop, MEM_load_nop                                                  : std_logic;
+  signal WB_data_from_mem, WB_data_from_ex, WB_result_bw, WB_mem_data                            : std_logic_vector(31 downto 0);
 
   signal instr_address, instruction, data_mem_address, data_mem_read_data, data_mem_write_data : std_logic_vector(31 downto 0);
   signal data_mem_write_en, data_mem_read_en                                                   : std_logic;
 begin
   compIDStage : IDStage
-    port map(clk, IDSigs_ID_in, WBSigs_EX_in.rd, MEMSigs_EX_in.mem_read, ID_misprediction, MEMSigs_MEM_in.alt_ta, WBSigs_WB_in.reg_write, WBSigs_WB_in.rd, WBSigs_WB_in.result, IFSigs_ID_out, EXSigs_ID_out, MEMSigs_ID_out, WBSigs_ID_out, ID_load_nop, EX_load_nop, MEM_load_nop
+    port map(clk, IDSigs_ID_in, WBSigs_EX_in.rd, MEMSigs_EX_in.mem_read, ID_misprediction, MEMSigs_MEM_in.alt_ta, WBSigs_WB_in.reg_write, WBSigs_WB_in.rd, WB_result_bw, IFSigs_ID_out, EXSigs_ID_out, MEMSigs_ID_out, WBSigs_ID_out, ID_load_nop, EX_load_nop, MEM_load_nop
              );
 
   comp_ID_EX_Reg : process(clk)
   begin
-    if rising_edge(clk) then
+    if rst_n = '0' then
+      EXSigs_EX_in.op            <= ALU_op_nop;
+      EXSigs_EX_in.use_pc        <= '0';
+      EXSigs_EX_in.use_immediate <= '0';
+      EXSigs_EX_in.oprnd_1       <= (others => '0');
+      EXSigs_EX_in.oprnd_2       <= (others => '0');
+      EXSigs_EX_in.immediate     <= EXSigs_ID_out.immediate;
+      EXSigs_EX_in.next_pc       <= EXSigs_ID_out.next_pc;
+      EXSigs_EX_in.rs1           <= (others => '0');
+      EXSigs_EX_in.rs2           <= (others => '0');
+
+      MEMSigs_EX_in.mem_write <= '0';
+      MEMSigs_EX_in.branch    <= '0';
+      MEMSigs_EX_in.mem_read  <= '0';
+      MEMSigs_EX_in.alt_ta    <= MEMSigs_ID_out.alt_ta;
+
+      WBSigs_EX_in.reg_write <= '0';
+      WBSigs_EX_in.rd        <= (others => '0');
+    elsif rising_edge(clk) then
       if ID_load_nop = '1' then
         EXSigs_EX_in.op            <= ALU_op_nop;
         EXSigs_EX_in.use_pc        <= '0';
@@ -102,8 +128,8 @@ begin
         EXSigs_EX_in.oprnd_2       <= (others => '0');
         EXSigs_EX_in.immediate     <= EXSigs_ID_out.immediate;
         EXSigs_EX_in.next_pc       <= EXSigs_ID_out.next_pc;
-		EXSigs_EX_in.rs1 <= (others => '0');
-		EXSigs_EX_in.rs2 <= (others => '0');
+        EXSigs_EX_in.rs1           <= (others => '0');
+        EXSigs_EX_in.rs2           <= (others => '0');
 
         MEMSigs_EX_in.mem_write <= '0';
         MEMSigs_EX_in.branch    <= '0';
@@ -118,35 +144,85 @@ begin
         WBSigs_EX_in  <= WBSigs_ID_out;
       end if;
     end if;
-    end process;
+  end process;
 
-      compIFStage : IFStage port map(clk, IFSigs_ID_out, IDSigs_IF_out, instr_address, instruction);
+  compIFStage : IFStage port map(clk, rst_n, IFSigs_ID_out, IDSigs_IF_out, instr_address, instruction);
 
-      comp_IF_ID_Reg : process(clk)
-      begin
-        if rising_edge(clk) then
-          if IFSigs_ID_out.load_nop = '1' then
-            -- Load a nop instead of the instruction just fetched
-            IDSigs_ID_in.inst <= NOP_instr;
-            IDSigs_ID_in.pc   <= IDSigs_IF_out.pc;
-            --IDSigs_ID_in.pc   <= IDSigs_IF_out.next_pc;
-          else
-            IDSigs_ID_in <= IDSigs_IF_out;
-          end if;
+  comp_IF_ID_Reg : process(clk)
+  begin
+    if rst_n = '0' then
+      IDSigs_ID_in.inst <= NOP_instr;
+      IDSigs_ID_in.pc   <= IDSigs_IF_out.pc;
+    elsif rising_edge(clk) then
+      if IFSigs_ID_out.load_nop = '1' then
+        -- Load a nop instead of the instruction just fetched
+        IDSigs_ID_in.inst <= NOP_instr;
+        IDSigs_ID_in.pc   <= IDSigs_IF_out.pc;
+      --IDSigs_ID_in.pc   <= IDSigs_IF_out.next_pc;
+      else
+        IDSigs_ID_in <= IDSigs_IF_out;
+      end if;
 
-        end if;
-      end process;
+    end if;
+  end process;
 
 
-      comp_EX_MEM_Reg : process(clk)
-      begin
-        if rising_edge(clk) then
-          EXData_MEM_in <= EXData_EX_out;
-        end if;
-      end process;
+  comp_EX_MEM_Reg : process(clk)
+  begin
+    if rst_n = '0' then
+      MEMSigs_MEM_in.mem_write <= '0';
+      MEMSigs_MEM_in.mem_read  <= '0';
+      MEMSigs_MEM_in.branch    <= '0';
+      EXData_MEM_in.result     <= (others => '0');
+      MEMSigs_MEM_in.data_for_mem <= (others => '0');
 
-    compMemStage     : MEMStage port map(MEMSigs_MEM_in, EXData_MEM_in, ID_misprediction, data_mem_address, data_mem_read_en, data_mem_write_en, data_mem_read_data, data_mem_write_data, WB_mem_data);
+      WBSigs_MEM_in.reg_write <= '0';
+    elsif rising_edge(clk) then
+      if EX_load_nop = '0' then
+        EXData_MEM_in  <= EXData_EX_out;
+        MEMSigs_MEM_in <= MEMSigs_EX_out;
+        WBSigs_MEM_in  <= WBSigs_EX_out;
+      else
+        MEMSigs_MEM_in.mem_write <= '0';
+        MEMSigs_MEM_in.mem_read  <= '0';
+        MEMSigs_MEM_in.branch    <= '0';
 
-    compMemInterface : memoryInterface port map(instr_address, data_mem_address, data_mem_read_en, data_mem_write_en, data_mem_write_data, data_mem_read_data, instruction, phy_data_mem_in, phy_data_mem_addr, phy_instr_mem_addr, phy_data_mem_wr_en, phy_data_mem_out, phy_instr_mem_out);
-    end structure;
+        WBSigs_MEM_in.reg_write <= '0';
+      end if;
+    end if;
+  end process;
+
+  compMemStage : MEMStage port map(MEMSigs_MEM_in, EXData_MEM_in, ID_misprediction, data_mem_address, data_mem_read_en, data_mem_write_en, data_mem_read_data, data_mem_write_data, WB_mem_data);
+  WBSigs_MEM_out <= WBSigs_MEM_in;
+  -- *** EX STAGE HERE ***
+  compEXStage : EXStage port map(clk, EXSigs_EX_in, EXData_EX_out);
+  MEMSigs_EX_out <= MEMSigs_EX_in;
+  WBSigs_EX_out  <= WBSigs_EX_in;
+
+  -- *** END EX STAGE ***
+
+  -- *** FWD UNIT HERE ***
+
+  -- *** END FWD UNIT ***
+  compMemInterface : memoryInterface port map(instr_address, data_mem_address, data_mem_read_en, data_mem_write_en, data_mem_write_data, data_mem_read_data, instruction, phy_data_mem_in, phy_data_mem_addr, phy_instr_mem_addr, phy_data_mem_wr_en, phy_data_mem_out, phy_instr_mem_out);
+
+
+  comp_MEM_WB_Reg : process(clk)
+  begin
+    if rst_n = '0' then
+      WBSigs_WB_in.reg_write <= '0';
+    elsif rising_edge(clk) then
+      if MEM_load_nop = '0' then
+        WBSigs_WB_in     <= WBSigs_MEM_out;
+        WB_data_from_mem <= WB_mem_data;
+        WB_data_from_ex  <= EXData_MEM_in.result;
+      else
+        WBSigs_WB_in.reg_write <= '0';
+      end if;
+    end if;
+  end process;
+
+  compWBStage : WB_result_bw <= WB_data_from_mem when WBSigs_WB_in.mem_to_reg = '1' else WB_data_from_ex;
+
+end structure;
 

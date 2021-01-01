@@ -26,16 +26,26 @@ architecture behavior of Memory is
   type t_mem is array(1023 downto 0) of std_logic_vector(31 downto 0);
 
   impure function init_mem(constant filename : string) return t_mem is
+    -- File handle variables
+    variable open_status: FILE_OPEN_STATUS;
+    file instmem     : text;
+    -- Memory object
     variable mem_var : t_mem;
-    file instmem     : text open read_mode is filename;
+    -- Line from file
     variable fline   : line;
-    variable addr    : std_logic_vector(31 downto 0);
+    -- Temporary variable for input data
     variable inst    : std_logic_vector(31 downto 0);
+    -- Address counter, incremented at each line
     variable addr_i  : integer := 0;
   begin
+    file_open(open_status,instmem, filename, READ_MODE);
+    -- Check if file is open
+    if open_status /= open_ok then
+      report "Could not open file";
+      return mem_var;
+    end if;
     while (not endfile(instmem)) loop
       readline(instmem, fline);
-      hread(fline, addr);
       hread(fline, inst);
       mem_var(addr_i) := inst;
       addr_i          := addr_i + 1;

@@ -7,7 +7,7 @@ package globals is
   constant DATA_MEM_START_ADDR  : integer := 16#10010000#;
   constant INSTR_MEM_LIMIT      : integer := 16#7fffffff#;
 
-  type t_ALU_OP is (alu_op_shift, alu_op_add, alu_op_xor, alu_op_and, alu_op_add0, alu_op_lt);
+  type t_ALU_OP is (alu_op_shift, alu_op_add, alu_op_xor, alu_op_and, alu_op_nop, alu_op_lt);
   constant PC_SEL_JUMP  : std_logic_vector(1 downto 0) := "10";
   constant PC_SEL_STALL : std_logic_vector(1 downto 0) := "01";
   constant PC_SEL_INC   : std_logic_vector(1 downto 0) := "00";
@@ -46,12 +46,13 @@ package globals is
     branch_taken : std_logic;
     mem_read     : std_logic;
     alt_ta       : std_logic_vector(31 downto 0);
+    data_for_mem: std_logic_vector(31 downto 0);
   end record;
 
   type t_WBSigs is record
     reg_write : std_logic;
     rd        : std_logic_vector(4 downto 0);
-    result : std_logic_vector(31 downto 0);
+    mem_to_reg: std_logic;
   end record;
 
   type t_EXData is record

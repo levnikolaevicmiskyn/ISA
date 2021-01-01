@@ -6,19 +6,42 @@ end entity testbench;
 
 
 architecture behavior of testbench is
-  component riscvProcessor is
-      port(clk: in std_logic);
-  end component;
+component riscvProcessor is
+  port(clk, rst_n                                                    : in  std_logic;
+       phy_data_mem_addr, phy_instr_mem_addr, phy_data_mem_in : out std_logic_vector(31 downto 0);
+       phy_instr_mem_out, phy_data_mem_out                    : in  std_logic_vector(31 downto 0);
+       phy_data_mem_wr_en                                     : out std_logic);
+end component;
 
-  signal clk: std_logic;
+component Memory is
+  generic(filename : string);
+  port(clk      : in  std_logic;
+       address  : in  std_logic_vector(31 downto 0);
+       wr_en    : in  std_logic;
+       data_in  : in  std_logic_vector(31 downto 0);
+       data_out : out std_logic_vector(31 downto 0)
+       );
+end component;
+
+signal clk, rst_n : std_logic;
+signal phy_data_mem_addr, phy_data_mem_in, phy_data_mem_out, phy_instr_mem_in, phy_instr_mem_out, phy_instr_mem_addr: std_logic_vector(31 downto 0);
+signal phy_data_mem_wr_en: std_logic;
 begin
-  proc: riscvProcessor(clk);
+  compProc : riscvProcessor port map(clk, rst_n, phy_data_mem_addr, phy_instr_mem_addr, phy_data_mem_in, phy_instr_mem_out, phy_data_mem_out, phy_data_mem_wr_en     );
 
-  procClkGen: process
-              begin
-                clk <= '0';
-                wait for 10 ns;
-                clk <= '1';
-                wait for 10 ns;
-              end process;
+  procClkGen : process
+  begin
+    clk <= '0';
+    wait for 10 ns;
+    clk <= '1';
+    wait for 10 ns;
+  end process;
+  rst_n <= '0', '1' after 1ns;
+
+  compInstrMemory: Memory generic map("machinecode.txt")
+    port map(clk, phy_instr_mem_addr, '0', (others => '0'), phy_instr_mem_out);
+
+  
+  compDataMemory: Memory generic map("machinedata.txt")
+    port map(clk, phy_data_mem_addr, phy_data_mem_wr_en, phy_data_mem_in , phy_data_mem_out);
 end behavior;

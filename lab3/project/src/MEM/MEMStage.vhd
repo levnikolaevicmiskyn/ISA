@@ -40,7 +40,8 @@ begin
   ID_misprediction <= mispred;
 
   WB_data <= data_in;  -- Forward data received from memory to writeback stage
-
+  data_out <= MEMSigs.data_for_mem;
+  
   -- Signals for memory
   rd      <= MEMSigs.mem_read;
   wr      <= MEMSigs.mem_write;
