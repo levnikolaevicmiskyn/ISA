@@ -102,15 +102,14 @@ begin
   comp_ID_EX_Reg : process(clk)
   begin
     if rst_n = '0' then
-      EXSigs_EX_in.op            <= ALU_op_nop;
-      EXSigs_EX_in.use_pc        <= '0';
-      EXSigs_EX_in.use_immediate <= '0';
-      EXSigs_EX_in.oprnd_1       <= (others => '0');
-      EXSigs_EX_in.oprnd_2       <= (others => '0');
-      EXSigs_EX_in.immediate     <= EXSigs_ID_out.immediate;
-      EXSigs_EX_in.next_pc       <= EXSigs_ID_out.next_pc;
-      EXSigs_EX_in.rs1           <= (others => '0');
-      EXSigs_EX_in.rs2           <= (others => '0');
+      EXSigs_EX_in.op        <= ALU_op_nop;
+      EXSigs_EX_in.oprnd_sel <= alu_sel_reg_reg;
+      EXSigs_EX_in.oprnd_1   <= (others => '0');
+      EXSigs_EX_in.oprnd_2   <= (others => '0');
+      EXSigs_EX_in.immediate <= EXSigs_ID_out.immediate;
+      EXSigs_EX_in.pc   <= EXSigs_ID_out.next_pc;
+      EXSigs_EX_in.rs1       <= (others => '0');
+      EXSigs_EX_in.rs2       <= (others => '0');
 
       MEMSigs_EX_in.mem_write <= '0';
       MEMSigs_EX_in.branch    <= '0';
@@ -122,12 +121,11 @@ begin
     elsif rising_edge(clk) then
       if ID_load_nop = '1' then
         EXSigs_EX_in.op            <= ALU_op_nop;
-        EXSigs_EX_in.use_pc        <= '0';
-        EXSigs_EX_in.use_immediate <= '0';
+        EXSigs_EX_in.alu_sel <= alu_sel_reg_reg;
         EXSigs_EX_in.oprnd_1       <= (others => '0');
         EXSigs_EX_in.oprnd_2       <= (others => '0');
         EXSigs_EX_in.immediate     <= EXSigs_ID_out.immediate;
-        EXSigs_EX_in.next_pc       <= EXSigs_ID_out.next_pc;
+        EXSigs_EX_in.pc       <= EXSigs_ID_out.next_pc;
         EXSigs_EX_in.rs1           <= (others => '0');
         EXSigs_EX_in.rs2           <= (others => '0');
 
@@ -158,7 +156,6 @@ begin
         -- Load a nop instead of the instruction just fetched
         IDSigs_ID_in.inst <= NOP_instr;
         IDSigs_ID_in.pc   <= IDSigs_IF_out.pc;
-      --IDSigs_ID_in.pc   <= IDSigs_IF_out.next_pc;
       else
         IDSigs_ID_in <= IDSigs_IF_out;
       end if;
@@ -170,10 +167,10 @@ begin
   comp_EX_MEM_Reg : process(clk)
   begin
     if rst_n = '0' then
-      MEMSigs_MEM_in.mem_write <= '0';
-      MEMSigs_MEM_in.mem_read  <= '0';
-      MEMSigs_MEM_in.branch    <= '0';
-      EXData_MEM_in.result     <= (others => '0');
+      MEMSigs_MEM_in.mem_write    <= '0';
+      MEMSigs_MEM_in.mem_read     <= '0';
+      MEMSigs_MEM_in.branch       <= '0';
+      EXData_MEM_in.result        <= (others => '0');
       MEMSigs_MEM_in.data_for_mem <= (others => '0');
 
       WBSigs_MEM_in.reg_write <= '0';
@@ -195,7 +192,7 @@ begin
   compMemStage : MEMStage port map(MEMSigs_MEM_in, EXData_MEM_in, ID_misprediction, data_mem_address, data_mem_read_en, data_mem_write_en, data_mem_read_data, data_mem_write_data, WB_mem_data);
   WBSigs_MEM_out <= WBSigs_MEM_in;
   -- *** EX STAGE HERE ***
-  compEXStage : EXStage port map(clk, EXSigs_EX_in, EXData_EX_out);
+  compEXStage  : EXStage port map(clk, EXSigs_EX_in, EXData_EX_out);
   MEMSigs_EX_out <= MEMSigs_EX_in;
   WBSigs_EX_out  <= WBSigs_EX_in;
 
