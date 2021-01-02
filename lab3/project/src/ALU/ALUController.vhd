@@ -2,11 +2,12 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 library work;
+use work.globals;
 use work.ALUpkg;
 
 entity ALUController is
     port (
-        operation: in t_ALU_OP;         -- ALU abstract operation
+        operation: in globals.t_ALU_OP; -- ALU abstract operation
         control: out ALUpkg.t_Control   -- Control signals
     );
 end entity ALUController;
@@ -20,19 +21,19 @@ begin
         control.comp_signed_data <= '1';
         control.comp_comparison <= ALUpkg.COMP_LT;
         case operation is
-            when alu_op_add =>
+            when globals.alu_op_add =>
                 control.operation <= ALUpkg.OP_SUM;
                 control.adder_sub <= '0';
-            when alu_op_shift =>
+            when globals.alu_op_shift =>
                 control.operation <= ALUpkg.OP_SHIFT;
-            when alu_op_and =>
+            when globals.alu_op_and =>
                 control.operation <= ALUpkg.OP_AND;
-            when alu_op_xor =>
+            when globals.alu_op_xor =>
                 control.operation <= ALUpkg.OP_XOR;
-            when alu_op_lt =>
+            when globals.alu_op_lt =>
                 control.operation <= ALUpkg.OP_COMP;
                 control.comp_signed_data <= '1';
-                control.comp.comparison <= ALUpkg.COMP_LT;
+                control.comp_comparison <= ALUpkg.COMP_LT;
             when others =>
                 assert false
                 report "Unknown ALU operation requested"

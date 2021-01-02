@@ -3,7 +3,7 @@ use ieee.std_logic_1164.all;
 
 use work.ALUpkg
 entity comparatorExtension is
-    generic (N : positive := 0)
+    generic (NB: positive := 32);
     port (
         -- ALU flags
         N, Z, C, V: in std_logic;
@@ -11,7 +11,7 @@ entity comparatorExtension is
         signed_data: in std_logic;
         comparison: in ALUpkg.t_Comparison;
         -- Result
-        result: out std_logic_vector(N-1 downto 0)
+        result: out std_logic_vector(NB-1 downto 0)
     );
 end entity comparatorExtension;
 

@@ -2,21 +2,21 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 library work;
-use work.ALUpkg
+use work.ALUpkg;
 
 entity ALUDatapath is
     port (
         -- Control
-        control:  in ALUpkg.t_Control
+        control:  in ALUpkg.t_Control;
         -- Operands and result
         operand1: in  std_logic_vector(31 downto 0);     -- First operand
         operand2: in  std_logic_vector(31 downto 0);     -- Second operand
-        result:   out std_logic_vector(31 downto 0)      -- Result
+        result:   out std_logic_vector(31 downto 0);     -- Result
         -- Flags
-        signal N: out std_logic; -- Negative
-        signal Z: out std_logic; -- Zero
-        signal C: out std_logic; -- Carry out
-        signal V: out std_logic  -- Signed Overflow
+        N: out std_logic; -- Negative
+        Z: out std_logic; -- Zero
+        C: out std_logic; -- Carry out
+        V: out std_logic  -- Signed Overflow
     );
 end entity ALUDatapath;
 
@@ -46,7 +46,7 @@ architecture structure of ALUDatapath is
     end component;
 
     component comparatorExtension is
-        generic (N : positive := 0)
+        generic (NB: positive := 32);
         port (
             -- ALU flags
             N, Z, C, V: in std_logic;
@@ -54,7 +54,7 @@ architecture structure of ALUDatapath is
             signed_data: in std_logic;
             comparison: in ALUpkg.t_Comparison;
             -- Result
-            result: out std_logic_vector(N-1 downto 0)
+            result: out std_logic_vector(NB-1 downto 0)
         );
     end component;
     -- Internal results
@@ -98,7 +98,7 @@ begin
 
     -- Compute partial flags
     flag_reference_result <= res_sum;
-    intN <= res_add(0);
+    intN <= res_sum(0);
     proc_Z_flag: process(flag_reference_result)
             variable nz: std_logic;
         begin
