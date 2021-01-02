@@ -1,44 +1,42 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
+library work;
+use work.ALUpkg;
+
 entity ALUController is
     port (
-        op: in t_ALU_OP;
-        sel_immediate: in std_logic;
-        sel_pc: in std_logic;
-
-        sel_operand1: out std_logic_vector(1 downto 0);
-        sel_operand2: out std_logic_vector(1 downto 0);
-        ALU_control: out std_logic_vector(2 downto 0)
+        operation: in t_ALU_OP;         -- ALU abstract operation
+        control: out ALUpkg.t_Control   -- Control signals
     );
 end entity ALUController;
 
 architecture structure of ALUController is
-    signal ALU_adder_sub: std_logic;
-    signal ALU_sel_result: std_logic_vector(1 downto 0);
 begin
-    proc_controller: process(op, sel_immediate, sel_pc)
+    proc_control: process(operation)
     begin
-        ALU_adder_sub <= '0';
-        ALU_sel_result <= "00"
-        sel_operand1 <= '0' & sel_pc;
-        sel_operand2 <= '0' & sel_immediate;
-        case op is
-            when alu_op_nop =>
-                -- Set operand1 to zero
-                sel_operand1 <= "10";
+        control.operation <= ALUpkg.OP_SUM;
+        control.adder_sub <= '0';
+        control.comp_signed_data <= '1';
+        control.comp_comparison <= ALUpkg.COMP_LT;
+        case operation is
             when alu_op_add =>
+                control.operation <= ALUpkg.OP_SUM;
+                control.adder_sub <= '0';
             when alu_op_shift =>
-                ALU_sel_result <= "01";
+                control.operation <= ALUpkg.OP_SHIFT;
             when alu_op_and =>
-                ALU_sel_result <= "10";
+                control.operation <= ALUpkg.OP_AND;
             when alu_op_xor =>
-                ALU_sel_result <= "11";
+                control.operation <= ALUpkg.OP_XOR;
             when alu_op_lt =>
-                ALU_adder_sub <= '1';
+                control.operation <= ALUpkg.OP_COMP;
+                control.comp_signed_data <= '1';
+                control.comp.comparison <= ALUpkg.COMP_LT;
             when others =>
+                assert false
+                report "Unknown ALU operation requested"
+                severity error;
         end case;
-    end proc_controller;
-
-    control <= ALU_adder_sub & ALU_sel_result;
+    end process proc_control;
 end architecture structure;
