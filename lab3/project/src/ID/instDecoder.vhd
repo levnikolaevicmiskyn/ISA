@@ -17,7 +17,7 @@ entity instDecoder is
     IF_stall: out std_logic;
     -- EX control signals
     op: out t_ALU_OP;
-    alu_use_immediate, use_pc: out std_logic;
+    alu_sel: out t_ALU_SEL;
     -- MEM control signals
     MEM_write, MEM_read, WB_reg_write: out std_logic;
     immediate: out std_logic_vector(31 downto 0);
@@ -45,9 +45,8 @@ begin
   begin
     -- Default signal assignments
     inst_type <= t_INST_R;
-    op <= alu_op_nop;
-    alu_use_immediate <= '0';
-    use_pc <= '0';
+    op <= alu_op_add;
+    alu_sel <= alu_sel_reg_reg;
     WB_reg_write <= '0';
     MEM_read <= '0';
     MEM_write <= '0';
@@ -58,7 +57,7 @@ begin
     case opcode is
       when "0110011" =>	-- Arithmetic operations
         inst_type <= t_INST_R;
-        alu_use_immediate <= '0'; -- Use register operands
+        alu_sel <= alu_sel_reg_reg; -- Use register operands
         if hazard(rs1_i, rs2_i, EX_rd_bw, EX_mem_read_bw) = '0' then
           if funct7 = "0000000" and funct3 = "000" then
 					-- ADD
@@ -82,7 +81,7 @@ begin
 
       when "0010011" =>
         inst_type <= t_INST_I;
-        alu_use_immediate <= '1'; -- Use immediate operand
+        alu_sel <= alu_sel_reg_imm; -- Use immediate operand
         if hazard(rs1_i, EX_rd_bw, EX_mem_read_bw) = '0' then
           if funct3 = "000" then
 					-- ADDI
@@ -106,23 +105,21 @@ begin
 
       when "0010111" =>   -- AUIPC
         inst_type <= t_INST_U;
-        use_pc <= '1'; 			-- Use pc as first operand
-        alu_use_immediate <= '1';   -- Use immediate as second operand
+        alu_sel <= alu_sel_pc_imm;  -- Use pc as first operand and  immediate as second operand
         op <= alu_op_add;
         WB_reg_write <= '1';
 
       when "0110111" =>   -- LUI
         inst_type <= t_INST_U;
-        alu_use_immediate <= '1';
-        op <= alu_op_nop;
+        alu_sel <= alu_sel_0_imm;
+        op <= alu_op_add;
         WB_reg_write <= '1';
 
       when "1100011" =>   -- BEQ
         inst_type <= t_INST_SB;
         if hazard(rs1_i, rs2_i, EX_rd_bw, EX_mem_read_bw) = '0' then
           op <= alu_op_lt; -- Resulting data will be discarded and zero flag will be used to decide on branch
-          alu_use_immediate <= '0';
-          use_pc <= '0';
+          alu_sel<=alu_sel_reg_reg;
           WB_reg_write <= '0';
           branch <= '1';
           -- Set jump in case this branch is predicted to be taken so that the pc will
@@ -135,7 +132,7 @@ begin
       when "0000011" =>   -- LW
         inst_type <= t_INST_I;
         op <= alu_op_add;
-        alu_use_immediate <= '1';
+        alu_sel <= alu_sel_reg_imm;
         if hazard(rs1_i, EX_rd_bw, EX_mem_read_bw) = '0' then
           WB_reg_write <= '1';
           MEM_read <= '1';
@@ -146,14 +143,15 @@ begin
       when "1101111" =>   -- JAL
         inst_type <= t_INST_J;
         -- In this case sum 4 to the current pc before jumping
-        use_pc <= '1';
-        op <= alu_op_nop;
+        alu_sel <= alu_sel_pc_4;
+        op <= alu_op_add;
         WB_reg_write <= '1';
         jump <= '1';
 
       when "0100011" =>   -- SW
         inst_type <= t_INST_S;
-        op <= alu_op_nop;
+        alu_sel <= alu_sel_reg_imm;
+        op <= alu_op_add;
         if hazard(rs1_i, rs2_i, EX_rd_bw, EX_mem_read_bw) = '0' then
           WB_reg_write <= '1';
           mem_write <= '1';
@@ -164,8 +162,6 @@ begin
         -- Undefined behavior
         assert false report "Invalid opcode encountered. Behavior is undefined." severity warning;
         -- Allow logic simplification
-        alu_use_immediate <= '-';
-        use_pc <= '-';
         WB_reg_write <= '-';
         MEM_read <= '-';
         MEM_write <= '-';

@@ -8,6 +8,8 @@ package globals is
   constant INSTR_MEM_LIMIT      : integer := 16#7fffffff#;
 
   type t_ALU_OP is (alu_op_shift, alu_op_add, alu_op_xor, alu_op_and, alu_op_nop, alu_op_lt);
+  type t_ALU_SEL is (alu_sel_reg_reg, alu_sel_reg_imm, alu_sel_pc_imm, alu_sel_pc_4, alu_sel_0_imm);
+  
   constant PC_SEL_JUMP  : std_logic_vector(1 downto 0) := "10";
   constant PC_SEL_STALL : std_logic_vector(1 downto 0) := "01";
   constant PC_SEL_INC   : std_logic_vector(1 downto 0) := "00";
@@ -16,15 +18,14 @@ package globals is
 
   -- Record types
   type t_EXSigs is record
-    use_immediate : std_logic;
-    use_pc        : std_logic;
     op            : t_ALU_OP;
     oprnd_1       : std_logic_vector(31 downto 0);
     oprnd_2       : std_logic_vector(31 downto 0);
     immediate     : std_logic_vector(31 downto 0);
-    next_pc       : std_logic_vector(31 downto 0);
+    pc       : std_logic_vector(31 downto 0);
 	rs1: std_logic_vector(4 downto 0);
-	rs2 : std_logic_vector(4 downto 0);
+    rs2 : std_logic_vector(4 downto 0);
+    oprnd_sel: t_ALU_SEL;
   end record;
 
   type t_IFSigs is record

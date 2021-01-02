@@ -44,7 +44,7 @@ architecture RTL of IDStage is
       IF_stall                          : out std_logic;
       -- EX control signals
       op                                : out t_ALU_OP;
-      alu_use_immediate, use_pc         : out std_logic;
+      alu_sel: out t_ALU_SEL;
       -- MEM control signals
       MEM_write, MEM_read, WB_reg_write : out std_logic;
       immediate                         : out std_logic_vector(31 downto 0);
@@ -85,13 +85,14 @@ architecture RTL of IDStage is
   signal jump_addr_adder_out                    : std_logic_vector(31 downto 0);
   signal jump, branch                           : std_logic;
   signal ALU_op : t_ALU_OP;
+  signal ALU_sel: t_ALU_SEL;
   signal IF_stall: std_logic;
   signal branch_prediction : std_logic;
   signal MEM_write, MEM_read, WB_reg_write: std_logic;
   signal WB_rd: std_logic_vector(4 downto 0);
 
 begin
-  compInstDecoder : instDecoder port map(IDSigs.inst, branch_prediction, EX_rd_bw, EX_mem_read_bw, IF_stall, ALU_op, ALU_use_immediate, oprnd_1_is_pc, MEM_write,
+  compInstDecoder : instDecoder port map(IDSigs.inst, branch_prediction, EX_rd_bw, EX_mem_read_bw, IF_stall, ALU_op, ALU_sel, MEM_write,
                                          MEM_read, WB_reg_write, immediate, read_addr_1, read_addr_2, WB_rd, jump, branch);
 
   compRegFile : regFile port map(clk, WB_reg_write_bw, read_addr_1, read_addr_2, WB_rd_bw, WB_data, read_data_1, read_data_2);
@@ -99,13 +100,12 @@ begin
 -- Assign ALU operands
   EXSigs.oprnd_1       <= read_data_1;
   EXSigs.oprnd_2       <= read_data_2;
-  EXSigs.use_immediate <= ALU_use_immediate;
-  EXSigs.use_pc        <= oprnd_1_is_pc;
   EXSigs.op <= ALU_op;
   EXSigs.immediate <= immediate;
-  EXSigs.next_pc <= IDSigs.next_pc;
+  EXSigs.pc <= IDSigs.next_pc;
   EXSigs.rs1 <= read_addr_1;
   EXSigs.rs2 <=read_addr_2;
+  EXSigs.oprnd_sel <= ALU_sel;
 
 -- Branch prediction unit
   compBPU : BPU port map(IDSigs.pc, ID_misprediction, branch_prediction);
