@@ -9,7 +9,7 @@ package globals is
 
   type t_ALU_OP is (alu_op_shift, alu_op_add, alu_op_xor, alu_op_and, alu_op_lt);
   type t_ALU_SEL is (alu_sel_reg_reg, alu_sel_reg_imm, alu_sel_pc_imm, alu_sel_pc_4, alu_sel_0_imm);
-  
+
   constant PC_SEL_JUMP  : std_logic_vector(1 downto 0) := "10";
   constant PC_SEL_STALL : std_logic_vector(1 downto 0) := "01";
   constant PC_SEL_INC   : std_logic_vector(1 downto 0) := "00";
@@ -72,13 +72,11 @@ package body globals is
     variable y : t_ALU_OP;
   begin
     case x is
-      when "111"     => y := alu_op_shift;
-      when "000"  => y := alu_op_add;
-      when "001"  => y := alu_op_xor;
-      when "010"  => y := alu_op_and;
-      when "011"  => y := alu_op_nop;
-      when "100"  => y := alu_op_lt;
-      when others => y := alu_op_shift;
+      when "000" => y := alu_op_add;
+      when "001" => y := alu_op_shift;
+      when "010" => y := alu_op_and;
+      when "011" => y := alu_op_xor;
+      when "100" => y := alu_op_lt;
     end case;
     return y;
   end function getOp;
