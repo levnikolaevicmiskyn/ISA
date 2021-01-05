@@ -1,18 +1,22 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
+library work;
+use work.globals;
+use work.ALUpkg;
+
 entity tb_ALU is
 end entity tb_ALU;
 
 architecture behavior of tb_ALU is
     component ALU is
         port (
+            -- Control signals
+            operation: globals.t_ALU_OP;
             -- Operands and result
             operand1: in std_logic_vector(31 downto 0);     -- First operand
             operand2: in std_logic_vector(31 downto 0);     -- Second operand
             result: out std_logic_vector(31 downto 0);      -- Result
-            -- Control signals
-            control: in std_logic_vector(2 downto 0);       -- Control signals
             -- Flags
             N: out std_logic;   -- Negative flag
             Z: out std_logic;   -- Zero flag
@@ -31,7 +35,7 @@ architecture behavior of tb_ALU is
             done: out std_logic;
             operand1: out std_logic_vector(31 downto 0);
             operand2: out std_logic_vector(31 downto 0);
-            control: out std_logic_vector(2 downto 0)
+            operation: out globals.t_ALU_OP
         );
     end component;
 
@@ -62,7 +66,7 @@ architecture behavior of tb_ALU is
     signal clk: std_logic;
     signal operand1: std_logic_vector(31 downto 0);
     signal operand2: std_logic_vector(31 downto 0);
-    signal control: std_logic_vector(2 downto 0);
+    signal operation: globals.t_ALU_OP;
     signal result: std_logic_vector(31 downto 0);
     signal done: std_logic;
     signal rst_n: std_logic;
@@ -77,7 +81,7 @@ begin
 
     comp_ALUFileReader: ALUFileReader
         generic map ("inputs.txt")
-        port map (clk, '1', done, operand1, operand2, control);
+        port map (clk, '1', done, operand1, operand2, operation);
 
     comp_ALU: ALU
         port map (operand1, operand2, result, control, N, Z, C, V);

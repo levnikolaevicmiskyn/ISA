@@ -38,10 +38,10 @@ architecture structure of ALU is
             operand2: in  std_logic_vector(31 downto 0);     -- Second operand
             result:   out std_logic_vector(31 downto 0);     -- Result
             -- Flags
-            signal N: out std_logic; -- Negative
-            signal Z: out std_logic; -- Zero
-            signal C: out std_logic; -- Carry out
-            signal V: out std_logic  -- Signed Overflow
+            N: out std_logic; -- Negative
+            Z: out std_logic; -- Zero
+            C: out std_logic; -- Carry out
+            V: out std_logic  -- Signed Overflow
         );
     end component;
     signal control: ALUpkg.t_Control;

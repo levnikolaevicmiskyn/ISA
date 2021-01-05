@@ -81,11 +81,11 @@ ALU::Input ALU::parseInputString(const std::string &instruction) {
 
 std::string ALU::formatOutputString(const Output &output) {
     std::stringstream ss;
-    ss << std::setfill('0') << std::setw(32 / 4) << std::hex << output.result << " "
+    ss << std::setfill('0') << std::setw(32 / 4) << std::hex << output.result; /* << " "
        << output.N << " "
        << output.Z << " "
        << output.C << " "
-       << output.V << " ";
+       << output.V << " "; */
     return ss.str();
 }
 
