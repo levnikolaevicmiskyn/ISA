@@ -11,6 +11,7 @@ vcom -work work ../../src/ALU/arithmetic/carryGenerator.vhd
 vcom -work work ../../src/ALU/arithmetic/sumGenerator.vhd
 vcom -work work ../../src/ALU/arithmetic/adder_CLA.vhd
 vcom -work work ../../src/ALU/arithmetic/barrelShifter_behavior.vhd
+vcom -work work ../../src/ALU/arithmetic/comparatorExtension.vhd
 vcom -work work ../../src/ALU/ALUController.vhd;
 vcom -work work ../../src/ALU/ALUDatapath.vhd;
 vcom -work work ../../src/ALU/ALU.vhd;

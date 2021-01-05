@@ -42,7 +42,7 @@ begin
                     hread(linein, tmp_operation);
                     operand1  <= tmp_operand1;
                     operand2  <= tmp_operand2;
-                    operation <= globals.getOp(tmp_control(2 downto 0));
+                    operation <= globals.getOp(tmp_operation(2 downto 0));
                 else
                     done <= '1';
                 end if;

@@ -14,7 +14,7 @@ package globals is
   constant PC_SEL_STALL : std_logic_vector(1 downto 0) := "01";
   constant PC_SEL_INC   : std_logic_vector(1 downto 0) := "00";
 
-  function getOp(signal x : in std_logic_vector(2 downto 0)) return t_ALU_OP;
+  function getOp(x : std_logic_vector(2 downto 0)) return t_ALU_OP;
 
   -- Record types
   type t_EXSigs is record
@@ -68,15 +68,16 @@ constant NOP_INSTR : std_logic_vector(31 downto 0) := ((31 downto 7 => '0') & "0
 
 end package globals;
 package body globals is
-  function getOp(signal x : in std_logic_vector(2 downto 0)) return t_ALU_Op is
+  function getOp(x : std_logic_vector(2 downto 0)) return t_ALU_Op is
     variable y : t_ALU_OP;
   begin
     case x is
-      when "000" => y := alu_op_add;
-      when "001" => y := alu_op_shift;
-      when "010" => y := alu_op_and;
-      when "011" => y := alu_op_xor;
-      when "100" => y := alu_op_lt;
+      when "000"  => y := alu_op_add;
+      when "001"  => y := alu_op_shift;
+      when "010"  => y := alu_op_and;
+      when "011"  => y := alu_op_xor;
+      when "100"  => y := alu_op_lt;
+      when others => y := alu_op_add;
     end case;
     return y;
   end function getOp;

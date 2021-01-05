@@ -84,7 +84,7 @@ begin
         port map (clk, '1', done, operand1, operand2, operation);
 
     comp_ALU: ALU
-        port map (operand1, operand2, result, control, N, Z, C, V);
+        port map (operation, operand1, operand2, result, N, Z, C, V);
 
     comp_ALUFileWriter: ALUFileWriter
         generic map ("results-VHDL.txt")
