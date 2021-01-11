@@ -26,12 +26,16 @@ begin
                 control.adder_sub <= '0';
             when globals.alu_op_shift =>
                 control.operation <= ALUpkg.OP_SHIFT;
+            when globals.alu_op_abs =>
+                control.operation <= ALUpkg.OP_SUM;
+                control.adder_sub <= '1';
             when globals.alu_op_and =>
                 control.operation <= ALUpkg.OP_AND;
             when globals.alu_op_xor =>
                 control.operation <= ALUpkg.OP_XOR;
             when globals.alu_op_lt =>
                 control.operation <= ALUpkg.OP_COMP;
+                control.adder_sub <= '1';
                 control.comp_signed_data <= '1';
                 control.comp_comparison <= ALUpkg.COMP_LT;
             when others =>
