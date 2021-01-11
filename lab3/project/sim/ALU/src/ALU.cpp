@@ -8,7 +8,7 @@ const std::map<int, ALU::ALUFunction> ALU::functions = {
         {1, ALU::_srai},
         {2, ALU::_and},
         {3, ALU::_xor},
-        {6, ALU::_sub}
+        {4, ALU::_lt}
 };
 
 ALU::ALU() : m_input{0, 0, 0},
@@ -81,11 +81,11 @@ ALU::Input ALU::parseInputString(const std::string &instruction) {
 
 std::string ALU::formatOutputString(const Output &output) {
     std::stringstream ss;
-    ss << std::setfill('0') << std::setw(32 / 4) << std::hex << output.result << " "
+    ss << std::setfill('0') << std::setw(32 / 4) << std::hex << output.result; /* << " "
        << output.N << " "
        << output.Z << " "
        << output.C << " "
-       << output.V << " ";
+       << output.V << " "; */
     return ss.str();
 }
 
@@ -117,6 +117,12 @@ ALU::dtype ALU::_and(const Input &input) {
 
 ALU::dtype ALU::_xor(const Input &input) {
     return input.operand1 ^ input.operand2;
+}
+
+ALU::dtype ALU::_lt(const Input &input) {
+    if (input.operand1 < input.operand2)
+        return 1;
+    return 0;
 }
 
 ALU::InputFormatError::InputFormatError(const std::string &msg) : std::runtime_error(msg) {}

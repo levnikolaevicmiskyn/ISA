@@ -1,25 +1,81 @@
 library ieee;
 use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
 
 library work;
-use work.globals.all;
-
+use work.globals;
 
 entity EXStage is
-  port(clk: in std_logic;
-       EXSigs: in t_EXSigs;
-       EXData: out t_EXData
-       -- *** FWD UNIT SIGNALS HERE ***
-       );
+    port (
+        ex_sigs: in globals.t_EXSigs;    -- Stage control signals and numerical operands
+        fwd_sigs: in globals.t_FWDSigs;  -- Control signals and data from the FWD unit
+        ex_data: out globals.t_EXData    -- Results
+    );
 end entity EXStage;
 
-architecture behavior of EXStage is
+architecture structure of EXStage is
+    component EXController is
+        port (
+            instruction_type: in globals.t_ALUOperandsType;
+            sel_forward1: in std_logic_vector(1 downto 0);
+            sel_forward2: in std_logic_vector(1 downto 0);
 
+            sel_operand1: out ALUpkg.t_InputSelector;
+            sel_operand2: out ALUpkg.t_InputSelector
+        );
+    end component;
+
+    component ALU is
+        port (
+            -- Control signals
+            operation: globals.t_ALU_OP;
+            -- Operands and result
+            operand1: in std_logic_vector(31 downto 0);     -- First operand
+            operand2: in std_logic_vector(31 downto 0);     -- Second operand
+            result: out std_logic_vector(31 downto 0);      -- Result
+            -- Flags
+            N: out std_logic;   -- Negative flag
+            Z: out std_logic;   -- Zero flag
+            C: out std_logic;   -- Carry out flag
+            V: out std_logic    -- Overflow flag
+        );
+    end component;
+
+    signal operand1: std_logic_vector(31 downto 0);
+    signal operand2: std_logic_vector(31 downto 0);
+
+    -- Why not := std_logic(to_unsigned(0, 32)) or similar? Because I like it more this way... too bad!
+    constant CONST_ZERO: std_logic_vector(31 downto 0) := "00000000000000000000000000000000";
+    constant CONST_4:    std_logic_vector(31 downto 0) := "00000000000000000000000000000100";
+
+    signal sel_operand1: ALUpkg.t_InputSelector;
+    signal sel_operand2: ALUpkg.t_InputSelector;
 begin
-  EXData.result <= EXSigs.oprnd_1 when EXSigs.use_immediate = '0' else EXSigs.immediate;
-  EXData.Z <= '1' when unsigned(EXSigs.oprnd_1) = to_unsigned(0, 32) else '0';
-  EXData.N <= '0';
-  EXData.V <= '0';
-  EXData.C <= '0';
-end behavior;
+    comp_controller: EXController
+        port map (
+            ex_sigs.instruction_type,
+            fwd_sigs.sel_forward1,
+            fwd_sigs.sel_forward2,
+            sel_operand1,
+            sel_operand2
+        );
+    -- Select inputs
+    with sel_operand1 select operand1 <=
+         CONST_ZERO           when ALUpkg.SEL_ZERO,
+         ex_sigs.operand1     when ALUpkg.SEL_OPERAND,
+         CONST_ZERO           when ALUpkg.SEL_CONST,
+         ex_sigs.pc           when ALUpkg.SEL_SPECIAL,
+         fwd_sigs.MEM_data    when ALUpkg.SEL_FWD_MEM,
+         fwd_sigs.WB_data     when ALUpkg.SEL_FWD_WB,
+         (31 downto 0 => 'X') when others;
+    with sel_operand2 select operand2 <=
+         CONST_ZERO           when ALUpkg.SEL_ZERO,
+         ex_sigs.operand2     when ALUpkg.SEL_OPERAND,
+         CONST_4              when ALUpkg.SEL_CONST,
+         ex_sigs.immediate    when ALUpkg.SEL_SPECIAL,
+         fwd_sigs.MEM_data    when ALUpkg.SEL_FWD_MEM,
+         fwd_sigs.WB_data     when ALUpkg.SEL_FWD_WB,
+         (31 downto 0 => 'X') when others;
+
+    comp_ALU: ALU
+        port map(ex_sigs.opcode, operand1, operand2, ex_data.result, ex_data.N, ex_data.Z, ex_data.C, ex_data.V);
+end architecture structure;
