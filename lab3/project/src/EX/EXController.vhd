@@ -2,12 +2,12 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 library work;
-use work.globals;
+use work.globals.all;
 use work.ALUpkg;
 
 entity EXController is
     port (
-        instruction_type: in globals.t_ALUInstructionType;
+        instruction_type: in t_ALUInstructionType;
         sel_forward1: in std_logic_vector(1 downto 0);
         sel_forward2: in std_logic_vector(1 downto 0);
 

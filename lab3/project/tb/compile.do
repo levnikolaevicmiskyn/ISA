@@ -11,4 +11,9 @@ vcom -93 -work work ../src/ID/IDStage.vhd
 vcom -93 -work work ../src/EX/EXStage.vhd
 vcom -93 -work work ../src/MEM/memoryInterface.vhd
 vcom -93 -work work ../src/MEM/MEMStage.vhd
+vcom -93 -work work ../src/ALUpkg.vhd
+vcom -93 -work work ../src/ALUController.vhd
+vcom -93 -work work ../src/ALUDatapath.vhd
+vcom -93 -work work ../src/ALU/ALU.vhd
+vcom -93 -work work ../src/ALU/arithmetic/*.vhd
 vcom -93 -work work testbench.vhd

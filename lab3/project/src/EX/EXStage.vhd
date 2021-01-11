@@ -3,6 +3,7 @@ use ieee.std_logic_1164.all;
 
 library work;
 use work.globals;
+use work.ALUpkg;
 
 entity EXStage is
     port (
@@ -52,7 +53,7 @@ architecture structure of EXStage is
 begin
     comp_controller: EXController
         port map (
-            ex_sigs.instruction_type,
+            ex_sigs.oprnd_sel,
             fwd_sigs.sel_forward1,
             fwd_sigs.sel_forward2,
             sel_operand1,
@@ -61,7 +62,7 @@ begin
     -- Select inputs
     with sel_operand1 select operand1 <=
          CONST_ZERO           when ALUpkg.SEL_ZERO,
-         ex_sigs.operand1     when ALUpkg.SEL_OPERAND,
+         ex_sigs.oprnd_1     when ALUpkg.SEL_OPERAND,
          CONST_ZERO           when ALUpkg.SEL_CONST,
          ex_sigs.pc           when ALUpkg.SEL_SPECIAL,
          fwd_sigs.MEM_data    when ALUpkg.SEL_FWD_MEM,
@@ -69,7 +70,7 @@ begin
          (31 downto 0 => 'X') when others;
     with sel_operand2 select operand2 <=
          CONST_ZERO           when ALUpkg.SEL_ZERO,
-         ex_sigs.operand2     when ALUpkg.SEL_OPERAND,
+         ex_sigs.oprnd_2     when ALUpkg.SEL_OPERAND,
          CONST_4              when ALUpkg.SEL_CONST,
          ex_sigs.immediate    when ALUpkg.SEL_SPECIAL,
          fwd_sigs.MEM_data    when ALUpkg.SEL_FWD_MEM,
@@ -77,5 +78,5 @@ begin
          (31 downto 0 => 'X') when others;
 
     comp_ALU: ALU
-        port map(ex_sigs.opcode, operand1, operand2, ex_data.result, ex_data.N, ex_data.Z, ex_data.C, ex_data.V);
+        port map(ex_sigs.op, operand1, operand2, ex_data.result, ex_data.N, ex_data.Z, ex_data.C, ex_data.V);
 end architecture structure;

@@ -8,8 +8,10 @@ package globals is
     constant DATA_MEM_END_ADDR:    integer := 16#100101fc#;
 
     type t_ALU_OP is (alu_op_shift, alu_op_add, alu_op_xor, alu_op_and, alu_op_lt);
-    type t_ALUInstructionType is (alu_sel_reg_reg, alu_sel_reg_imm, alu_sel_pc_imm, alu_sel_pc_4, alu_sel_0_imm, alu_sel_0_0);
-
+    type t_ALU_SEL is (alu_sel_reg_reg, alu_sel_reg_imm, alu_sel_pc_imm, alu_sel_pc_4, alu_sel_0_imm, alu_sel_0_0);
+    alias t_ALUOperandsType is t_ALU_SEL;
+    alias t_ALUInstructionType is t_ALU_SEL;
+    
     constant PC_SEL_JUMP  : std_logic_vector(1 downto 0) := "10";
     constant PC_SEL_STALL : std_logic_vector(1 downto 0) := "01";
     constant PC_SEL_INC   : std_logic_vector(1 downto 0) := "00";
@@ -18,14 +20,14 @@ package globals is
 
     -- Record types
     type t_EXSigs is record
-        opcode:           t_ALU_OP;
-        operand1:         std_logic_vector(31 downto 0);
-        operand2:         std_logic_vector(31 downto 0);
+        op:           t_ALU_OP;
+        oprnd_1:         std_logic_vector(31 downto 0);
+        oprnd_2:         std_logic_vector(31 downto 0);
         immediate:        std_logic_vector(31 downto 0);
         pc:               std_logic_vector(31 downto 0);
         rs1:              std_logic_vector(4 downto 0);
         rs2:              std_logic_vector(4 downto 0);
-        instruction_type: t_ALUInstructionType;
+        oprnd_sel: t_ALU_SEL;
     end record;
 
     type t_IFSigs is record

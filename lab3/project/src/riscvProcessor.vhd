@@ -76,9 +76,9 @@ architecture structure of riscvProcessor is
 
   component EXStage is
       port (
-          ex_sigs: in globals.t_EXSigs;    -- Stage control signals and numerical operands
-          fwd_sigs: in globals.t_FWDSigs;  -- Control signals and data from the FWD unit
-          ex_data: out globals.t_EXData    -- Results
+          ex_sigs: in t_EXSigs;    -- Stage control signals and numerical operands
+          fwd_sigs: in t_FWDSigs;  -- Control signals and data from the FWD unit
+          ex_data: out t_EXData    -- Results
       );
   end component EXStage;
 
@@ -116,12 +116,12 @@ begin
   comp_ID_EX_Reg : process(clk)
   begin
     if rst_n = '0' then
-      EXSigs_EX_in.opcode           <= ALU_op_add;
-      EXSigs_EX_in.instruction_type <= alu_sel_0_0;
-      EXSigs_EX_in.operand1         <= (others => '0');
-      EXSigs_EX_in.operand2         <= (others => '0');
+      EXSigs_EX_in.op           <= ALU_op_add;
+      EXSigs_EX_in.oprnd_sel <= alu_sel_0_0;
+      EXSigs_EX_in.oprnd_1        <= (others => '0');
+      EXSigs_EX_in.oprnd_2         <= (others => '0');
       EXSigs_EX_in.immediate        <= EXSigs_ID_out.immediate;
-      EXSigs_EX_in.pc               <= EXSigs_ID_out.next_pc;
+      EXSigs_EX_in.pc               <= EXSigs_ID_out.pc;
       EXSigs_EX_in.rs1              <= (others => '0');
       EXSigs_EX_in.rs2              <= (others => '0');
 
@@ -134,12 +134,12 @@ begin
       WBSigs_EX_in.rd        <= (others => '0');
     elsif rising_edge(clk) then
       if ID_load_nop = '1' then
-        EXSigs_EX_in.opcode           <= ALU_op_add;
-        EXSigs_EX_in.instruction_type <= alu_sel_0_0;
-        EXSigs_EX_in.operand1         <= (others => '0');
-        EXSigs_EX_in.operand2         <= (others => '0');
+        EXSigs_EX_in.op           <= ALU_op_add;
+        EXSigs_EX_in.oprnd_sel <= alu_sel_0_0;
+        EXSigs_EX_in.oprnd_1         <= (others => '0');
+        EXSigs_EX_in.oprnd_2         <= (others => '0');
         EXSigs_EX_in.immediate        <= EXSigs_ID_out.immediate;
-        EXSigs_EX_in.pc               <= EXSigs_ID_out.next_pc;
+        EXSigs_EX_in.pc               <= EXSigs_ID_out.pc;
         EXSigs_EX_in.rs1              <= (others => '0');
         EXSigs_EX_in.rs2              <= (others => '0');
 
@@ -205,18 +205,17 @@ begin
 
   compMemStage : MEMStage port map(MEMSigs_MEM_in, EXData_MEM_in, ID_misprediction, data_mem_address, data_mem_read_en, data_mem_write_en, data_mem_read_data, data_mem_write_data, WB_mem_data);
   WBSigs_MEM_out <= WBSigs_MEM_in;
-  -- *** EX STAGE HERE ***
-  FWDSigs.MEM_data <= ???;
-  FWDSigs.WB_data <= ???;
+  
+  FWDSigs.MEM_data <= MEMSigs_MEM_in.data_for_mem;
+  FWDSigs.WB_data <= WB_data_from_ex;
   compEXStage  : EXStage
     port map(EXSigs_EX_in, FWDSigs, EXData_EX_out);
   MEMSigs_EX_out <= MEMSigs_EX_in;
   WBSigs_EX_out  <= WBSigs_EX_in;
-  -- *** END EX STAGE ***
-  -- *** FWD UNIT HERE ***
+  
   compFWDUnit: fwdUnit
-    port map(EXSigs_EX_in.rs1, EXSigs_EX_in.rs2, ???, ??? ???, ???, FWDSigs.sel_forward1, FWDSigs.sel_forward2);
-  -- *** END FWD UNIT ***
+    port map(EXSigs_EX_in.rs1, EXSigs_EX_in.rs2, WBSigs_MEM_in.rd, WBSigs_WB_in.rd, WBSigs_MEM_in.reg_write, WBSigs_WB_in.reg_write, FWDSigs.sel_forward1, FWDSigs.sel_forward2);
+
   compMemInterface : memoryInterface
     port map(
       instr_address, data_mem_address,

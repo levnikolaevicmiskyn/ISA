@@ -102,7 +102,7 @@ begin
   EXSigs.oprnd_2       <= read_data_2;
   EXSigs.op <= ALU_op;
   EXSigs.immediate <= immediate;
-  EXSigs.pc <= IDSigs.next_pc;
+  EXSigs.pc <= IDSigs.pc;
   EXSigs.rs1 <= read_addr_1;
   EXSigs.rs2 <=read_addr_2;
   EXSigs.oprnd_sel <= ALU_sel;

@@ -1,7 +1,8 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-use work.ALUpkg
+use work.ALUpkg.all;
+
 entity comparatorExtension is
     generic (NB: positive := 32);
     port (
@@ -9,7 +10,7 @@ entity comparatorExtension is
         N, Z, C, V: in std_logic;
         -- Control signals
         signed_data: in std_logic;
-        comparison: in ALUpkg.t_Comparison;
+        comparison: in t_Comparison;
         -- Result
         result: out std_logic_vector(NB-1 downto 0)
     );
@@ -42,5 +43,5 @@ begin
         res_gt when COMP_GT,
         'X' when others;
 
-    res <= (31 downto 1 => '0') & res_lsb;
+    result <= (31 downto 1 => '0') & res_lsb;
 end architecture structure;
