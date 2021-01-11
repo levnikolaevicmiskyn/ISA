@@ -7,7 +7,14 @@ package globals is
     constant DATA_MEM_START_ADDR:  integer := 16#10010000#;
     constant DATA_MEM_END_ADDR:    integer := 16#100101fc#;
 
-    type t_ALU_OP is (alu_op_shift, alu_op_add, alu_op_xor, alu_op_and, alu_op_lt);
+    type t_ALU_OP is (
+        alu_op_add,
+        alu_op_shift,
+        alu_op_abs,
+        alu_op_and,
+        alu_op_xor,
+        alu_op_lt
+    );
     type t_ALUInstructionType is (alu_sel_reg_reg, alu_sel_reg_imm, alu_sel_pc_imm, alu_sel_pc_4, alu_sel_0_imm, alu_sel_0_0);
 
     constant PC_SEL_JUMP  : std_logic_vector(1 downto 0) := "10";
@@ -83,6 +90,7 @@ package body globals is
             when "010"  => y := alu_op_and;
             when "011"  => y := alu_op_xor;
             when "100"  => y := alu_op_lt;
+            when "101"  => y := alu_op_abs;
             when others => y := alu_op_add;
         end case;
         return y;

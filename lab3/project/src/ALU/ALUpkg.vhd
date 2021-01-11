@@ -10,6 +10,7 @@ package ALUpkg is
     constant SEL_SPECIAL:   t_InputSelector := "011";
     constant SEL_FWD_MEM:   t_InputSelector := "100";
     constant SEL_FWD_WB:    t_InputSelector := "101";
+    constant SEL_OTHER:     t_InputSelector := "110";
     -- Internal perations
     subtype t_InternalOperation is std_logic_vector(2 downto 0);
     constant OP_SUM:    t_InternalOperation := "000";

@@ -62,7 +62,8 @@ begin
     -- Select inputs
     with sel_operand1 select operand1 <=
          CONST_ZERO           when ALUpkg.SEL_ZERO,
-         ex_sigs.oprnd_1     when ALUpkg.SEL_OPERAND,
+         ex_sigs.oprnd_1      when ALUpkg.SEL_OPERAND,
+         ex_sigs.oprnd_2      when ALUpkg.SEL_OTHER,
          CONST_ZERO           when ALUpkg.SEL_CONST,
          ex_sigs.pc           when ALUpkg.SEL_SPECIAL,
          fwd_sigs.MEM_data    when ALUpkg.SEL_FWD_MEM,
@@ -70,7 +71,8 @@ begin
          (31 downto 0 => 'X') when others;
     with sel_operand2 select operand2 <=
          CONST_ZERO           when ALUpkg.SEL_ZERO,
-         ex_sigs.oprnd_2     when ALUpkg.SEL_OPERAND,
+         ex_sigs.oprnd_2      when ALUpkg.SEL_OPERAND,
+         ex_sigs.oprnd_1      when ALUpkg.SEL_OTHER,
          CONST_4              when ALUpkg.SEL_CONST,
          ex_sigs.immediate    when ALUpkg.SEL_SPECIAL,
          fwd_sigs.MEM_data    when ALUpkg.SEL_FWD_MEM,
