@@ -7,7 +7,9 @@ operations = {
     'sum': 0,
     'shift': 1,
     'and': 2,
-    'xor': 3
+    'xor': 3,
+    'lt': 4,
+    'abs': 5
 }
 
 for i in range(nsamples):

@@ -125,4 +125,9 @@ ALU::dtype ALU::_lt(const Input &input) {
     return 0;
 }
 
+ALU::dtype ALU::_lt(const Input &input) {
+    if (input.operand2 < 0)
+        return -input.operand2;
+    return input.operand2;
+}
 ALU::InputFormatError::InputFormatError(const std::string &msg) : std::runtime_error(msg) {}

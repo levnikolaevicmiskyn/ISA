@@ -56,6 +56,7 @@ private:
     static dtype _and(const Input &input);
     static dtype _xor(const Input &input);
     static dtype _lt(const Input &input);
+    static dtype _abs(const Input &input);
     // Opcode to function mapper
     static const std::map<int, ALUFunction> functions;
 };
