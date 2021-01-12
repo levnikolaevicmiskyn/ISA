@@ -7,8 +7,10 @@ use work.ALUpkg;
 
 entity ALUController is
     port (
-        operation: in globals.t_ALU_OP; -- ALU abstract operation
-        control: out ALUpkg.t_Control   -- Control signals
+        operation: in globals.t_ALU_OP;  -- ALU abstract operation
+        operand1_info: in t_OperandInfo; -- Operand 1 info
+        operand2_info: in t_OperandInfo; -- Operand 2 info
+        control: out ALUpkg.t_Control    -- Control signals
     );
 end entity ALUController;
 
@@ -28,7 +30,11 @@ begin
                 control.operation <= ALUpkg.OP_SHIFT;
             when globals.alu_op_abs =>
                 control.operation <= ALUpkg.OP_SUM;
-                control.adder_sub <= '1';
+                if operand2_info.negative = '1' then
+                    control.adder_sub <= '1';
+                else
+                    control.adder_sub <= '0';
+                end if;
             when globals.alu_op_and =>
                 control.operation <= ALUpkg.OP_AND;
             when globals.alu_op_xor =>

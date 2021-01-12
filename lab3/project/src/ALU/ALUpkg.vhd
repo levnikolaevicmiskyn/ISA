@@ -26,6 +26,10 @@ package ALUpkg is
     constant COMP_GE: t_Comparison := "011";
     constant COMP_GT: t_Comparison := "100";
 
+    type t_OperandInfo is record:
+        negative: std_logic;
+    end record;
+    
     type t_Control is record
         operation: t_InternalOperation;
         adder_sub: std_logic;

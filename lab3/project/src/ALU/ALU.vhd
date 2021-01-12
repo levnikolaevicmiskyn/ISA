@@ -24,8 +24,10 @@ end entity ALU;
 architecture structure of ALU is
     component ALUController is
         port (
-            operation: in globals.t_ALU_OP; -- ALU abstract operation
-            control: out ALUpkg.t_Control   -- Control signals
+            operation: in globals.t_ALU_OP;  -- ALU abstract operation
+            operand1_info: in t_OperandInfo; -- Operand 1 info
+            operand2_info: in t_OperandInfo; -- Operand 2 info
+            control: out ALUpkg.t_Control    -- Control signals
         );
     end component;
 
@@ -45,9 +47,13 @@ architecture structure of ALU is
         );
     end component;
     signal control: ALUpkg.t_Control;
+    signal operand1_info: ALUpkg.t_OperandInfo;
+    signal operand2_info: ALUpkg.t_OperandInfo;
 begin
+    operand1_info.negative <= operand1(31);
+    operand2_info.negative <= operand2(31);
     comp_controller: ALUController
-        port map(operation, control);
+        port map(operation, operand1_info, operand2_info, control);
 
     comp_datapath: ALUDatapath
         port map(control, operand1, operand2, result, N, Z, C, V);
