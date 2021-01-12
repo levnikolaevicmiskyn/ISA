@@ -10,63 +10,84 @@ use ieee.std_logic_textio.all;
 -- Port two supports read and write, the corresponding address is addr_2. Write is enabled by asserting wr_en_2.
 -- If wr_en_2 is enabled, data_in_2 will be written to the location referenced
 -- by addr_2 at the next clock rising edge. Otherwise, read data is available
--- on output port data_out_2. 
+-- on output port data_out_2.
 
 entity Memory is
-  generic(filename : string);
-  port(clk      : in  std_logic;
-       address  : in  std_logic_vector(31 downto 0);
-       wr_en    : in  std_logic;
-       data_in  : in  std_logic_vector(31 downto 0);
-       data_out : out std_logic_vector(31 downto 0)
-       );
+    generic (
+        SIZE:         positive := 1023;
+        filename_in:  string;
+        filename_out: string
+    );
+    port (
+        clk:      in  std_logic;
+        dump:     in  std_logic;
+        address:  in  std_logic_vector(31 downto 0);
+        wr_en:    in  std_logic;
+        data_in:  in  std_logic_vector(31 downto 0);
+        data_out: out std_logic_vector(31 downto 0)
+    );
 end entity Memory;
 
 architecture behavior of Memory is
-  type t_mem is array(1023 downto 0) of std_logic_vector(31 downto 0);
+    type t_mem is array(SIZE-1 downto 0) of std_logic_vector(31 downto 0);
 
-  impure function init_mem(constant filename : string) return t_mem is
-    -- File handle variables
-    variable open_status: FILE_OPEN_STATUS;
-    file instmem     : text;
-    -- Memory object
-    variable mem_var : t_mem;
-    -- Line from file
-    variable fline   : line;
-    -- Temporary variable for input data
-    variable inst    : std_logic_vector(31 downto 0);
-    -- Address counter, incremented at each line
-    variable addr_i  : integer := 0;
-  begin
-    file_open(open_status,instmem, filename, READ_MODE);
-    -- Check if file is open
-    if open_status /= open_ok then
-      report "Could not open file";
-      return mem_var;
-    end if;
-    while (not endfile(instmem)) loop
-      readline(instmem, fline);
-      hread(fline, inst);
-      mem_var(addr_i) := inst;
-      addr_i          := addr_i + 1;
-    end loop;
-    file_close(instmem);
-    return mem_var;
-  end function;
+    impure function init_mem(constant filename : string) return t_mem is
+        -- File handle variables
+        variable open_status: FILE_OPEN_STATUS;
+        file instmem     : text;
+        -- Memory object
+        variable mem_var : t_mem;
+        -- Line from file
+        variable fline   : line;
+        -- Temporary variable for input data
+        variable inst    : std_logic_vector(31 downto 0);
+        -- Address counter, incremented at each line
+        variable addr_i  : integer := 0;
+    begin
+        file_open(open_status,instmem, filename, READ_MODE);
+        -- Check if file is open
+        if open_status /= open_ok then
+            report "Could not open file";
+            return mem_var;
+        end if;
+        while (not endfile(instmem) and (addr_i < SIZE)) loop
+            readline(instmem, fline);
+            hread(fline, inst);
+            mem_var(addr_i) := inst;
+            addr_i          := addr_i + 1;
+        end loop;
+        file_close(instmem);
+        return mem_var;
+    end function;
 
-  signal mem : t_mem := init_mem(filename);
-
+    signal mem : t_mem := init_mem(filename_in);
 begin
-  data_out <= mem(to_integer(unsigned(address(11 downto 2))));
+    data_out <= mem(to_integer(unsigned(address(11 downto 2))));
+    assert to_integer(unsigned(address)) < 2**12 report "Address is out of range" severity warning;
 
-  assert to_integer(unsigned(address)) < 2**12 report "Address is out of range" severity warning;
+    procWrite2 : process(clk)
+    begin
+        if rising_edge(clk) then
+            if wr_en = '1' then
+                mem(to_integer(unsigned(address(11 downto 2)))) <= data_in;
+            end if;
+        end if;
+    end process;
 
-  procWrite2 : process(clk)
-  begin
-    if rising_edge(clk) then
-      if wr_en = '1' then
-        mem(to_integer(unsigned(address(11 downto 2)))) <= data_in;
-      end if;
-    end if;
-  end process;
+    proc_dump: process(clk)
+        file fileout: text open WRITE_MODE is filename_out;
+        variable lineout: line;
+        variable value: integer;
+    begin
+        if rising_edge(clk) then
+            if dump = '1' then
+                -- Dump all the memory content into the file
+                for i in 0 to SIZE-1 loop
+                    value := mem(i);
+                    hwrite(lineout, value);
+                    writeline(fileout, lineout);
+                end loop;
+            end if;
+        end if;
+    end process proc_dump;
 end behavior;
