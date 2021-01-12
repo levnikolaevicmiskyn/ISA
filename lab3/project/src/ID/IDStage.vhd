@@ -118,7 +118,7 @@ begin
   IFSigs.jmp_addr      <= jump_addr_adder_out when ID_misprediction = '0' else ID_alt_ta_bw;
   IFSigs.load_jmp_addr <= jump or ID_misprediction;
   -- Replace fetched instruction with nop in case of a jump, misprediction or hazard.
-  IFSigs.load_nop      <= jump or ID_misprediction or IF_stall;
+  IFSigs.load_nop      <= jump or ID_misprediction;-- or IF_stall;
   IFSigs.stall <= IF_stall;
 
   MEMSigs.alt_ta    <= IDSigs.next_pc when jump = '1' else jump_addr_adder_out;

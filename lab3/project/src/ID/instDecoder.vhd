@@ -41,7 +41,7 @@ begin
   funct3 <= inst(14 downto 12);
 
 
-  proc_inst_type: process(opcode)
+  proc_inst_type: process(opcode, rs1_i, rs2_i, EX_rd_bw, EX_mem_read_bw)
   begin
     -- Default signal assignments
     inst_type <= t_INST_R;

@@ -170,7 +170,7 @@ begin
         -- Load a nop instead of the instruction just fetched
         IDSigs_ID_in.inst <= NOP_instr;
         IDSigs_ID_in.pc   <= IDSigs_IF_out.pc;
-      else
+      elsif IFSigs_ID_out.stall = '0' then
         IDSigs_ID_in <= IDSigs_IF_out;
       end if;
 
