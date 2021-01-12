@@ -29,7 +29,7 @@ signal pc_i: std_logic_vector(31 downto 0);
     pc_proc: process(clk, rst_n, IFSigs.load_jmp_addr)
     begin
       if rst_n = '0' then
-        pc_i <= (others =>'0');
+        pc_i <= std_logic_vector(to_unsigned(16#00400000#, 32));
       elsif rising_edge(clk) then
         if IFSigs.stall = '1' then
           pc_i <= pc_i;

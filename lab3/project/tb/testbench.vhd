@@ -32,7 +32,7 @@ end component;
 signal clk, rst_n : std_logic;
 signal phy_data_mem_addr, phy_data_mem_in, phy_data_mem_out, phy_instr_mem_in, phy_instr_mem_out, phy_instr_mem_addr: std_logic_vector(31 downto 0);
 signal phy_data_mem_wr_en: std_logic;
-signal dump: std_logic := '0';
+signal dump: std_logic;
 begin
   compProc : riscvProcessor port map(clk, rst_n, phy_data_mem_addr, phy_instr_mem_addr, phy_data_mem_in, phy_instr_mem_out, phy_data_mem_out, phy_data_mem_wr_en     );
 
@@ -44,7 +44,8 @@ begin
     wait for 10 ns;
   end process;
   rst_n <= '0', '1' after 1ns;
-
+  dump <= '0', '1' after 200us, '0' after 200.03us;
+  
   compInstrMemory: Memory generic map(1024, "machinecode.txt", "machinecode-dump.txt")
     port map(clk, '0', phy_instr_mem_addr, '0', (others => '0'), phy_instr_mem_out);
 

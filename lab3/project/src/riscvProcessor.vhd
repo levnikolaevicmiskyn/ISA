@@ -206,11 +206,22 @@ begin
   compMemStage : MEMStage port map(MEMSigs_MEM_in, EXData_MEM_in, ID_misprediction, data_mem_address, data_mem_read_en, data_mem_write_en, data_mem_read_data, data_mem_write_data, WB_mem_data);
   WBSigs_MEM_out <= WBSigs_MEM_in;
   
-  FWDSigs.MEM_data <= MEMSigs_MEM_in.data_for_mem;
-  FWDSigs.WB_data <= WB_data_from_ex;
+  FWDSigs.MEM_data <= EXData_MEM_in.result;
+  FWDSigs.WB_data <= WB_result_bw;
+  
   compEXStage  : EXStage
     port map(EXSigs_EX_in, FWDSigs, EXData_EX_out);
-  MEMSigs_EX_out <= MEMSigs_EX_in;
+
+  MEMSigs_EX_out.data_for_mem <= EXSigs_EX_in.oprnd_2 when FWDSigs.sel_forward2 = "00" else
+                                 FWDSigs.MEM_data when FWDSigs.sel_forward2= "10" else
+                                 FWDSigs.WB_data;
+
+  MEMSigs_EX_out.branch <= MEMSigs_EX_in.branch;
+  MEMSigs_EX_out.branch_taken <= MEMSigs_EX_in.branch_taken;
+  MEMSigs_EX_out.mem_write <= MEMSigs_EX_in.mem_write;
+  MEMSigs_EX_out.alt_ta <= MEMSigs_EX_in.alt_ta;
+  MEMSigs_EX_out.mem_read <= MEMSigs_EX_in.mem_read;
+  
   WBSigs_EX_out  <= WBSigs_EX_in;
   
   compFWDUnit: fwdUnit
