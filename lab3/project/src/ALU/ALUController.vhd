@@ -32,6 +32,7 @@ begin
                 control.operation <= ALUpkg.OP_XOR;
             when globals.alu_op_lt =>
                 control.operation <= ALUpkg.OP_COMP;
+                control.adder_sub <= '1';
                 control.comp_signed_data <= '1';
                 control.comp_comparison <= ALUpkg.COMP_LT;
             when others =>
