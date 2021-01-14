@@ -12,7 +12,7 @@ end entity riscvProcessor;
 
 architecture structure of riscvProcessor is
   component IDStage is
-    port(clk              : in std_logic;
+    port(clk, rst_n              : in std_logic;
          -- From IF stage
          IDSigs           : in t_IDSigs;
          -- From EX stage
@@ -110,7 +110,7 @@ architecture structure of riscvProcessor is
   signal data_mem_write_en, data_mem_read_en                                                   : std_logic;
 begin
   compIDStage : IDStage
-    port map(clk, IDSigs_ID_in, WBSigs_EX_in.rd, MEMSigs_EX_in.mem_read, ID_misprediction, MEMSigs_MEM_in.alt_ta, WBSigs_WB_in.reg_write, WBSigs_WB_in.rd, WB_result_bw, IFSigs_ID_out, EXSigs_ID_out, MEMSigs_ID_out, WBSigs_ID_out, ID_load_nop, EX_load_nop, MEM_load_nop
+    port map(clk,rst_n, IDSigs_ID_in, WBSigs_EX_in.rd, MEMSigs_EX_in.mem_read, ID_misprediction, MEMSigs_MEM_in.alt_ta, WBSigs_WB_in.reg_write, WBSigs_WB_in.rd, WB_result_bw, IFSigs_ID_out, EXSigs_ID_out, MEMSigs_ID_out, WBSigs_ID_out, ID_load_nop, EX_load_nop, MEM_load_nop
              );
 
   comp_ID_EX_Reg : process(clk)

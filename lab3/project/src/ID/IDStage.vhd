@@ -6,7 +6,7 @@ library work;
 use work.globals.all;
 
 entity IDStage is
-  port(clk: in std_logic;-- From IF stage
+  port(clk, rst_n: in std_logic;-- From IF stage
        IDSigs           : in t_IDSigs;
        -- From EX stage
        EX_rd_bw         : in std_logic_vector(4 downto 0);
@@ -60,11 +60,13 @@ architecture RTL of IDStage is
           read_data_1, read_data_2               : out std_logic_vector(31 downto 0));
   end component;
 
-  component BPU is
-    port(pc               : in  std_logic_vector(31 downto 0);
-         ID_misprediction : in  std_logic;
-         prediction       : out std_logic);
-  end component;
+component BPU is
+  generic(N : integer := 8);
+    port(clk, rst_n, branch : in  std_logic;
+         pc                 : in  std_logic_vector(31 downto 0);
+         ID_misprediction   : in  std_logic;
+         prediction         : out std_logic);
+end component;
 
   component adder is
     generic (N : positive := 32);
@@ -108,7 +110,8 @@ begin
   EXSigs.oprnd_sel <= ALU_sel;
 
 -- Branch prediction unit
-  compBPU : BPU port map(IDSigs.pc, ID_misprediction, branch_prediction);
+  compBPU : BPU generic map(8)
+    port map(clk, rst_n, branch, IDSigs.pc, ID_misprediction, branch_prediction);
 
 -- Adder to compute the jump or branch target address to be stored in PC
   compAdder :-- adder generic map(32)
