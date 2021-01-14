@@ -1,1 +1,4 @@
-*.bak
+# Always ignore backup files
+**.bak
+# Always ignore work directory
+**work/
