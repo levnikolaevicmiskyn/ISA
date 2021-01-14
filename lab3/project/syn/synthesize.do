@@ -1,4 +1,4 @@
-remove_designs -designs
+remove_design -designs
 
 # Analyze source code
 analyze -f vhdl -lib WORK ../src/globals.vhd
@@ -10,6 +10,8 @@ analyze -f vhdl -lib WORK ../src/ID/regFile.vhd
 analyze -f vhdl -lib WORK ../src/ID/instDecoder.vhd
 analyze -f vhdl -lib WORK ../src/ID/IDStage.vhd
 
+analyze -f vhdl -lib WORK ../src/ALU/ALUpkg.vhd
+analyze -f vhdl -lib WORK ../src/ALU/arithmetic/comparatorExtension.vhd
 analyze -f vhdl -lib WORK ../src/ALU/arithmetic/GPCombiner.vhd
 analyze -f vhdl -lib WORK ../src/ALU/arithmetic/GPGenerator.vhd
 analyze -f vhdl -lib WORK ../src/ALU/arithmetic/sumGenerator.vhd
@@ -17,9 +19,7 @@ analyze -f vhdl -lib WORK ../src/ALU/arithmetic/carryGenerator.vhd
 analyze -f vhdl -lib WORK ../src/ALU/arithmetic/blockGPGenerator_LadnerFischer.vhd
 analyze -f vhdl -lib WORK ../src/ALU/arithmetic/barrelShifter_behavior.vhd
 analyze -f vhdl -lib WORK ../src/ALU/arithmetic/adder_CLA.vhd
-analyze -f vhdl -lib WORK ../src/ALU/arithmetic/comparatorExtension.vhd
 
-analyze -f vhdl -lib WORK ../src/ALU/ALUpkg.vhd
 analyze -f vhdl -lib WORK ../src/ALU/ALUDatapath.vhd
 analyze -f vhdl -lib WORK ../src/ALU/ALUController.vhd
 analyze -f vhdl -lib WORK ../src/ALU/ALU.vhd
