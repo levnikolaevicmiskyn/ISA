@@ -1,0 +1,82 @@
+\documentclass[10pt, english, makeidx, a4paper, titlepage, oneside]{report}
+% Geometry package
+\usepackage[a4paper,width=150mm,top=30mm,bottom=25mm]{geometry}
+\geometry{hmarginratio=1:1}
+
+% General packages
+\usepackage[utf8]{inputenc}
+%\usepackage[italian]{babel}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true}
+\hypersetup{linkcolor=black}
+\usepackage{siunitx}	% SI measurement units
+\usepackage{amsmath}
+
+% Graphics packages
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hhline}
+\usepackage{todonotes}
+\usepackage{algorithmic}
+\usepackage{subcaption}
+\graphicspath{{images/}}
+
+% Custom commands
+%\newcommand{\rshift}{\ \texttt{>>}\ }
+%\newcommand{\lshift}{\ \texttt{<<}\ }
+% TITLE
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,automata,petri,positioning,calc}
+
+\usepackage{mdframed}
+\usepackage{listings}
+%\definecolor{codeBackground}{RGB}{250, 250, 250}
+\definecolor{codeColor}{RGB}{50, 50, 50}
+\definecolor{codeComment}{RGB}{90, 90, 90}
+\definecolor{codeString}{RGB}{50, 175, 50}
+
+\lstdefinestyle{lstStyle}{
+    %backgroundcolor=\color{codeBackground},
+    basicstyle=\ttfamily\footnotesize\linespread{0}\color{codeColor},
+    commentstyle=\ttfamily\footnotesize\color{codeComment},
+    keywordstyle=\bf\color{orange},
+    stringstyle=\color{codeString},
+    frame=tlbr,
+    numbers=left,
+    breaklines=true,
+    showstringspaces=false,
+    tabsize=2
+}
+\lstset{style=lstStyle}
+
+\input{commands}
+
+\title{
+	{\Huge \textbf{Politecnico di Torino}}\\ \ \\
+	{\Huge Integrated Systems Architectures} \\
+	{\large Report for Lab 3}\\
+	% {\small \url{https://github.com/levnikolaevicmiskyn/ISA/tree/main/lab2}} \\ \ \\
+	{\includegraphics[width=0.5\textwidth] {Politecnico_di_Torino.png}}
+}
+\author{
+    {\Large \textsc{Group 12}}\\ \ \\
+	Antonio Carlucci 276128\\
+	Gabriele Perrone 269089\\
+	Alessandro Scisca 276032
+}
+\date{} % Do not insert date
+% START OF THE DOCUMENT
+\begin{document}
+\maketitle
+\tableofcontents
+\hypersetup{linkcolor=blue}
+\newpage
+
+\include{1-introduction/introduction}
+\include{2-implementation/implementation}
+\include{3-verification/verification}
+\include{4-synthesis/synthesis}
+\include{5-conclusion/conclusion}
+\end{document}
