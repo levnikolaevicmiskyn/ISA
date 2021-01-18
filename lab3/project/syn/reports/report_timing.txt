@@ -1,0 +1,176 @@
+Warning: Design 'riscvProcessor' has '1' unresolved references. For more detailed information, use the "link" command. (UID-341)
+Warning: There are infeasible paths detected in your design that were ignored during optimization. Please run 'report_timing -attributes' and/or 'create_qor_snapshot/query_qor_snapshot -infeasible_paths' to identify these paths.  (OPT-1721)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : riscvProcessor
+Version: O-2018.06-SP4
+Date   : Thu Jan 14 18:29:24 2021
+****************************************
+
+ # A fanout number of 1000 was used for high fanout net computations.
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: EXSigs_EX_in_reg[RS2][2]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: EXData_MEM_in_reg[Z]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  riscvProcessor     5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  EXSigs_EX_in_reg[RS2][2]/CK (DFFR_X1)                   0.00 #     0.00 r
+  EXSigs_EX_in_reg[RS2][2]/QN (DFFR_X1)                   0.06       0.06 f
+  U971/ZN (INV_X1)                                        0.04       0.10 r
+  compFWDUnit/Rs2[2] (fwdUnit)                            0.00       0.10 r
+  compFWDUnit/U32/ZN (XNOR2_X1)                           0.06       0.16 r
+  compFWDUnit/U15/ZN (AND4_X2)                            0.07       0.23 r
+  compFWDUnit/U14/ZN (AND3_X1)                            0.05       0.28 r
+  compFWDUnit/U44/ZN (NOR2_X1)                            0.02       0.30 f
+  compFWDUnit/Forward_B[0] (fwdUnit)                      0.00       0.30 f
+  compEXStage/fwd_sigs[SEL_FORWARD2][0] (EXStage)         0.00       0.30 f
+  compEXStage/comp_controller/sel_forward2[0] (EXController)
+                                                          0.00       0.30 f
+  compEXStage/comp_controller/U7/ZN (XNOR2_X1)            0.06       0.36 f
+  compEXStage/comp_controller/U14/ZN (NOR2_X2)            0.06       0.42 r
+  compEXStage/comp_controller/sel_operand2[2] (EXController)
+                                                          0.00       0.42 r
+  compEXStage/U179/ZN (INV_X1)                            0.04       0.46 f
+  compEXStage/U67/ZN (AND2_X2)                            0.06       0.51 f
+  compEXStage/U115/ZN (AOI22_X1)                          0.07       0.58 r
+  compEXStage/U113/ZN (NAND2_X1)                          0.03       0.62 f
+  compEXStage/comp_ALU/operand2[11] (ALU)                 0.00       0.62 f
+  compEXStage/comp_ALU/comp_datapath/operand2[11] (ALUDatapath)
+                                                          0.00       0.62 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/b[11] (adder_N32)
+                                                          0.00       0.62 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/U33/ZN (XNOR2_X1)
+                                                          0.06       0.68 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_GPGenerator/b[11] (GPGenerator_N32)
+                                                          0.00       0.68 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_GPGenerator/U40/Z (XOR2_X1)
+                                                          0.08       0.76 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_GPGenerator/p[11] (GPGenerator_N32)
+                                                          0.00       0.76 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/p[11] (blockGPGenerator_N32)
+                                                          0.00       0.76 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_recursiveLowerHalf/p[11] (blockGPGenerator_N16_0)
+                                                          0.00       0.76 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_recursiveLowerHalf/comp_recursiveUpperHalf/p[3] (blockGPGenerator_N8_3)
+                                                          0.00       0.76 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_recursiveLowerHalf/comp_recursiveUpperHalf/comp_recursiveLowerHalf/p[3] (blockGPGenerator_N4_6)
+                                                          0.00       0.76 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_recursiveLowerHalf/comp_recursiveUpperHalf/comp_recursiveLowerHalf/comp_recursiveUpperHalf/p[1] (blockGPGenerator_N2_11)
+                                                          0.00       0.76 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_recursiveLowerHalf/comp_recursiveUpperHalf/comp_recursiveLowerHalf/comp_recursiveUpperHalf/comp_recursiveUpperHalf/p[0] (blockGPGenerator_N1_21)
+                                                          0.00       0.76 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_recursiveLowerHalf/comp_recursiveUpperHalf/comp_recursiveLowerHalf/comp_recursiveUpperHalf/comp_recursiveUpperHalf/bp[0] (blockGPGenerator_N1_21)
+                                                          0.00       0.76 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_recursiveLowerHalf/comp_recursiveUpperHalf/comp_recursiveLowerHalf/comp_recursiveUpperHalf/comp_upperHalfCombiner_i_1/pjk (GPCombiner_11)
+                                                          0.00       0.76 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_recursiveLowerHalf/comp_recursiveUpperHalf/comp_recursiveLowerHalf/comp_recursiveUpperHalf/comp_upperHalfCombiner_i_1/U2/ZN (AOI21_X1)
+                                                          0.04       0.80 r
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_recursiveLowerHalf/comp_recursiveUpperHalf/comp_recursiveLowerHalf/comp_recursiveUpperHalf/comp_upperHalfCombiner_i_1/U3/ZN (INV_X1)
+                                                          0.02       0.82 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_recursiveLowerHalf/comp_recursiveUpperHalf/comp_recursiveLowerHalf/comp_recursiveUpperHalf/comp_upperHalfCombiner_i_1/gik (GPCombiner_11)
+                                                          0.00       0.82 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_recursiveLowerHalf/comp_recursiveUpperHalf/comp_recursiveLowerHalf/comp_recursiveUpperHalf/bg[1] (blockGPGenerator_N2_11)
+                                                          0.00       0.82 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_recursiveLowerHalf/comp_recursiveUpperHalf/comp_recursiveLowerHalf/comp_upperHalfCombiner_i_3/gjk (GPCombiner_27)
+                                                          0.00       0.82 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_recursiveLowerHalf/comp_recursiveUpperHalf/comp_recursiveLowerHalf/comp_upperHalfCombiner_i_3/U2/ZN (AOI21_X1)
+                                                          0.05       0.87 r
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_recursiveLowerHalf/comp_recursiveUpperHalf/comp_recursiveLowerHalf/comp_upperHalfCombiner_i_3/U3/ZN (INV_X1)
+                                                          0.02       0.90 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_recursiveLowerHalf/comp_recursiveUpperHalf/comp_recursiveLowerHalf/comp_upperHalfCombiner_i_3/gik (GPCombiner_27)
+                                                          0.00       0.90 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_recursiveLowerHalf/comp_recursiveUpperHalf/comp_recursiveLowerHalf/bg[3] (blockGPGenerator_N4_6)
+                                                          0.00       0.90 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_recursiveLowerHalf/comp_recursiveUpperHalf/comp_upperHalfCombiner_i_7/gij (GPCombiner_41)
+                                                          0.00       0.90 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_recursiveLowerHalf/comp_recursiveUpperHalf/comp_upperHalfCombiner_i_7/U2/ZN (AOI21_X1)
+                                                          0.04       0.94 r
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_recursiveLowerHalf/comp_recursiveUpperHalf/comp_upperHalfCombiner_i_7/U3/ZN (INV_X1)
+                                                          0.02       0.96 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_recursiveLowerHalf/comp_recursiveUpperHalf/comp_upperHalfCombiner_i_7/gik (GPCombiner_41)
+                                                          0.00       0.96 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_recursiveLowerHalf/comp_recursiveUpperHalf/bg[7] (blockGPGenerator_N8_3)
+                                                          0.00       0.96 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_recursiveLowerHalf/comp_upperHalfCombiner_i_15/gjk (GPCombiner_57)
+                                                          0.00       0.96 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_recursiveLowerHalf/comp_upperHalfCombiner_i_15/U5/ZN (INV_X1)
+                                                          0.02       0.98 r
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_recursiveLowerHalf/comp_upperHalfCombiner_i_15/U2/ZN (OAI21_X1)
+                                                          0.03       1.02 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_recursiveLowerHalf/comp_upperHalfCombiner_i_15/gik (GPCombiner_57)
+                                                          0.00       1.02 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_recursiveLowerHalf/bg[15] (blockGPGenerator_N16_0)
+                                                          0.00       1.02 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/U3/Z (BUF_X2)
+                                                          0.05       1.07 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_upperHalfCombiner_i_19/gij (GPCombiner_77)
+                                                          0.00       1.07 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_upperHalfCombiner_i_19/U2/ZN (AOI21_X1)
+                                                          0.04       1.11 r
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_upperHalfCombiner_i_19/U3/ZN (INV_X1)
+                                                          0.02       1.13 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/comp_upperHalfCombiner_i_19/gik (GPCombiner_77)
+                                                          0.00       1.13 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_blockGPGenerator/bg[19] (blockGPGenerator_N32)
+                                                          0.00       1.13 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_carryGenerator/bg[19] (carryGenerator_N32)
+                                                          0.00       1.13 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_carryGenerator/U59/ZN (AOI21_X1)
+                                                          0.05       1.18 r
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_carryGenerator/U60/ZN (INV_X1)
+                                                          0.02       1.21 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_carryGenerator/c[20] (carryGenerator_N32)
+                                                          0.00       1.21 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_sumGenerator/c[20] (sumGenerator_N32)
+                                                          0.00       1.21 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_sumGenerator/U53/ZN (XNOR2_X1)
+                                                          0.05       1.26 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/comp_sumGenerator/s[20] (sumGenerator_N32)
+                                                          0.00       1.26 f
+  compEXStage/comp_ALU/comp_datapath/comp_adder/s[20] (adder_N32)
+                                                          0.00       1.26 f
+  compEXStage/comp_ALU/comp_datapath/U24/ZN (OR2_X1)      0.06       1.32 f
+  compEXStage/comp_ALU/comp_datapath/U132/ZN (NOR2_X1)
+                                                          0.04       1.36 r
+  compEXStage/comp_ALU/comp_datapath/U167/ZN (NAND4_X1)
+                                                          0.04       1.40 f
+  compEXStage/comp_ALU/comp_datapath/U166/ZN (NOR2_X1)
+                                                          0.04       1.44 r
+  compEXStage/comp_ALU/comp_datapath/Z (ALUDatapath)      0.00       1.44 r
+  compEXStage/comp_ALU/Z (ALU)                            0.00       1.44 r
+  compEXStage/ex_data[Z] (EXStage)                        0.00       1.44 r
+  U961/Z (MUX2_X1)                                        0.05       1.48 r
+  EXData_MEM_in_reg[Z]/D (DFF_X2)                         0.01       1.49 r
+  data arrival time                                                  1.49
+
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  clock uncertainty                                      -0.07      -0.07
+  EXData_MEM_in_reg[Z]/CK (DFF_X2)                        0.00      -0.07 r
+  library setup time                                     -0.03      -0.10
+  data required time                                                -0.10
+  --------------------------------------------------------------------------
+  data required time                                                -0.10
+  data arrival time                                                 -1.49
+  --------------------------------------------------------------------------
+  slack (VIOLATED)                                                  -1.59
+
+
+1
