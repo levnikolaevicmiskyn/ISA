@@ -40,7 +40,6 @@ signal pc_i: std_logic_vector(31 downto 0);
         end if;
         end if;
     end process;
-    
 
     address <= pc_i;
   end behavior;
