@@ -57,7 +57,8 @@ begin
     end if;
   end process;
   
-  prediction <= m_prediction;
+  --prediction <= m_prediction;
+  prediction <= '1';
 
   current_value <= counters(to_integer(unsigned(pc(N+1 downto 2))));
   m_prediction  <= current_value(1); -- when counter's value is greater than 1

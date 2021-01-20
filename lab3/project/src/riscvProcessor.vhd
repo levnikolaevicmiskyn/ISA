@@ -59,9 +59,11 @@ architecture structure of riscvProcessor is
 
   component MEMStage is
     port(                               -- From control unit
-      MEMSigs          : in  t_MEMSigs;
+      branch, branch_taken, mem_read, mem_write: in std_logic;
+	  data_for_mem: in std_logic_vector(31 downto 0);
       -- Results from EX stage
-      EXData           : in  t_EXData;
+		Z: in std_logic;
+		result: in std_logic_vector(31 downto 0);
       -- Wrong prediction flag
       ID_misprediction : out std_logic;
       -- Memory
@@ -203,7 +205,8 @@ begin
     end if;
   end process;
 
-  compMemStage : MEMStage port map(MEMSigs_MEM_in, EXData_MEM_in, ID_misprediction, data_mem_address, data_mem_read_en, data_mem_write_en, data_mem_read_data, data_mem_write_data, WB_mem_data);
+  compMemStage : MEMStage port map(MEMSigs_MEM_in.branch, MEMSigs_MEM_in.branch_taken, MEMSigs_MEM_in.mem_read, MEMSigs_MEM_in.mem_write, MEMSigs_MEM_in.data_for_mem, 
+  EXData_MEM_in.Z, EXData_MEM_in.result, ID_misprediction, data_mem_address, data_mem_read_en, data_mem_write_en, data_mem_read_data, data_mem_write_data, WB_mem_data);
   WBSigs_MEM_out <= WBSigs_MEM_in;
   
   FWDSigs.MEM_data <= EXData_MEM_in.result;
