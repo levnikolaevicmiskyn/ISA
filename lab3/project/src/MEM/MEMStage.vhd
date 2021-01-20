@@ -4,10 +4,13 @@ library work;
 use work.globals.all;
 
 entity MEMStage is
-  port(                                 -- From control unit
-    MEMSigs          : in  t_MEMSigs;
+  port(
+	-- From control unit
+	branch, branch_taken, mem_read, mem_write: in std_logic;
+	data_for_mem: in std_logic_vector(31 downto 0);
     -- Results from EX stage
-    EXData           : in  t_EXData;
+	Z: in std_logic;
+	result: in std_logic_vector(31 downto 0);
     -- Wrong prediction flag
     ID_misprediction : out std_logic;
     -- Memory
@@ -24,10 +27,10 @@ architecture structure of MEMStage is
   signal mispred : std_logic;
 begin
   procCheckMisprediction :
-  process(EXData.Z, MEMSigs.branch_taken, MEMSigs.branch)
+  process(Z, branch_taken, branch)
   begin
-    if MEMSigs.branch = '1' then
-      if (MEMSigs.branch_taken xor EXData.Z) = '0' then
+    if branch = '1' then
+      if (branch_taken xor Z) = '0' then
         mispred <= '0';
       else
         mispred <= '1';
@@ -40,11 +43,11 @@ begin
   ID_misprediction <= mispred;
 
   WB_data <= data_in;  -- Forward data received from memory to writeback stage
-  data_out <= MEMSigs.data_for_mem;
+  data_out <= data_for_mem;
   
   -- Signals for memory
-  rd      <= MEMSigs.mem_read;
-  wr      <= MEMSigs.mem_write;
-  address <= EXData.result;
+  rd      <= mem_read;
+  wr      <= mem_write;
+  address <= result;
 
 end structure;

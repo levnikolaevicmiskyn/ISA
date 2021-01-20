@@ -110,7 +110,7 @@ begin
   EXSigs.oprnd_sel <= ALU_sel;
 
 -- Branch prediction unit
-  compBPU : BPU generic map(8)
+  compBPU : BPU generic map(4)
     port map(clk, rst_n, branch, IDSigs.pc, ID_misprediction, branch_prediction);
 
 -- Adder to compute the jump or branch target address to be stored in PC
@@ -121,8 +121,8 @@ begin
   IFSigs.jmp_addr      <= jump_addr_adder_out when ID_misprediction = '0' else ID_alt_ta_bw;
   IFSigs.load_jmp_addr <= jump or ID_misprediction;
   -- Replace fetched instruction with nop in case of a jump, misprediction or hazard.
-  IFSigs.load_nop      <= jump or ID_misprediction;-- or IF_stall;
-  IFSigs.stall <= IF_stall;
+  IFSigs.load_nop      <= jump or ID_misprediction;
+  IFSigs.stall 	<= IF_stall and (not ID_misprediction);
 
   MEMSigs.alt_ta    <= IDSigs.next_pc when jump = '1' else jump_addr_adder_out;
   MEMSigs.branch    <= branch;

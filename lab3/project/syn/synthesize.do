@@ -1,3 +1,5 @@
+set VERSION 1
+
 remove_design -designs
 
 # Analyze source code
@@ -50,11 +52,24 @@ set OLOAD [load_of NangateOpenCellLibrary/BUF_X4/A]
 set_load $OLOAD [all_outputs]
 set_clock_uncertainty 0.07
 
+# Flatten the hierarchy
+ungroup -all -flatten
+
 # Compile
 compile
+optimize_registers -clock clk
 
-check_design > reports/check_design.txt
+check_design > reports/design/check_design_$VERSION.txt
 
-report_resources > reports/report_resources.txt
-report_area > reports/report_area.txt
-report_timing > reports/report_timing.txt
+report_resources > reports/resources/report_resources_$VERSION.txt
+report_area > reports/area/report_area_$VERSION.txt
+report_timing > reports/timing/report_timing_$VERSION.txt
+
+# Netlist and constraint file export
+change_names -hierarchy -rules verilog
+# sdf file containing the delay of the netlist
+write_sdf ../netlist/riscvProcessor.sdf
+# Save the netlist in Verilog
+write -f verilog -hierarchy -output ../netlist/riscvProcessor.v
+# sdc file containts constraints to the input and output ports in a standard format
+write_sdc ../netlist/riscvProcessor.sdc

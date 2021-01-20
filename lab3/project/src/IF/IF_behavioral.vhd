@@ -40,9 +40,6 @@ signal pc_i: std_logic_vector(31 downto 0);
         end if;
         end if;
     end process;
-    
-   -- address <= pc_i when IFSigs.stall  = '1' else
-    --            IFSigs.jmp_addr when IFSigs.load_jmp_addr = '1' else pc_inc;
 
     address <= pc_i;
   end behavior;
