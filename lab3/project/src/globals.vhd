@@ -15,9 +15,9 @@ package globals is
         alu_op_xor,
         alu_op_lt
     );
-    type t_ALUInstructionType is (alu_sel_reg_reg, alu_sel_reg_imm, alu_sel_pc_imm, alu_sel_pc_4, alu_sel_0_imm, alu_sel_0_0);
+    type t_ALU_SEL is (alu_sel_reg_reg, alu_sel_reg_imm, alu_sel_pc_imm, alu_sel_pc_4, alu_sel_0_imm, alu_sel_0_0);
 
-    alias t_ALU_SEL is t_ALUInstructionType;
+    alias t_ALUInstructionType  is t_ALU_SEL;
     
     constant PC_SEL_JUMP  : std_logic_vector(1 downto 0) := "10";
     constant PC_SEL_STALL : std_logic_vector(1 downto 0) := "01";

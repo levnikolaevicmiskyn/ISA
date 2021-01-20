@@ -71,7 +71,10 @@ begin
 					-- SLT
             op <= alu_op_lt;
             WB_reg_write <= '1';
-          else
+          elsif funct7 = "0000000" and funct3 = "111" then
+					-- ABS (absolute value)
+		  op <= alu_op_abs;
+		  WB_reg_write <= '1';
 					-- Undefined behavior
             assert false report "Invalid instruction encountered. Behavior is undefined." severity warning;
           end if;
