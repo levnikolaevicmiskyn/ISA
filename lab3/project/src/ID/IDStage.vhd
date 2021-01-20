@@ -110,7 +110,7 @@ begin
   EXSigs.oprnd_sel <= ALU_sel;
 
 -- Branch prediction unit
-  compBPU : BPU generic map(3)
+  compBPU : BPU generic map(4)
     port map(clk, rst_n, branch, IDSigs.pc, ID_misprediction, branch_prediction);
 
 -- Adder to compute the jump or branch target address to be stored in PC

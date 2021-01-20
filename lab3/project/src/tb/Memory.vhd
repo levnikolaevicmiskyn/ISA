@@ -70,6 +70,7 @@ begin
         if rising_edge(clk) then
             if wr_en = '1' then
                 mem(to_integer(unsigned(address(11 downto 2)))) <= data_in;
+				report "Stored data in memory at " & time'image(now);
             end if;
         end if;
     end process;

@@ -1,0 +1,11 @@
+\section{Recursive Adder Description}
+\label{appendix:recursive-adder-description}
+The code of this block is in the file \texttt{ALU/arithmetic/blockGPGenerator\_LadnerFischer.vhd}, which is
+reported below:
+\lstinputlisting[language=VHDL]{../../lab3/project/src/ALU/arithmetic/blockGPGenerator_LadnerFischer.vhd}
+
+It is possible to see how the recursion was acheived through a conditional generate statement: in the general case,
+considered at line 44, the component instantiates itself with half the bit-width.
+After some number of recursive instantiations, the bit-width finally reaches 1, triggering the other generate statement
+in line 39. This is the degenerate case where the Ladner-Fischer network is receiving a single bit and consists of a
+single input-to-output line.
