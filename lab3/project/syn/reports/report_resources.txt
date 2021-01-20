@@ -1,0 +1,14 @@
+Warning: Design 'riscvProcessor' has '1' unresolved references. For more detailed information, use the "link" command. (UID-341)
+ 
+****************************************
+Report : resources
+Design : riscvProcessor
+Version: O-2018.06-SP4
+Date   : Thu Jan 14 18:29:04 2021
+****************************************
+
+
+No resource sharing information to report.
+
+No implementations to report
+1

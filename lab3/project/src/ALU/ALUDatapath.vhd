@@ -98,7 +98,7 @@ begin
 
     -- Compute partial flags
     flag_reference_result <= res_sum;
-    intN <= res_sum(0);
+    intN <= res_sum(31);
     proc_Z_flag: process(flag_reference_result)
             variable nz: std_logic;
         begin

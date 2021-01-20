@@ -85,7 +85,7 @@ begin
     -- Make sum
     comp_sumGenerator: sumGenerator
         generic map(N)
-        port map(a, b, ci(N-1 downto 0), s);
+        port map(a, signed_b, ci(N-1 downto 0), s);
     ovf <= ci(N) xor ci(N-1);
     cout <= ci(N);
 end architecture CLA;

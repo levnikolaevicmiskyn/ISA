@@ -75,18 +75,18 @@ begin
     end process;
 
     proc_dump: process(clk)
-        file fileout: text open WRITE_MODE is filename_out;
+        file fileout: text;
         variable lineout: line;
-        variable value: integer;
     begin
+      file_open(fileout, filename_out, WRITE_MODE);
         if rising_edge(clk) then
             if dump = '1' then
                 -- Dump all the memory content into the file
                 for i in 0 to SIZE-1 loop
-                    value := mem(i);
-                    hwrite(lineout, value);
+                    hwrite(lineout, mem(i));
                     writeline(fileout, lineout);
                 end loop;
+                file_close(fileout);
             end if;
         end if;
     end process proc_dump;

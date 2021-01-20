@@ -34,8 +34,8 @@ begin
         if tmp_sel = ALUpkg.SEL_OPERAND then
             case sel_forward1 is
                 when "00"   => tmp_sel := ALUpkg.SEL_OPERAND;
-                when "01"   => tmp_sel := ALUpkg.SEL_FWD_MEM;
-                when "10"   => tmp_sel := ALUpkg.SEL_FWD_WB;
+                when "10"   => tmp_sel := ALUpkg.SEL_FWD_MEM;
+                when "01"   => tmp_sel := ALUpkg.SEL_FWD_WB;
                 when others => tmp_sel := ALUpkg.SEL_ZERO;
             end case;
         end if;
@@ -59,8 +59,8 @@ begin
         if tmp_sel = ALUpkg.SEL_OPERAND then
             case sel_forward2 is
                 when "00"   => tmp_sel := ALUpkg.SEL_OPERAND;
-                when "01"   => tmp_sel := ALUpkg.SEL_FWD_MEM;
-                when "10"   => tmp_sel := ALUpkg.SEL_FWD_WB;
+                when "10"   => tmp_sel := ALUpkg.SEL_FWD_MEM;
+                when "01"   => tmp_sel := ALUpkg.SEL_FWD_WB;
                 when others => tmp_sel := ALUpkg.SEL_ZERO;
             end case;
         end if;

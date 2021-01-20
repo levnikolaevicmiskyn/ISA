@@ -38,6 +38,26 @@ begin
   end process;
 
 -- Read
-  read_data_1 <= memory(read_addr_1_int) when read_addr_1_int /= 0 else (others => '0');
-  read_data_2 <= memory(read_addr_2_int) when read_addr_2_int /= 0 else (others => '0');
+  proc_read_1: process(read_addr_1_int, write_addr_1_int, write_data_1)
+  begin
+    if read_addr_1_int = 0 then
+      read_data_1 <= (others => '0');
+    elsif read_addr_1_int = write_addr_1_int then
+      read_data_1 <= write_data_1;
+    else
+      read_data_1 <= memory(read_addr_1_int);
+    end if;
+  end process;
+
+    proc_read_2: process(read_addr_2_int, write_addr_1_int, write_data_1)
+  begin
+    if read_addr_2_int = 0 then
+      read_data_2 <= (others => '0');
+    elsif read_addr_2_int = write_addr_1_int then
+      read_data_2 <= write_data_1;
+    else
+      read_data_2 <= memory(read_addr_2_int);
+    end if;
+  end process;
+  
 end structure;

@@ -46,7 +46,7 @@ begin
                 
                 -- MEM_WB forwarding
                 -- forward if Rd is not x0 and the instruction will write back to memory
-                elsif(Rs1 = MEM_WB_Rd) and (MEM_WB_Rd /= "00000") and (MEM_WB_Write_Back = '1') then
+                elsif(Rs2 = MEM_WB_Rd) and (MEM_WB_Rd /= "00000") and (MEM_WB_Write_Back = '1') then
                     Forward_B <= "01";  -- forward: operand 2 from memory stage
                     
                 end if;
