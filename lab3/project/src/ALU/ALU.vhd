@@ -25,8 +25,8 @@ architecture structure of ALU is
     component ALUController is
         port (
             operation: in globals.t_ALU_OP;  -- ALU abstract operation
-            operand1_info: in t_OperandInfo; -- Operand 1 info
-            operand2_info: in t_OperandInfo; -- Operand 2 info
+            operand1_info: in ALUpkg.t_OperandInfo; -- Operand 1 info
+            operand2_info: in ALUpkg.t_OperandInfo; -- Operand 2 info
             control: out ALUpkg.t_Control    -- Control signals
         );
     end component;

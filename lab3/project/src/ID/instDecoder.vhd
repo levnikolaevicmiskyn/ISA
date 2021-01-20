@@ -75,6 +75,7 @@ begin
 					-- ABS (absolute value)
 		  op <= alu_op_abs;
 		  WB_reg_write <= '1';
+		  else
 					-- Undefined behavior
             assert false report "Invalid instruction encountered. Behavior is undefined." severity warning;
           end if;
