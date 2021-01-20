@@ -1,9 +1,11 @@
 # Ignore work directory
 */work
 
+alib-52
+
 # Logs
-*/*.log
-*/log.txt
+*.log
+log.txt
 
 # Synopsys files
-*/default.svf
+default.svf

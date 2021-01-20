@@ -23,7 +23,7 @@ begin
   read_addr_2_int  <= to_integer(unsigned(read_addr_2));
 
 -- Register x0 is always zero
-  memory(0) <= (others => '0');
+ -- memory(0) <= (others => '0');
 
   proc_rd_wr : process(clk)
   begin

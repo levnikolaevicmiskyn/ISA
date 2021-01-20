@@ -41,3 +41,7 @@ vlog -work work ../tb/testbench.v
 vsim work.testbench
 
 run 250 us
+
+quit -sim
+
+exit
