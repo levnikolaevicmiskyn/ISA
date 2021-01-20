@@ -1,0 +1,75 @@
+\section{Execution Unit}
+The Execution Unit is the unit responsible for the computations and the general execution of the commands.
+The core and most significant component is the ALU, which the Execution Unit simply surrounds with multiplexers
+and their controller to select the operands.
+
+\subsection{ALU}
+The ALU is also internally organized with a datapath and a controller. It is important to highlight that to not
+interfere with the processor's pipeline, this controller (as well as the Execution Stage's) is fully combinational and
+mostly acts as an input translator.
+
+\subsubsection{Datapath}
+The datapath instantiates the arithmetic and logic operators, generates the status flags and outputs the final result.
+All the operators are instantiated in parallel and at every cycle, they all run their own operation and the result
+is selected through a multiplexer. If power consuption is to be considered, \textbf{guarded evaluation} can be a simple
+solution to this problem.
+
+The available operators are:
+\begin{itemize}
+    \item Carry Look Ahead adder
+    \item Barrel shifter
+    \item And
+    \item Xor
+    \item Comparator
+\end{itemize}
+
+Most of their functionality is very straightforward: the \texttt{and} and \texttt{xor} operators are simple logic gates,
+while the barrel shifter is described through the \texttt{numeric\_std} library's function \texttt{shift\_right} and
+likely instantiated as a cascade of multiplexers. The components worth discussing are the adder and the comparator.
+
+\paragraph{Adder}
+\todo{Insert top level adder schematic}
+The adder is designed as a \textbf{Ladner-Fischer} Carry Look Ahead. Its structure is organized as a cascade of the following
+blocks:
+ \begin{enumerate}
+    \item Sign converter \\
+    To accomodate for subtractions, operator \signal{b} goes through a \texttt{xor} gate controlled by the
+    \texttt{sub} signal which, when asserted, also sets the \signal{cin} to 1.
+
+    \item Generate and Propagate bits generator \\
+    Given \signal{a} and \signal{b}, output the corrisponding generate and propagate signals bit by bit, where
+    \begin{align*}
+        g_i &= a_i\ \texttt{and}\ b_i \\
+        p_i &= a_i\ \texttt{xor}\ b_i
+    \end{align*}
+
+    \item Block Generate and Propagate bits generator \\
+    Starting from $g_i$ and $p_i$, compute the block generate $G_{0, i}$ and propagate $P_{0, i}$ as a parallel prefix
+    problem. This is where the Ladner-Fischer structure is instantiated.
+
+    \todo{Insert Ladner-Fischer schematic}
+    The main component needed to compute the block generate and propagate is called \texttt{GPCombiner} which, given
+    $P_{i, j}$ and $P_{j, k}$, combines them into $P_{i, k}$ (and the same goes for $G$). The inputs $g_i$ and $p_i$
+    (lowercase, meaning they are not the block generate and propagate but the bitwise ones) are assumed as $G_{i, i}$
+    and $P_{i, i}$, which is equivalent. The operation is simple:
+    \begin{align*}
+        G_{i, k} &= G_{j, k}\ \texttt{or}\  \left( G_{i, j}\ \texttt{and}\ P_{j, k} \right) \\
+        P_{i, k} &= P_{i, j}\ \texttt{and}\ P_{j, k}
+    \end{align*}
+    The combiners are connected according to the schematic \todo{Reference to the schematic} in the top level module,
+    called \texttt{blockGPGenerator}. To keep the generality of the component, the block is described with generic
+    and its structure is instantiated \textbf{recursively}. More information on the description can be found in
+    \autoref{appendix:recursive-adder-description}.
+
+    \item Carry Generator \\
+
+    \item Full adders \\
+
+    \item Flag generators \\
+ \end{enumerate}
+
+\subsubsection{Controller}
+dsahijhjdlsa
+
+\subsection{Input Selection}
+sdasadsdasa
