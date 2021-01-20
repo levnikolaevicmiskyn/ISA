@@ -4,7 +4,8 @@ library work;
 use work.globals.all;
 
 entity MEMStage is
-  port(                                 -- From control unit
+  port(
+	-- From control unit
 	branch, branch_taken, mem_read, mem_write: in std_logic;
 	data_for_mem: in std_logic_vector(31 downto 0);
     -- Results from EX stage
