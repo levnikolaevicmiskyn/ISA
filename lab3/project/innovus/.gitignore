@@ -1,0 +1,16 @@
+*.cmd*
+*.log*
+*.sdf
+*.v
+*.ptiavg
+*.enc
+.top.db
+*.db*
+
+IIRFilter_design.enc.dat/
+
+IIRFilter.*
+!IIRFilter.gateCount
+!IIRFilter.power.rail.rpt
+!IIRFilter.power.rpt
+
