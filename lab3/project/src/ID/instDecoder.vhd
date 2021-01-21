@@ -41,7 +41,7 @@ begin
   funct7 <= inst(31 downto 25);
   funct3 <= inst(14 downto 12);
 
-  hz1 <= hazard(rs1_i, rs2_i, EX_rd_bw, EX_mem_read_bw);
+  hz1 <= hazard(rs1_i, EX_rd_bw, EX_mem_read_bw);
   hz2 <= hazard(rs1_i, rs2_i, EX_rd_bw, EX_mem_read_bw);
   proc_inst_type: process(opcode, hz1, hz2, branch_prediction)
   begin
@@ -60,7 +60,7 @@ begin
       when "0110011" =>	-- Arithmetic operations
         inst_type <= t_INST_R;
         alu_sel <= alu_sel_reg_reg; -- Use register operands
-        if hz1 = '0' then
+        if hz2 = '0' then
 		--if hazard(rs1_i, rs2_i, EX_rd_bw, EX_mem_read_bw) = '0' then
           if funct7 = "0000000" and funct3 = "000" then
 					-- ADD
