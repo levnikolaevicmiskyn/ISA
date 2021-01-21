@@ -40,7 +40,8 @@ architecture structure of riscvProcessor is
 
   component IFStage is
     port (clk, rst_n : in  std_logic;
-          IFSigs     : in  t_IFSigs;
+          IFSigs_load_jmp_addr, IFSigs_stall: in std_logic;
+		  IFSigs_jmp_addr: in std_logic_vector(31 downto 0);
           IDSigs     : out t_IDSigs;
           address    : out std_logic_vector(31 downto 0);
           instr      : in  std_logic_vector(31 downto 0));
@@ -160,7 +161,7 @@ begin
     end if;
   end process;
 
-  compIFStage : IFStage port map(clk, rst_n, IFSigs_ID_out, IDSigs_IF_out, instr_address, instruction);
+  compIFStage : IFStage port map(clk, rst_n, IFSigs_ID_out.load_jmp_addr, IFSigs_ID_out.stall, IFSigs_ID_out.jmp_addr, IDSigs_IF_out, instr_address, instruction);
 
   comp_IF_ID_Reg : process(clk)
   begin

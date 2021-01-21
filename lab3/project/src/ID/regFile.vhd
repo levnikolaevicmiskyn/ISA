@@ -23,16 +23,14 @@ begin
   read_addr_2_int  <= to_integer(unsigned(read_addr_2));
 
 -- Register x0 is always zero
- -- memory(0) <= (others => '0');
 
   proc_rd_wr : process(clk)
   begin
     if rising_edge(clk) then
       -- Write
       if reg_write = '1' then
-        if write_addr_1_int /= 0 then
-          memory(write_addr_1_int) <= write_data_1;
-        end if;
+         memory(write_addr_1_int) <= write_data_1;
+		 memory(0) <= (others => '0');
       end if;
     end if;
   end process;
