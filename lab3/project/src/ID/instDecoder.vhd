@@ -34,14 +34,16 @@ architecture struct of instDecoder is
   signal funct3: std_logic_vector(14 downto 12);
   signal rs1_i, rs2_i, rd_i: std_logic_vector(4 downto 0);
 
+  signal hz1, hz2: std_logic;
 begin
   -- Fetch opcode
   opcode <= inst(6 downto 0);
   funct7 <= inst(31 downto 25);
   funct3 <= inst(14 downto 12);
 
-
-  proc_inst_type: process(opcode, rs1_i, rs2_i, EX_rd_bw, EX_mem_read_bw, branch_prediction)
+  hz1 <= hazard(rs1_i, rs2_i, EX_rd_bw, EX_mem_read_bw);
+  hz2 <= hazard(rs1_i, rs2_i, EX_rd_bw, EX_mem_read_bw);
+  proc_inst_type: process(opcode, hz1, hz2, branch_prediction)
   begin
     -- Default signal assignments
     inst_type <= t_INST_R;
@@ -58,7 +60,8 @@ begin
       when "0110011" =>	-- Arithmetic operations
         inst_type <= t_INST_R;
         alu_sel <= alu_sel_reg_reg; -- Use register operands
-        if hazard(rs1_i, rs2_i, EX_rd_bw, EX_mem_read_bw) = '0' then
+        if hz1 = '0' then
+		--if hazard(rs1_i, rs2_i, EX_rd_bw, EX_mem_read_bw) = '0' then
           if funct7 = "0000000" and funct3 = "000" then
 					-- ADD
             op <= alu_op_add;
@@ -82,7 +85,8 @@ begin
       when "0010011" =>
         inst_type <= t_INST_I;
         alu_sel <= alu_sel_reg_imm; -- Use immediate operand
-        if hazard(rs1_i, EX_rd_bw, EX_mem_read_bw) = '0' then
+        if hz1= '0' then
+		--if hazard(rs1_i, EX_rd_bw, EX_mem_read_bw) = '0' then
           if funct3 = "000" then
 					-- ADDI
             op <= alu_op_add;
@@ -117,7 +121,8 @@ begin
 
       when "1100011" =>   -- BEQ
         inst_type <= t_INST_SB;
-        if hazard(rs1_i, rs2_i, EX_rd_bw, EX_mem_read_bw) = '0' then
+        if hz2 = '0' then
+		--if hazard(rs1_i, rs2_i, EX_rd_bw, EX_mem_read_bw) = '0' then
           op <= alu_op_lt; -- Resulting data will be discarded and zero flag will be used to decide on branch
           alu_sel<=alu_sel_reg_reg;
           WB_reg_write <= '0';
@@ -133,7 +138,8 @@ begin
         inst_type <= t_INST_I;
         op <= alu_op_add;
         alu_sel <= alu_sel_reg_imm;
-        if hazard(rs1_i, EX_rd_bw, EX_mem_read_bw) = '0' then
+        if hz1 = '0' then
+		--if hazard(rs1_i, EX_rd_bw, EX_mem_read_bw) = '0' then
           WB_reg_write <= '1';
           MEM_read <= '1';
         --mem_to_reg <= '1';
@@ -152,7 +158,8 @@ begin
         inst_type <= t_INST_S;
         alu_sel <= alu_sel_reg_imm;
         op <= alu_op_add;
-        if hazard(rs1_i, rs2_i, EX_rd_bw, EX_mem_read_bw) = '0' then
+        if hz2 = '0' then
+		--if hazard(rs1_i, rs2_i, EX_rd_bw, EX_mem_read_bw) = '0' then
           WB_reg_write <= '1';
           mem_write <= '1';
         else
