@@ -72,17 +72,13 @@ begin
 			counters(i) <= (others => '0');
 		end loop;
 	elsif rising_edge(clk) then
-      if branch_dline(0) = '1' and outcome= '1' then
+      if (branch_dline(0) = '1') and (outcome= '1') and (counters(to_integer(pc_dline(0))) /= "11") then
           -- Taken: increment counter
-          if counters(to_integer(pc_dline(0))) /= "11" then
             counters(to_integer(pc_dline(0))) <= ((counters(to_integer(pc_dline(0)))) + to_unsigned(1, 2));
-          end if;
 	  end if;
-      if branch_dline(0) = '1' and outcome = '0' then
+      if (branch_dline(0) = '1') and (outcome = '0') and (counters(to_integer(pc_dline(0))) /= "00")  then
 		  -- Not taken: decrement counter
-          if counters(to_integer(pc_dline(0))) /= "00" then
-            counters(to_integer(pc_dline(0))) <= ((counters(to_integer(pc_dline(0)))) - to_unsigned(1, 2));
-          end if;
+         counters(to_integer(pc_dline(0))) <= ((counters(to_integer(pc_dline(0)))) - to_unsigned(1, 2));
       end if;
     end if;
 
