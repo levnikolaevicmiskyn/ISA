@@ -24,7 +24,7 @@ signal pc_inc, next_pc_value: std_logic_vector(31 downto 0);
 signal pc_i: std_logic_vector(31 downto 0);
   begin
 	pc_inc(1 downto 0) <= pc_i(1 downto 0);
-    pc_inc(31 downto 2) <= std_logic_vector(unsigned(pc_i(31 downto 2)) + to_unsigned(1, 32));
+    pc_inc(31 downto 2) <= std_logic_vector(unsigned(pc_i(31 downto 2)) + to_unsigned(1, 30));
     IDSigs.next_pc <= pc_inc;
     IDSigs.pc <= pc_i;
     IDSigs.inst <= instr;
