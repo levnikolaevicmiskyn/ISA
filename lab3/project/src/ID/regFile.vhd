@@ -30,7 +30,7 @@ begin
       -- Write
       if reg_write = '1' then
          memory(write_addr_1_int) <= write_data_1;
-		 memory(0) <= (others => '0');
+		 --memory(0) <= (others => '0');
       end if;
     end if;
   end process;
