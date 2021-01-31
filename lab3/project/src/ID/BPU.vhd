@@ -4,10 +4,10 @@ use ieee.numeric_std.all;
 
 entity BPU is
   generic(N : integer := 3);
-    port(clk, rst_n, branch : in  std_logic;
-         pc                 : in  std_logic_vector(31 downto 0);
-         ID_misprediction   : in  std_logic;
-         prediction         : out std_logic);
+  port(clk, rst_n, branch : in  std_logic;
+       pc                 : in  std_logic_vector(31 downto 0);
+       ID_misprediction   : in  std_logic;
+       prediction         : out std_logic);
 end entity BPU;
 
 architecture behavior of BPU is
@@ -56,29 +56,29 @@ begin
       pc_dline(pc_dline'length-1) <= unsigned(pc(N+1 downto 2));
     end if;
   end process;
-  
+
   prediction <= m_prediction;
   --prediction <= '1';
 
   current_value <= counters(to_integer(unsigned(pc(N+1 downto 2))));
-  m_prediction  <= current_value(1); -- when counter's value is greater than 1
+  m_prediction  <= current_value(1);  -- when counter's value is greater than 1
 
   outcome <= taken_dline(0) xor ID_misprediction;
 
   proc_update : process(clk, rst_n)
   begin
-	if rst_n = '0' then
-		for i in 2**N-1 downto 0 loop
-			counters(i) <= (others => '0');
-		end loop;
-	elsif rising_edge(clk) then
-      if (branch_dline(0) = '1') and (outcome= '1') and (counters(to_integer(pc_dline(0))) /= "11") then
-          -- Taken: increment counter
-            counters(to_integer(pc_dline(0))) <= ((counters(to_integer(pc_dline(0)))) + to_unsigned(1, 2));
-	  end if;
-      if (branch_dline(0) = '1') and (outcome = '0') and (counters(to_integer(pc_dline(0))) /= "00")  then
-		  -- Not taken: decrement counter
-         counters(to_integer(pc_dline(0))) <= ((counters(to_integer(pc_dline(0)))) - to_unsigned(1, 2));
+    if rst_n = '0' then
+      for i in 2**N-1 downto 0 loop
+        counters(i) <= (others => '0');
+      end loop;
+    elsif rising_edge(clk) then
+      if (branch_dline(0) = '1') and (outcome = '1') and (counters(to_integer(pc_dline(0))) /= "11") then
+        -- Taken: increment counter
+        counters(to_integer(pc_dline(0))) <= ((counters(to_integer(pc_dline(0)))) + to_unsigned(1, 2));
+      end if;
+      if (branch_dline(0) = '1') and (outcome = '0') and (counters(to_integer(pc_dline(0))) /= "00") then
+        -- Not taken: decrement counter
+        counters(to_integer(pc_dline(0))) <= ((counters(to_integer(pc_dline(0)))) - to_unsigned(1, 2));
       end if;
     end if;
 
