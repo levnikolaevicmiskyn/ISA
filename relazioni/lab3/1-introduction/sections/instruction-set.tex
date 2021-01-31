@@ -8,7 +8,17 @@ The supported instructions are
         Instruction               & Format & Description \\ \hline
         \instr{add} rd, rs1, rs2  & R      & Store r1 + r2 in rs \\ \hline
         \instr{addi} rd, rs, imm  & I      & Store r1 + imm in rd \\ \hline
-        bla bla & bla & bla \\ \hline
+        \instr{xor} & R & bla \\ \hline
+        \instr{slt} & R & Set register to 1 if rs1$<$rs2 is verified\\\hline
+        \instr{and} & R & \\\hline
+        \instr{andi} & I  & \\\hline
+        \instr{srai} & I & \\\hline
+        \instr{auipc} & U & Add upper immediate to pc\\\hline
+        \instr{lui} & U & Load upper immediate to a register\\\hline
+        \instr{beq} & SB & Branch if register operands are equal\\\hline
+        \instr{lw} & I & Load word from memory\\\hline
+        \instr{jal} & J & Jump and link\\\hline
+        \instr{sw} & S & Store word\\\hline
     \end{tabular}
     \caption{Supported instructions}
     \label{tab:instruction-set}
