@@ -8,7 +8,11 @@ package globals is
     constant DATA_MEM_END_ADDR:    integer := 16#100101fc#;
 
     type t_ALU_OP is (alu_op_shift, alu_op_add, alu_op_xor, alu_op_and, alu_op_lt);
+    --attribute enum_encoding : string;
+    --attribute enum_encoding of t_ALU_OP: type is "000 001 010 011 100";
+
     type t_ALU_SEL is (alu_sel_reg_reg, alu_sel_reg_imm, alu_sel_pc_imm, alu_sel_pc_4, alu_sel_0_imm, alu_sel_0_0);
+    --attribute enum_encoding of t_ALU_SEL: type is "000 001 010 011 100 101";
 
     alias t_ALUInstructionType is t_ALU_SEL;
     
