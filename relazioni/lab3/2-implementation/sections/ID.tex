@@ -24,6 +24,12 @@ The main task of this sub-unit is to drive control signals for execution, memory
 
 The VHDL description consists in a combinational process whose sensitivity list includes the opcodes and the source registers. Based on \texttt{rs1} and \texttt{rs2}, this unit will resort to the hazard detection unit to handle the load-use data hazard occurring when the source operand is to be loaded from memory within the following two clock cycles. Under this circumstance, an operation that depends on such operand cannot proceed to the execution stage because it will be too early for the required data to be available of forwardable. Whenever the HZU runs into a load-use data hazard, the decoding step produces a nop (no operation), meaning that all control signals are inactive and the instruction fetch stage is prompted to refetch the current instruction without updating \texttt{PC}. The normal execution flow proceeds as soon as the hazard is removed.
 
+\begin{figure}[h]
+	\includegraphics[width=0.6\textwidth]{./images/idstage.pdf}
+	\caption{Instruction decoding stage with its sub-units}
+	\label{fig:idstage}
+\end{figure}
+
 \subsection{Hazard Detection Unit} This subunit takes the source register indices and the \texttt{rd} signals (destination register name) both at the output of ID/EX and EX/MEM pipeline stages. If any of \texttt{rs1} or \texttt{rs2} is the same as \texttt{rd} and the corresponding data memory read enable signal is active, then the condition for a potential load-use data hazard is verified. The instruction decoder will trigger a nop insertion after validating the hazard signal coming from this unit, which is effective only if the instruction depends on the data contained in the register involved in the hazard.
 
 
