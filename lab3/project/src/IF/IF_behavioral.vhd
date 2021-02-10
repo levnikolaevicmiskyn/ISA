@@ -31,7 +31,7 @@ begin
 
   -- A multiplexer selects the next address to be loaded in the pc register taking into account
   -- stall and jump conditions
-  next_pc_value <= pc_i when IFSigs_stall = '1' else
+  next_pc_value <= pc_i            when IFSigs_stall = '1' else
                    IFSigs_jmp_addr when IFSigs_load_jmp_addr = '1' else
                    pc_inc;
   pc_proc : process(clk, rst_n)
