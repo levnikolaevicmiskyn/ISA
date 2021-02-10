@@ -8,7 +8,8 @@ const std::map<int, ALU::ALUFunction> ALU::functions = {
         {1, ALU::_srai},
         {2, ALU::_and},
         {3, ALU::_xor},
-        {4, ALU::_lt}
+        {4, ALU::_lt},
+	{5, ALU::_abs}
 };
 
 ALU::ALU() : m_input{0, 0, 0},
@@ -120,13 +121,15 @@ ALU::dtype ALU::_xor(const Input &input) {
 }
 
 ALU::dtype ALU::_lt(const Input &input) {
-    if (input.operand1 < input.operand2)
+    if ((int32_t) input.operand1 < (int32_t) input.operand2)
         return 1;
     return 0;
 }
 
-ALU::dtype ALU::_lt(const Input &input) {
-    if (input.operand2 < 0)
+ALU::dtype ALU::_abs(const Input &input) {
+    // Check if MSB is 1
+    dtype MSB = input.operand2 >> 31;
+    if (MSB == 1)
         return -input.operand2;
     return input.operand2;
 }

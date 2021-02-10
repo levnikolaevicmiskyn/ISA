@@ -19,5 +19,4 @@ echo "Running reference"
 build/ALU < inputs.txt > results-CPP.txt
 
 echo "Done!"
-rm -rf inputs.txt
 exit 0

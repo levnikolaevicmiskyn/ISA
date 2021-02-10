@@ -16,7 +16,7 @@ end entity ALUController;
 
 architecture structure of ALUController is
 begin
-    proc_control: process(operation)
+    proc_control: process(operation, operand1_info, operand2_info)
     begin
         control.operation <= ALUpkg.OP_SUM;
         control.adder_sub <= '0';
