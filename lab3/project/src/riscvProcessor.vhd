@@ -119,40 +119,19 @@ begin
   comp_ID_EX_Reg : process(clk)
   begin
     if rst_n = '0' then
-      EXSigs_EX_in.op           <= ALU_op_add;
-      EXSigs_EX_in.oprnd_sel <= alu_sel_0_0;
-      EXSigs_EX_in.oprnd_1        <= (others => '0');
-      EXSigs_EX_in.oprnd_2         <= (others => '0');
-      EXSigs_EX_in.immediate        <= EXSigs_ID_out.immediate;
-      EXSigs_EX_in.pc               <= EXSigs_ID_out.pc;
-      EXSigs_EX_in.rs1              <= (others => '0');
-      EXSigs_EX_in.rs2              <= (others => '0');
-
       MEMSigs_EX_in.mem_write <= '0';
       MEMSigs_EX_in.branch    <= '0';
       MEMSigs_EX_in.mem_read  <= '0';
-      MEMSigs_EX_in.alt_ta    <= MEMSigs_ID_out.alt_ta;
 
       WBSigs_EX_in.reg_write <= '0';
       WBSigs_EX_in.rd        <= (others => '0');
     elsif rising_edge(clk) then
       if ID_load_nop = '1' then
-        EXSigs_EX_in.op           <= ALU_op_add;
-        EXSigs_EX_in.oprnd_sel <= alu_sel_0_0;
-        EXSigs_EX_in.oprnd_1         <= (others => '0');
-        EXSigs_EX_in.oprnd_2         <= (others => '0');
-        EXSigs_EX_in.immediate        <= EXSigs_ID_out.immediate;
-        EXSigs_EX_in.pc               <= EXSigs_ID_out.pc;
-        EXSigs_EX_in.rs1              <= (others => '0');
-        EXSigs_EX_in.rs2              <= (others => '0');
-
         MEMSigs_EX_in.mem_write <= '0';
         MEMSigs_EX_in.branch    <= '0';
         MEMSigs_EX_in.mem_read  <= '0';
-        MEMSigs_EX_in.alt_ta    <= MEMSigs_ID_out.alt_ta;
 
         WBSigs_EX_in.reg_write <= '0';
-        WBSigs_EX_in.rd        <= (others => '0');
       else
         EXSigs_EX_in  <= EXSigs_ID_out;
         MEMSigs_EX_in <= MEMSigs_ID_out;
