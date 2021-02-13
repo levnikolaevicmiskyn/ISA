@@ -1,0 +1,46 @@
+ 
+****************************************
+Report : resources
+Design : riscvProcessor
+Version: O-2018.06-SP4
+Date   : Thu Jan 21 20:30:41 2021
+****************************************
+
+Resource Sharing Report for design riscvProcessor in file
+        ../src/riscvProcessor.vhd
+
+===============================================================================
+|          |              |            | Contained     |                      |
+| Resource | Module       | Parameters | Resources     | Contained Operations |
+===============================================================================
+| r423     | DW_cmp       | width=5    |               | compIDStage/compInstDecoder/eq_12_C44_rn |
+      |            |               |                      |
+|          |              |            |               | compIDStage/compInstDecoder/eq_21_C45_rn |
+| r448     | DW01_add     | width=32   |               | compIDStage/add_119  |
+| r450     | DW_cmp       | width=5    |               | compIDStage/compInstDecoder/eq_21_2_C45_rn |
+| r452     | DW_cmp       | width=5    |               | compIDStage/compRegFile/eq_43 |
+| r454     | DW_cmp       | width=5    |               | compIDStage/compRegFile/eq_54 |
+| r456     | DW01_inc     | width=2    |               | compIDStage/compBPU/add_77 |
+| r458     | DW01_dec     | width=2    |               | compIDStage/compBPU/sub_81 |
+| r460     | DW01_inc     | width=30   |               | compIFStage/add_27   |
+| r462     | DW_sra       | A_width=32 |               | compEXStage/comp_ALU/comp_datapath/comp_barrel_shifter/sra_21 |
+              |                      |
+|          |              | SH_width=31 |              |                      |
+| r464     | DW_cmp       | width=5    |               | compFWDUnit/eq_26    |
+| r466     | DW_cmp       | width=5    |               | compFWDUnit/eq_31    |
+| r468     | DW_cmp       | width=5    |               | compFWDUnit/eq_44    |
+| r470     | DW_cmp       | width=5    |               | compFWDUnit/eq_49    |
+===============================================================================
+
+
+Implementation Report
+===============================================================================
+|                    |                  | Current            | Set            |
+| Cell               | Module           | Implementation     | Implementation |
+===============================================================================
+| compIFStage/add_27 | DW01_inc         | pparch (area,speed)                 |
+| compIDStage/add_119                   |                    |                |
+|                    | DW01_add         | pparch (area,speed)                 |
+===============================================================================
+
+1

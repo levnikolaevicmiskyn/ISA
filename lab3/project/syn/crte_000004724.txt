@@ -1,0 +1,230 @@
+CRTE_SNAPSHOT_START
+
+SECTION_CRTE_VERSION
+3.0
+
+SECTION_PID
+4724
+
+SECTION_POLLING_INTERVAL
+5
+
+SECTION_DATE_TIME
+Sat Feb 06 21:49:16 CET 2021 (1612644556)
+
+SECTION_OS_VERSION
+osname: Linux
+hostname: localhost.localdomain
+arch: x86_64
+release_version: 3.10.0-957.5.1.el7.x86_64
+
+SECTION_IPC_INFO
+
+------ Message Queues --------
+key        msqid      owner      perms      used-bytes   messages    
+
+------ Shared Memory Segments --------
+key        shmid      owner      perms      bytes      nattch     status      
+0x00000000 51412992   isa17      600        393216     2          dest         
+0x00000000 51576833   isa17      600        524288     2          dest         
+0x00000000 51609602   isa17      600        393216     2          dest         
+0x00000000 51642371   isa17      600        393216     2          dest         
+0x00000000 51806212   isa17      600        393216     2          dest         
+0x00000000 51838981   isa17      600        67108864   2          dest         
+0x00000000 52068358   isa17      600        393216     2          dest         
+0x00000000 52101127   isa17      600        524288     2          dest         
+0x00000000 76054536   isa19      600        1048576    2          dest         
+0x00000000 56655881   isa17      600        393216     2        SECTION_ULIMIT
+core file size          (blocks, -c) 0
+data seg size           (kbytes, -d) unlimited
+scheduling priority             (-e) 0
+file size               (blocks, -f) unlimited
+pending signals                 (-i) 63449
+max locked memory       (kbytes, -l) 64
+max memory size         (kbytes, -m) unlimited
+open files                      (-n) 4096
+pipe size            (512 bytes, -p) 8
+POSIX message queues     (bytes, -q) 819200
+real-time priority              (-r) 0
+stack size              (kbytes, -s) 8200
+cpu time               (seconds, -t) unlimited
+max user processes              (-u) 4096
+virtual memory          (kbytes, -v) unlimited
+file locks                      (-x) unlimited
+
+SECTION_SYSCONF
+_SC_THREAD_SAFE_FUNCTIONS= 200809
+_SC_CLK_TCK= 100
+_SC_OPEN_MAX= 4096
+_SC_PAGE_SIZE= 4096
+_SC_ARG_MAX= 2099200
+_SC_CHILD_MAX= 4096
+_SC_LINE_MAX= 2048
+
+SECTION_FULL_COMMAND
+/software/synopsys/syn_current_64.18/linux64/syn/bin/common_shell_exec -shell design_vision -r /software/synopsys/syn_current_64.18
+
+SECTION_CPUINFO
+total_core: 2
+
+model_name:  Westmere E56xx/L56xx/X56xx (Nehalem-C)
+flags:  fpu de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 syscall nx lm constant_tsc nopl eagerfpu pni ssse3 cx16 sse4_1 sse4_2 x2apic popcnt aes hypervisor lahf_lm
+cpu_family: 6
+core_frequency_mhz: 1994
+core_per_socket: 0
+stepping: 1
+cache_size_kb: 4096
+ht: 0
+
+model_name:  Westmere E56xx/L56xx/X56xx (Nehalem-C)
+flags:  fpu de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 syscall nx lm constant_tsc nopl eagerfpu pni ssse3 cx16 sse4_1 sse4_2 x2apic popcnt aes hypervisor lahf_lm
+cpu_family: 6
+core_frequency_mhz: 1994
+core_per_socket: 0
+stepping: 1
+cache_size_kb: 4096
+ht: 0
+
+SECTION_OS_RELEASE_VERSION
+CentOS Linux release 7.6.1810 (Core) 
+
+
+SECTION_SYS/VM
+/proc/sys/vm/admin_reserve_kbytes:8192
+/proc/sys/vm/block_dump:0
+/proc/sys/vm/dirty_background_bytes:0
+/proc/sys/vm/dirty_background_ratio:10
+/proc/sys/vm/dirty_bytes:0
+/proc/sys/vm/dirty_expire_centisecs:3000
+/proc/sys/vm/dirty_ratio:30
+/proc/sys/vm/dirty_writeback_centisecs:500
+/proc/sys/vm/drop_caches:0
+/proc/sys/vm/extfrag_threshold:500
+/proc/sys/vm/hugepages_treat_as_movable:0
+/proc/sys/vm/hugetlb_shm_group:0
+/proc/sys/vm/laptop_mode:0
+/proc/sys/vm/legacy_va_layout:0
+/proc/sys/vm/lowmem_reserve_ratio:256	256	32
+/proc/sys/vm/max_map_count:65530
+/proc/sys/vm/memory_failure_early_kill:0
+/proc/sys/vm/memory_failure_recovery:1
+/proc/sys/vm/min_free_kbytes:67584
+/proc/sys/vm/min_slab_ratio:5
+/proc/sys/vm/min_unmapped_ratio:1
+/proc/sys/vm/mmap_min_addr:4096
+/proc/sys/vm/nr_hugepages:0
+/proc/sys/vm/nr_hugepages_mempolicy:0
+/proc/sys/vm/nr_overcommit_hugepages:0
+/proc/sys/vm/nr_pdflush_threads:0
+/proc/sys/vm/numa_zonelist_order:default
+/proc/sys/vm/oom_dump_tasks:1
+/proc/sys/vm/oom_kill_allocating_task:0
+/proc/sys/vm/overcommit_kbytes:0
+/proc/sys/vm/overcommit_memory:0
+/proc/sys/vm/overcommit_ratio:50
+/proc/sys/vm/page-cluster:3
+/proc/sys/vm/panic_on_oom:0
+/proc/sys/vm/percpu_pagelist_fraction:0
+/proc/sys/vm/stat_interval:1
+/proc/sys/vm/swappiness:30
+/proc/sys/vm/user_reserve_kbytes:131072
+/proc/sys/vm/vfs_cache_pressure:100
+/proc/sys/vm/zone_reclaim_mode:0
+
+
+SECTION_SWAP
+swap_partition: /dev/dm-1
+size_gb: 3
+
+CRTE_SNAPSHOT_END
+
+CRTE_PERIODIC_START 1 1612644556435
+
+SECTION_MPSTAT
+total_core: 2
+
+CPU     %user   %kernel %wait   %idle   
+all   19.613007 2.954327 0.074217 77.358444
+0     20.595697 2.861465 0.069032 76.473808
+1     18.629829 3.047237 0.079406 78.243523
+
+SECTION_PID_STATUS
+name: common_shell_ex
+state: 1
+vmsize: 1861776
+vmrss: 310548
+vmdata: 1363812
+vmstk: 216
+vmexe: 251088
+vmlib: 119572
+threads: 1
+
+SECTION_PROCESS_CPU_UTIL
+pid: 4724
+cpu_total_time: 4840798
+cpu_used_time: 1515
+cpu_p: 
+
+SECTION_SYSTEM_CPU_UTIL
+sys_cpu_p: 
+
+SECTION_MEMINFO
+memtotal: 16266792
+memfree: 13628460
+cached: 823668
+swapcached: 0
+active: 1892564
+swaptotal: 4194300
+swapfree: 4194300
+
+SECTION_SMAPS
+shared_kb: 49880
+private_kb: 260676
+
+SECTION_DF
+Filesystem  Size  Used Avail Use%
+filesystem        34G  31G  3G    91
+
+Filesystem    Inodes   IUsed   IFree   IUse%
+filesystem          7238176  600149 6638027   4294966290
+
+SECTION_CWD
+Filesystem  Size  Used Avail Use%
+filesystem        34G  31G  3G    91
+
+Filesystem    Inodes   IUsed   IFree   IUse%
+filesystem          7238176  600149 6638027   4294966290
+
+SECTION_SWAP_RATE
+blk_read: 4920
+blk_wrtn: 0
+swap_in_rate: 
+swap_out_rate: 
+swap_in_rate: 
+swap_out_rate: 
+
+SECTION_FD_SIZE
+files: 15
+total_size: 1663070
+
+SECTION_NET_INTERFACE
+total_eth_avbl: 1
+
+name net_rx_err net_rx_drp net_tx_err net_tx_drp 
+  eth0:         0        14        0        0
+
+SECTION_NFSSTAT
+readlink: 0
+write: 0
+getattr: 70
+retrans: 0
+raw_data: 
+net 0 0 0 0
+rpc 76015 0 76015
+proc3 22 0 53541 0 2149 15698 25 4196 0 0 0 0 0 0 0 0 0 0 402 0 2 1 0
+
+
+SECTION_THREAD_CPU_UTIL
+4724 : 4724 (common_shell_ex) R 3895 4724 3895 34820 4724 4202496 253497 51538 32 0 1013 264 201 39 20 0 1 0 2428422 1906458624 77637 18446744073709551615 4194304 261306140 140725490654032 140725490470472 140057935804128 0 1024 2101248 1268477695 0 0 0 17 1 0 0 49 0 0 263406528 276650648 1469722624 140725490655497 140725490655629 140725490655629 140725490659249 0
+
+CRTE_PERIODIC_END 1 1612644556435

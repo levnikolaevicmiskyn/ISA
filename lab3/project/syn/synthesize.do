@@ -1,9 +1,9 @@
-set VERSION 2
+set VERSION 1
 
 remove_design -designs
 
 # Analyze source code
-analyze -f vhdl -lib WORK ../src/globals.vhd
+analyze -f vhdl -lib WORK ../src/globals_$VERSION.vhd
 analyze -f vhdl -lib WORK ../src/IF/IF_behavioral.vhd
 
 analyze -f vhdl -lib WORK ../src/ID/HDU_pkg.vhd
@@ -12,7 +12,7 @@ analyze -f vhdl -lib WORK ../src/ID/regFile.vhd
 analyze -f vhdl -lib WORK ../src/ID/instDecoder.vhd
 analyze -f vhdl -lib WORK ../src/ID/IDStage.vhd
 
-analyze -f vhdl -lib WORK ../src/ALU/ALUpkg.vhd
+analyze -f vhdl -lib WORK ../src/ALU/ALUpkg_$VERSION.vhd
 analyze -f vhdl -lib WORK ../src/ALU/arithmetic/comparatorExtension.vhd
 analyze -f vhdl -lib WORK ../src/ALU/arithmetic/GPCombiner.vhd
 analyze -f vhdl -lib WORK ../src/ALU/arithmetic/GPGenerator.vhd
@@ -59,8 +59,9 @@ check_design > reports/design/check_design_$VERSION.txt
 ungroup -all -flatten
 
 # Compile
-compile
-optimize_registers -clock clk
+set_optimize_registers
+compile_ultra -retime
+#optimize_registers -clock clk
 
 
 report_resources > reports/resources/report_resources_$VERSION.txt
@@ -68,10 +69,10 @@ report_area > reports/area/report_area_$VERSION.txt
 report_timing > reports/timing/report_timing_$VERSION.txt
 
 # Netlist and constraint file export
-change_names -hierarchy -rules verilog
+#change_names -hierarchy -rules verilog
 # sdf file containing the delay of the netlist
-write_sdf ../netlist/riscvProcessor.sdf
+#write_sdf ../netlist/riscvProcessor.sdf
 # Save the netlist in Verilog
-write -f verilog -hierarchy -output ../netlist/riscvProcessor.v
+#write -f verilog -hierarchy -output ../netlist/riscvProcessor.v
 # sdc file containts constraints to the input and output ports in a standard format
-write_sdc ../netlist/riscvProcessor.sdc
+#write_sdc ../netlist/riscvProcessor.sdc

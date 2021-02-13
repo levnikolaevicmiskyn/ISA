@@ -1,0 +1,86 @@
+Warning: There are infeasible paths detected in your design that were ignored during optimization. Please run 'report_timing -attributes' and/or 'create_qor_snapshot/query_qor_snapshot -infeasible_paths' to identify these paths.  (OPT-1721)
+Information: Updating design information... (UID-85)
+Warning: Design 'riscvProcessor' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+ 
+****************************************
+Report : qor
+Design : riscvProcessor
+Version: O-2018.06-SP4
+Date   : Thu Jan 21 20:30:40 2021
+****************************************
+
+
+  Timing Path Group 'clk'
+  -----------------------------------
+  Levels of Logic:              21.00
+  Critical Path Length:          1.07
+  Critical Path Slack:          -1.18
+  Critical Path Clk Period:      0.00
+  Total Negative Slack:      -1298.91
+  No. of Violating Paths:     1779.00
+  Worst Hold Violation:         -0.01
+  Total Hold Violation:         -0.01
+  No. of Hold Violations:        1.00
+  -----------------------------------
+
+
+  Cell Count
+  -----------------------------------
+  Hierarchical Cell Count:          2
+  Hierarchical Port Count:        158
+  Leaf Cell Count:               7629
+  Buf/Inv Cell Count:             918
+  Buf Cell Count:                 161
+  Inv Cell Count:                 757
+  CT Buf/Inv Cell Count:            0
+  Combinational Cell Count:      5933
+  Sequential Cell Count:         1696
+  Macro Count:                      0
+  -----------------------------------
+
+
+  Area
+  -----------------------------------
+  Combinational Area:     7519.554033
+  Noncombinational Area:  8217.537848
+  Buf/Inv Area:            549.290001
+  Total Buffer Area:           135.66
+  Total Inverter Area:         413.63
+  Macro/Black Box Area:      0.000000
+  Net Area:                  0.000000
+  -----------------------------------
+  Cell Area:             15737.091881
+  Design Area:           15737.091881
+
+
+  Design Rules
+  -----------------------------------
+  Total Number of Nets:          7923
+  Nets With Violations:             1
+  Max Trans Violations:             0
+  Max Cap Violations:               1
+  -----------------------------------
+
+
+  Hostname: localhost.localdomain
+
+  Compile CPU Statistics
+  -----------------------------------------
+  Resource Sharing:                    1.29
+  Logic Optimization:                  0.86
+  Mapping Optimization:               40.03
+  -----------------------------------------
+  Overall Compile Time:               92.44
+  Overall Compile Wall Clock Time:   937.76
+
+  --------------------------------------------------------------------
+
+  Design  WNS: 1.18  TNS: 1298.91  Number of Violating Paths: 1779
+
+
+  Design (Hold)  WNS: 0.01  TNS: 0.01  Number of Violating Paths: 1
+
+  --------------------------------------------------------------------
+
+
+1
