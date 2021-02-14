@@ -15,7 +15,7 @@ fi
 # Clean directory
 rm -rf work/
 # Remove old memory dump
-rm machinedata-result.txt
+rm machinedata-dump.txt
 # Launch script
 echo "Initializing Modelsim..."
 source /software/scripts/init_msim6.2g

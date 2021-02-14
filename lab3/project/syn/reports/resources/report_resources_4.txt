@@ -1,0 +1,52 @@
+ 
+****************************************
+Report : resources
+Design : riscvProcessor
+Version: O-2018.06-SP4
+Date   : Sun Feb 14 20:47:09 2021
+****************************************
+
+
+Resource Report for this hierarchy in file ../src/riscvProcessor.vhd
+=============================================================================
+| Cell           | Module         | Parameters | Contained Operations       |
+=============================================================================
+| add_x_11       | DW01_add       | width=32   | compIDStage/add_119 (IDStage.vhd:119) |
+| eq_x_14        | DW_cmp         | width=5    | compIDStage/compInstDecoder/eq_21_2_C45_rn (HDU_pkg.vhd:21) |
+| eq_x_50        | DW_cmp         | width=5    | compIDStage/compRegFile/eq_43 (regFile.vhd:43) |
+| eq_x_53        | DW_cmp         | width=5    | compIDStage/compRegFile/eq_54 (regFile.vhd:54) |
+| add_x_56       | DW01_inc       | width=2    | compIDStage/compBPU/add_77 (BPU.vhd:77) |
+| sub_x_57       | DW01_dec       | width=2    | compIDStage/compBPU/sub_81 (BPU.vhd:81) |
+| add_x_93       | DW01_inc       | width=30   | compIFStage/add_27 (IF_behavioral.vhd:27) |
+| sra_99         | DW_sra         | A_width=32 | compEXStage/comp_ALU/comp_datapath/comp_barrel_shifter/sra_21 (barrelShifter_behavior.vhd:21) |
+| SH_width=5 |  |
+| eq_x_101       | DW_cmp         | width=5    | compFWDUnit/eq_26 (fwdUnit.vhd:26) |
+| eq_x_102       | DW_cmp         | width=5    | compFWDUnit/eq_31 (fwdUnit.vhd:31) |
+| eq_x_104       | DW_cmp         | width=5    | compFWDUnit/eq_44 (fwdUnit.vhd:44) |
+| eq_x_105       | DW_cmp         | width=5    | compFWDUnit/eq_49 (fwdUnit.vhd:49) |
+| eq_x_118       | DW_cmp         | width=5    | compIDStage/compInstDecoder/eq_12_C44_rn (HDU_pkg.vhd:12) |
+   |            | compIDStage/compInstDecoder/eq_21_C45_rn (HDU_pkg.vhd:21) |
+=============================================================================
+
+
+Implementation Report
+===============================================================================
+|                    |                  | Current            | Set            |
+| Cell               | Module           | Implementation     | Implementation |
+===============================================================================
+| add_x_11           | DW01_add         | pparch (area,speed)                 |
+| eq_x_14            | DW_cmp           | apparch (area)     |                |
+| eq_x_50            | DW_cmp           | apparch (area)     |                |
+| eq_x_53            | DW_cmp           | apparch (area)     |                |
+| add_x_56           | DW01_inc         | apparch (area)     |                |
+| sub_x_57           | DW01_dec         | apparch (area)     |                |
+| add_x_93           | DW01_inc         | pparch (area,speed)                 |
+| sra_99             | DW_sra           | astr (area)        |                |
+| eq_x_101           | DW_cmp           | apparch (area)     |                |
+| eq_x_102           | DW_cmp           | apparch (area)     |                |
+| eq_x_104           | DW_cmp           | apparch (area)     |                |
+| eq_x_105           | DW_cmp           | apparch (area)     |                |
+| eq_x_118           | DW_cmp           | apparch (area)     |                |
+===============================================================================
+
+1
