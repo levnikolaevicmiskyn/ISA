@@ -1,1 +1,14 @@
 \chapter{Synthesis}
+\section{First version}
+\begin{table}[h]
+\begin{tabular}{|l|l|l|}
+	\hline
+	& \texttt{compile} & \texttt{compile\_ultra}\\\hline
+	Area & 15.5 & 14.8 \\\hline
+	$T_{ck}$& 1.14 & 1.10\\\hline
+\end{tabular}
+\caption{Comparison between standard and ultra compile}
+\label{tab:comp}
+\end{table}
+
+The basic design was synthesized with the retiming option enabled using both the standard compile followed by \texttt{optimize\_registers} and \texttt{compile\_ultra}. \autoref{tab:comp} shows that in this case the second option should be preferred. The compiler issues a warning when it applies retiming to registers that have both a preset and a reset signal, a situation that occurs with pipeline registers since they must be initialized at startup and reset synchronously during the execution as well (flush). Therefore, a simulation of the synthesized netlist is mandatory to verify that the retiming has not altered the functionality of the processor. This check was done on the testbench program provided (minimum search) with successful results.
