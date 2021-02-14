@@ -1,6 +1,6 @@
 vlib work
 
-vcom -93 -work work ../src/globals.vhd
+vcom -93 -work work ../src/globals_1.vhd
 vcom -93 -work work ../src/IF/IF_behavioral.vhd
 
 vcom -93 -work work ../src/ID/HDU_pkg.vhd

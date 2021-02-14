@@ -22,4 +22,5 @@ echo "Done"
 echo "Starting simulation"
 vsim -c -do "source $script">log.txt
 echo "Done"
+diff machinedata.txt machinedata-dump.txt -i -b -Z -s
 exit 0
