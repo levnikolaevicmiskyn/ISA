@@ -134,7 +134,7 @@ begin
 --      MEMSigs_EX_in.alt_ta    <= MEMSigs_ID_out.alt_ta;
 
       WBSigs_EX_in.reg_write <= '0';
---      WBSigs_EX_in.rd        <= (others => '0');
+      WBSigs_EX_in.rd        <= (others => '0');
     elsif rising_edge(clk) then
       if ID_load_nop = '1' then
 --        EXSigs_EX_in.op        <= ALU_op_add;
