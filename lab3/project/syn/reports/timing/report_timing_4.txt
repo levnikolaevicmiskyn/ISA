@@ -1,0 +1,70 @@
+Warning: There are infeasible paths detected in your design that were ignored during optimization. Please run 'report_timing -attributes' and/or 'create_qor_snapshot/query_qor_snapshot -infeasible_paths' to identify these paths.  (OPT-1721)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : riscvProcessor
+Version: O-2018.06-SP4
+Date   : Sun Feb 14 20:47:12 2021
+****************************************
+
+ # A fanout number of 1000 was used for high fanout net computations.
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: clk_r_REG1002_S9
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: clk_r_REG103_S4
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  riscvProcessor     5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.00       0.00
+  clk_r_REG1002_S9/CK (DFF_X1)             0.00 #     0.00 r
+  clk_r_REG1002_S9/Q (DFF_X1)              0.08       0.08 f
+  U3520/ZN (AND2_X1)                       0.04       0.11 f
+  U3518/ZN (NAND2_X1)                      0.03       0.15 r
+  U3766/ZN (INV_X1)                        0.03       0.17 f
+  U3769/ZN (AND2_X2)                       0.04       0.22 f
+  U3785/Z (BUF_X2)                         0.05       0.27 f
+  U3863/ZN (NAND2_X1)                      0.04       0.30 r
+  U3866/ZN (NAND3_X1)                      0.04       0.35 f
+  U3867/ZN (OR2_X1)                        0.06       0.40 f
+  U3294/ZN (OAI211_X1)                     0.05       0.45 r
+  U3938/ZN (XNOR2_X1)                      0.07       0.53 r
+  U3941/ZN (NAND4_X1)                      0.07       0.59 f
+  U3359/ZN (OAI21_X1)                      0.06       0.65 r
+  U3983/ZN (AND2_X1)                       0.05       0.70 r
+  U4434/ZN (NOR2_X1)                       0.02       0.72 f
+  U3507/ZN (OAI211_X1)                     0.05       0.77 r
+  U3498/ZN (NAND2_X1)                      0.05       0.82 f
+  U4529/ZN (OAI21_X1)                      0.06       0.88 r
+  U6766/ZN (XNOR2_X1)                      0.04       0.92 f
+  U6767/Z (MUX2_X1)                        0.07       0.98 f
+  clk_r_REG103_S4/D (DFFR_X1)              0.01       0.99 f
+  data arrival time                                   0.99
+
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.00       0.00
+  clock uncertainty                       -0.07      -0.07
+  clk_r_REG103_S4/CK (DFFR_X1)             0.00      -0.07 r
+  library setup time                      -0.04      -0.11
+  data required time                                 -0.11
+  -----------------------------------------------------------
+  data required time                                 -0.11
+  data arrival time                                  -0.99
+  -----------------------------------------------------------
+  slack (VIOLATED)                                   -1.10
+
+
+1

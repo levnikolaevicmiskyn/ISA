@@ -1,0 +1,32 @@
+ 
+****************************************
+Report : area
+Design : riscvProcessor
+Version: O-2018.06-SP4
+Date   : Sun Feb 14 17:56:20 2021
+****************************************
+
+Information: Updating design information... (UID-85)
+Warning: Design 'riscvProcessor' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+Library(s) Used:
+
+    NangateOpenCellLibrary (File: /software/dk/nangate45/synopsys/NangateOpenCellLibrary_typical_ecsm_nowlm.db)
+
+Number of ports:                          321
+Number of nets:                          7880
+Number of cells:                         7359
+Number of combinational cells:           5638
+Number of sequential cells:              1717
+Number of macros/black boxes:               0
+Number of buf/inv:                        786
+Number of references:                      46
+
+Combinational area:               7428.316038
+Buf/Inv area:                      478.534000
+Noncombinational area:            8045.701811
+Macro/Black Box area:                0.000000
+Net Interconnect area:      undefined  (Wire load has zero net area)
+
+Total cell area:                 15474.017849
+Total area:                 undefined
+1
