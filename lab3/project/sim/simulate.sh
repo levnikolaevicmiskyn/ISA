@@ -14,7 +14,8 @@ then
 fi
 # Clean directory
 rm -rf work/
-
+# Remove old memory dump
+rm machinedata-result.txt
 # Launch script
 echo "Initializing Modelsim..."
 source /software/scripts/init_msim6.2g
@@ -22,4 +23,5 @@ echo "Done"
 echo "Starting simulation"
 vsim -c -do "source $script">log.txt
 echo "Done"
+diff machinedata-result.txt machinedata-dump.txt -i -b -Z -s
 exit 0
