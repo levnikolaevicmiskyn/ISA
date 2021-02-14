@@ -5,17 +5,17 @@ package ALUpkg is
     -- Input selections
     subtype t_InputSelector is std_logic_vector(2 downto 0);
     constant SEL_ZERO:      t_InputSelector := "000";
-    constant SEL_OPERAND:   t_InputSelector := "001";
+    constant SEL_OPERAND:   t_InputSelector := "100";
     constant SEL_CONST:     t_InputSelector := "010";
     constant SEL_SPECIAL:   t_InputSelector := "011";
-    constant SEL_FWD_MEM:   t_InputSelector := "100";
+    constant SEL_FWD_MEM:   t_InputSelector := "110";
     constant SEL_FWD_WB:    t_InputSelector := "101";
     -- Internal perations
     subtype t_InternalOperation is std_logic_vector(2 downto 0);
-    constant OP_SUM:    t_InternalOperation := "000";
-    constant OP_SHIFT:  t_InternalOperation := "001";
-    constant OP_AND:    t_InternalOperation := "010";
-    constant OP_XOR:    t_InternalOperation := "011";
+    constant OP_SUM:    t_InternalOperation := "001";
+    constant OP_SHIFT:  t_InternalOperation := "000";
+    constant OP_AND:    t_InternalOperation := "011";
+    constant OP_XOR:    t_InternalOperation := "010";
     constant OP_COMP:   t_InternalOperation := "100";
     -- Control
     subtype t_Comparison is std_logic_vector(2 downto 0);

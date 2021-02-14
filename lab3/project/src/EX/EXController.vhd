@@ -27,8 +27,9 @@ begin
             when alu_sel_pc_imm  => tmp_sel := ALUpkg.SEL_SPECIAL;
             when alu_sel_pc_4    => tmp_sel := ALUpkg.SEL_SPECIAL;
             when alu_sel_0_imm   => tmp_sel := ALUpkg.SEL_ZERO;
-            when alu_sel_0_0     => tmp_sel := ALUpkg.SEL_ZERO;
-            when others          => tmp_sel := ALUpkg.SEL_ZERO;
+--**            when alu_sel_0_0     => tmp_sel := ALUpkg.SEL_ZERO;
+--**            when others          => tmp_sel := ALUpkg.SEL_ZERO;
+			when others          => tmp_sel := "---";
         end case;
         -- If a register was selected, consult FWD unit:
         if tmp_sel = ALUpkg.SEL_OPERAND then
@@ -36,7 +37,8 @@ begin
                 when "00"   => tmp_sel := ALUpkg.SEL_OPERAND;
                 when "10"   => tmp_sel := ALUpkg.SEL_FWD_MEM;
                 when "01"   => tmp_sel := ALUpkg.SEL_FWD_WB;
-                when others => tmp_sel := ALUpkg.SEL_ZERO;
+--**                when others => tmp_sel := ALUpkg.SEL_ZERO;
+				when others          => tmp_sel := "---";
             end case;
         end if;
         -- Assign to selector
@@ -52,8 +54,9 @@ begin
             when alu_sel_pc_imm  => tmp_sel := ALUpkg.SEL_SPECIAL;
             when alu_sel_pc_4    => tmp_sel := ALUpkg.SEL_CONST;
             when alu_sel_0_imm   => tmp_sel := ALUpkg.SEL_SPECIAL;
-            when alu_sel_0_0     => tmp_sel := ALUpkg.SEL_ZERO;
-            when others          => tmp_sel := ALUpkg.SEL_ZERO;
+--**            when alu_sel_0_0     => tmp_sel := ALUpkg.SEL_ZERO;
+--**            when others          => tmp_sel := ALUpkg.SEL_ZERO;
+			when others          => tmp_sel := "---";
         end case;
         -- If a register was selected, consult FWD unit:
         if tmp_sel = ALUpkg.SEL_OPERAND then
@@ -61,7 +64,8 @@ begin
                 when "00"   => tmp_sel := ALUpkg.SEL_OPERAND;
                 when "10"   => tmp_sel := ALUpkg.SEL_FWD_MEM;
                 when "01"   => tmp_sel := ALUpkg.SEL_FWD_WB;
-                when others => tmp_sel := ALUpkg.SEL_ZERO;
+--**                when others => tmp_sel := ALUpkg.SEL_ZERO;
+				when others          => tmp_sel := "---";
             end case;
         end if;
         -- Assign to selector
