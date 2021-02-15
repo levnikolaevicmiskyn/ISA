@@ -3,15 +3,22 @@ The Execution Unit is the unit responsible for the computations and the general 
 The core and most significant component is the ALU, which the Execution Unit simply surrounds with multiplexers
 and their controller to select the operands.
 
+\begin{figure}[htbp]
+    \center
+	\includegraphics[width=0.8\textwidth]{./2-implementation/images/ExStage.png}
+	\caption{Block view of the execution stage}
+	\label{fig:exstage}
+\end{figure}
+
 \subsection{ALU}
-The ALU is also internally organized with a datapath and a controller. It is important to highlight that to not
+The ALU is also internally organized with a datapath and its own controller. It is important to highlight that to not
 interfere with the processor's pipeline, this controller (as well as the Execution Stage's) is fully combinational and
 mostly acts as an input translator.
 
 \subsubsection{Datapath}
 The datapath instantiates the arithmetic and logic operators, generates the status flags and outputs the final result.
 All the operators are instantiated in parallel and at every cycle, they all run their own operation and the result
-is selected through a multiplexer. If power consuption is to be considered, \textbf{guarded evaluation} can be a simple
+is selected through a multiplexer. If power consuption is to be considered, guarded evaluation can be a simple
 solution to this problem.
 
 The available operators are:
@@ -28,10 +35,16 @@ while the barrel shifter is described through the \texttt{numeric\_std} library'
 likely instantiated as a cascade of multiplexers. The components worth discussing are the adder and the comparator.
 
 \paragraph{Adder}
-\todo{Insert top level adder schematic}
-The adder is designed as a \textbf{Ladner-Fischer} Carry Look Ahead. Its structure is organized as a cascade of the following
+The adder is designed as a \textbf{Ladner-Fischer} Carry Look Ahead.
+\begin{figure}[htbp]
+    \center
+	\includegraphics[width=0.5\textwidth]{./2-implementation/images/AdderCLADiagram.png}
+	\caption{Carry Look Ahead adder organization}
+	\label{fig:adder-diagram}
+\end{figure}
+Its structure is organized as a cascade of the following
 blocks:
- \begin{enumerate}
+\begin{enumerate}
     \item Sign converter \\
     To accomodate for subtractions, operator \signal{b} goes through a \texttt{xor} gate controlled by the
     \texttt{sub} signal which, when asserted, also sets the \signal{cin} to 1.
@@ -47,7 +60,12 @@ blocks:
     Starting from $g_i$ and $p_i$, compute the block generate $G_{0, i}$ and propagate $P_{0, i}$ as a parallel prefix
     problem. This is where the Ladner-Fischer structure is instantiated.
 
-    \todo{Insert Ladner-Fischer schematic}
+    \begin{figure}[htbp]
+        \center
+    	\includegraphics[width=0.5\textwidth]{./2-implementation/images/LadnerFischer.png}
+    	\caption{Ladner-Fischer GPCombiner. Each circle represents an instance of the component GPCombiner.}
+    	\label{fig:LadnerFischer}
+    \end{figure}
     The main component needed to compute the block generate and propagate is called \texttt{GPCombiner} which, given
     $P_{i, j}$ and $P_{j, k}$, combines them into $P_{i, k}$ (and the same goes for $G$). The inputs $g_i$ and $p_i$
     (lowercase, meaning they are not the block generate and propagate but the bitwise ones) are assumed as $G_{i, i}$
@@ -56,20 +74,72 @@ blocks:
         G_{i, k} &= G_{j, k}\ \texttt{or}\  \left( G_{i, j}\ \texttt{and}\ P_{j, k} \right) \\
         P_{i, k} &= P_{i, j}\ \texttt{and}\ P_{j, k}
     \end{align*}
-    The combiners are connected according to the schematic \todo{Reference to the schematic} in the top level module,
+    The combiners are connected according to the schematic in \autoref{fig:LadnerFischer} in the top level module,
     called \texttt{blockGPGenerator}. To keep the generality of the component, the block is described with generic
-    and its structure is instantiated \textbf{recursively}. More information on the description can be found in
+    and its structure is instantiated \textbf{recursively}. More information on the VHDL description can be found in
     \autoref{appendix:recursive-adder-description}.
 
+    This is the slowest stage because it is the only one where chained combinational paths working on bits of different
+    indices are needed. The choice of the Ladner-Fischer architecture makes so that the introduced delay is
+    $\log_2{N}$.
     \item Carry Generator \\
+    Given the results from the previous stage, it is possible to compute the value of all $c_i$ in parallel, since
+    \begin{align*}
+        c_i &= G_{0, i}\ \texttt{or}\ (c_0\ \texttt{and}\ P_{0, i})
+    \end{align*}
 
     \item Full adders \\
+    The final stage is a barrier of full adders. At this point, every adder has all of its inputs ready: $a_i$, $b_i$,
+    $c_i$. For this reason there is no need for one adder to wait for the result of another adder, but they can all
+    operate in parallel, so the introduced delay is only $1\ ^t\text{FA}$.
 
     \item Flag generators \\
- \end{enumerate}
+    The adder also generates two overflow flags to be used to control the flow of operations: one for signed sums, one
+    for unsigned ones. In particular,
+    \begin{align*}
+        \texttt{cout} = C &= c_{32} \\
+        \texttt{ovf} = V &= c_{32} \texttt{ xor } c_{31}
+    \end{align*}
+\end{enumerate}
+The ALU also internally computes all of the status flags: C and V are obtained directly from the adder, Z and N are
+trivial to obtain by checking the sum result.
 
-\subsubsection{Controller}
-dsahijhjdlsa
+\paragraph{Comparator}
+A comparator is usually implemented as a subtractor that then performs some checks on its result, given that the generic
+comparison operation $?$ between $A$ and $B$ can be expressed as
+\begin{align}
+    A\ ?\ B &\rightarrow A - B\ ?\ 0
+\end{align}
+Since an adder/subtractor is already available and all of the relevant observations on the result were performed for
+the status flags, the comparator is implemented as an extension of the adder that only checks the status flags and
+outputs a result based on the requested comparison.
+
+It internally computes all of the possible comparisons and a multiplexer selects the result to output. In particular,
+\begin{align*}
+    lt &= N \texttt{ xor } \texttt{overflow} \\
+    le &= lt \texttt{ or } Z \\
+    eq &= Z \\
+    ge &= \texttt{not } lt \\
+    gt &= \texttt{not } le
+\end{align*}
+The \texttt{overflow} signal is either C or V, depending on whether the comparison should consider its operands as
+respectively unsigned or signed.
+
+It is clear to see how it is the controller's job to correctly deliver all of the necessary commands when a comparison
+is requested, such as switching the adder to subtracting mode, deciding whether the operands are signed or not and
+selecting the otuput.
+
+\subsubsection{ALU Controller}
+The controller for the ALU receives an ALU opcode to choose what operation to perform and then internally manages all
+the necessary signals. It is described with a simple process and a switch on the opcode that updates the control
+signals, as in any classical control unit output process.
+
+For example, when the opcode is \texttt{alu\_op\_lt}, the control unit sets \texttt{adder\_sub} to 1 (to perform a
+subtraction instead of an addition), switches the ALU multiplexer to select the comparison result, specifies to the
+comparator that the data is signed and switches its multiplexer to choose the \texttt{lt} result.
+
+All of the control signals are packed inside of a VHDL record to simplify possible future changes without the need of
+modifying any entity in the circuit.
 
 \subsection{Input Selection}
 sdasadsdasa
