@@ -1,0 +1,85 @@
+Information: Updating design information... (UID-85)
+Warning: Design 'riscvProcessor' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+ 
+****************************************
+Report : qor
+Design : riscvProcessor
+Version: O-2018.06-SP4
+Date   : Mon Feb 15 16:53:47 2021
+****************************************
+
+
+  Timing Path Group 'clk'
+  -----------------------------------
+  Levels of Logic:              20.00
+  Critical Path Length:          1.05
+  Critical Path Slack:           0.00
+  Critical Path Clk Period:      1.16
+  Total Negative Slack:          0.00
+  No. of Violating Paths:        0.00
+  Worst Hold Violation:         -0.01
+  Total Hold Violation:         -0.01
+  No. of Hold Violations:        2.00
+  -----------------------------------
+
+
+  Cell Count
+  -----------------------------------
+  Hierarchical Cell Count:          0
+  Hierarchical Port Count:          0
+  Leaf Cell Count:               7612
+  Buf/Inv Cell Count:             508
+  Buf Cell Count:                 129
+  Inv Cell Count:                 379
+  CT Buf/Inv Cell Count:            0
+  Combinational Cell Count:      6067
+  Sequential Cell Count:         1545
+  Macro Count:                      0
+  -----------------------------------
+
+
+  Area
+  -----------------------------------
+  Combinational Area:     7438.690020
+  Noncombinational Area:  7205.939812
+  Buf/Inv Area:            322.924001
+  Total Buffer Area:           117.31
+  Total Inverter Area:         205.62
+  Macro/Black Box Area:      0.000000
+  Net Area:                  0.000000
+  -----------------------------------
+  Cell Area:             14644.629832
+  Design Area:           14644.629832
+
+
+  Design Rules
+  -----------------------------------
+  Total Number of Nets:          7924
+  Nets With Violations:             0
+  Max Trans Violations:             0
+  Max Cap Violations:               0
+  -----------------------------------
+
+
+  Hostname: localhost.localdomain
+
+  Compile CPU Statistics
+  -----------------------------------------
+  Resource Sharing:                    0.01
+  Logic Optimization:                  0.58
+  Mapping Optimization:                4.53
+  -----------------------------------------
+  Overall Compile Time:               19.71
+  Overall Compile Wall Clock Time:    47.57
+
+  --------------------------------------------------------------------
+
+  Design  WNS: 0.00  TNS: 0.00  Number of Violating Paths: 0
+
+
+  Design (Hold)  WNS: 0.01  TNS: 0.01  Number of Violating Paths: 2
+
+  --------------------------------------------------------------------
+
+
+1

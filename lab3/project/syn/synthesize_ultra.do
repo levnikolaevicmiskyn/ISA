@@ -62,7 +62,11 @@ ungroup -all -flatten
 set_optimize_registers
 compile_ultra -retime
 
+create_clock -name clk -period 1.16 {clk}
 
+compile_ultra -incremental
+
+report_qor > reports/design/report_qor_$VERSION.txt
 report_resources > reports/resources/report_resources_$VERSION.txt
 report_area > reports/area/report_area_$VERSION.txt
 report_timing > reports/timing/report_timing_$VERSION.txt
