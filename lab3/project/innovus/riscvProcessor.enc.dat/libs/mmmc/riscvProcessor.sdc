@@ -1,0 +1,1 @@
+/home/isa12/Desktop/ISA/lab3/project/netlist/riscvProcessor.sdc
