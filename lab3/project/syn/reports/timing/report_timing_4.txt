@@ -1,3 +1,4 @@
+Warning: There are infeasible paths detected in your design that were ignored during optimization. Please run 'report_timing -attributes' and/or 'create_qor_snapshot/query_qor_snapshot -infeasible_paths' to identify these paths.  (OPT-1721)
  
 ****************************************
 Report : timing
@@ -6,7 +7,7 @@ Report : timing
         -max_paths 1
 Design : riscvProcessor
 Version: O-2018.06-SP4
-Date   : Mon Feb 15 16:53:48 2021
+Date   : Wed Feb 17 17:35:59 2021
 ****************************************
 
  # A fanout number of 1000 was used for high fanout net computations.
@@ -14,9 +15,9 @@ Date   : Mon Feb 15 16:53:48 2021
 Operating Conditions: typical   Library: NangateOpenCellLibrary
 Wire Load Model Mode: top
 
-  Startpoint: clk_r_REG1002_S9
+  Startpoint: WBSigs_MEM_in_reg[RD][2]
               (rising edge-triggered flip-flop clocked by clk)
-  Endpoint: clk_r_REG103_S4
+  Endpoint: EXData_MEM_in_reg[Z]
             (rising edge-triggered flip-flop clocked by clk)
   Path Group: clk
   Path Type: max
@@ -25,46 +26,51 @@ Wire Load Model Mode: top
   ------------------------------------------------
   riscvProcessor     5K_hvratio_1_1        NangateOpenCellLibrary
 
-  Point                                    Incr       Path
-  -----------------------------------------------------------
-  clock clk (rise edge)                    0.00       0.00
-  clock network delay (ideal)              0.00       0.00
-  clk_r_REG1002_S9/CK (DFF_X1)             0.00 #     0.00 r
-  clk_r_REG1002_S9/Q (DFF_X1)              0.08       0.08 f
-  U3533/ZN (AND2_X1)                       0.04       0.12 f
-  U3531/ZN (NAND2_X1)                      0.04       0.16 r
-  U3778/ZN (INV_X1)                        0.03       0.18 f
-  U3781/ZN (AND2_X2)                       0.04       0.22 f
-  U3782/ZN (INV_X1)                        0.06       0.28 r
-  U3321/Z (BUF_X1)                         0.09       0.37 r
-  U4486/ZN (OAI211_X1)                     0.05       0.42 f
-  U4487/ZN (NAND2_X1)                      0.04       0.45 r
-  U3389/ZN (AOI21_X1)                      0.03       0.48 f
-  U3296/ZN (AND2_X1)                       0.04       0.53 f
-  U3390/ZN (XNOR2_X1)                      0.06       0.59 f
-  U3508/ZN (NAND2_X1)                      0.05       0.65 r
-  U4541/ZN (NOR2_X1)                       0.03       0.67 f
-  U3560/ZN (NOR2_X1)                       0.05       0.73 r
-  U3385/Z (BUF_X2)                         0.05       0.78 r
-  U4550/ZN (AOI21_X1)                      0.04       0.82 f
-  U4551/ZN (AOI21_X1)                      0.05       0.87 r
-  U4552/ZN (OAI21_X1)                      0.04       0.91 f
-  U6780/ZN (XNOR2_X1)                      0.06       0.97 f
-  U6781/Z (MUX2_X1)                        0.07       1.04 f
-  clk_r_REG103_S4/D (DFFR_X1)              0.01       1.05 f
-  data arrival time                                   1.05
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  WBSigs_MEM_in_reg[RD][2]/CK (DFF_X1)                    0.00 #     0.00 r
+  WBSigs_MEM_in_reg[RD][2]/Q (DFF_X1)                     0.09       0.09 r
+  U3647/ZN (XNOR2_X1)                                     0.07       0.16 r
+  U3671/ZN (NAND2_X1)                                     0.03       0.20 f
+  U3675/ZN (OAI21_X1)                                     0.05       0.25 r
+  U3676/ZN (INV_X1)                                       0.02       0.27 f
+  U3677/ZN (NAND2_X1)                                     0.03       0.30 r
+  U3678/ZN (NAND2_X1)                                     0.03       0.33 f
+  U4549/ZN (AND2_X1)                                      0.04       0.37 f
+  U6254/ZN (NAND2_X1)                                     0.03       0.40 r
+  U3420/ZN (AND2_X2)                                      0.05       0.45 r
+  U3383/Z (BUF_X4)                                        0.06       0.51 r
+  U4028/ZN (XNOR2_X1)                                     0.07       0.58 r
+  U4029/ZN (NAND2_X1)                                     0.03       0.61 f
+  U4030/ZN (NAND2_X1)                                     0.04       0.65 r
+  U4033/ZN (INV_X1)                                       0.03       0.68 f
+  U4034/ZN (NAND2_X1)                                     0.03       0.70 r
+  U4038/ZN (NAND2_X1)                                     0.03       0.73 f
+  U6197/ZN (NAND2_X1)                                     0.04       0.78 r
+  U3343/ZN (NAND3_X1)                                     0.04       0.82 f
+  U3029/ZN (OR2_X2)                                       0.06       0.87 f
+  U6310/ZN (AOI21_X1)                                     0.04       0.92 r
+  U6318/ZN (XNOR2_X1)                                     0.06       0.98 r
+  U3525/ZN (NAND3_X1)                                     0.04       1.02 f
+  U3524/ZN (NOR2_X1)                                      0.04       1.06 r
+  U3535/ZN (NAND4_X1)                                     0.04       1.09 f
+  U3544/ZN (OAI21_X1)                                     0.04       1.13 r
+  EXData_MEM_in_reg[Z]/D (DFF_X2)                         0.01       1.14 r
+  data arrival time                                                  1.14
 
-  clock clk (rise edge)                    1.16       1.16
-  clock network delay (ideal)              0.00       1.16
-  clock uncertainty                       -0.07       1.09
-  clk_r_REG103_S4/CK (DFFR_X1)             0.00       1.09 r
-  library setup time                      -0.04       1.05
-  data required time                                  1.05
-  -----------------------------------------------------------
-  data required time                                  1.05
-  data arrival time                                  -1.05
-  -----------------------------------------------------------
-  slack (MET)                                         0.00
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  clock uncertainty                                      -0.07      -0.07
+  EXData_MEM_in_reg[Z]/CK (DFF_X2)                        0.00      -0.07 r
+  library setup time                                     -0.03      -0.10
+  data required time                                                -0.10
+  --------------------------------------------------------------------------
+  data required time                                                -0.10
+  data arrival time                                                 -1.14
+  --------------------------------------------------------------------------
+  slack (VIOLATED)                                                  -1.24
 
 
 1

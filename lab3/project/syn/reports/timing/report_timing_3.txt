@@ -7,7 +7,7 @@ Report : timing
         -max_paths 1
 Design : riscvProcessor
 Version: O-2018.06-SP4
-Date   : Sun Feb 14 17:56:23 2021
+Date   : Wed Feb 17 17:29:44 2021
 ****************************************
 
  # A fanout number of 1000 was used for high fanout net computations.
@@ -15,9 +15,9 @@ Date   : Sun Feb 14 17:56:23 2021
 Operating Conditions: typical   Library: NangateOpenCellLibrary
 Wire Load Model Mode: top
 
-  Startpoint: clk_r_REG1577_S10
+  Startpoint: clk_r_REG1630_S17
               (rising edge-triggered flip-flop clocked by clk)
-  Endpoint: clk_r_REG86_S26
+  Endpoint: clk_r_REG16_S11
             (rising edge-triggered flip-flop clocked by clk)
   Path Group: clk
   Path Type: max
@@ -30,42 +30,40 @@ Wire Load Model Mode: top
   -----------------------------------------------------------
   clock clk (rise edge)                    0.00       0.00
   clock network delay (ideal)              0.00       0.00
-  clk_r_REG1577_S10/CK (DFF_X1)            0.00 #     0.00 r
-  clk_r_REG1577_S10/Q (DFF_X1)             0.09       0.09 r
-  U4700/ZN (NAND4_X1)                      0.04       0.13 f
-  U4705/ZN (NOR2_X1)                       0.04       0.17 r
-  U4478/ZN (NAND3_X1)                      0.03       0.20 f
-  U6720/ZN (NAND2_X1)                      0.04       0.24 r
-  U4021/ZN (AND3_X2)                       0.06       0.30 r
-  U6698/ZN (INV_X1)                        0.03       0.33 f
-  U6691/ZN (NAND2_X1)                      0.04       0.36 r
-  U4061/ZN (INV_X1)                        0.05       0.41 f
-  U4708/ZN (AOI22_X1)                      0.06       0.47 r
-  U6663/ZN (NAND2_X1)                      0.05       0.52 f
-  U6935/Z (XOR2_X1)                        0.09       0.60 f
-  U4826/ZN (XNOR2_X1)                      0.07       0.67 f
-  U4646/ZN (OAI21_X1)                      0.05       0.72 r
-  U6941/ZN (INV_X1)                        0.03       0.75 f
-  U4137/ZN (OAI21_X1)                      0.05       0.80 r
-  U7063/ZN (INV_X1)                        0.03       0.82 f
-  U4345/ZN (AND2_X1)                       0.04       0.87 f
-  U4037/ZN (AND2_X1)                       0.04       0.90 f
-  U7197/ZN (AOI222_X1)                     0.06       0.97 r
-  U7199/ZN (OAI211_X1)                     0.05       1.02 f
-  clk_r_REG86_S26/D (DFF_X1)               0.01       1.03 f
-  data arrival time                                   1.03
+  clk_r_REG1630_S17/CK (DFF_X1)            0.00 #     0.00 r
+  clk_r_REG1630_S17/QN (DFF_X1)            0.06       0.06 r
+  U4604/Z (XOR2_X1)                        0.07       0.13 r
+  U4027/ZN (AND3_X1)                       0.06       0.20 r
+  U4270/ZN (OAI21_X1)                      0.03       0.23 f
+  U4317/ZN (NOR2_X1)                       0.06       0.28 r
+  U4619/Z (BUF_X2)                         0.07       0.35 r
+  U7246/ZN (NAND2_X1)                      0.05       0.40 f
+  U4108/ZN (AND4_X1)                       0.05       0.45 f
+  U4107/ZN (XNOR2_X1)                      0.06       0.51 f
+  U6548/ZN (XNOR2_X1)                      0.07       0.58 f
+  U7552/ZN (NAND3_X1)                      0.04       0.62 r
+  U4166/ZN (AND2_X1)                       0.04       0.66 r
+  U4165/ZN (NOR3_X1)                       0.02       0.69 f
+  U7554/ZN (NOR4_X1)                       0.06       0.75 r
+  U4006/ZN (AND2_X2)                       0.06       0.80 r
+  U4002/ZN (OAI211_X2)                     0.06       0.86 f
+  U4181/ZN (OR2_X1)                        0.06       0.92 f
+  U4421/ZN (NAND2_X1)                      0.03       0.95 r
+  U4420/ZN (XNOR2_X1)                      0.06       1.01 r
+  clk_r_REG16_S11/D (DFFR_X2)              0.01       1.02 r
+  data arrival time                                   1.02
 
   clock clk (rise edge)                    0.00       0.00
   clock network delay (ideal)              0.00       0.00
   clock uncertainty                       -0.07      -0.07
-  clk_r_REG86_S26/CK (DFF_X1)              0.00      -0.07 r
+  clk_r_REG16_S11/CK (DFFR_X2)             0.00      -0.07 r
   library setup time                      -0.04      -0.11
   data required time                                 -0.11
   -----------------------------------------------------------
   data required time                                 -0.11
-  data arrival time                                  -1.03
+  data arrival time                                  -1.02
   -----------------------------------------------------------
-  slack (VIOLATED)                                   -1.14
+  slack (VIOLATED)                                   -1.13
 
 
 1

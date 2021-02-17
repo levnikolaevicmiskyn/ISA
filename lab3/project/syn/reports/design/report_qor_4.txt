@@ -1,3 +1,4 @@
+Warning: There are infeasible paths detected in your design that were ignored during optimization. Please run 'report_timing -attributes' and/or 'create_qor_snapshot/query_qor_snapshot -infeasible_paths' to identify these paths.  (OPT-1721)
 Information: Updating design information... (UID-85)
 Warning: Design 'riscvProcessor' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
  
@@ -5,21 +6,21 @@ Warning: Design 'riscvProcessor' contains 1 high-fanout nets. A fanout number of
 Report : qor
 Design : riscvProcessor
 Version: O-2018.06-SP4
-Date   : Mon Feb 15 16:53:47 2021
+Date   : Wed Feb 17 17:35:59 2021
 ****************************************
 
 
   Timing Path Group 'clk'
   -----------------------------------
-  Levels of Logic:              20.00
-  Critical Path Length:          1.05
-  Critical Path Slack:           0.00
-  Critical Path Clk Period:      1.16
-  Total Negative Slack:          0.00
-  No. of Violating Paths:        0.00
+  Levels of Logic:              25.00
+  Critical Path Length:          1.14
+  Critical Path Slack:          -1.24
+  Critical Path Clk Period:      0.00
+  Total Negative Slack:      -1271.10
+  No. of Violating Paths:     1585.00
   Worst Hold Violation:         -0.01
-  Total Hold Violation:         -0.01
-  No. of Hold Violations:        2.00
+  Total Hold Violation:         -0.02
+  No. of Hold Violations:        5.00
   -----------------------------------
 
 
@@ -27,34 +28,34 @@ Date   : Mon Feb 15 16:53:47 2021
   -----------------------------------
   Hierarchical Cell Count:          0
   Hierarchical Port Count:          0
-  Leaf Cell Count:               7612
-  Buf/Inv Cell Count:             508
-  Buf Cell Count:                 129
-  Inv Cell Count:                 379
+  Leaf Cell Count:               7733
+  Buf/Inv Cell Count:             524
+  Buf Cell Count:                 107
+  Inv Cell Count:                 417
   CT Buf/Inv Cell Count:            0
-  Combinational Cell Count:      6067
-  Sequential Cell Count:         1545
+  Combinational Cell Count:      6204
+  Sequential Cell Count:         1529
   Macro Count:                      0
   -----------------------------------
 
 
   Area
   -----------------------------------
-  Combinational Area:     7438.690020
-  Noncombinational Area:  7205.939812
-  Buf/Inv Area:            322.924001
-  Total Buffer Area:           117.31
-  Total Inverter Area:         205.62
+  Combinational Area:     7064.960068
+  Noncombinational Area:  7123.479807
+  Buf/Inv Area:            346.066001
+  Total Buffer Area:           105.60
+  Total Inverter Area:         240.46
   Macro/Black Box Area:      0.000000
   Net Area:                  0.000000
   -----------------------------------
-  Cell Area:             14644.629832
-  Design Area:           14644.629832
+  Cell Area:             14188.439875
+  Design Area:           14188.439875
 
 
   Design Rules
   -----------------------------------
-  Total Number of Nets:          7924
+  Total Number of Nets:          8838
   Nets With Violations:             0
   Max Trans Violations:             0
   Max Cap Violations:               0
@@ -66,18 +67,18 @@ Date   : Mon Feb 15 16:53:47 2021
   Compile CPU Statistics
   -----------------------------------------
   Resource Sharing:                    0.01
-  Logic Optimization:                  0.58
-  Mapping Optimization:                4.53
+  Logic Optimization:                  0.55
+  Mapping Optimization:               23.93
   -----------------------------------------
-  Overall Compile Time:               19.71
-  Overall Compile Wall Clock Time:    47.57
+  Overall Compile Time:               53.38
+  Overall Compile Wall Clock Time:    80.15
 
   --------------------------------------------------------------------
 
-  Design  WNS: 0.00  TNS: 0.00  Number of Violating Paths: 0
+  Design  WNS: 1.24  TNS: 1271.10  Number of Violating Paths: 1585
 
 
-  Design (Hold)  WNS: 0.01  TNS: 0.01  Number of Violating Paths: 2
+  Design (Hold)  WNS: 0.01  TNS: 0.02  Number of Violating Paths: 5
 
   --------------------------------------------------------------------
 

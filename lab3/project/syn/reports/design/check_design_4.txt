@@ -2,15 +2,15 @@
 ****************************************
 check_design summary:
 Version:     O-2018.06-SP4
-Date:        Mon Feb 15 15:46:17 2021
+Date:        Wed Feb 17 17:30:05 2021
 ****************************************
 
                    Name                                            Total
 --------------------------------------------------------------------------------
 Inputs/Outputs                                                    608
-    Unconnected ports (LINT-28)                                    83
+    Unconnected ports (LINT-28)                                    84
     Feedthrough (LINT-29)                                         301
-    Shorted outputs (LINT-31)                                     145
+    Shorted outputs (LINT-31)                                     144
     Constant outputs (LINT-52)                                     79
 
 Cells                                                               6
@@ -106,6 +106,7 @@ Warning: In design 'BPU_N4', port 'pc[7]' is not connected to any nets. (LINT-28
 Warning: In design 'BPU_N4', port 'pc[6]' is not connected to any nets. (LINT-28)
 Warning: In design 'BPU_N4', port 'pc[1]' is not connected to any nets. (LINT-28)
 Warning: In design 'BPU_N4', port 'pc[0]' is not connected to any nets. (LINT-28)
+Warning: In design 'ALUController', port 'operand1_info[NEGATIVE]' is not connected to any nets. (LINT-28)
 Warning: In design 'IDStage', input port 'IDSigs[PC][31]' is connected directly to output port 'EXSigs[PC][31]'. (LINT-29)
 Warning: In design 'IDStage', input port 'IDSigs[PC][30]' is connected directly to output port 'EXSigs[PC][30]'. (LINT-29)
 Warning: In design 'IDStage', input port 'IDSigs[PC][29]' is connected directly to output port 'EXSigs[PC][29]'. (LINT-29)
@@ -519,7 +520,6 @@ Warning: In design 'memoryInterface', output port 'phy_mem_data_addr[31]' is con
 Warning: In design 'memoryInterface', output port 'phy_mem_data_addr[31]' is connected directly to output port 'phy_mem_data_addr[28]'. (LINT-31)
 Warning: In design 'memoryInterface', output port 'phy_mem_data_addr[31]' is connected directly to output port 'phy_mem_data_addr[29]'. (LINT-31)
 Warning: In design 'memoryInterface', output port 'phy_mem_data_addr[31]' is connected directly to output port 'phy_mem_data_addr[30]'. (LINT-31)
-Warning: In design 'ALUController', output port 'control[OPERATION][2]' is connected directly to output port 'control[ADDER_SUB]'. (LINT-31)
 Warning: In design 'ALUController', output port 'control[COMP_COMPARISON][2]' is connected directly to output port 'control[COMP_COMPARISON][0]'. (LINT-31)
 Warning: In design 'ALUController', output port 'control[COMP_COMPARISON][2]' is connected directly to output port 'control[COMP_COMPARISON][1]'. (LINT-31)
 Warning: In design 'comparatorExtension_NB32', output port 'result[31]' is connected directly to output port 'result[1]'. (LINT-31)

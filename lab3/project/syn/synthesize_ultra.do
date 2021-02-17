@@ -62,7 +62,7 @@ ungroup -all -flatten
 set_optimize_registers
 compile_ultra -retime
 
-create_clock -name clk -period 1.16 {clk}
+create_clock -name clk -period 0 {clk}
 
 compile_ultra -incremental
 
