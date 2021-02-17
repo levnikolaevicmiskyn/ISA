@@ -79,9 +79,9 @@ begin
         file fileout: text;
         variable lineout: line;
     begin
-      file_open(fileout, filename_out, WRITE_MODE);
         if rising_edge(clk) then
             if dump = '1' then
+             file_open(fileout, filename_out, WRITE_MODE);
                 -- Dump all the memory content into the file
                 for i in 0 to SIZE-1 loop
                     hwrite(lineout, mem(i));

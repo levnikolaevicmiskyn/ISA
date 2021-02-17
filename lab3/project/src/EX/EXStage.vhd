@@ -68,16 +68,16 @@ begin
          ex_sigs.pc           when ALUpkg.SEL_SPECIAL,
          fwd_sigs.MEM_data    when ALUpkg.SEL_FWD_MEM,
          fwd_sigs.WB_data     when ALUpkg.SEL_FWD_WB,
-         (31 downto 0 => 'X') when others;
+         (31 downto 0 => '-') when others;
     with sel_operand2 select operand2 <=
-         CONST_ZERO           when ALUpkg.SEL_ZERO,
+--**         CONST_ZERO           when ALUpkg.SEL_ZERO,
          ex_sigs.oprnd_2      when ALUpkg.SEL_OPERAND,
          ex_sigs.oprnd_1      when ALUpkg.SEL_OTHER,
          CONST_4              when ALUpkg.SEL_CONST,
          ex_sigs.immediate    when ALUpkg.SEL_SPECIAL,
          fwd_sigs.MEM_data    when ALUpkg.SEL_FWD_MEM,
          fwd_sigs.WB_data     when ALUpkg.SEL_FWD_WB,
-         (31 downto 0 => 'X') when others;
+         (31 downto 0 => '-') when others;
 
     comp_ALU: ALU
         port map(ex_sigs.op, operand1, operand2, ex_data.result, ex_data.N, ex_data.Z, ex_data.C, ex_data.V);

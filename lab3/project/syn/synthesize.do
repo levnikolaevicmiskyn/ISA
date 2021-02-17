@@ -1,4 +1,4 @@
-set VERSION 1
+set VERSION 3
 
 remove_design -designs
 
@@ -52,6 +52,9 @@ set OLOAD [load_of NangateOpenCellLibrary/BUF_X4/A]
 set_load $OLOAD [all_outputs]
 set_clock_uncertainty 0.07
 
+# Check design before flattening
+check_design > reports/design/check_design_$VERSION.txt
+
 # Flatten the hierarchy
 ungroup -all -flatten
 
@@ -59,7 +62,6 @@ ungroup -all -flatten
 compile
 optimize_registers -clock clk
 
-check_design > reports/design/check_design_$VERSION.txt
 
 report_resources > reports/resources/report_resources_$VERSION.txt
 report_area > reports/area/report_area_$VERSION.txt

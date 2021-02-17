@@ -1,0 +1,56 @@
+ 
+****************************************
+Report : resources
+Design : riscvProcessor
+Version: O-2018.06-SP4
+Date   : Wed Jan 20 15:36:34 2021
+****************************************
+
+Resource Sharing Report for design riscvProcessor in file
+        ../src/riscvProcessor.vhd
+
+===============================================================================
+|          |              |            | Contained     |                      |
+| Resource | Module       | Parameters | Resources     | Contained Operations |
+===============================================================================
+| r404     | DW_cmp       | width=5    |               | compIDStage/compInstDecoder/eq_12_C136_rn |
+     |            |               |                      |
+|          |              |            |               | compIDStage/compInstDecoder/eq_12_C85_rn |
+      |            |               |                      |
+|          |              |            |               | compIDStage/compInstDecoder/eq_21_C120_rn |
+     |            |               |                      |
+|          |              |            |               | compIDStage/compInstDecoder/eq_21_C155_rn |
+     |            |               |                      |
+|          |              |            |               | compIDStage/compInstDecoder/eq_21_C61_rn |
+| r405     | DW_cmp       | width=5    |               | compIDStage/compInstDecoder/eq_21_2_C120_rn |
+   |            |               |                      |
+|          |              |            |               | compIDStage/compInstDecoder/eq_21_2_C155_rn |
+   |            |               |                      |
+|          |              |            |               | compIDStage/compInstDecoder/eq_21_2_C61_rn |
+| r428     | DW01_add     | width=32   |               | compIDStage/add_119  |
+| r430     | DW_cmp       | width=5    |               | compIDStage/compRegFile/eq_45 |
+| r432     | DW_cmp       | width=5    |               | compIDStage/compRegFile/eq_56 |
+| r434     | DW01_inc     | width=2    |               | compIDStage/compBPU/add_79 |
+| r436     | DW01_dec     | width=2    |               | compIDStage/compBPU/sub_84 |
+| r438     | DW01_add     | width=32   |               | compIFStage/add_24   |
+| r440     | DW_sra       | A_width=32 |               | compEXStage/comp_ALU/comp_datapath/comp_barrel_shifter/sra_21 |
+              |                      |
+|          |              | SH_width=31 |              |                      |
+| r442     | DW_cmp       | width=5    |               | compFWDUnit/eq_26    |
+| r444     | DW_cmp       | width=5    |               | compFWDUnit/eq_31    |
+| r446     | DW_cmp       | width=5    |               | compFWDUnit/eq_44    |
+| r448     | DW_cmp       | width=5    |               | compFWDUnit/eq_49    |
+===============================================================================
+
+
+Implementation Report
+===============================================================================
+|                    |                  | Current            | Set            |
+| Cell               | Module           | Implementation     | Implementation |
+===============================================================================
+| compIFStage/add_24 | DW01_add         | pparch (area,speed)                 |
+| compIDStage/add_119                   |                    |                |
+|                    | DW01_add         | pparch (area,speed)                 |
+===============================================================================
+
+1

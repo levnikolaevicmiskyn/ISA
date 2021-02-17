@@ -1,0 +1,11 @@
+Initializing Modelsim...
+
+Initializing environment...
+
+
+The tool can be started with the command 'vsim'
+
+Done
+Starting simulation
+Done
+Files machinedata-result.txt and machinedata-dump.txt are identical
