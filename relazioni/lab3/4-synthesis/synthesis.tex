@@ -1,14 +1,35 @@
 \chapter{Synthesis}
 \section{First version}
 \begin{table}[h]
+	\centering
 \begin{tabular}{|l|l|l|}
 	\hline
 	& \texttt{compile} & \texttt{compile\_ultra}\\\hline
-	Area & 15.5 & 14.8 \\\hline
-	$T_{ck}$& 1.14 & 1.10\\\hline
+	Area & 15500 & 14800 \\\hline
+	$T_{ck}$& 1.14 ns & 1.10 ns\\\hline
 \end{tabular}
 \caption{Comparison between standard and ultra compile}
 \label{tab:comp}
 \end{table}
 
-The basic design was synthesized with the retiming option enabled using both the standard compile followed by \texttt{optimize\_registers} and \texttt{compile\_ultra}. \autoref{tab:comp} shows that in this case the second option should be preferred. The compiler issues a warning when it applies retiming to registers that have both a preset and a reset signal, a situation that occurs with pipeline registers since they must be initialized at startup and reset synchronously during the execution as well (flush). Therefore, a simulation of the synthesized netlist is mandatory to verify that the retiming has not altered the functionality of the processor. This check was done on the testbench program provided (minimum search) with successful results.
+\paragraph{Maximum clock frequency} The basic design was synthesized with the retiming option enabled using both the standard compile followed by \texttt{optimize\_registers} and \texttt{compile\_ultra}. \autoref{tab:comp} shows that in this case the second option should be preferred. The compiler issues a warning when it applies retiming to registers that have both a preset and a reset signal, a situation that occurs with pipeline registers since they must be initialized at startup and reset synchronously during the execution as well (flush). Therefore, a simulation of the synthesized netlist is mandatory to verify that the retiming has not altered the functionality of the processor. This check was done on the testbench program provided (minimum search) with successful results.
+
+\paragraph{Final synthesis} After the zero clock period synthesis, a second compile command was issued with a slightly larger clock period constraint in order to obtain the final netlist to be routed. The results of this process are summarized in \autoref{tab:synres}. The QOR report indicates that there are as many as 20 logic levels, this suggests that this design could benefit from a deeper pipeline, since it is well known that the ideal number of combinational logic levels for a processor is between 6 and 8.
+
+The result from \texttt{report\_resources} indicates that several DesignWare library components were used to synthesize comparators, incrementers and decrementers in the IF and ID stages. A barrel shifter was inferred in the ALU and an incrementer/decrementer in the branch prediction unit.
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|l|l|}
+		\hline
+		Area & 14644 \\\hline
+		Combinationa area & 7438 \\\hline
+		Noncombinational area &7205\\\hline
+		Clock period & 1.16 ns \\\hline
+		Critical path length & 1.05 ns\\\hline
+		Levels of logic & 20 \\\hline
+		
+	\end{tabular}
+\caption{Synthesis results}
+\label{tab:synres}
+\end{table}
