@@ -1,4 +1,4 @@
-set VERSION 4
+set VERSION 5
 
 remove_design -designs
 
@@ -62,8 +62,7 @@ ungroup -all -flatten
 set_optimize_registers
 compile_ultra -retime
 
-create_clock -name clk -period 0 {clk}
-
+create_clock -name clk -period 1.4 {clk}
 compile_ultra -incremental
 
 report_qor > reports/design/report_qor_$VERSION.txt

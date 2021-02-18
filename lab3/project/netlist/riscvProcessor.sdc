@@ -1,6 +1,6 @@
 ###################################################################
 
-# Created by write_sdc on Wed Feb 17 17:36:01 2021
+# Created by write_sdc on Thu Feb 18 19:23:49 2021
 
 ###################################################################
 set sdc_version 2.1
@@ -103,7 +103,7 @@ set_load -pin_load 3.40189 [get_ports {phy_data_mem_in[2]}]
 set_load -pin_load 3.40189 [get_ports {phy_data_mem_in[1]}]
 set_load -pin_load 3.40189 [get_ports {phy_data_mem_in[0]}]
 set_load -pin_load 3.40189 [get_ports phy_data_mem_wr_en]
-create_clock [get_ports clk]  -period 0  -waveform {0 0}
+create_clock [get_ports clk]  -period 1.4  -waveform {0 0.7}
 set_clock_uncertainty 0.07  [get_clocks clk]
 set_input_delay -clock clk  -max 0.5  [get_ports rst_n]
 set_input_delay -clock clk  -max 0.5  [get_ports {phy_instr_mem_out[31]}]
