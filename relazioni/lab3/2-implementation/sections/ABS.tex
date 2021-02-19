@@ -1,8 +1,8 @@
 \section{Adding ABS}
 \label{sec:adding-abs}
-Given the highly parametrized implementation, supporting an additional instruction set in a second version of the same processor is straightforward. As far as the decoding is concerned, the addition of the absolute value instruction amounts to adding a dedicated case in the combinational process describing the instruction decoder along with a specific ALU operation. The new ALU operation is just appended to the enumerated type that was already defined in the previous version.
-\subsection{Changes on ID, IF and Control Unit}
-
+Given the highly parametrized implementation, supporting an additional instruction set in a second version of the same processor is straightforward.
+\subsection{Changes in the Control Unit}
+As far as the decoding is concerned, the addition of the absolute value instruction amounts to adding a dedicated case in the combinational process describing the instruction decoder along with a specific ALU operation. The new ALU operation is just appended to the enumerated type that was already defined in the previous version.
 \subsection{Changes on the Execution stage}
 In order to best utilize the already available hardware, the addition of an ad-hoc unit was discarded. The adder path
 is already used for nop-like operations, where the passed operand is simply summed to 0; being an adder/subtractor,

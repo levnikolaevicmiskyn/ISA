@@ -33,3 +33,34 @@ The result from \texttt{report\_resources} indicates that several DesignWare lib
 \caption{Synthesis results}
 \label{tab:synres}
 \end{table}
+
+\paragraph{Place and route} The gate count report shows the data reported in \autoref{tab:gatecount}. The total area is sligthly larger than estimated by Synopsys.
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|l|l|}\hline
+  Gates &     18903\\\hline Cells &   7942\\\hline Area &   15084.9 $\mu\textrm{m}^2$\\\hline
+	\end{tabular}
+	\caption{Gate count from Innovus}
+	\label{tab:gatecount}
+\end{table}
+
+The post-route timing report confirms that timing requirements are met with a positive slack equal to 0.017 ns in the worst case. The verify connectivity report confirms the successful completion.
+
+\section{Second version}
+The second version of the design reaches a minimum clock period equal to 1.2 ns. It was synthesized with a larger clock period equal to 1.4 ns with the results reported in \autoref{fig:synres2}
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|l|l|}
+		\hline
+		Area & \\\hline
+		Combinational area &  \\\hline
+		Noncombinational area &\\\hline
+		Clock period &  \\\hline
+		Critical path length & \\\hline
+		Levels of logic & \\\hline
+		
+	\end{tabular}
+	\caption{Synthesis results}
+	\label{tab:synres2}
+\end{table}
+
