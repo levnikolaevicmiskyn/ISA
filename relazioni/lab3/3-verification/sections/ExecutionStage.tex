@@ -15,8 +15,8 @@ The reference and the simulation results can then be compared to each other to c
 
 \subsection{Input generation}
 \label{sec:tb-input-gen}
-Inputs are generated through a very simple Python script, that generates a certain number of inputs (specified by
-command line) using the random number generators. Each line of the
+Inputs are generated through a very simple Python script, that generates a certain number of lines (specified through
+the command line) using the random number generators. Each line of the
 generated output contains the following fields separated by spaces:
 \begin{enumerate}
     \item 8 hex digits for operand 1
@@ -26,8 +26,9 @@ generated output contains the following fields separated by spaces:
 which are all the inputs of an ALU. Since, in VHDL, the ALU opcode is an enumeration that may be changed for
 optimizations or various design reasons, the numbers that represent the various operations are arbitary and the
 VHDL testbench will need a specific unit to convert the arbitrary signals into the ones that the circuit actually uses.
-For example, the following line from a generated input file will represent an addition between 00000001 and
-\texttt{ffffffff}.
+
+For a file format example, the following line from a generated input file will represent
+an addition between 00000001 and \texttt{ffffffff}.
 \begin{lstlisting}
     00000001 ffffffff 0
 \end{lstlisting}
@@ -43,12 +44,13 @@ instantiates a clock generator, an ALUFileReader and an ALUFileWriter.
 	\label{fig:tb-alu}
 \end{figure}
 
-As stated in \autoref{sec:tb-input-gen}, ALUFileReader has to map the arbitrary opcodes into the local enumeration,
-this task is done through a function, described in the global package, that uses a switch to return the correct result.
+As stated in \autoref{sec:tb-input-gen}, ALUFileReader has to map the arbitrary opcodes into the local enumeration.
+This task is done through a function, described in the global package, that uses a switch to return the correct result.
 
 \subsection{C++ Reference}
-The software version of the ALU used to generate is implemented with a single C++ class called ALU. The declaration of
-this class, along with a brief description of its functionality, is visible in \autoref{appendix:simulated-alu}.
+The software version of the ALU used to generate the reference results is implemented with a single C++ class called
+ALU. The declaration of this class, along with a brief description of its functionality,
+is present in \autoref{appendix:simulated-alu}.
 
 By default, the compiled executable works in streaming mode: it continuously reads inputs from the standard input,
 performs the operations and prints the outputs to the standard out until the user interrupts the stream. This is useful

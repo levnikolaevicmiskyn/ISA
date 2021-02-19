@@ -1,6 +1,6 @@
 \chapter{Synthesis}
 \section{First version}
-\begin{table}[h]
+\begin{table}[htbp]
 	\centering
 \begin{tabular}{|l|l|l|}
 	\hline
@@ -18,13 +18,13 @@
 
 The result from \texttt{report\_resources} indicates that several DesignWare library components were used to synthesize comparators, incrementers and decrementers in the IF and ID stages. A barrel shifter was inferred in the ALU and an incrementer/decrementer in the branch prediction unit.
 
-\begin{table}[h]
+\begin{table}[htbp]
 	\centering
-	\begin{tabular}{|l|l|}
+	\begin{tabular}{|l|r|}
 		\hline
-		Area & 14644 $\mu\textrm{m}^2$\\\hline
-		Combinational area & 7438 $\mu\textrm{m}^2$\\\hline
-		Noncombinational area &7205 $\mu\textrm{m}^2$\\\hline
+		Area & $\SI{14644}{\micro m^2}$\\\hline
+		Combinational area & $\SI{7438}{\micro m^2}$\\\hline
+		Noncombinational area & $\SI{7205}{\micro m^2}$\\\hline
 		Clock period & 1.16 ns \\\hline
 		Critical path length & 1.05 ns\\\hline
 		Levels of logic & 20 \\\hline
@@ -35,10 +35,10 @@ The result from \texttt{report\_resources} indicates that several DesignWare lib
 \end{table}
 
 \paragraph{Place and route} The gate count report shows the data reported in \autoref{tab:gatecount}. The total area is sligthly larger than estimated by Synopsys.
-\begin{table}[h]
+\begin{table}[htbp]
 	\centering
-	\begin{tabular}{|l|l|}\hline
-  Gates &     18903\\\hline Cells &   7942\\\hline Area &   15084.9 $\mu\textrm{m}^2$\\\hline
+	\begin{tabular}{|l|r|}\hline
+  Gates &     18903\\\hline Cells &   7942\\\hline Area &   $\SI{15084.9}{\micro m^2}$\\\hline
 	\end{tabular}
 	\caption{Gate count from Innovus}
 	\label{tab:gatecount}
@@ -48,27 +48,27 @@ The post-route timing report confirms that timing requirements are met with a po
 
 \section{Second version}
 The second version of the design reaches a minimum clock period equal to 1.2 ns. It was synthesized with a larger clock period equal to 1.4 ns with the results reported in \autoref{tab:synres2}
-\begin{table}[h]
+\begin{table}[htbp]
 	\centering
 	\begin{tabular}{|l|l|}
 		\hline
-		Area & 14091 $\mu\textrm{m}^2$\\\hline
-		Combinational area &  6971 $\mu\textrm{m}^2$\\\hline
-		Noncombinational area & 7120 $\mu\textrm{m}^2$\\\hline
+		Area & $\SI{14091}{\micro m^2}$\\\hline
+		Combinational area &  $\SI{6971}{\micro m^2}$\\\hline
+		Noncombinational area & $\SI{7120}{\micro m^2}$\\\hline
 		Clock period &  1.4 ns\\\hline
 		Critical path length & 1.29 ns\\\hline
 		Levels of logic & 23\\\hline
-		
+
 	\end{tabular}
 
 	\caption{Synthesis results for the processor with extended ISA}
 	\label{tab:synres2}
 \end{table}
 The overall area and the number of gates are again summarized in \autoref{tab:gatecount2}. For this design, the looser timing constraint set during synthesis resulted in a smaller circuit as predicted by the area report in Synopsys.
-\begin{table}[h]
+\begin{table}[htbp]
 	\centering
 	\begin{tabular}{|l|l|}\hline
-		Gates &     18123 \\\hline Cells &   7062\\\hline Area &   14462 $\mu\textrm{m}^2$\\\hline
+		Gates &     18123 \\\hline Cells &   7062\\\hline Area &   $\SI{14462}{\micro m^2}$\\\hline
 	\end{tabular}
 	\caption{Gate count regarding the second version of the processor}
 	\label{tab:gatecount2}

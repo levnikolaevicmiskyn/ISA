@@ -164,12 +164,13 @@ pick the operands, it analyses three control signals: \texttt{instruction\_type}
 
 The control logic works as follows: first, \texttt{instruction\_type} is analysed. This signal specifies what kind of
 operators the current instruction works with, specifically if each one is a register, a specific constant,
-the immediate. Whenever an operand is not a register, this request is immediately accepted and the corresponding
-operand is selected since there are no risks of forwarding. Whenever one operand is a register, instead, forwarding is
+the immediate and so on.
+Whenever an operand is not a register, this request is immediately accepted and the corresponding
+operand is selected since there are no risks of hazards. Whenever one operand is a register, instead, hazards are
 a risk and the signals from the forwarding unit should be considered as well.
 
 The candidates for operand 1 and 2 are not necessarily the same, so they are categorized in a generic way that allows
-all the supported instructions to be executed but still optimized the selection process. The multiplexers for the two
+all the supported instructions to be executed but still optimizes the selection process. The multiplexers for the two
 operands may then be connected to the specific signals associated to the generic selector.
 All of the possible values for both operands are listed in \autoref{tab:exe-operands}.
 

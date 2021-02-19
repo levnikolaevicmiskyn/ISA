@@ -7,9 +7,9 @@ Given the variety of its purposes, this block is furtherly broken down into seve
 	\item Branch Prediction Unit (BPU)
 	\item Target address computation
 	\item Register File
-\end{itemize} 
+\end{itemize}
 
-\subsection{Decoder} 
+\subsection{Decoder}
 The simplicity of RISC instruction sets consists in including few instructions that perform simple tasks. Furthermore, the instruction format is fixed, so as to allow the decoding circuitry to be as simple and fast as possible. Five types of instruction are defined in RISC-V, with the following types of fields that could be present depending on the actual format:
 \begin{itemize}
 	\item Opcode
@@ -24,7 +24,8 @@ The main task of this sub-unit is to drive control signals for execution, memory
 
 The VHDL description consists in a combinational process whose sensitivity list includes the opcodes and the source registers. Based on \texttt{rs1} and \texttt{rs2}, this unit will resort to the hazard detection unit to handle the load-use data hazard occurring when the source operand is to be loaded from memory within the following two clock cycles. Under this circumstance, an operation that depends on such operand cannot proceed to the execution stage because it will be too early for the required data to be available of forwardable. Whenever the HZU runs into a load-use data hazard, the decoding step produces a nop (no operation), meaning that all control signals are inactive and the instruction fetch stage is prompted to refetch the current instruction without updating \texttt{PC}. The normal execution flow proceeds as soon as the hazard is removed.
 
-\begin{figure}[h]
+\begin{figure}[htb]
+    \center
 	\includegraphics[width=0.6\textwidth]{./images/idstage.pdf}
 	\caption{Instruction decoding stage with its sub-units}
 	\label{fig:idstage}
@@ -46,6 +47,6 @@ A basic one-level scheme is the bimodal predictor, consisting in an array of 2-b
 
 This is described in VHDL using a combinational \texttt{when-else} statement to synthesize a selection logic.
 
-\subsection{Register file} As prescribed by the specifications, RV32I entails grouping 32 internal registers holding 32-bit data in a register file. \texttt{x0} denotes a location that always returns zero when read, thus making all write operations targeting it equivalent to not writing any data back.  
+\subsection{Register file} As prescribed by the specifications, RV32I entails grouping 32 internal registers holding 32-bit data in a register file. \texttt{x0} denotes a location that always returns zero when read, thus making all write operations targeting it equivalent to not writing any data back.
 
 The VHDL description of this sub-unit is that of a standard memory, with additional care taken to obtain the correct synthesis for the \texttt{x0} location, which might not correspond to a physical register.
