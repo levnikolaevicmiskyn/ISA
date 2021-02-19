@@ -1,0 +1,13 @@
+\section{Simulated ALU}
+\label{appendix:simulated-alu}
+The following is the header for the ALU simulation that contains the ALU class declaration.
+\lstinputlisting[language=C++]{../../lab3/project/sim/ALU/inc/ALU.h}
+To separate the specific instance of the class from the operation execution, all the supported operation are
+implemented as static function, which are automatically called when the \texttt{executeStream} function is used.
+
+This function takes an input stream and an output stream as parameters. Input data is acquired, checked and converted
+from the input stream, then the requested function to execute is retrieved through the use of a static map, the
+function is collected and its generated result is written to the output stream.
+
+It is also possible to use the same class to work on a single input through the \texttt{executeStep} whenever the user
+prefers to run a certain hardcoded pattern for testing.
