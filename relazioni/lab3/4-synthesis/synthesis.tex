@@ -22,9 +22,9 @@ The result from \texttt{report\_resources} indicates that several DesignWare lib
 	\centering
 	\begin{tabular}{|l|l|}
 		\hline
-		Area & 14644 \\\hline
-		Combinational area & 7438 \\\hline
-		Noncombinational area &7205\\\hline
+		Area & 14644 $\mu\textrm{m}^2$\\\hline
+		Combinational area & 7438 $\mu\textrm{m}^2$\\\hline
+		Noncombinational area &7205 $\mu\textrm{m}^2$\\\hline
 		Clock period & 1.16 ns \\\hline
 		Critical path length & 1.05 ns\\\hline
 		Levels of logic & 20 \\\hline
@@ -47,20 +47,29 @@ The result from \texttt{report\_resources} indicates that several DesignWare lib
 The post-route timing report confirms that timing requirements are met with a positive slack equal to 0.017 ns in the worst case. The verify connectivity report confirms the successful completion.
 
 \section{Second version}
-The second version of the design reaches a minimum clock period equal to 1.2 ns. It was synthesized with a larger clock period equal to 1.4 ns with the results reported in \autoref{fig:synres2}
+The second version of the design reaches a minimum clock period equal to 1.2 ns. It was synthesized with a larger clock period equal to 1.4 ns with the results reported in \autoref{tab:synres2}
 \begin{table}[h]
 	\centering
 	\begin{tabular}{|l|l|}
 		\hline
-		Area & \\\hline
-		Combinational area &  \\\hline
-		Noncombinational area &\\\hline
-		Clock period &  \\\hline
-		Critical path length & \\\hline
-		Levels of logic & \\\hline
+		Area & 14091 $\mu\textrm{m}^2$\\\hline
+		Combinational area &  6971 $\mu\textrm{m}^2$\\\hline
+		Noncombinational area & 7120 $\mu\textrm{m}^2$\\\hline
+		Clock period &  1.4 ns\\\hline
+		Critical path length & 1.29 ns\\\hline
+		Levels of logic & 23\\\hline
 		
 	\end{tabular}
-	\caption{Synthesis results}
+
+	\caption{Synthesis results for the processor with extended ISA}
 	\label{tab:synres2}
 \end{table}
-
+The overall area and the number of gates are again summarized in \autoref{tab:gatecount2}.
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|l|l|}\hline
+		Gates &     18903\\\hline Cells &   7942\\\hline Area &   15084.9 $\mu\textrm{m}^2$\\\hline
+	\end{tabular}
+	\caption{Gate count regarding the second version of the processor}
+	\label{tab:gatecount2}
+\end{table}
