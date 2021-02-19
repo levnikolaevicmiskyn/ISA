@@ -112,7 +112,14 @@ comparison operation $?$ between $A$ and $B$ can be expressed as
 \end{align}
 Since an adder/subtractor is already available and all of the relevant observations on the result were performed for
 the status flags, the comparator is implemented as an extension of the adder that only checks the status flags and
-outputs a result based on the requested comparison.
+outputs a result based on the requested comparison, as seen in the schematic in \autoref{fig:comparator}.
+
+\begin{figure}[htbp]
+    \center
+	\includegraphics[width=0.6\textwidth]{./2-implementation/images/comparator.png}
+	\caption{Schematic of the comparator implemented as an extension of the adder}
+	\label{fig:comparator}
+\end{figure}
 
 It internally computes all of the possible comparisons and a multiplexer selects the result to output. In particular,
 \begin{align*}
@@ -141,7 +148,7 @@ comparator that the data is signed and switches its multiplexer to choose the \t
 All of the control signals are packed inside of a VHDL record to simplify possible future changes without the need of
 modifying any entity in the circuit.
 
-\subsection{Control Unit and Input Selection}
+\subsection{Execution Controller and Input Selection}
 Depending on the instruction to be executed, different sources for the two operands may be needeed. Overall, the
 execution stage receives the following signals:
 \begin{itemize}
