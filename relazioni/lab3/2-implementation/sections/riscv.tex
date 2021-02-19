@@ -1,0 +1,29 @@
+\section{RISC-V Processor}
+The processor is implemented as a pipelined processor where the execution of an instruction is divided in the following
+stages:
+\begin{enumerate}
+    \item Instruction Fetch
+    \item Instruction Decode
+    \item Execution
+    \item Memory
+    \item Write Back
+\end{enumerate}
+
+Each stage is independently described within its own component which implements all of the necessary functionality. The
+pipeline - specifically, the pipeline registers - is described and managed in the top level entity:
+this means that every stage is implemented as a combinational component\footnote{Of course, single registers may be
+needed in various occasions, the clearest instance is the Program Counter. But it is the duty of the single stage to
+not interfere with the pipeline and internally deal with the components to maintain a correct timing}. This allows for
+clean descriptions of the stages since they do not have to deal with instancing and controlling the pipeline registers.
+
+The processor is also endowed with two specific units that improve the overall performance: the
+\textbf{Forwarding Unit} and the \textbf{Branch Prediction Unit}, which minimize the number of pipeline flushes and
+stalls introduced during the execution of a thread.
+
+To simplify the description of the pipeline, the processor and the top level entities of the various stages use
+VHDL records, all described in a global package. This allows for simpler signal assignments as well as a more versatile
+implementation: whenever a stage needs a new signal that was not accounted for, or any modification in general is
+needed, it is sufficient to update the record and the signal assignments, but no entity or instance has to be modified.
+
+The specific descriptions of each unit together with their design choices, functionalities and general discussions
+are listed in the following sections.
