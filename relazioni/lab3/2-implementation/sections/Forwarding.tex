@@ -1,0 +1,5 @@
+\section{Forwarding Unit}
+
+ Forwarding unit is a unit that works across Execution stage, Memory Stage and Write-back stage. Its role is to prevent read after write data hazard that can occur between successive instructions due to the pipelined implementation of the processor. To do so, it compares separately the source register Rs1 and Rs2 of the instruction at Execution Stage first against destination register Rd of the instructions at Memory Stage, then against the one of the instruction at Write-back stage. If there is a match it checks also that this register is not x0, and that the destination register will be effectively wrote-back into the register-file, otherwise the forwarding will be useless or wrong.
+ 
+ Performed all the comparisons, the Forwarding unit tells to the execution if the correct operands are to be taken from register-file, Memory Stage or Write-back stage. 
