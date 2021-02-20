@@ -18,7 +18,7 @@ mostly acts as an input translator.
 \subsubsection{Datapath}
 The datapath instantiates the arithmetic and logic operators, generates the status flags and outputs the final result.
 All the operators are instantiated in parallel and, at every cycle, they all run their own operation and the result
-is selected through a multiplexer. If power consuption is to be considered, guarded evaluation can be a simple
+is selected through a multiplexer. If power consumption is to be considered, guarded evaluation can be a simple
 solution to optimize this behavior.
 
 The available operators are:
@@ -49,7 +49,7 @@ Its structure is organized as a cascade of the following functional blocks:
     \texttt{sub} signal which, when asserted, inverts \signal{b} and sets \signal{cin} to 1.
 
     \item Generate and Propagate bits generator \\
-    Given \signal{a} and \signal{b}, output the corrisponding generate and propagate signals bit by bit, where
+    Given \signal{a} and \signal{b}, output the corresponding generate and propagate signals bit by bit, where
     \begin{align*}
         g_i &= a_i\ \texttt{and}\ b_i \\
         p_i &= a_i\ \texttt{xor}\ b_i
@@ -133,7 +133,7 @@ depending on whether the comparison should consider its operands as respectively
 
 It is clear to see how it is the controller's job to correctly deliver all of the necessary commands when a comparison
 is requested, such as switching the adder to subtracting mode, deciding whether the operands are signed or not and
-selecting the otuput.
+selecting the output.
 
 \subsubsection{ALU Controller}
 The controller for the ALU receives an ALU opcode to choose what operation to perform and then internally manages all
@@ -148,14 +148,14 @@ All of the control signals are packed inside of a VHDL record to simplify possib
 modifying any entity in the circuit.
 
 \subsection{Execution Controller and Input Selection}
-Depending on the instruction to be executed, different sources for the two operands may be needeed. Overall, the
+Depending on the instruction to be executed, different sources for the two operands may be needed. Overall, the
 execution stage receives the following signals:
 \begin{itemize}
     \item Two entries from the register file
     \item Immediate
     \item Program counter
     \item Data from the Memory stage (used in forwarding)
-    \item Data from the WriteBack stage (used in forwarding)
+    \item Data from the Write-Back stage (used in forwarding)
 \end{itemize}
 To these, some constants are inserted as additional options, such as the constant 0 being used in various operations.
 The two operands which are fed to the ALU are selected from the EXController. In order to
@@ -184,7 +184,7 @@ All of the possible values for both operands are listed in \autoref{tab:exe-oper
         \texttt{SEL\_CONST}    & 0                         & 4                         \\ \hline
         \texttt{SEL\_SPECIAL}  & PC                        & Immediate                 \\ \hline
         \texttt{SEL\_FWD\_MEM} & Data from Memory stage    & Data from Memory stage    \\ \hline
-        \texttt{SEL\_FWD\_WB}  & Data from WriteBack stage & Data from WriteBack stage \\ \hline
+        \texttt{SEL\_FWD\_WB}  & Data from Write-Back stage & Data from Write-Back stage \\ \hline
     \end{tabular}
     \caption{Possible operand values for both operands in the Execution stage}
     \label{tab:exe-operands}
