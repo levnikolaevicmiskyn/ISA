@@ -3,3 +3,8 @@
 
 \input{3-verification/sections/ExecutionStage}
 \newpage
+
+\section{Testbench}
+The testbench for the entire processor is made up of a testbench entity that instantiates the DUT along with a non-synthesizable memory component. This component loads the contents of the instruction and the data memory from a text file (hexadecimal text) at startup and provides address and data ports for the processor to read/write data. Moreover, it is capable of dumping the entire content of the data memory in a file to be compared with the correct result at the end of execution. This can be done at any time during the execution by asserting an input signal \texttt{dump}.
+
+The program used for testing was the minimum search in a vector.  
