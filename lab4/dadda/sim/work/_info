@@ -1,0 +1,261 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/home/isa12/Desktop/ISA/lab4/dadda/sim
+T_opt
+!s110 1616093758
+VILnQSL:6_cz]c=g_fnLZO2
+04 3 4 work top fast 0
+=1-000ae431a4f1-6053a23a-811b6-7488
+o-quiet -auto_acc_if_foreign -work work
+Z1 tCvgOpt 0
+n@_opt
+OL;O;10.7c;67
+vDUT
+Z2 DXx6 sv_std 3 std 0 22 d=_JfHTnXCN[H5FjiaJJc0
+Z3 DXx6 mtiUvm 7 uvm_pkg 0 22 3zPkj@YUcM=M^m3zCLh<H1
+Z4 DXx4 work 11 top_sv_unit 0 22 PGAmZ@YODU_IIAXa:Z[b>2
+Z5 VDg1SIo80bB@j0V0VzS_@n1
+r1
+!s85 0
+!i10b 1
+!s100 37<mnK;m3HE6^1Rjm^:5W0
+IjSYX06IN7e6MWP1^M_:<S0
+Z6 !s105 top_sv_unit
+S1
+R0
+w1616093449
+8../src/DUT.sv
+Z7 F../src/DUT.sv
+L0 1
+Z8 OL;L;10.7c;67
+31
+Z9 !s108 1616093742.000000
+Z10 !s107 ../tb/simple_test.sv|../tb/env.sv|../tb/comparator.sv|../tb/refmod.sv|../tb/agent_out.sv|../tb/agent.sv|../tb/monitor_out.sv|../tb/monitor.sv|../tb/driver_out.sv|../tb/driver.sv|../tb/sequencer.sv|../tb/sequence_in.sv|../tb/packet_out.sv|../tb/packet_in.sv|../src/DUT.sv|../src/dut_if.sv|/software/mentor/questa10.7c/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_deprecated_defines.svh|/software/mentor/questa10.7c/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_reg_defines.svh|/software/mentor/questa10.7c/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_callback_defines.svh|/software/mentor/questa10.7c/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_sequence_defines.svh|/software/mentor/questa10.7c/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/tlm1/uvm_tlm_imps.svh|/software/mentor/questa10.7c/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_tlm_defines.svh|/software/mentor/questa10.7c/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_printer_defines.svh|/software/mentor/questa10.7c/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_object_defines.svh|/software/mentor/questa10.7c/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_phase_defines.svh|/software/mentor/questa10.7c/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_message_defines.svh|/software/mentor/questa10.7c/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_version_defines.svh|/software/mentor/questa10.7c/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/uvm_macros.svh|../tb/top.sv|
+Z11 !s90 -sv|../tb/top.sv|
+!i113 0
+Z12 o-sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R1
+n@d@u@t
+Ydut_if
+R2
+R3
+R4
+R5
+r1
+!s85 0
+!i10b 1
+!s100 ?mTNfbdG4W^BJd9eB>GjY3
+IDGPm?k<he6@R2QSZZ;;_31
+R6
+S1
+R0
+Z13 w1616093732
+8../src/dut_if.sv
+Z14 F../src/dut_if.sv
+L0 1
+R8
+31
+R9
+R10
+R11
+!i113 0
+R12
+R1
+Efa
+Z15 w1606203877
+Z16 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z17 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+R0
+Z18 8../src/FA.vhd
+Z19 F../src/FA.vhd
+l0
+L5
+VObjB;;Q`c4QgROnQb7Fi_2
+!s100 jBLQUn@SI0TcUckGBF`XF0
+Z20 OL;C;10.7c;67
+32
+Z21 !s110 1616093740
+!i10b 1
+Z22 !s108 1616093740.000000
+Z23 !s90 ../src/FA.vhd|
+Z24 !s107 ../src/FA.vhd|
+!i113 0
+Z25 tExplicit 1 CvgOpt 0
+Astructure
+R16
+R17
+DEx4 work 2 fa 0 22 ObjB;;Q`c4QgROnQb7Fi_2
+l11
+L10
+V82l`n7UF4VVe_O7`ic<F33
+!s100 ?GKEU;0bSOIC3TN^Tm6DR1
+R20
+32
+R21
+!i10b 1
+R22
+R23
+R24
+!i113 0
+R25
+Eha
+R15
+R16
+R17
+R0
+Z26 8../src/HA.vhd
+Z27 F../src/HA.vhd
+l0
+L5
+VUXkNE6BY;o30Yi8NLI_FQ2
+!s100 M^Befi:m3Md[eXj1kE16F3
+R20
+32
+R21
+!i10b 1
+R22
+Z28 !s90 ../src/HA.vhd|
+Z29 !s107 ../src/HA.vhd|
+!i113 0
+R25
+Astructure
+R16
+R17
+DEx4 work 2 ha 0 22 UXkNE6BY;o30Yi8NLI_FQ2
+l11
+L10
+V[NMP0bc4O5im^of1<J1a11
+!s100 CAhag?2@U]e4O>W2hT:UK0
+R20
+32
+R21
+!i10b 1
+R22
+R28
+R29
+!i113 0
+R25
+Embe
+R15
+Z30 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+R16
+R17
+R0
+Z31 8../src/MBE.vhd
+Z32 F../src/MBE.vhd
+l0
+L5
+V?O:kPV=99M6RhNhUoTh502
+!s100 ;a<Bl[4=nYAKkFmkd@>5o0
+R20
+32
+!s110 1616093741
+!i10b 1
+Z33 !s108 1616093741.000000
+Z34 !s90 ../src/MBE.vhd|
+Z35 !s107 ../src/MBE.vhd|
+!i113 0
+R25
+Artl
+R30
+R16
+R17
+DEx4 work 3 mbe 0 22 ?O:kPV=99M6RhNhUoTh502
+l482
+L13
+VQ2Rd32VFjdZ3Nh@mgCJgb0
+!s100 C]BM8G:=91A>DGmUF[LEA2
+R20
+32
+!s110 1616093742
+!i10b 1
+R33
+R34
+R35
+!i113 0
+R25
+vtop
+R2
+R3
+R4
+R5
+r1
+!s85 0
+!i10b 1
+!s100 >JE^3MXB7;@kWSY_K1PN?1
+I7`3[j9nO^RcCh3D]ORDRg3
+R6
+S1
+R0
+w1616093637
+Z36 8../tb/top.sv
+Z37 F../tb/top.sv
+L0 21
+R8
+31
+R9
+R10
+R11
+!i113 0
+R12
+R1
+Xtop_sv_unit
+!s115 dut_if
+R2
+R3
+VPGAmZ@YODU_IIAXa:Z[b>2
+r1
+!s85 0
+!i10b 1
+!s100 dhoL_@LOZZbR9;7mME`>m0
+IPGAmZ@YODU_IIAXa:Z[b>2
+!i103 1
+S1
+R0
+R13
+R36
+R37
+F/software/mentor/questa10.7c/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/uvm_macros.svh
+F/software/mentor/questa10.7c/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_version_defines.svh
+F/software/mentor/questa10.7c/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_message_defines.svh
+F/software/mentor/questa10.7c/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_phase_defines.svh
+F/software/mentor/questa10.7c/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_object_defines.svh
+F/software/mentor/questa10.7c/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_printer_defines.svh
+F/software/mentor/questa10.7c/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_tlm_defines.svh
+F/software/mentor/questa10.7c/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/tlm1/uvm_tlm_imps.svh
+F/software/mentor/questa10.7c/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_sequence_defines.svh
+F/software/mentor/questa10.7c/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_callback_defines.svh
+F/software/mentor/questa10.7c/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_reg_defines.svh
+F/software/mentor/questa10.7c/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_deprecated_defines.svh
+R14
+R7
+F../tb/packet_in.sv
+F../tb/packet_out.sv
+F../tb/sequence_in.sv
+F../tb/sequencer.sv
+F../tb/driver.sv
+F../tb/driver_out.sv
+F../tb/monitor.sv
+F../tb/monitor_out.sv
+F../tb/agent.sv
+F../tb/agent_out.sv
+F../tb/refmod.sv
+F../tb/comparator.sv
+F../tb/env.sv
+F../tb/simple_test.sv
+L0 1
+R8
+31
+R9
+R10
+R11
+!i113 0
+R12
+R1
