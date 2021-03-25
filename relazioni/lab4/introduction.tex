@@ -1,0 +1,7 @@
+\chapter{Universal Verification Methodology}
+\section{Introduction}
+The UVM is an open source verification standard consisting in a set of classes that extend the SystemVerilog language with advanced verification capabilities. A UVM testbench is made up of reusable components that are often an extension of the base classes already available and fit into a standardized testbench architecture. The object-oriented approach brings the verification task at an higher level of abstraction, which makes UVM a flexible and efficient environment. 
+
+The general organization separates the verification domain from the DUT and its interface. Only the interface that closely interacts with the DUT needs to specify communication at the signal-level, while the remaining part that carries out most of the verification can operate at the transaction level. 
+
+Interfaces for transaction-level communication are used in UVM to isolate the internal implentation of each component
