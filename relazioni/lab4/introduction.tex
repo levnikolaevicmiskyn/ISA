@@ -12,7 +12,7 @@ Instances of such sequence items exist in the testbench under analysis in two cl
 Exchange of data happens, at the most simple level, between a producer component that \textit{puts} data on a port and a consumer with an associated export that \textit{gets} the transaction. The producer is the one that generates a transaction and sends it to its port using the \texttt{put} method. On the other hand, the consumer is expected to give an implementation of the \texttt{put} method, which is called whenever the producer wants to put data to its consumer. 
 
 The converse operation on the consumer's side is to ask for a transaction from the producer. This is accomplished with the \texttt{get} method, called by the consumer and implemented in the producer.
-For example, the \texttt{refmod} component contains both a get port and a put port objects, which allows to receive transactions from the agent and to send the result to the scoreboard.
+For example, the \texttt{refmod} component contains both a get port and a put port objects, which allow to receive transactions from the agent and to send the result to the scoreboard.
 
 \begin{lstlisting}[language = verilog, caption = Snippet from \textit{refmod.sv}]
 packet_in tr_in;
@@ -31,3 +31,50 @@ endtask: run_phase
 \end{lstlisting}
 
 In this case the transactions are \textit{non-blocking}, they return instantaneously in the same delta cycle in which they are invoked.
+
+\paragraph{Cycle} Every UVM object undergoes three distinct phases during a simulation run: all classes are required to give an implementation for these in the form of methods.
+The \textbf{build phase} is where objects are created by means of the \texttt{create} method defined in the \texttt{uvm\_registry\_component} wrapper class. This way of creating objects is prescribed by the factory pattern, a paradigm drawn from object-oriented programming that is here employed to allow customization of objects through a configuration database rather than direct modification of the testbench code. Macros are used in every class to \textit{register} the object to the factory (as in line 2 of \ref{driver}). The defult constructor simply calls its conterpart in the parent with default parameters to create an object whose properties will be overridden later by means of the create method.
+
+\begin{lstlisting}[language=verilog, label=driver]
+class driver extends uvm_driver #(packet_in);
+	`uvm_component_utils(driver) // Registration to the factory
+	[...]
+	// Constructor
+	function new(string name = "driver", uvm_component parent = null);
+		super.new(name, parent);
+	endfunction
+	
+	// Build phase
+	virtual function void build_phase(uvm_phase phase);
+		super.build_phase(phase);
+		assert(uvm_config_db#(input_vif)::get(this, "", "vif", vif));
+	endfunction
+\end{lstlisting}
+
+The \textbf{connect phase} follows, where properly defined function create connection among testbench components by calling the \texttt{connect} method. As an example, the following snippet
+shows the driver-sequencer connection and the link between the monitor and an \texttt{uvm\_analysis\_port} object.
+
+\begin{lstlisting}[language=verilog, caption=Creation phase from the agent]
+ virtual function void connect_phase(uvm_phase phase);
+		super.connect_phase(phase);
+		mon.item_collected_port.connect(item_collected_port); // Monitor connection
+		drv.seq_item_port.connect(sqr.seq_item_export);       // Driver connection with sequencer
+endfunction
+	\end{lstlisting}
+
+
+\section{Architecture}
+The testbench infrastructure used in this lab is freely provided by \textit{sistenix.com}. In the following, we report a brief overview of how different tasks are partitioned across components taking this particular implementation as a reference. This is still general, since the architecture is the one specified in the UVM standard \cite{uvm_book}, and can be expected to be essentially the same for all compliant implementations.
+
+At the highest hierarchical level, verification tasks are performed in the \texttt{env} (\textit{environment}) entity, which instantiates the agents and the scoreboard.
+
+\paragraph{Agent} The UVM standard defines the agent as the combination of a sequencer that produces the stimuli, a driver that communicates those stimuli to the DUT's interface and a monitor 
+to gather the output data flow. This testbench includes a dedicated agent that operates in \textit{active} mode by driving the DUT's input interface. In particular, the \textit{sequencer} implements constrained random input generation at the transaction level, whose packet flow is then translated to bit-level signals by the \textit{driver}. These inputs must be forwarded to the scoreboard, this is accomplished by the \textit{monitor} that takes the signals at the driver's output back to the transaction level and puts them to the \textit{refmod}. 
+
+A separate \textit{passive} agent collects the output data and it is made up of a driver and a monitor directly connected to the DUT's output interface.
+
+\paragraph{Scoreboard} This component is in charge of verifying that the output results match those of a "golden" reference model for a given input. The behavioral description in the \textit{refmod} is an high level representation of the task that the DUT is supposed to perform: the design under test is correctly verified if it reproduces the refmod under all conditions.
+
+
+
+% This part is worth a closer look as it implements an handshake-based(?) communication protocol with the DUT. 
