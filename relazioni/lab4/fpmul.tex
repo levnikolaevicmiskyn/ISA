@@ -1,1 +1,20 @@
 \chapter{Floating Point Multiplier}
+
+\section{Input data}
+The input to this floating point multiplier is a couple of numbers A and B that are 32-bit sequences to be interpreted according to the IEEE standard for floating-point numbers. Their most significant bit gives the sign (as in the sign-magnitude representation). The remaining bits contain the exponent and the mantissa. Eight bits immediately after the sign bit encode an unsigned number in the range 0-255 called \textit{biased exponent}, or \textit{b.e.}. The exponent of the floating point number can be obtained as $\textit{b.e.} - 127$, which is a number in the range $E_{min} = -127$ to $E_{max}=128$.
+The remaining bits are allocated for the significand.
+
+ The generation of random floating point number was broken down into two consecutive steps. Random integer  numbers are obtained independently for the sign, exponent and mantissa and then they are aligned correctly in a 32 bit vector (again modeled as an integer number) by means of simple right-shift operations.
+ 
+ The sign can only be 0 or 1, therefore it is constrained to be in the interval $[0,1]$. As for the exponents, a first requirement is $-127 \leq a_{exp}, b_{exp} \leq 128$. The significand is again a positive number that fits into 23 bits: its range is $[0, 2^{23}-1]$.
+ Two additional conditions must hold for a valid input sequence (one that can be expected to produce a meaningful result): the product $AB$ must be within the representable range and none of A, B or $AB$ can be denormal. As for the overflow or underflow conditions, we can make sure that the result is not beyond the upper and lower limits by requiring that
+ \begin{align*}
+-126 \leq a_{exp} &+ b_{exp} \leq 127\\
+-126 \leq (a_{exp}^{biased} - 127) &+ (b_{exp}^{biased} - 127) \leq 127 \\
+128 \leq(a_{exp}^{biased} &+ b_{exp}^{biased}) \leq 308
+ \end{align*}
+ 
+Moreover, since denormal numbers are not supported:
+\begin{align*}
+a_{exp}^{biased} > 0\,\hspace{3cm}\, b_{exp}^{biased} > 0
+\end{align*}
