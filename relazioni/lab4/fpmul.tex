@@ -19,7 +19,7 @@ a_{exp}^{biased} > 0$ and $b_{exp}^{biased} > 0$.
 
 These constraints are coded in the sequencer as shown in \ref{code:fpm_input}. A and B are constrained according to the requirements regarding the input numbers. In order to enforce condition \ref{eqn:constraint}, B is furtherly constrained with an expression that depends on A, hence the range of the random integer B is conditioned by the value taken by A. The correct implementation of this requires the explicit statement \texttt{solve A\_exp before B\_exp}.
 
-\begin{lstlisting}[language = verilog, label = code:fpm_input]
+\begin{lstlisting}[language = verilog, label = code:fpm_input, caption=\textit{packet\_in.sv}]
 rand integer A_sig;
 rand integer B_sig;
 rand integer A_exp;
