@@ -1,6 +1,6 @@
 module DUT(dut_if.port_in in_inter, dut_if.port_out out_inter, output enum logic [1:0] {INITIAL,WAIT,SEND} state);
-    
-    FPmul adder_under_test(.FP_A(in_inter.A),.FP_B(in_inter.B),.FP_Z(out_inter.data),.clk(in_inter.clk));
+
+    FPmul fpmul_under_test(.FP_A(in_inter.A),.FP_B(in_inter.B),.FP_Z(out_inter.data),.clk(in_inter.clk));
 
 	logic[31:0] A1, B1, A2, B2;
 
@@ -16,13 +16,13 @@ module DUT(dut_if.port_in in_inter, dut_if.port_out out_inter, output enum logic
 			B1 <= 0;
 			B2 <= 0;
         end
-        else 
+        else
 				case(state)
                 INITIAL: begin
                     in_inter.ready <= 1;
                     state <= WAIT;
                 end
-                
+
                 WAIT: begin
                     if(in_inter.valid) begin
 						A2 <= A1;
@@ -38,7 +38,7 @@ module DUT(dut_if.port_in in_inter, dut_if.port_out out_inter, output enum logic
                         state <= SEND;
                     end
                 end
-                
+
                 SEND: begin
                     if(out_inter.ready) begin
                         out_inter.valid <= 0;
