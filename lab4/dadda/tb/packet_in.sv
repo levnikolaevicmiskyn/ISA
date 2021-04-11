@@ -2,8 +2,8 @@ class packet_in extends uvm_sequence_item;
     rand integer A;
     rand integer B;
 
-	constraint myrangeA {A >= 0;}
-	constraint myrangeB {B >= 0;}
+	constraint range_A {A >= 0;}
+	constraint range_B {B >= 0;}
 
     `uvm_object_utils_begin(packet_in)
         `uvm_field_int(A, UVM_ALL_ON|UVM_HEX)
