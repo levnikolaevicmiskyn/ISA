@@ -36,7 +36,7 @@ class refmod extends uvm_component;
 			tr_out.data = $shortrealtobits($bitstoshortreal(A1) * $bitstoshortreal(B1));		
 			delayed_Z <= tr_out.data;
             $display("refmod: input A = %f, input B = %f, output OUT = %f",$bitstoshortreal(A2), $bitstoshortreal(B2), $bitstoshortreal(delayed_Z));
-			$display("refmod: input A = %b, input B = %b, output OUT = %b",A2, B2, delayed_Z);
+			$display("refmod: input A = %b, input B = %b, output OUT = %b", A2, B2, delayed_Z);
             out.put(tr_out);
         end
     endtask: run_phase

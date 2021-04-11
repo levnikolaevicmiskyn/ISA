@@ -8,13 +8,60 @@ The remaining bits are allocated for the significand.
  
  The sign can only be 0 or 1, therefore it is constrained to be in the interval $[0,1]$. As for the exponents, a first requirement is $-127 \leq a_{exp}, b_{exp} \leq 128$. The significand is again a positive number that fits into 23 bits: its range is $[0, 2^{23}-1]$.
  Two additional conditions must hold for a valid input sequence (one that can be expected to produce a meaningful result): the product $AB$ must be within the representable range and none of A, B or $AB$ can be denormal. As for the overflow or underflow conditions, we can make sure that the result is not beyond the upper and lower limits by requiring that
- \begin{align*}
--126 \leq a_{exp} &+ b_{exp} \leq 127\\
--126 \leq (a_{exp}^{biased} - 127) &+ (b_{exp}^{biased} - 127) \leq 127 \\
-128 \leq(a_{exp}^{biased} &+ b_{exp}^{biased}) \leq 308
- \end{align*}
+ \begin{align}
+-126 \leq a_{exp} &+ b_{exp} \leq 127 \nonumber\\
+-126 \leq (a_{exp}^{biased} - 127) &+ (b_{exp}^{biased} - 127) \leq 127 \nonumber\\
+128 \leq(a_{exp}^{biased} &+ b_{exp}^{biased}) \leq 308 \label{eqn:constraint}
+ \end{align}
  
-Moreover, since denormal numbers are not supported:
-\begin{align*}
-a_{exp}^{biased} > 0\,\hspace{3cm}\, b_{exp}^{biased} > 0
-\end{align*}
+Moreover, since denormal numbers are not supported, $
+a_{exp}^{biased} > 0$ and $b_{exp}^{biased} > 0$.
+
+These constraints are coded in the sequencer as shown in \ref{code:fpm_input}. A and B are constrained according to the requirements regarding the input numbers. In order to enforce condition \ref{eqn:constraint}, B is furtherly constrained with an expression that depends on A, hence the range of the random integer B is conditioned by the value taken by A. The correct implementation of this requires the explicit statement \texttt{solve A\_exp before B\_exp}.
+
+\begin{lstlisting}[language = verilog, label = code:fpm_input]
+rand integer A_sig;
+rand integer B_sig;
+rand integer A_exp;
+rand integer B_exp;
+rand integer A_sign;
+rand integer B_sign;
+
+// Constraints on exponent, sign and mantissa
+constraint data_constr{
+	A_exp > 127; A_exp < 129; B_exp > 127; B_exp < 129; 		    // Exponent
+	A_sign inside {[0:1]}; B_sign inside{[0:1]}; 					 			// Sign
+	A_sig inside{[0:(2**23-1)]}; B_sig inside{[0:(2**23-1)]}; 	// Significand
+	B_exp > 128 - A_exp; B_exp < 380 - A_exp;  				// Enforce condition on sum of exponents
+	solve A_exp before B_exp;
+}
+
+// Form A and B by combining the three fields
+rand integer A;
+rand integer B;
+constraint assign_constr{
+A == ((A_sign << 31) + (A_exp << 23) + A_sig);  // Make floating point number A
+B == ((B_sign << 31) + (B_exp << 23) + B_sig);  // Make floating point number B
+solve A_sign before A; solve A_exp before A; solve A_sig before A;solve B_sign before B; solve B_exp before B;solve B_sig before B;}
+\end{lstlisting}
+
+
+\section{Timing}
+In this case the testbench needs further modification in order to handle the latency that intrinsically comes with the pipelining introduced in the DUT. Since the multiplier's output is the product of the inputs sampled two cycles earlier, the \texttt{refmod} should model this for the comparison to work correctly.
+
+The two-cycles delay is implemented by adding auxiliary variables: any new data A and B coming through the \texttt{get} port is not used immediately but it is propagated through auxiliary variables \texttt{A1}, \texttt{A2}, \texttt{B1}, \texttt{B2}. The \texttt{refmod}'s output is the product of the auxiliary variable \texttt{A1} and \texttt{B1}, as shown in the following excerpt from the \texttt{run\_phase} in \textit{refmod.sv}. The operator \texttt{<=} performs a \textit{non-blocking assignment}, which means that the assignment to the left hand side is completed only after all right hand sides have been evaluated. In this case, the assignment to \texttt{A1} and \texttt{B1} will be effective only after the evaluation of the the product at line 3, thus modeling a delay element.
+
+\begin{lstlisting}[language = verilog]
+A1 <= tr_in.A;
+B1 <= tr_in.B;
+tr_out.data = $shortrealtobits($bitstoshortreal(A1) * $bitstoshortreal(B1));	
+\end{lstlisting}
+
+The purpose of this is to compare the results correctly. However, we also wanted to synchronize what was displayed in the output log so as to make every line contain the inputs A and B along with their product in both binary and decimal form. This required adding an additional delay, as shown in the following code:
+\begin{lstlisting}[language = verilog]
+A2 <= A1;
+B2 <= B1;
+delayed_Z <= tr_out.data;
+$display("refmod: input A = %f, input B = %f, output OUT = %f",$bitstoshortreal(A2), $bitstoshortreal(B2), $bitstoshortreal(delayed_Z));
+$display("refmod: input A = %b, input B = %b, output OUT = %b", A2, B2, delayed_Z);
+\end{lstlisting}
