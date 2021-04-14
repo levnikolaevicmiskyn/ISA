@@ -16,7 +16,7 @@ An additional limit is that neither $A$, $B$ nor $AB$ are allowed to be non-norm
 -126 &\leq (a_\text{exp}^\text{biased} - 127) + (b_\text{exp}^\text{biased} - 127) &\leq 125 \nonumber\\
  128 &\leq  a_\text{exp}^\text{biased}        + b_\text{exp}^\text{biased} &\leq 379 \label{eqn:constraint}
 \end{align}
-Notice that, unlike the inputs, the higher bound is 125 instead of 127 because the exponent resulting from the multiplication may be incremented up to twice because of the possible significand overflow and because of rounding.
+Notice that, unlike the inputs, the upper bound is 125 instead of 127 because the exponent resulting from the multiplication may be incremented up to twice because of the possible significand overflow and because of rounding.
 
 These constraints are coded in the sequencer as shown in \ref{code:fpm_input}. A and B are constrained according to the requirements regarding the input numbers. In order to enforce condition \ref{eqn:constraint}, B is furtherly constrained with an expression that depends on A, hence the range of the random integer B is conditioned by the value taken by A. The correct implementation of this requires the explicit statement \texttt{solve A\_exp before B\_exp}.
 
