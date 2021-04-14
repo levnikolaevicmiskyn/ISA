@@ -6,7 +6,7 @@ class packet_in extends uvm_sequence_item;
 	rand integer A_sign;
 	rand integer B_sign;
 
-	constraint fp_constrs{A_exp inside {[1:254]}; B_exp inside {[1:254]}; A_sign inside {[0:1]}; B_sign inside{[0:1]}; A_sig inside{[0:(2**23-1)]}; B_sig inside{[0:(2**23-1)]}; B_exp > 128 - A_exp; B_exp < 379 - A_exp; solve A_exp before B_exp;}
+	constraint fp_constrs{A_exp inside {[1:254]}; B_exp inside {[1:254]}; A_sign inside {[0:1]}; B_sign inside{[0:1]}; A_sig inside{[0:(2**23-1)]}; B_sig inside{[0:(2**23-1)]}; B_exp > 128 - A_exp; B_exp < 380 - A_exp; solve A_exp before B_exp;}
 
 	rand integer A;
 	rand integer B;
