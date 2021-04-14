@@ -3,6 +3,12 @@
 The UVM is an open source verification standard consisting in a set of classes that extend the SystemVerilog language with advanced verification capabilities. A UVM testbench is made up of reusable components that are often an extension of the base classes already available and fit into a standardized testbench architecture. The object-oriented approach brings the verification task at an higher level of abstraction, which makes UVM a flexible and efficient environment.
 
 The general organization separates the verification domain from the DUT and its interface. Only the interface that closely interacts with the DUT needs to specify communication at the signal-level, while the remaining part that carries out most of the verification can operate at the transaction level (Transaction Level Model).
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{sistenix.png}
+	\caption{General UVM architecture (image from Sistenix \cite{sistenix}).}
+	\label{fig:uvm}
+\end{figure}
 
 \paragraph{TLM} Transactions are objects that model all the abstract features of communication between two objects. Interfaces for transaction-level communication are used in UVM to isolate the internal implementation of each component so that different components with the same interface can be swapped easily.
 The elementary chunk of data exchanged in a transaction is an object of a custom class derived from \texttt{uvm\_sequence\_item}. This object includes all the variables, constraints and methods required to fully specify how data is structured and delivered in a given transaction.

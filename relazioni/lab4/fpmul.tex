@@ -28,18 +28,18 @@ rand integer A_sign;
 rand integer B_sign;
 
 // Constraints on exponent, sign and mantissa
-constraint data_constr{
-	A_exp > 127; A_exp < 129; B_exp > 127; B_exp < 129; 		    // Exponent
+constraint fp_constrs{
+	A_exp inside {[1:254]}; B_exp inside {[1:254]}; 		    // Exponent
 	A_sign inside {[0:1]}; B_sign inside{[0:1]}; 					 			// Sign
 	A_sig inside{[0:(2**23-1)]}; B_sig inside{[0:(2**23-1)]}; 	// Significand
-	B_exp > 128 - A_exp; B_exp < 380 - A_exp;  				// Enforce condition on sum of exponents
+	B_exp > 128 - A_exp; B_exp < 308 - A_exp;  				// Enforce condition on sum of exponents
 	solve A_exp before B_exp;
 }
 
 // Form A and B by combining the three fields
 rand integer A;
 rand integer B;
-constraint assign_constr{
+constraint final_constr{
 A == ((A_sign << 31) + (A_exp << 23) + A_sig);  // Make floating point number A
 B == ((B_sign << 31) + (B_exp << 23) + B_sig);  // Make floating point number B
 solve A_sign before A; solve A_exp before A; solve A_sig before A;solve B_sign before B; solve B_exp before B;solve B_sig before B;}
@@ -49,7 +49,7 @@ solve A_sign before A; solve A_exp before A; solve A_sig before A;solve B_sign b
 \section{Timing}
 In this case the testbench needs further modification in order to handle the latency that intrinsically comes with the pipelining introduced in the DUT. Since the multiplier's output is the product of the inputs sampled two cycles earlier, the \texttt{refmod} should model this for the comparison to work correctly.
 
-The two-cycles delay is implemented by adding auxiliary variables: any new data A and B coming through the \texttt{get} port is not used immediately but it is propagated through auxiliary variables \texttt{A1}, \texttt{A2}, \texttt{B1}, \texttt{B2}. The \texttt{refmod}'s output is the product of the auxiliary variable \texttt{A1} and \texttt{B1}, as shown in the following excerpt from the \texttt{run\_phase} in \textit{refmod.sv}. The operator \texttt{<=} performs a \textit{non-blocking assignment}, which means that the assignment to the left hand side is completed only after all right hand sides have been evaluated. In this case, the assignment to \texttt{A1} and \texttt{B1} will be effective only after the evaluation of the the product at line 3, thus modeling a delay element.
+The two-cycles delay is implemented by adding auxiliary variables: any new data A and B coming through the \texttt{get} port is not used immediately but it is propagated through auxiliary arrays \texttt{A[1:2]}, \texttt{B[1:2]}. The \texttt{refmod}'s output is the product of the auxiliary variable \texttt{A[1]} and \texttt{B[1]}, as shown in the following excerpt from the \texttt{run\_phase} in \textit{refmod.sv}. The operator \texttt{<=} performs a \textit{non-blocking assignment}, which means that the assignment to the left hand side is completed only after all right hand sides have been evaluated. In this case, the assignment to \texttt{A1} and \texttt{B1} will be effective only after the evaluation of the the product at line 3, thus modeling a delay element.
 
 \begin{lstlisting}[language = verilog]
 A1 <= tr_in.A;
@@ -59,9 +59,16 @@ tr_out.data = $shortrealtobits($bitstoshortreal(A1) * $bitstoshortreal(B1));
 
 The purpose of this is to compare the results correctly. However, we also wanted to synchronize what was displayed in the output log so as to make every line contain the inputs A and B along with their product in both binary and decimal form. This required adding an additional delay, as shown in the following code:
 \begin{lstlisting}[language = verilog]
-A2 <= A1;
-B2 <= B1;
+A[2] <= A[1];
+B[2] <= B[1];
+A[1] <= tr_in.A;
+B[1] <= tr_in.B;
+tr_out.data = $shortrealtobits($bitstoshortreal(A[1]) * $bitstoshortreal(B[1]));		
 delayed_Z <= tr_out.data;
-$display("refmod: input A = %f, input B = %f, output OUT = %f",$bitstoshortreal(A2), $bitstoshortreal(B2), $bitstoshortreal(delayed_Z));
-$display("refmod: input A = %b, input B = %b, output OUT = %b", A2, B2, delayed_Z);
+$display("refmod: input A = %f, input B = %f, output OUT = %f",$bitstoshortreal(A[2]), $bitstoshortreal(B[2]), $bitstoshortreal(delayed_Z));
+$display("refmod: input A = %b, input B = %b, output OUT = %b", A[2], B[2], delayed_Z);
+out.put(tr_out);
 \end{lstlisting}
+
+\section{Summary}
+The summary log shows that 100/101 results are matching: by inspection, it is possible to notice that the only mismatches are detected at the beginning of the simulation, when the outputs are not yet stable due to the inherent latency. Therefore, we conclude that the simulation completed successfully and the multiplier is validated.

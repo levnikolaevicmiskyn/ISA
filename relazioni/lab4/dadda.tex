@@ -12,7 +12,8 @@ The following step is to adjust the data interface.
 
 \begin{lstlisting}[
     language = verilog,
-    caption = DUT interface]
+    caption = DUT interface, 
+    label = code:packet_in]
 interface dut_if(input clk, rst);
     logic [31:0] A, B;
     logic [63:0] data;
@@ -22,10 +23,12 @@ interface dut_if(input clk, rst);
     modport port_out (input clk, rst, output valid, data, ready);
 endinterface
 \end{lstlisting}
-The only needed change in this case was to increase the output data width from 32 bits to 64 bits according to the
-component's output itself.
+The only needed change in the input interface in this case was to increase the output data width from 32 bits to 64 bits according to the
+component's output itself, as shown in \ref{code:packet_in}.
 
-Finally, it is possible to apply constraints on the randomly generated numbers. Being an unsigned multiplier it is
+As for the output interface, the variable \texttt{data} that stores the result from the \texttt{refmod} must be a \texttt{longint} to accommodate a 64-bit result. 
+
+Finally, it is possible to apply constraints on the randomly generated numbers. Being our DUT an unsigned multiplier it is
 best to constrain the inputs to be non-negative in order to prevent confusion with the reference model and to adapt
 the model itself by simply changing the addition into a multiplication.
 
