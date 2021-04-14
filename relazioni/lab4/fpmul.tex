@@ -7,10 +7,10 @@ The remaining bits are allocated for the significand.
 The generation of random floating point number was broken down into two consecutive steps. Random integer numbers are obtained independently for the sign, exponent and mantissa and then they are aligned correctly in a 32 bit vector (again modeled as an integer number) by means of simple left-shift operations. This technique allows to define field specific constraints, described below:
 \begin{itemize}
     \item The sign can only be 0 or 1, therefore it is constrained to be in the interval $[0,1]$.
-    \item Exponents must be limited as $-127 \leq a_\text{exp}, b_\text{exp} \leq 128$.
-    \item The significand is represented in 23 bits, so its range is $[0, 2^{23}-1]$.
+    \item Exponents must satisfy $-127 \leq a_\text{exp}, b_\text{exp} \leq 128$.
+    \item The significand is represented on 23 bits, so its range is $[0, 2^{23}-1]$.
 \end{itemize}
-An additional limit is that neither $A$, $B$ nor $AB$ are allowed to be non-normal, meaning they cannot overflow, underflow or be denormal. To exclude those cases from the inputs it is possible to simply reduce their exponents' range to $-126 \leq a_\text{exp}, b_\text{exp} \leq 127$. The same condition on the product instead translates to
+An additional limit is that neither $A$, $B$ nor $AB$ are allowed to be non-normal, meaning they cannot overflow, underflow or be denormal. To avoid the occurrence of those cases in the input numbers it is possible to simply reduce their exponents' range to $-126 \leq a_\text{exp}, b_\text{exp} \leq 127$. The same condition on the product instead translates to
 \begin{align}
 -126 &\leq  a_\text{exp}                      + b_\text{exp} &\leq 125 \nonumber\\
 -126 &\leq (a_\text{exp}^\text{biased} - 127) + (b_\text{exp}^\text{biased} - 127) &\leq 125 \nonumber\\
