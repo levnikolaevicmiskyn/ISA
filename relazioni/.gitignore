@@ -8,4 +8,5 @@
 *.synctex.gz
 
 # Ignore output PDFs
-main.pdf
+main.*
+!main.tex
