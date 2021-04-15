@@ -41,7 +41,7 @@ In this case the transactions are \textit{non-blocking}, they return instantaneo
 \paragraph{Cycle} Every UVM object undergoes three distinct phases during a simulation run: all classes are required to give an implementation for these in the form of methods.
 The \textbf{build phase} is where objects are created by means of the \texttt{create} method defined in the \texttt{uvm\_registry\_component} wrapper class. This way of creating objects is prescribed by the factory pattern, a paradigm drawn from object-oriented programming that is here employed to allow customization of objects through a configuration database rather than direct modification of the testbench code. Macros are used in every class to \textit{register} the object to the factory (as in line 2 of \ref{driver}). For instance, \texttt{uvm\_component\_utils} and \texttt{uvm\_object\_utils} are the macros for registering a new class type, respectively for classes derived from \texttt{uvm\_component} or \texttt{uvm\_object} classes \cite{sistenix}.
 
-In the following snippet, the defult constructor simply calls its conterpart in the parent with default parameters to create an object whose default properties will be overridden later by means of the create method.
+In the following snippet, the default constructor simply calls its counterpart in the parent with default parameters to create an object whose default properties will be overridden later by means of the create method.
 
 \begin{lstlisting}[language=verilog, label=driver]
 class driver extends uvm_driver #(packet_in);
